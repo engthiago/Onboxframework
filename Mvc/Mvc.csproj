@@ -78,7 +78,9 @@
     <Compile Include="Converters\ValueEqualsToConverter.cs" />
     <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
     <Compile Include="Converters\ValueIsNotNullConverter.cs" />
+    <Compile Include="IMessageService.cs" />
     <Compile Include="IViewBase.cs" />
+    <Compile Include="MessageBoxService.cs" />
     <Compile Include="NotifyPropertyBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ActionRelayCommand.cs" />

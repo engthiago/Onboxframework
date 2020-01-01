@@ -1,4 +1,4 @@
-﻿namespace Onbox.Sandbox.Revit.Commands
+﻿namespace Onbox.Mvc.V1
 {
     public interface IMessageService
     {

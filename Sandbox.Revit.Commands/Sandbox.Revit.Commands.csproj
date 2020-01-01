@@ -74,11 +74,9 @@
   <ItemGroup>
     <Compile Include="ContainerBuilder.cs" />
     <Compile Include="ExternalCommandBase.cs" />
-    <Compile Include="IMessageService.cs" />
     <Compile Include="IOrderView.cs" />
     <Compile Include="InherCommands.cs" />
     <Compile Include="IServerService.cs" />
-    <Compile Include="MessageBoxService.cs" />
     <Compile Include="MockServerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
