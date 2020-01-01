@@ -1,11 +1,13 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Newtonsoft.Json;
 using Onbox.Mvvm.V1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
@@ -15,102 +17,86 @@ namespace Onbox.Sandbox.Revit.Commands
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             var container = new Di.V1.Container();
-            container.Register<IOrderViewModel, NewOrderViewModel>();
-            container.Register<ServerService>();
+            container.Register<IOrderView, OrderView>();
+            container.Register<IServerService, MockServerService>();
+            container.Register<IMessageService, MessageBoxService>();
 
-            var newOrderViewModel = container.Resolve<IOrderViewModel>();
+            var newOrderViewModel = container.Resolve<IOrderView>();
             var result = newOrderViewModel.ShowDialog();
 
-            System.Windows.MessageBox.Show(result.ToString(), "Result");
+            //System.Windows.MessageBox.Show(result.ToString(), "Result");
 
             return Result.Succeeded;
         }
 
-        public class ViewWindowMockBase : ViewWindowBase, IViewWindow
-        {
-        }
-
         public class User
         {
+            [JsonProperty("name")]
             public string Name { get; set; }
+
+            [JsonProperty("role")]
             public string Role { get; set; }
         }
 
-        public class ServerService
+        public class MockServerService : IServerService
         {
-            public List<User> GetUsers()
+            private static readonly string path = "C:/temp/Onbox/";
+            private static readonly string userFile = path + "Users.json";
+
+            private List<User> GetUsers()
             {
-                return new List<User>()
+                if (!System.IO.Directory.Exists(path))
                 {
-                    new User { Name= "Thiago", Role = "Admin"},
-                    new User { Name= "Raphel", Role = "Programmer" },
-                    new User { Name= "Eduardo", Role = "Programmer" },
-                    new User { Name= "Ramoon", Role = "Programmer" },
-                };
+                    System.IO.Directory.CreateDirectory(path);
+                }
+                var json = System.IO.File.ReadAllText(userFile);
+                return JsonConvert.DeserializeObject<List<User>>(json);
+            }
+
+            public async Task<List<User>> GetUsersAsync()
+            {
+                await Task.Delay(1000);
+                return this.GetUsers();
+            }
+
+            public async Task<List<User>> SaveUsersAsync(List<User> users)
+            {
+                var json = JsonConvert.SerializeObject(users);
+                System.IO.File.WriteAllText(userFile, json);
+                await Task.Delay(1000);
+                return this.GetUsers();
             }
         }
 
-        public class MockViewModel
+        public class MessageBoxService : IMessageService
         {
-            public virtual bool CanCloseDialog()
+            public static string title = "";
+
+            public void Show(string message)
             {
-                return true;
+                System.Windows.MessageBox.Show(message);
             }
 
-            public virtual void OnDestroy()
+            public void Warning(string message)
             {
+                System.Windows.MessageBox.Show(message, title, System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
             }
 
-            public virtual void OnInit()
+            public void Error(string message)
             {
+                System.Windows.MessageBox.Show(message, title, System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
 
-            public void ShowDialog()
+            public bool Question(string message)
             {
-                OnInit();
-                if (CanCloseDialog())
-                {
-                    OnDestroy();
-                }
-            }
-        }
-
-        public class NewOrderViewModel : ViewModelBase<OrderView>, IOrderViewModel
-        {
-            private readonly ServerService server;
-
-            public string Title { get; set; }
-            public ObservableCollection<User> Users { get; set; }
-
-
-            public NewOrderViewModel(ServerService server)
-            {
-                this.Title = "New View Order";
-                this.TitleVisibility = TitleVisibility.HideMinimizeAndMaximize;
-                this.server = server;
+                return System.Windows.MessageBox.Show(message, title, System.Windows.MessageBoxButton.YesNo, System.Windows.MessageBoxImage.Question) == System.Windows.MessageBoxResult.Yes;
             }
 
-            public override void OnInit()
+            public void SetTitle(string newTitle)
             {
-                this.Users = new ObservableCollection<User>(this.server.GetUsers());
-                System.Windows.MessageBox.Show("View Init...");
+                title = newTitle;
             }
-
-            public override void OnDestroy()
-            {
-                System.Windows.MessageBox.Show("View Destroyed...");
-            }
-
-            public override bool CanCloseDialog()
-            {
-                if (this.View.DialogResult == true)
-                {
-                    return true;
-                }
-
-                var result = System.Windows.MessageBox.Show("Are you sure?", "Test", System.Windows.MessageBoxButton.YesNo);
-                return result == System.Windows.MessageBoxResult.Yes;
-            }
+            
         }
     }
 }

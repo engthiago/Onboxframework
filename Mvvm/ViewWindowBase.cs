@@ -1,17 +1,23 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shell;
 
 namespace Onbox.Mvvm.V1
 {
-    public class ViewWindowBase : Window, IViewWindow
+    public class ViewWindowBase : Window, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Event that gets fired when any property changes on child classes
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public TitleVisibility TitleVisibility { get; set; } = TitleVisibility.HideMinimizeAndMaximize;
-        public Func<bool> CanCloseDialog { get ; set ; }
-        public Action OnInit { get; set; }
-        public Action OnDestroy { get; set; }
+        public bool IsLoading { get; set; }
+        public string Error { get; set; }
+        public string Warning { get; set; }
 
         private const int GWL_STYLE = -16,
                   WS_MAXIMIZEBOX = 0x10000,
@@ -25,6 +31,7 @@ namespace Onbox.Mvvm.V1
 
         public ViewWindowBase()
         {
+            this.DataContext = this;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.SetRevitAsParent();
             this.Loaded += this.OnViewLoaded;
@@ -49,7 +56,7 @@ namespace Onbox.Mvvm.V1
                     break;
             }
 
-            OnInit?.Invoke();
+            OnInit();
         }
 
         /// <summary>
@@ -100,29 +107,69 @@ namespace Onbox.Mvvm.V1
             WindowChrome.SetWindowChrome(this, wChrome);
         }
 
-        public void SetOwner(object owner)
-        {
-            if (owner is Window window)
-            {
-                this.Owner = window;
-            }
-        }
-
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            if (CanCloseDialog != null)
-            {
-                e.Cancel = !this.CanCloseDialog.Invoke();
-            }
+            e.Cancel = !this.CanCloseDialog();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            OnDestroy?.Invoke();
+            OnDestroy();
         }
 
+        public virtual bool CanCloseDialog()
+        {
+            return true;
+        }
+
+        public virtual void OnInit()
+        {
+        }
+
+        public virtual void OnDestroy()
+        {
+        }
+
+        public async Task<bool> PerformAsync(Func<Task> func, Action<string> error = null)
+        {
+            this.Error = null;
+            this.IsLoading = true;
+            try
+            {
+                await func.Invoke();
+                this.IsLoading = false;
+                return true;
+            }
+            catch (Exception e)
+            {
+                error?.Invoke(e.Message);
+                this.IsLoading = false;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Refresh a single property to UI
+        /// </summary>
+        /// <param name="propertyName"></param>
+        public void RefreshProperty(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Refresh all properties to UI
+        /// </summary>
+        public void RefreshAllProperties()
+        {
+            System.Reflection.PropertyInfo[] properties = this.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                RefreshProperty(property.Name);
+            }
+        }
     }
 
     public enum TitleVisibility

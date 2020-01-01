@@ -5,17 +5,60 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:local="clr-namespace:Onbox.Sandbox.Revit.Commands"
                      xmlns:mvvm="clr-namespace:Onbox.Mvvm.V1;assembly=Onbox.Mvvm"
+                     xmlns:c="clr-namespace:Onbox.Mvvm.V1.Converters;assembly=Onbox.Mvvm"
                      mc:Ignorable="d"
                      Title="{Binding Title}"
                      Height="484.473"
                      Width="514.71">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Users}" />
-        <Button Grid.Row="1" Click="Button_Click">OK</Button>
+        <Grid.Resources>
+            <ControlTemplate x:Key="Sc"
+                             TargetType="DataGrid">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DataGridColumnHeadersPresenter Focusable="False" />
+                    <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Visible"
+                                  Focusable="false"
+                                  Grid.Row="1">
+                        <ItemsPresenter VerticalAlignment="Stretch" />
+                    </ScrollViewer>
+                </Grid>
+            </ControlTemplate>
+        </Grid.Resources>
+        <Grid IsEnabled="{Binding IsLoading, Converter={c:BoolInverterConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <DataGrid ItemsSource="{Binding Users}"
+                      CanUserResizeRows="False"
+                      PreparingCellForEdit="BeginEditing"
+                      CellEditEnding="EndEditing" />
+            <WrapPanel Grid.Row="1"
+                       HorizontalAlignment="Right"
+                       IsEnabled="{Binding Error, Converter={c:ValueIsNotNullConverter}, ConverterParameter=False}">
+                <Button Click="Save"
+                        Margin="0,0,4,0"
+                        IsEnabled="{Binding IsEditing, Converter={c:BoolInverterConverter}}"
+                        Width="82">Sync</Button>
+                <Button IsCancel="True"
+                        Margin="0,0,4,0"
+                        IsEnabled="{Binding IsEditing, Converter={c:BoolInverterConverter}}"
+                        Width="82">Cancel</Button>
+                <Button Click="Confirm"
+                        IsEnabled="{Binding IsEditing, Converter={c:BoolInverterConverter}}"
+                        Width="82">Sync Close</Button>
+            </WrapPanel>
+        </Grid>
+        <mvvm:Spinner Visibility="{Binding IsLoading, Converter={c:BoolToVisibilityConverter}}" />
+        <TextBlock Text="{Binding Error}"
+                   Foreground="Red"
+                   IsHitTestVisible="False"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
     </Grid>
-    
 </mvvm:ViewWindowBase>
