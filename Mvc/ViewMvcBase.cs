@@ -7,7 +7,7 @@ using System.Windows.Shell;
 
 namespace Onbox.Mvc.V1
 {
-    public class ViewWindowBase : Window, INotifyPropertyChanged
+    public abstract class ViewMvcBase : Window, INotifyPropertyChanged
     {
         /// <summary>
         /// Event that gets fired when any property changes on child classes
@@ -29,7 +29,7 @@ namespace Onbox.Mvc.V1
         [DllImport("user32.dll")]
         extern private static int SetWindowLong(IntPtr hwnd, int index, int value);
 
-        public ViewWindowBase()
+        public ViewMvcBase()
         {
             this.DataContext = this;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;

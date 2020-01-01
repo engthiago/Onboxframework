@@ -72,11 +72,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMessageBoxService.cs" />
+    <Compile Include="ContainerBuilder.cs" />
+    <Compile Include="ExternalCommandBase.cs" />
+    <Compile Include="IJsonService.cs" />
+    <Compile Include="IMessageService.cs" />
     <Compile Include="IOrderView.cs" />
     <Compile Include="InherCommands.cs" />
-    <Compile Include="ContainerCommands.cs" />
     <Compile Include="IServerService.cs" />
+    <Compile Include="JsonExtensions.cs" />
+    <Compile Include="JsonService.cs" />
+    <Compile Include="MessageBoxService.cs" />
+    <Compile Include="MockServerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +99,7 @@
     <Compile Include="OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -108,7 +115,7 @@
       <Project>{7ADE1A05-4EE6-4790-B634-9649BBDA7B67}</Project>
       <Name>Di</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mvvm\Mvc.csproj">
+    <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{2f93c222-e73b-4cf1-8b3e-d7d4802bd9d9}</Project>
       <Name>Mvc</Name>
     </ProjectReference>

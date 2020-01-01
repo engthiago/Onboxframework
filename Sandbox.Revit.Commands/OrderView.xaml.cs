@@ -11,7 +11,7 @@ namespace Onbox.Sandbox.Revit.Commands
     /// <summary>
     /// Interaction logic for OrderView.xaml
     /// </summary>
-    public partial class OrderView : ViewWindowBase, IOrderView
+    public partial class OrderView : ViewMvcBase, IOrderView
     {
         public bool IsEditing { get; set; }
 
@@ -75,8 +75,6 @@ namespace Onbox.Sandbox.Revit.Commands
 
             return true;
         }
-
-
 
         private async void Save(object sender, RoutedEventArgs e)
         {

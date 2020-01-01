@@ -85,7 +85,7 @@
     <Compile Include="Spinner.xaml.cs">
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewWindowBase.cs" />
+    <Compile Include="ViewMvcBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
