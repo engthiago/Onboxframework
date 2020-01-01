@@ -20,9 +20,9 @@ namespace Onbox.Sandbox.Revit.Commands
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             var container = new Container();
-            container.Register<IOrderView, OrderView>();
-            container.Register<IServerService, MockServerService>();
-            container.Register<IMessageService, MessageBoxService>();
+            container.AddTransient<IOrderView, OrderView>();
+            container.AddTransient<IServerService, MockServerService>();
+            container.AddTransient<IMessageService, MessageBoxService>();
 
             container.AddJson(config =>
             {
@@ -48,10 +48,11 @@ namespace Onbox.Sandbox.Revit.Commands
 
         public class JsonService : IJsonService
         {
-            internal static JsonSerializerSettings settings;
+            readonly JsonSerializerSettings settings;
 
-            public JsonService()
+            public JsonService(JsonSerializerSettings settings)
             {
+                this.settings = settings;
             }
 
             public T Deserialize<T>(string json)
@@ -142,12 +143,26 @@ namespace Onbox.Sandbox.Revit.Commands
 
     public static class JsonSettings
     {
+        public static Container AddJson(this Container container)
+        {
+            return AddJson(container, null);
+        }
+
         public static Container AddJson(this Container container, Action<JsonSerializerSettings> config)
         {
-            container.Register<IJsonService, JsonService>();
+            container.ConfigureJson(config)
+                     .AddTransient<IJsonService, JsonService>();
+
+            return container;
+        }
+
+        public static Container ConfigureJson(this Container container, Action<JsonSerializerSettings> config)
+        {
             var settings = new JsonSerializerSettings();
-            config.Invoke(settings);
-            JsonService.settings = settings;
+            config?.Invoke(settings);
+
+            container.AddSingleton(settings);
+
             return container;
         }
     }

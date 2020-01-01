@@ -10,22 +10,22 @@ namespace Onbox.Di.V1
         private static readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
         private static readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
 
-        public void Register<TContract, TImplementation>()
+        public void AddTransient<TContract, TImplementation>()
         {
             types[typeof(TContract)] = typeof(TImplementation);
         }
 
-        public void Register<TImplementation>()
+        public void AddTransient<TImplementation>()
         {
             types[typeof(TImplementation)] = typeof(TImplementation);
         }
 
-        public void Register<TImplementation>(TImplementation instance)
+        public void AddSingleton<TImplementation>(TImplementation instance)
         {
             instances[typeof(TImplementation)] = instance;
         }
 
-        public void Register<TContract, TImplementation>(TImplementation instance)
+        public void AddSingleton<TContract, TImplementation>(TImplementation instance)
         {
             instances[typeof(TContract)] = instance;
         }
@@ -33,12 +33,6 @@ namespace Onbox.Di.V1
         public T Resolve<T>()
         {
             return (T)Resolve(typeof(T));
-        }
-
-        public void Reset()
-        {
-            types.Clear();
-            instances.Clear();
         }
 
         private object Resolve(Type contract)
@@ -63,6 +57,12 @@ namespace Onbox.Di.V1
                 }
                 return constructor.Invoke(parameters.ToArray());
             }
+        }
+
+        public void Reset()
+        {
+            types.Clear();
+            instances.Clear();
         }
     }
 }
