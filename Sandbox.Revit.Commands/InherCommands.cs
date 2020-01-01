@@ -2,12 +2,15 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Onbox.Di.V1;
 using Onbox.Mvvm.V1;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using static Onbox.Sandbox.Revit.Commands.Inher;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
@@ -16,10 +19,17 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            var container = new Di.V1.Container();
+            var container = new Container();
             container.Register<IOrderView, OrderView>();
             container.Register<IServerService, MockServerService>();
             container.Register<IMessageService, MessageBoxService>();
+
+            container.AddJson(config =>
+            {
+                config.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                config.NullValueHandling = NullValueHandling.Ignore;
+                config.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             var newOrderViewModel = container.Resolve<IOrderView>();
             var result = newOrderViewModel.ShowDialog();
@@ -31,17 +41,47 @@ namespace Onbox.Sandbox.Revit.Commands
 
         public class User
         {
-            [JsonProperty("name")]
             public string Name { get; set; }
 
-            [JsonProperty("role")]
             public string Role { get; set; }
+        }
+
+        public class JsonService : IJsonService
+        {
+            internal static JsonSerializerSettings settings;
+
+            public JsonService()
+            {
+            }
+
+            public T Deserialize<T>(string json)
+            {
+                return JsonConvert.DeserializeObject<T>(json, settings);
+            }
+
+            public string Serialize(object instance)
+            {
+                var json = JsonConvert.SerializeObject(instance, settings);
+                return json;
+            }
+        }
+
+        public interface IJsonService
+        {
+            T Deserialize<T>(string json);
+            string Serialize(object instance);
         }
 
         public class MockServerService : IServerService
         {
             private static readonly string path = "C:/temp/Onbox/";
             private static readonly string userFile = path + "Users.json";
+            private readonly IJsonService jsonService;
+
+            public MockServerService(IJsonService jsonService)
+            {
+                this.jsonService = jsonService;
+            }
 
             private List<User> GetUsers()
             {
@@ -50,7 +90,7 @@ namespace Onbox.Sandbox.Revit.Commands
                     System.IO.Directory.CreateDirectory(path);
                 }
                 var json = System.IO.File.ReadAllText(userFile);
-                return JsonConvert.DeserializeObject<List<User>>(json);
+                return jsonService.Deserialize<List<User>>(json);
             }
 
             public async Task<List<User>> GetUsersAsync()
@@ -61,7 +101,7 @@ namespace Onbox.Sandbox.Revit.Commands
 
             public async Task<List<User>> SaveUsersAsync(List<User> users)
             {
-                var json = JsonConvert.SerializeObject(users);
+                var json = jsonService.Serialize(users);
                 System.IO.File.WriteAllText(userFile, json);
                 await Task.Delay(1000);
                 return this.GetUsers();
@@ -97,6 +137,18 @@ namespace Onbox.Sandbox.Revit.Commands
                 title = newTitle;
             }
             
+        }
+    }
+
+    public static class JsonSettings
+    {
+        public static Container AddJson(this Container container, Action<JsonSerializerSettings> config)
+        {
+            container.Register<IJsonService, JsonService>();
+            var settings = new JsonSerializerSettings();
+            config.Invoke(settings);
+            JsonService.settings = settings;
+            return container;
         }
     }
 }
