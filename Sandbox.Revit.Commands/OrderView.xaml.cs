@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using static Onbox.Sandbox.Revit.Commands.Inher;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
@@ -22,12 +21,11 @@ namespace Onbox.Sandbox.Revit.Commands
         public OrderView(IServerService serverService, IMessageService messageService)
         {
             this.InitializeComponent();
-            this.Title = "MVC test";
             this.serverService = serverService;
             this.messageService = messageService;
         }
 
-        public async override void OnInit()
+        public async override Task OnInitAsync()
         {
             await this.PerformAsync(async () =>
             {

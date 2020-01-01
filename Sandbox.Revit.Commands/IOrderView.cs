@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Onbox.Mvc.V1;
+using System.Collections.Generic;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
-    public interface IOrderView
+    public interface IOrderView : IViewBase
     {
-        List<Inher.User> Users { get; set; }
-
-        bool? ShowDialog();
+        List<User> Users { get; set; }
     }
 }

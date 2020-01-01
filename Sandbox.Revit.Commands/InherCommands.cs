@@ -1,21 +1,17 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Onbox.Di.V1;
-using Onbox.Mvc.V1;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    public partial class Inher : ExternalCommandBase
+    public class Inher : ExternalCommandBase
     {
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             var newOrderViewModel = container.Resolve<IOrderView>();
+            newOrderViewModel.SetTitle("Edit");
             var result = newOrderViewModel.ShowDialog();
 
             return Result.Succeeded;

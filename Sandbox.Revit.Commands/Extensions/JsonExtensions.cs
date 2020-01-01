@@ -3,7 +3,7 @@ using Onbox.Di.V1;
 using System;
 using static Onbox.Sandbox.Revit.Commands.Inher;
 
-namespace Onbox.Sandbox.Revit.Commands
+namespace Onbox.Sandbox.Revit.Commands.Extensions
 {
     public static class JsonExtensions
     {

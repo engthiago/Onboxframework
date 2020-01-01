@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Onbox.Di.V1;
-using static Onbox.Sandbox.Revit.Commands.Inher;
+using Onbox.Sandbox.Revit.Commands.Extensions;
 
 namespace Onbox.Sandbox.Revit.Commands
 {

@@ -7,21 +7,25 @@ using System.Windows.Shell;
 
 namespace Onbox.Mvc.V1
 {
-    public abstract class ViewMvcBase : Window, INotifyPropertyChanged
+    public abstract class ViewMvcBase : Window, INotifyPropertyChanged, IViewBase
     {
         /// <summary>
         /// Event that gets fired when any property changes on child classes
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public TitleVisibility TitleVisibility { get; set; } = TitleVisibility.HideMinimizeAndMaximize;
         public bool IsLoading { get; set; }
         public string Error { get; set; }
         public string Warning { get; set; }
 
+        private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
+
         private const int GWL_STYLE = -16,
                   WS_MAXIMIZEBOX = 0x10000,
                   WS_MINIMIZEBOX = 0x20000;
+
+        private Func<Task> onInitAsyncFunc;
+        private Action<string> onInitAsyncError;
 
         [DllImport("user32.dll")]
         extern private static int GetWindowLong(IntPtr hwnd, int index);
@@ -35,11 +39,12 @@ namespace Onbox.Mvc.V1
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.SetRevitAsParent();
             this.Loaded += this.OnViewLoaded;
+            this.ContentRendered += this.ViewMvcBase_ContentRendered;
         }
 
-        private void OnViewLoaded(object sender, RoutedEventArgs e)
+        private async void OnViewLoaded(object sender, RoutedEventArgs e)
         {
-            switch (this.TitleVisibility)
+            switch (this.titleVisibility)
             {
                 case TitleVisibility.Default:
                     break;
@@ -57,6 +62,30 @@ namespace Onbox.Mvc.V1
             }
 
             OnInit();
+
+            await OnInitAsync();
+
+            if (onInitAsyncFunc != null)
+            {
+                try
+                {
+                    Error = null;
+                    IsLoading = true;
+                    await onInitAsyncFunc?.Invoke();
+                    IsLoading = false;
+                }
+                catch (Exception ex)
+                {
+                    Error = ex.Message;
+                    IsLoading = false;
+                    this.onInitAsyncError?.Invoke(ex.Message);
+                } 
+            }
+        }
+
+        private void ViewMvcBase_ContentRendered(object sender, EventArgs e)
+        {
+            OnAfterInit();
         }
 
         /// <summary>
@@ -107,6 +136,14 @@ namespace Onbox.Mvc.V1
             WindowChrome.SetWindowChrome(this, wChrome);
         }
 
+        public void SetOwner(object owner)
+        {
+            if (owner is Window ownerWindow)
+            {
+                this.Owner = ownerWindow;
+            }
+        }
+
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
@@ -126,9 +163,19 @@ namespace Onbox.Mvc.V1
 
         public virtual void OnInit()
         {
+
+        }
+
+        public virtual Task OnInitAsync()
+        {
+            return Task.CompletedTask;
         }
 
         public virtual void OnDestroy()
+        {
+        }
+
+        public virtual void OnAfterInit()
         {
         }
 
@@ -169,6 +216,22 @@ namespace Onbox.Mvc.V1
             {
                 RefreshProperty(property.Name);
             }
+        }
+
+        public void SetTitle(string title)
+        {
+            this.Title = !string.IsNullOrWhiteSpace(title) ? title : "";
+        }
+
+        public void SetTitleVisibility(TitleVisibility titleVisibility)
+        {
+            this.titleVisibility = titleVisibility;
+        }
+
+        public void RunInitFunc(Func<Task> func, Action<string> error = null)
+        {
+            this.onInitAsyncFunc = func;
+            this.onInitAsyncError = error;
         }
     }
 

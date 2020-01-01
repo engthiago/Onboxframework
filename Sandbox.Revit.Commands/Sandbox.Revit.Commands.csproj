@@ -79,7 +79,7 @@
     <Compile Include="IOrderView.cs" />
     <Compile Include="InherCommands.cs" />
     <Compile Include="IServerService.cs" />
-    <Compile Include="JsonExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="JsonService.cs" />
     <Compile Include="MessageBoxService.cs" />
     <Compile Include="MockServerService.cs" />
