@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvvm.V1.Converters
+namespace Onbox.Mvc.V1.Converters
 {
     public class EnumtoVisibilityConveter : MarkupExtension, IValueConverter
     {

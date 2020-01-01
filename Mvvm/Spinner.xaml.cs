@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Onbox.Mvvm.V1
+namespace Onbox.Mvc.V1
 {
     /// <summary>
     /// Interaction logic for Spinner.xaml

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shell;
 
-namespace Onbox.Mvvm.V1
+namespace Onbox.Mvc.V1
 {
     public class ViewWindowBase : Window, INotifyPropertyChanged
     {

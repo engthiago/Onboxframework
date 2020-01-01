@@ -108,9 +108,9 @@
       <Project>{7ADE1A05-4EE6-4790-B634-9649BBDA7B67}</Project>
       <Name>Di</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mvvm\Mvvm.csproj">
+    <ProjectReference Include="..\Mvvm\Mvc.csproj">
       <Project>{2f93c222-e73b-4cf1-8b3e-d7d4802bd9d9}</Project>
-      <Name>Mvvm</Name>
+      <Name>Mvc</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

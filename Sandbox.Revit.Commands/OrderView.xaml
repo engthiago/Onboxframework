@@ -1,11 +1,11 @@
-﻿<mvvm:ViewWindowBase x:Class="Onbox.Sandbox.Revit.Commands.OrderView"
+﻿<mvc:ViewWindowBase x:Class="Onbox.Sandbox.Revit.Commands.OrderView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:local="clr-namespace:Onbox.Sandbox.Revit.Commands"
-                     xmlns:mvvm="clr-namespace:Onbox.Mvvm.V1;assembly=Onbox.Mvvm"
-                     xmlns:c="clr-namespace:Onbox.Mvvm.V1.Converters;assembly=Onbox.Mvvm"
+                     xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.mvc"
+                     xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters;assembly=Onbox.mvc"
                      mc:Ignorable="d"
                      Title="{Binding Title}"
                      Height="484.473"
@@ -54,11 +54,11 @@
                         Width="82">Sync Close</Button>
             </WrapPanel>
         </Grid>
-        <mvvm:Spinner Visibility="{Binding IsLoading, Converter={c:BoolToVisibilityConverter}}" />
+        <mvc:Spinner Visibility="{Binding IsLoading, Converter={c:BoolToVisibilityConverter}}" />
         <TextBlock Text="{Binding Error}"
                    Foreground="Red"
                    IsHitTestVisible="False"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
     </Grid>
-</mvvm:ViewWindowBase>
+</mvc:ViewWindowBase>

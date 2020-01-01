@@ -4,7 +4,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace Onbox.Mvvm.V1.Converters
+namespace Onbox.Mvc.V1.Converters
 {
     public class ColorToBrushConverter : MarkupExtension, IValueConverter
     {

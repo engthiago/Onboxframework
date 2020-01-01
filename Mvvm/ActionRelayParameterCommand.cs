@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Onbox.Mvvm.V1
+namespace Onbox.Mvc.V1
 {
     /// <summary>
     /// Also known as DelegateCommand or RelayCommand, this class is responsible for delegating actions for ViewModels

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Onbox.Mvvm.V1.Converters
+namespace Onbox.Mvc.V1.Converters
 {
     public class BindingProxy : Freezable
     {

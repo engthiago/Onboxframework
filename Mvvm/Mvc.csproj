@@ -7,8 +7,8 @@
     <ProjectGuid>{2F93C222-E73B-4CF1-8B3E-D7D4802BD9D9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Mvvm.V1</RootNamespace>
-    <AssemblyName>Onbox.Mvvm</AssemblyName>
+    <RootNamespace>Onbox.Mvc.V1</RootNamespace>
+    <AssemblyName>Onbox.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

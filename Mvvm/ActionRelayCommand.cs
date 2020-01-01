@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Onbox.Mvvm.V1
+namespace Onbox.Mvc.V1
 {
     public class ActionRelayCommand : ICommand
     {
