@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Onbox.Sandbox.Revit.Commands
+namespace Onbox.Json.V1
 {
     public class JsonService : IJsonService
     {

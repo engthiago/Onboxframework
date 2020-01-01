@@ -74,13 +74,10 @@
   <ItemGroup>
     <Compile Include="ContainerBuilder.cs" />
     <Compile Include="ExternalCommandBase.cs" />
-    <Compile Include="IJsonService.cs" />
     <Compile Include="IMessageService.cs" />
     <Compile Include="IOrderView.cs" />
     <Compile Include="InherCommands.cs" />
     <Compile Include="IServerService.cs" />
-    <Compile Include="Extensions\JsonExtensions.cs" />
-    <Compile Include="JsonService.cs" />
     <Compile Include="MessageBoxService.cs" />
     <Compile Include="MockServerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -114,6 +111,10 @@
     <ProjectReference Include="..\Di\Di.csproj">
       <Project>{7ADE1A05-4EE6-4790-B634-9649BBDA7B67}</Project>
       <Name>Di</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Json\Json.csproj">
+      <Project>{71933159-702F-4546-8CD7-DA24A30F673A}</Project>
+      <Name>Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{2f93c222-e73b-4cf1-8b3e-d7d4802bd9d9}</Project>

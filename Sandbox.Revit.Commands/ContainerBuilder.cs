@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Onbox.Di.V1;
-using Onbox.Sandbox.Revit.Commands.Extensions;
+using Onbox.Json.V1;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
@@ -14,12 +14,7 @@ namespace Onbox.Sandbox.Revit.Commands
             container.AddTransient<IServerService, MockServerService>();
             container.AddTransient<IMessageService, MessageBoxService>();
 
-            container.AddJson(config =>
-            {
-                config.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                config.NullValueHandling = NullValueHandling.Ignore;
-                config.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });
+            container.AddJson();
 
             return container;
         }

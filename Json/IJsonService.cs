@@ -1,4 +1,4 @@
-﻿namespace Onbox.Sandbox.Revit.Commands
+﻿namespace Onbox.Json.V1
 {
     public interface IJsonService
     {
