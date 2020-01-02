@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Onbox.Di.V1
 {
-    public class Container
+    public class Container : IContainer
     {
         private static readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
         private static readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
