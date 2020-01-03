@@ -27,7 +27,6 @@ namespace Onbox.Core.V1.Http
     {
         private readonly HttpClient client;
         private readonly IJsonService jsonService;
-        private readonly HttpSettings httpSettings;
 
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
@@ -35,15 +34,13 @@ namespace Onbox.Core.V1.Http
         public HttpService(IJsonService jsonService, HttpSettings httpSettings)
         {
             this.client = new HttpClient();
-            this.client.Timeout = TimeSpan.FromSeconds(25);
-            this.client.DefaultRequestHeaders.Add("cache-control", "no-cache");
+            this.Configure(httpSettings);
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls |
                                                     SecurityProtocolType.Tls11 |
                                                     SecurityProtocolType.Tls12;
 
             this.jsonService = jsonService;
-            this.httpSettings = httpSettings;
         }
 
 
@@ -51,7 +48,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var response = await this.client.GetAsync(endpoint);
             response.EnsureSuccessStatusCode();
@@ -64,7 +60,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var response = await this.client.DeleteAsync(endpoint);
             response.EnsureSuccessStatusCode();
@@ -82,7 +77,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var response = await this.client.DeleteAsync(endpoint);
             response.EnsureSuccessStatusCode();
@@ -92,7 +86,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var payload = this.jsonService.Serialize(content);
             var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -113,7 +106,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var payload = this.jsonService.Serialize(content);
             var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -126,7 +118,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var payload = this.jsonService.Serialize(content);
             var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -147,7 +138,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var payload = this.jsonService.Serialize(content);
             var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -160,7 +150,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var payload = this.jsonService.Serialize(content);
             var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
@@ -189,7 +178,6 @@ namespace Onbox.Core.V1.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
-            this.Configure(httpSettings);
 
             var payload = this.jsonService.Serialize(content);
             var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
