@@ -13,9 +13,19 @@ namespace Onbox.Sandbox.Revit.Commands
             container.AddTransient<IServerService, MockServerService>();
             container.AddTransient<IMessageService, MessageBoxService>();
 
+            container.AddSingleton<SomeService>();
+
             container.AddJson();
 
             return container;
+        }
+    }
+
+    public class SomeService
+    {
+        public SomeService(IMessageService messageService)
+        {
+            messageService.Show("Instantiated service");
         }
     }
 }

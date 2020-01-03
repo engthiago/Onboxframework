@@ -21,7 +21,7 @@ namespace Onbox.Json.V1
         public static Container AddJson(this Container container, Action<JsonSerializerSettings> config)
         {
             container.ConfigureJson(config)
-                     .AddTransient<IJsonService, JsonService>();
+                     .AddSingleton<IJsonService, JsonService>();
 
             return container;
         }

@@ -10,14 +10,27 @@ namespace Onbox.Di.V1
         private static readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
         private static readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
 
+        private static readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
+
+
+        public void AddTransient<TImplementation>()
+        {
+            types[typeof(TImplementation)] = typeof(TImplementation);
+        }
+
         public void AddTransient<TContract, TImplementation>()
         {
             types[typeof(TContract)] = typeof(TImplementation);
         }
 
-        public void AddTransient<TImplementation>()
+        public void AddSingleton<TImplementation>()
         {
-            types[typeof(TImplementation)] = typeof(TImplementation);
+            singletonCache[typeof(TImplementation)] = typeof(TImplementation);
+        }
+
+        public void AddSingleton<TContract, TImplementation>()
+        {
+            singletonCache[typeof(TContract)] = typeof(TImplementation);
         }
 
         public void AddSingleton<TImplementation>(TImplementation instance)
@@ -32,7 +45,7 @@ namespace Onbox.Di.V1
 
         public T Resolve<T>()
         {
-            return (T)Resolve(typeof(T));
+            return (T)this.Resolve(typeof(T));
         }
 
         private object Resolve(Type contract)
@@ -41,28 +54,54 @@ namespace Onbox.Di.V1
             {
                 return instances[contract];
             }
+            else if (singletonCache.ContainsKey(contract))
+            {
+                var instance = this.Resolve(contract, singletonCache);
+                instances[contract] = instance;
+                singletonCache.Remove(contract);
+                return instance;
+            }
+            else if (types.ContainsKey(contract))
+            {
+                return this.Resolve(contract, types);
+            }
             else
             {
-                Type implementation = types[contract];
-                ConstructorInfo constructor = implementation.GetConstructors()[0];
-                ParameterInfo[] constructorParameters = constructor.GetParameters();
-                if (constructorParameters.Length == 0)
-                {
-                    return Activator.CreateInstance(implementation);
-                }
-                List<object> parameters = new List<object>(constructorParameters.Length);
-                foreach (ParameterInfo parameterInfo in constructorParameters)
-                {
-                    parameters.Add(Resolve(parameterInfo.ParameterType));
-                }
-                return constructor.Invoke(parameters.ToArray());
+                throw new KeyNotFoundException($"{contract.Name} not registered on the DI container.");
             }
+        }
+
+        private object Resolve(Type contract, IDictionary<Type, Type> dic)
+        {
+            Type implementation = dic[contract];
+            ConstructorInfo constructor = implementation.GetConstructors()[0];
+            ParameterInfo[] constructorParameters = constructor.GetParameters();
+            if (constructorParameters.Length == 0)
+            {
+                return Activator.CreateInstance(implementation);
+            }
+            List<object> parameters = new List<object>(constructorParameters.Length);
+            foreach (ParameterInfo parameterInfo in constructorParameters)
+            {
+                parameters.Add(this.Resolve(parameterInfo.ParameterType));
+            }
+
+            return constructor.Invoke(parameters.ToArray());
         }
 
         public void Reset()
         {
             types.Clear();
             instances.Clear();
+            singletonCache.Clear();
+        }
+
+        public static Container Default()
+        {
+            var container = new Container();
+            container.AddSingleton<IContainer>(container);
+
+            return container;
         }
     }
 }
