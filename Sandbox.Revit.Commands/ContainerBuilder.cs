@@ -1,5 +1,5 @@
-﻿using Onbox.Di.V1;
-using Onbox.Json.V1;
+﻿using Onbox.Core.V1;
+using Onbox.Di.V1;
 using Onbox.Mvc.V1;
 
 namespace Onbox.Sandbox.Revit.Commands
@@ -13,9 +13,11 @@ namespace Onbox.Sandbox.Revit.Commands
             container.AddTransient<IServerService, MockServerService>();
             container.AddTransient<IMessageService, MessageBoxService>();
 
+            container.AddOnboxCore();
+
             container.AddSingleton<SomeService>();
 
-            container.AddJson();
+
 
             return container;
         }

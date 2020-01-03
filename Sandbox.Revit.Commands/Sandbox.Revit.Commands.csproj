@@ -106,13 +106,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{f340830f-cabc-439d-8684-05317d6dc13e}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Di\Di.csproj">
       <Project>{7ADE1A05-4EE6-4790-B634-9649BBDA7B67}</Project>
       <Name>Di</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Json\Json.csproj">
-      <Project>{71933159-702F-4546-8CD7-DA24A30F673A}</Project>
-      <Name>Json</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{2f93c222-e73b-4cf1-8b3e-d7d4802bd9d9}</Project>

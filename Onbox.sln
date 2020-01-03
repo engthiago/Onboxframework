@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Revit.Commands", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc", "Mvc\Mvc.csproj", "{2F93C222-E73B-4CF1-8B3E-D7D4802BD9D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Json", "Json\Json.csproj", "{71933159-702F-4546-8CD7-DA24A30F673A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{F340830F-CABC-439D-8684-05317D6DC13E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{2F93C222-E73B-4CF1-8B3E-D7D4802BD9D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F93C222-E73B-4CF1-8B3E-D7D4802BD9D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F93C222-E73B-4CF1-8B3E-D7D4802BD9D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71933159-702F-4546-8CD7-DA24A30F673A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71933159-702F-4546-8CD7-DA24A30F673A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71933159-702F-4546-8CD7-DA24A30F673A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71933159-702F-4546-8CD7-DA24A30F673A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F340830F-CABC-439D-8684-05317D6DC13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F340830F-CABC-439D-8684-05317D6DC13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F340830F-CABC-439D-8684-05317D6DC13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F340830F-CABC-439D-8684-05317D6DC13E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

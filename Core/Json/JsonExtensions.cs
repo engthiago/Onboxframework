@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using Onbox.Di.V1;
 using System;
 
-namespace Onbox.Json.V1
+namespace Onbox.Core.V1.Json
 {
     public static class JsonExtensions
     {
@@ -40,7 +40,6 @@ namespace Onbox.Json.V1
             };
 
             config?.Invoke(settings);
-
             container.AddSingleton(settings);
 
             return container;
