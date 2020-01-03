@@ -52,6 +52,8 @@
     <Compile Include="Http\HttpSettings.cs" />
     <Compile Include="Json\JsonExtensions.cs" />
     <Compile Include="Json\JsonService.cs" />
+    <Compile Include="Messaging\IMessageService.cs" />
+    <Compile Include="Messaging\MessageDebugService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
