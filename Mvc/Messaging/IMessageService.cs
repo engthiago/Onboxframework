@@ -1,4 +1,4 @@
-﻿namespace Onbox.Mvc.V1
+﻿namespace Onbox.Mvc.V1.Messaging
 {
     public interface IMessageService
     {

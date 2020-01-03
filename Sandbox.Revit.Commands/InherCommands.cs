@@ -2,6 +2,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Onbox.Mvc.V1;
+using Onbox.Mvc.V1.Messaging;
 using System.Threading.Tasks;
 
 namespace Onbox.Sandbox.Revit.Commands
