@@ -43,9 +43,13 @@ namespace Onbox.Di.V1
             instances[typeof(TContract)] = instance;
         }
 
+        List<Type> currentTypes = new List<Type>();
+
         public T Resolve<T>()
         {
-            return (T)this.Resolve(typeof(T));
+            var type = (T)this.Resolve(typeof(T));
+            currentTypes.Clear();
+            return type;
         }
 
         private object Resolve(Type contract)
@@ -71,9 +75,22 @@ namespace Onbox.Di.V1
             }
         }
 
+        private Type currentType;
+
         private object Resolve(Type contract, IDictionary<Type, Type> dic)
         {
+            // Check for Ciruclar dependencies
+            if (currentTypes.Contains(contract))
+            {
+                throw new InvalidOperationException($"Circular dependency between: {contract.Name} and {currentType.Name}.");
+            }
+            currentTypes.Add(contract);
+            currentType = contract;
+
+            // Get Type from the dictionary
             Type implementation = dic[contract];
+
+            // Get the first available contructor
             ConstructorInfo constructor = implementation.GetConstructors()[0];
             ParameterInfo[] constructorParameters = constructor.GetParameters();
             if (constructorParameters.Length == 0)
@@ -85,7 +102,6 @@ namespace Onbox.Di.V1
             {
                 parameters.Add(this.Resolve(parameterInfo.ParameterType));
             }
-
             return constructor.Invoke(parameters.ToArray());
         }
 

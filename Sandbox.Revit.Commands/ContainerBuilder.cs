@@ -14,11 +14,12 @@ namespace Onbox.Sandbox.Revit.Commands
             container.AddTransient<IServerService, MockServerService>();
             container.AddTransient<IMessageService, MessageBoxService>();
 
-            container.AddOnboxCore();
-
             container.AddSingleton<SomeService>();
+            container.AddTransient<OtherService>();
+            container.AddTransient<OtherOtherService>();
+            container.AddTransient<OtherOtherOtherService>();
 
-
+            container.AddOnboxCore();
 
             return container;
         }
@@ -26,9 +27,30 @@ namespace Onbox.Sandbox.Revit.Commands
 
     public class SomeService
     {
-        public SomeService(IMessageService messageService)
+        public SomeService(OtherService service)
         {
-            messageService.Show("Instantiated service");
+        }
+    }
+
+    public class OtherService
+    {
+        public OtherService(OtherOtherService service)
+        {
+        }
+    }
+
+    public class OtherOtherService
+    {
+        public OtherOtherService(OtherOtherOtherService service)
+        {
+        }
+    }
+
+    public class OtherOtherOtherService
+    {
+        public OtherOtherOtherService(OtherOtherService service)
+        {
+
         }
     }
 }
