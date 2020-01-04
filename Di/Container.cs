@@ -5,6 +5,20 @@ using System.Reflection;
 
 namespace Onbox.Di.V1
 {
+    public interface IContainer
+    {
+        void AddSingleton<TImplementation>();
+        void AddSingleton<TImplementation>(TImplementation instance);
+        void AddSingleton<TContract, TImplementation>() where TImplementation : TContract;
+        void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract;
+
+        void AddTransient<TImplementation>();
+        void AddTransient<TContract, TImplementation>() where TImplementation : TContract;
+
+        void Reset();
+        T Resolve<T>();
+    }
+
     public class Container : IContainer
     {
         private static readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
@@ -12,25 +26,12 @@ namespace Onbox.Di.V1
 
         private static readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
 
-
-        public void AddTransient<TImplementation>()
-        {
-            types[typeof(TImplementation)] = typeof(TImplementation);
-        }
-
-        public void AddTransient<TContract, TImplementation>()
-        {
-            types[typeof(TContract)] = typeof(TImplementation);
-        }
+        private List<Type> currentTypes = new List<Type>();
+        private Type currentType;
 
         public void AddSingleton<TImplementation>()
         {
             singletonCache[typeof(TImplementation)] = typeof(TImplementation);
-        }
-
-        public void AddSingleton<TContract, TImplementation>()
-        {
-            singletonCache[typeof(TContract)] = typeof(TImplementation);
         }
 
         public void AddSingleton<TImplementation>(TImplementation instance)
@@ -38,12 +39,29 @@ namespace Onbox.Di.V1
             instances[typeof(TImplementation)] = instance;
         }
 
-        public void AddSingleton<TContract, TImplementation>(TImplementation instance)
+        public void AddSingleton<TContract, TImplementation>() where TImplementation : TContract
+        {
+            singletonCache[typeof(TContract)] = typeof(TImplementation);
+        }
+
+        public void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract
         {
             instances[typeof(TContract)] = instance;
         }
 
-        List<Type> currentTypes = new List<Type>();
+
+
+        public void AddTransient<TImplementation>()
+        {
+            types[typeof(TImplementation)] = typeof(TImplementation);
+        }
+
+        public void AddTransient<TContract, TImplementation>() where TImplementation : TContract
+        {
+            types[typeof(TContract)] = typeof(TImplementation);
+        }
+
+
 
         public T Resolve<T>()
         {
@@ -75,7 +93,6 @@ namespace Onbox.Di.V1
             }
         }
 
-        private Type currentType;
 
         private object Resolve(Type contract, IDictionary<Type, Type> dic)
         {
