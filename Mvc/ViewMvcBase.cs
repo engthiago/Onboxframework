@@ -179,21 +179,24 @@ namespace Onbox.Mvc.V1
         {
         }
 
-        public async Task<bool> PerformAsync(Func<Task> func, Action<string> error = null)
+        public async Task<bool> PerformAsync(Func<Task> func, Action<Exception> onError = null, Action onComplete = null)
         {
             this.Error = null;
             this.IsLoading = true;
             try
             {
                 await func.Invoke();
-                this.IsLoading = false;
                 return true;
             }
             catch (Exception e)
             {
-                error?.Invoke(e.Message);
-                this.IsLoading = false;
+                onError?.Invoke(e);
                 return false;
+            }
+            finally
+            {
+                onComplete?.Invoke();
+                this.IsLoading = false;
             }
         }
 

@@ -20,6 +20,15 @@ namespace Onbox.Mvc.V1
     /// </summary>
     public partial class Spinner : UserControl
     {
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(Spinner), new PropertyMetadata("Loading..."));
+
         public Spinner()
         {
             InitializeComponent();

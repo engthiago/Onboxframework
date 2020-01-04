@@ -35,7 +35,7 @@ namespace Onbox.Sandbox.Revit.Commands
             },
             (error) =>
             {
-                this.messageService.Warning(error);
+                this.messageService.Warning(error.Message);
                 this.Users = new List<User>();
             });
         }
@@ -56,7 +56,7 @@ namespace Onbox.Sandbox.Revit.Commands
             },
             (error) =>
             {
-                this.messageService.Warning(error);
+                this.messageService.Warning(error.Message);
             });
         }
 
