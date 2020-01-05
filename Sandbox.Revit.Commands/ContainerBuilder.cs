@@ -12,11 +12,11 @@ namespace Onbox.Sandbox.Revit.Commands
         {
             var container = Container.Default();
 
-            //container.AddSingleton<IMessageService, MessageBoxService>();
-            
             container.AddSingleton<IMessageService, MessageBoxService>();
-            //container.AddTransient<SomeOtherService>();
-            //container.AddTransient<SomeOtherOtherService>();
+
+            //container.AddSingleton<SomeService>();
+            //container.AddSingleton<SomeOtherService>();
+            //container.AddSingleton<SomeOtherOtherService>();
 
             container.AddTransient<ITestWindow, TestWindow>();
             
