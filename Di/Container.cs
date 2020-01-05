@@ -21,44 +21,44 @@ namespace Onbox.Di.V1
 
     public class Container : IContainer
     {
-        private static readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
-        private static readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
+        private readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
+        private readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
 
-        private static readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
+        private readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
 
         private List<Type> currentTypes = new List<Type>();
         private Type currentType;
 
         public void AddSingleton<TImplementation>()
         {
-            singletonCache[typeof(TImplementation)] = typeof(TImplementation);
+            this.singletonCache[typeof(TImplementation)] = typeof(TImplementation);
         }
 
         public void AddSingleton<TImplementation>(TImplementation instance)
         {
-            instances[typeof(TImplementation)] = instance;
+            this.instances[typeof(TImplementation)] = instance;
         }
 
         public void AddSingleton<TContract, TImplementation>() where TImplementation : TContract
         {
-            singletonCache[typeof(TContract)] = typeof(TImplementation);
+            this.singletonCache[typeof(TContract)] = typeof(TImplementation);
         }
 
         public void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract
         {
-            instances[typeof(TContract)] = instance;
+            this.instances[typeof(TContract)] = instance;
         }
 
 
 
         public void AddTransient<TImplementation>()
         {
-            types[typeof(TImplementation)] = typeof(TImplementation);
+            this.types[typeof(TImplementation)] = typeof(TImplementation);
         }
 
         public void AddTransient<TContract, TImplementation>() where TImplementation : TContract
         {
-            types[typeof(TContract)] = typeof(TImplementation);
+            this.types[typeof(TContract)] = typeof(TImplementation);
         }
 
 
@@ -66,26 +66,27 @@ namespace Onbox.Di.V1
         public T Resolve<T>()
         {
             var type = (T)this.Resolve(typeof(T));
-            currentTypes.Clear();
+            this.currentTypes.Clear();
             return type;
         }
 
         private object Resolve(Type contract)
         {
-            if (instances.ContainsKey(contract))
+            // Always prioritize instances
+            if (this.instances.ContainsKey(contract))
             {
-                return instances[contract];
+                return this.instances[contract];
             }
-            else if (singletonCache.ContainsKey(contract))
+            else if (this.singletonCache.ContainsKey(contract))
             {
-                var instance = this.Resolve(contract, singletonCache);
-                instances[contract] = instance;
-                singletonCache.Remove(contract);
+                var instance = this.Resolve(contract, this.singletonCache);
+                this.instances[contract] = instance;
+                this.singletonCache.Remove(contract);
                 return instance;
             }
-            else if (types.ContainsKey(contract))
+            else if (!contract.IsAbstract)
             {
-                return this.Resolve(contract, types);
+                return this.Resolve(contract, this.types);
             }
             else
             {
@@ -97,15 +98,19 @@ namespace Onbox.Di.V1
         private object Resolve(Type contract, IDictionary<Type, Type> dic)
         {
             // Check for Ciruclar dependencies
-            if (currentTypes.Contains(contract))
+            if (this.currentTypes.Contains(contract))
             {
-                throw new InvalidOperationException($"Circular dependency between: {contract.Name} and {currentType.Name}.");
+                throw new InvalidOperationException($"Circular dependency between: {contract.Name} and {this.currentType.Name}.");
             }
-            currentTypes.Add(contract);
-            currentType = contract;
+            this.currentTypes.Add(contract);
+            this.currentType = contract;
 
-            // Get Type from the dictionary
-            Type implementation = dic[contract];
+            // If this is a concrete type just instantiate it, if not, get the concrete type on the dictionary
+            Type implementation = contract;
+            if (implementation.IsAbstract)
+            {
+                implementation = dic[contract];
+            }
 
             // Get the first available contructor
             ConstructorInfo constructor = implementation.GetConstructors()[0];
@@ -124,9 +129,9 @@ namespace Onbox.Di.V1
 
         public void Reset()
         {
-            types.Clear();
-            instances.Clear();
-            singletonCache.Clear();
+            this.types.Clear();
+            this.instances.Clear();
+            this.singletonCache.Clear();
         }
 
         public static Container Default()

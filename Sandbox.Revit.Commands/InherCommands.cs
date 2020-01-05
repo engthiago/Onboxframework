@@ -14,7 +14,6 @@ namespace Onbox.Sandbox.Revit.Commands
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             var someService = this.container.Resolve<SomeService>();
-            var someService2 = this.container.Resolve<SomeService>();
 
             return Result.Succeeded;
         }

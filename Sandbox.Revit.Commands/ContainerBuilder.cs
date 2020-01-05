@@ -14,9 +14,9 @@ namespace Onbox.Sandbox.Revit.Commands
 
             container.AddSingleton<IMessageService, MessageBoxService>();
 
-            container.AddTransient<SomeService>();
-            container.AddTransient<SomeOtherService>();
-            container.AddTransient<SomeOtherOtherService>();
+            //container.AddTransient<SomeService>();
+            //container.AddTransient<SomeOtherService>();
+            //container.AddTransient<SomeOtherOtherService>();
 
             container.AddTransient<ITestWindow, TestWindow>();
             
