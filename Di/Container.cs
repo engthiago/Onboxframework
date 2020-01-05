@@ -92,7 +92,7 @@ namespace Onbox.Di.V1
                 this.singletonCache.Remove(contract);
                 return instance;
             }
-            else if (this.types.ContainsKey(contract) || !contract.IsAbstract)
+            else if (!contract.IsAbstract || this.types.ContainsKey(contract))
             {
                 return this.Resolve(contract, this.types);
             }
