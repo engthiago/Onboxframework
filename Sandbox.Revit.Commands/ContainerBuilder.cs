@@ -1,6 +1,7 @@
 ﻿using Onbox.Core.V1;
 using Onbox.Core.V1.Messaging;
 using Onbox.Di.V1;
+using Onbox.Mvc.V1;
 using Onbox.Mvc.V1.Messaging;
 
 namespace Onbox.Sandbox.Revit.Commands
@@ -9,48 +10,42 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public static Container Build()
         {
-            var container = new Container();
-            container.AddTransient<IOrderView, OrderView>();
-            container.AddTransient<IServerService, MockServerService>();
-            container.AddTransient<IMessageService, MessageBoxService>();
+            var container = Container.Default();
 
-            container.AddSingleton<SomeService>();
-            container.AddTransient<OtherService>();
-            container.AddTransient<OtherOtherService>();
-            container.AddTransient<OtherOtherOtherService>();
+            container.AddSingleton<IMessageService, MessageBoxService>();
 
-            container.AddOnboxCore();
+            container.AddTransient<SomeService>();
+            container.AddTransient<SomeOtherService>();
+            container.AddTransient<SomeOtherOtherService>();
 
+            container.AddTransient<ITestWindow, TestWindow>();
+            
             return container;
         }
     }
 
+
     public class SomeService
     {
-        public SomeService(OtherService service)
+        public SomeService(IMessageService messageService)
         {
+            messageService.Show("Instantiating some service");
         }
     }
 
-    public class OtherService
+    public class SomeOtherService
     {
-        public OtherService(OtherOtherService service)
+        public SomeOtherService(SomeOtherOtherService service, IMessageService messageService)
         {
+            messageService.Show("Instantiating some other service");
         }
     }
 
-    public class OtherOtherService
+    public class SomeOtherOtherService
     {
-        public OtherOtherService(OtherOtherOtherService service)
+        public SomeOtherOtherService(IMessageService messageService)
         {
-        }
-    }
-
-    public class OtherOtherOtherService
-    {
-        public OtherOtherOtherService()
-        {
-
+            messageService.Show("Instantiating some other other service");
         }
     }
 }

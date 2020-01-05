@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Onbox.Sandbox.Revit.Commands
 {
-    public interface IOrderView : IViewBase
+    public interface IOrderView : IViewMvc
     {
         List<User> Users { get; set; }
     }

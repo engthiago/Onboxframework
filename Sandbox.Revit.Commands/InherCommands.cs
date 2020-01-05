@@ -13,26 +13,31 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            //var newOrderViewModel = container.Resolve<IOrderView>();
-            //newOrderViewModel.SetTitle("Edit");
-            //var result = newOrderViewModel.ShowDialog();
-            var messageService = this.container.Resolve<IMessageService>();
-
             var someService = this.container.Resolve<SomeService>();
             var someService2 = this.container.Resolve<SomeService>();
-
-            if (someService.Equals(someService2))
-            {
-                messageService.Show("Equals");
-            }
-            else
-            {
-                messageService.Show("Not equals");
-            }
 
             return Result.Succeeded;
         }
     }
+
+    [Transaction(TransactionMode.Manual)]
+    public class ViewsCommand : ExternalCommandBase
+    {
+        public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
+        {
+            var messageService = container.Resolve<IMessageService>();
+            var testWindow = container.Resolve<ITestWindow>();
+            testWindow.RunOnInitFunc(async () =>
+            {
+                await Task.Delay(50);
+                messageService.Show("Resolved outside of window");
+            });
+            testWindow.ShowDialog();
+
+            return Result.Succeeded;
+        }
+    }
+
 
     [Transaction(TransactionMode.Manual)]
     public class CleanContainer : ExternalCommandBase

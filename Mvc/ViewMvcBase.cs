@@ -7,7 +7,7 @@ using System.Windows.Shell;
 
 namespace Onbox.Mvc.V1
 {
-    public abstract class ViewMvcBase : Window, INotifyPropertyChanged, IViewBase
+    public abstract class ViewMvcBase : Window, INotifyPropertyChanged, IViewMvc
     {
         /// <summary>
         /// Event that gets fired when any property changes on child classes
@@ -26,6 +26,7 @@ namespace Onbox.Mvc.V1
 
         private Func<Task> onInitAsyncFunc;
         private Action<string> onInitAsyncError;
+        private Action onInitComplete;
 
         [DllImport("user32.dll")]
         extern private static int GetWindowLong(IntPtr hwnd, int index);
@@ -37,9 +38,10 @@ namespace Onbox.Mvc.V1
         {
             this.DataContext = this;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            this.ShowInTaskbar = false;
             this.SetRevitAsParent();
             this.Loaded += this.OnViewLoaded;
-            this.ContentRendered += this.ViewMvcBase_ContentRendered;
+            this.ContentRendered += this.OnViewRendered;
         }
 
         private async void OnViewLoaded(object sender, RoutedEventArgs e)
@@ -67,23 +69,26 @@ namespace Onbox.Mvc.V1
 
             if (onInitAsyncFunc != null)
             {
+                Error = null;
+                IsLoading = true;
                 try
                 {
-                    Error = null;
-                    IsLoading = true;
                     await onInitAsyncFunc?.Invoke();
-                    IsLoading = false;
                 }
                 catch (Exception ex)
                 {
                     Error = ex.Message;
-                    IsLoading = false;
                     this.onInitAsyncError?.Invoke(ex.Message);
-                } 
+                }
+                finally
+                {
+                    IsLoading = false;
+                    this.onInitComplete?.Invoke();
+                }
             }
         }
 
-        private void ViewMvcBase_ContentRendered(object sender, EventArgs e)
+        private void OnViewRendered(object sender, EventArgs e)
         {
             OnAfterInit();
         }
@@ -182,10 +187,11 @@ namespace Onbox.Mvc.V1
         public async Task<bool> PerformAsync(Func<Task> func, Action<Exception> onError = null, Action onComplete = null)
         {
             this.Error = null;
+            this.Warning = null;
             this.IsLoading = true;
             try
             {
-                await func.Invoke();
+                await func?.Invoke();
                 return true;
             }
             catch (Exception e)
@@ -231,10 +237,11 @@ namespace Onbox.Mvc.V1
             this.titleVisibility = titleVisibility;
         }
 
-        public void RunInitFunc(Func<Task> func, Action<string> error = null)
+        public void RunOnInitFunc(Func<Task> func, Action<string> error = null, Action complete = null)
         {
             this.onInitAsyncFunc = func;
             this.onInitAsyncError = error;
+            this.onInitComplete = complete;
         }
     }
 
