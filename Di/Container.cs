@@ -7,12 +7,12 @@ namespace Onbox.Di.V1
 {
     public interface IContainer
     {
-        void AddSingleton<TImplementation>();
-        void AddSingleton<TImplementation>(TImplementation instance);
+        void AddSingleton<TImplementation>() where TImplementation: class;
+        void AddSingleton<TContract>(TContract instance) where TContract : class;
         void AddSingleton<TContract, TImplementation>() where TImplementation : TContract;
         void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract;
 
-        void AddTransient<TImplementation>();
+        void AddTransient<TImplementation>() where TImplementation : class;
         void AddTransient<TContract, TImplementation>() where TImplementation : TContract;
 
         void Reset();
@@ -29,19 +29,23 @@ namespace Onbox.Di.V1
         private List<Type> currentTypes = new List<Type>();
         private Type currentType;
 
-        public void AddSingleton<TImplementation>()
+        public void AddSingleton<TImplementation>() where TImplementation : class
         {
-            this.singletonCache[typeof(TImplementation)] = typeof(TImplementation);
+            var type = typeof(TImplementation);
+            CheckForValidNonAbstractClass(type);
+            this.singletonCache[type] = type;
         }
 
-        public void AddSingleton<TImplementation>(TImplementation instance)
+        public void AddSingleton<TContract>(TContract instance) where TContract : class
         {
-            this.instances[typeof(TImplementation)] = instance;
+            this.instances[typeof(TContract)] = instance;
         }
 
         public void AddSingleton<TContract, TImplementation>() where TImplementation : TContract
         {
-            this.singletonCache[typeof(TContract)] = typeof(TImplementation);
+            var type = typeof(TImplementation);
+            CheckForValidNonAbstractClass(type);
+            this.singletonCache[typeof(TContract)] = type;
         }
 
         public void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract
@@ -51,14 +55,18 @@ namespace Onbox.Di.V1
 
 
 
-        public void AddTransient<TImplementation>()
+        public void AddTransient<TImplementation>() where TImplementation : class
         {
-            this.types[typeof(TImplementation)] = typeof(TImplementation);
+            var type = typeof(TImplementation);
+            CheckForValidNonAbstractClass(type);
+            this.types[type] = type;
         }
 
         public void AddTransient<TContract, TImplementation>() where TImplementation : TContract
         {
-            this.types[typeof(TContract)] = typeof(TImplementation);
+            var type = typeof(TImplementation);
+            CheckForValidNonAbstractClass(type);
+            this.types[typeof(TContract)] = type;
         }
 
 
@@ -84,7 +92,7 @@ namespace Onbox.Di.V1
                 this.singletonCache.Remove(contract);
                 return instance;
             }
-            else if (!contract.IsAbstract)
+            else if (this.types.ContainsKey(contract) || !contract.IsAbstract)
             {
                 return this.Resolve(contract, this.types);
             }
@@ -113,7 +121,14 @@ namespace Onbox.Di.V1
             }
 
             // Get the first available contructor
-            ConstructorInfo constructor = implementation.GetConstructors()[0];
+            var constructors = implementation.GetConstructors();
+            if (constructors.Length < 1)
+            {
+                throw new InvalidOperationException($"{implementation.Name} has no available constructors. The container can not instantiate it.");
+            }
+
+            ConstructorInfo constructor = constructors[0];
+
             ParameterInfo[] constructorParameters = constructor.GetParameters();
             if (constructorParameters.Length == 0)
             {
@@ -140,6 +155,18 @@ namespace Onbox.Di.V1
             container.AddSingleton<IContainer>(container);
 
             return container;
+        }
+
+        private static void CheckForValidNonAbstractClass(Type type)
+        {
+            if (type.IsInterface)
+            {
+                throw new InvalidOperationException($"Can not add {type.Name} to the container because it is an interface. You need to provide a concrete type or provide an instance.");
+            }
+            if (type.IsAbstract)
+            {
+                throw new InvalidOperationException($"Can not add {type.Name} to the container because because it is an abstract type. You need to provide a concrete type or provide an instance.");
+            }
         }
     }
 }
