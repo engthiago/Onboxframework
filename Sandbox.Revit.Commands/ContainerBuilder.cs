@@ -1,4 +1,5 @@
 ﻿using Onbox.Core.V1;
+using Onbox.Core.V1.Logging;
 using Onbox.Core.V1.Messaging;
 using Onbox.Di.V1;
 using Onbox.Mvc.V1;
@@ -14,6 +15,8 @@ namespace Onbox.Sandbox.Revit.Commands
 
             container.AddSingleton<IMessageService, MessageBoxService>();
 
+            container.AddFileLogging();
+
             //container.AddSingleton<SomeService>();
             //container.AddSingleton<SomeOtherService>();
             //container.AddSingleton<SomeOtherOtherService>();
@@ -27,9 +30,10 @@ namespace Onbox.Sandbox.Revit.Commands
 
     public class SomeService
     {
-        public SomeService(IMessageService messageService)
+        public SomeService(IMessageService messageService, ILoggingService loggingService)
         {
             messageService.Show("Instantiating some service");
+            loggingService.Log("Instantiating some service");
         }
     }
 
