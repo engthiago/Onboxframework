@@ -5,20 +5,55 @@ using System.Reflection;
 
 namespace Onbox.Di.V1
 {
+    /// <summary>
+    /// Onbox's IOC container contract
+    /// </summary>
     public interface IContainer
     {
+        /// <summary>
+        /// Adds an implementation as a singleton on the container.
+        /// </summary>
         void AddSingleton<TImplementation>() where TImplementation: class;
-        void AddSingleton<TContract>(TContract instance) where TContract : class;
+
+        /// <summary>
+        /// Adds an instance as a singleton on the container
+        /// </summary>
+        void AddSingleton<TImplementation>(TImplementation instance) where TImplementation : class;
+
+        /// <summary>
+        /// Adds an implementation to a contract as a singleton on the container
+        /// </summary>
         void AddSingleton<TContract, TImplementation>() where TImplementation : TContract;
+
+        /// <summary>
+        /// Adds an instance as a singleton on the container
+        /// </summary>
         void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract;
 
+        /// <summary>
+        /// Adds an implementation as a transient on the container.
+        /// </summary>
         void AddTransient<TImplementation>() where TImplementation : class;
+
+        /// <summary>
+        /// Adds an implementation to a contract as transient on the container
+        /// </summary>
         void AddTransient<TContract, TImplementation>() where TImplementation : TContract;
 
+        /// <summary>
+        /// Resets the entire container
+        /// </summary>
         void Reset();
+
+        /// <summary>
+        /// Asks the container for a new instance of a type
+        /// </summary>
         T Resolve<T>();
     }
 
+    /// <summary>
+    /// Onbox's IOC container implementation
+    /// </summary>
     public class Container : IContainer
     {
         private readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
@@ -26,51 +61,90 @@ namespace Onbox.Di.V1
 
         private readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
 
-        private List<Type> currentTypes = new List<Type>();
+        private readonly List<Type> currentTypes = new List<Type>();
         private Type currentType;
 
+        /// <summary>
+        /// Adds an implementation as a singleton on the container.
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <typeparam name="TImplementation"></typeparam>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddSingleton<TImplementation>() where TImplementation : class
         {
             var type = typeof(TImplementation);
-            CheckForValidNonAbstractClass(type);
+            EnsureNonAbstractClass(type);
             this.singletonCache[type] = type;
         }
 
-        public void AddSingleton<TContract>(TContract instance) where TContract : class
+        /// <summary>
+        /// Adds an instance as a singleton on the container
+        /// </summary>
+        /// <typeparam name="TImplementation"></typeparam>
+        /// <param name="instance"></param>
+        public void AddSingleton<TImplementation>(TImplementation instance) where TImplementation : class
         {
-            this.instances[typeof(TContract)] = instance;
+            this.instances[typeof(TImplementation)] = instance;
         }
 
+        /// <summary>
+        /// Adds an implementation to a contract as a singleton on the container
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <typeparam name="TContract"></typeparam>
+        /// <typeparam name="TImplementation"></typeparam>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddSingleton<TContract, TImplementation>() where TImplementation : TContract
         {
             var type = typeof(TImplementation);
-            CheckForValidNonAbstractClass(type);
+            EnsureNonAbstractClass(type);
             this.singletonCache[typeof(TContract)] = type;
         }
 
+        /// <summary>
+        /// Adds an instance as a singleton on the container
+        /// </summary>
+        /// <typeparam name="TContract"></typeparam>
+        /// <typeparam name="TImplementation"></typeparam>
         public void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract
         {
             this.instances[typeof(TContract)] = instance;
         }
 
 
-
+        /// <summary>
+        /// Adds an implementation as a transient on the container.
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <typeparam name="TImplementation"></typeparam>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddTransient<TImplementation>() where TImplementation : class
         {
             var type = typeof(TImplementation);
-            CheckForValidNonAbstractClass(type);
+            EnsureNonAbstractClass(type);
             this.types[type] = type;
         }
 
+        /// <summary>
+        /// Adds an implementation to a contract as transient on the container
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <typeparam name="TContract"></typeparam>
+        /// <typeparam name="TImplementation"></typeparam>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddTransient<TContract, TImplementation>() where TImplementation : TContract
         {
             var type = typeof(TImplementation);
-            CheckForValidNonAbstractClass(type);
+            EnsureNonAbstractClass(type);
             this.types[typeof(TContract)] = type;
         }
 
 
-
+        /// <summary>
+        /// Asks the container for a new instance of a type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Resolve<T>()
         {
             var type = (T)this.Resolve(typeof(T));
@@ -142,6 +216,9 @@ namespace Onbox.Di.V1
             return constructor.Invoke(parameters.ToArray());
         }
 
+        /// <summary>
+        /// Resets the entire container
+        /// </summary>
         public void Reset()
         {
             this.types.Clear();
@@ -149,6 +226,10 @@ namespace Onbox.Di.V1
             this.singletonCache.Clear();
         }
 
+        /// <summary>
+        /// Creates the default container implementation and adds it to itself as a abstract singleton of type <see cref="IContainer"/>
+        /// </summary>
+        /// <returns></returns>
         public static Container Default()
         {
             var container = new Container();
@@ -157,7 +238,7 @@ namespace Onbox.Di.V1
             return container;
         }
 
-        private static void CheckForValidNonAbstractClass(Type type)
+        private static void EnsureNonAbstractClass(Type type)
         {
             if (type.IsInterface)
             {
