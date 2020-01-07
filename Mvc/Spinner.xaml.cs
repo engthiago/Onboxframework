@@ -20,6 +20,30 @@ namespace Onbox.Mvc.V1
     /// </summary>
     public partial class Spinner : UserControl
     {
+        public Color StartColor
+        {
+            get { return (Color)GetValue(StartColorProperty); }
+            set { SetValue(StartColorProperty, value); }
+        }
+
+        public static readonly DependencyProperty StartColorProperty =
+            DependencyProperty.Register("StartColor", typeof(Color), typeof(Spinner), new PropertyMetadata(Color.FromRgb(150,150,150)));
+
+
+        public Color EndColor
+        {
+            get { return (Color)GetValue(EndColorProperty); }
+            set { SetValue(EndColorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EndColor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EndColorProperty =
+            DependencyProperty.Register("EndColor", typeof(Color), typeof(Spinner), new PropertyMetadata(Color.FromRgb(84, 84, 84)));
+
+
+
+
+
         public string Text
         {
             get { return (string)GetValue(TextProperty); }

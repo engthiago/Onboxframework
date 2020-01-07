@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Onbox.Mvc.V1"
              x:Name="Host"
+             UseLayoutRounding="False"
+             RenderOptions.BitmapScalingMode="HighQuality"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Storyboard x:Name="spinner"
@@ -63,10 +65,10 @@
                                              StartPoint="399.906,240.414"
                                              EndPoint="419.903,240.414">
                             <LinearGradientBrush.GradientStops>
-                                <GradientStop Offset="0.26"
-                                              Color="Gray" />
+                                <GradientStop Offset="0.5"
+                                              Color="{Binding StartColor, ElementName=Host, FallbackValue=DarkGray}" />
                                 <GradientStop Offset="1.00"
-                                              Color="White" />
+                                              Color="Transparent" />
                             </LinearGradientBrush.GradientStops>
                             <LinearGradientBrush.Transform>
                                 <MatrixTransform Matrix="-1.000,0.000,0.000,-1.000,419.905,245.373" />
@@ -84,9 +86,9 @@
                                              EndPoint="509.491,230.414">
                             <LinearGradientBrush.GradientStops>
                                 <GradientStop Offset="0.00"
-                                              Color="#3f3f3f" />
-                                <GradientStop Offset="0.73"
-                                              Color="Gray" />
+                                              Color="{Binding EndColor, ElementName=Host, FallbackValue=DarkGray}"/>
+                                <GradientStop Offset="0.5"
+                                              Color="{Binding StartColor, ElementName=Host, FallbackValue=DarkGray}" />
                             </LinearGradientBrush.GradientStops>
                             <LinearGradientBrush.Transform>
                                 <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,-489.491,245.373" />
