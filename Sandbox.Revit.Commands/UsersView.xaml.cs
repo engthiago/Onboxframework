@@ -18,14 +18,16 @@ using System.Windows.Shapes;
 namespace Onbox.Sandbox.Revit.Commands
 {
     /// <summary>
-    /// Interaction logic for TestWindow.xaml
+    /// Interaction logic for UsersView.xaml
     /// </summary>
-    public partial class TestWindow : ViewMvcBase, ITestWindow
+    public partial class UsersView : ViewMvcBase
     {
         private readonly IMessageService messageService;
         private readonly ILoggingService loggingService;
 
-        public TestWindow(IMessageService messageService, ILoggingService loggingService)
+        public string UserName { get; set; }
+
+        public UsersView(IMessageService messageService, ILoggingService loggingService)
         {
             this.InitializeComponent();
             this.messageService = messageService;
@@ -34,16 +36,13 @@ namespace Onbox.Sandbox.Revit.Commands
 
         public async override void OnInit()
         {
-            await loggingService.Log("View initialized...");
+            await this.PerformAsync(async () =>
+            {
+                await loggingService.Log("Retrieving user...");
+                await Task.Delay(1000);
+                this.UserName = "Eduardo";
+                await loggingService.Log($"Retrieved user: {this.UserName}...");
+            });
         }
-
-        public async override void OnDestroy()
-        {
-            await loggingService.Log("View Closed...");
-        }
-    }
-
-    public interface ITestWindow : IViewMvc
-    {
     }
 }

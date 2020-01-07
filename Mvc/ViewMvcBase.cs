@@ -40,6 +40,8 @@ namespace Onbox.Mvc.V1
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.ShowInTaskbar = false;
             this.SetRevitAsParent();
+            this.ResizeMode = ResizeMode.CanResizeWithGrip;
+
             this.Loaded += this.OnViewLoaded;
             this.ContentRendered += this.OnViewRendered;
         }

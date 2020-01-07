@@ -1,0 +1,15 @@
+﻿<mvc:ViewMvcBase x:Class="Onbox.Sandbox.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.Mvc"
+        xmlns:local="clr-namespace:Sandbox.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="524.883"
+        Width="536.661">
+    <Grid>
+        <TextBlock Text="{Binding Name}"></TextBlock>
+    </Grid>
+</mvc:ViewMvcBase>

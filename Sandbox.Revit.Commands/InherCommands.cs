@@ -25,13 +25,7 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            var messageService = container.Resolve<IMessageService>();
             var testWindow = container.Resolve<ITestWindow>();
-            testWindow.RunOnInitFunc(async () =>
-            {
-                await Task.Delay(50);
-                messageService.Show("Resolved outside of window");
-            });
             testWindow.ShowDialog();
 
             return Result.Succeeded;
