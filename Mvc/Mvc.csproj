@@ -79,6 +79,9 @@
     <Compile Include="Converters\ValueEqualsToConverter.cs" />
     <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
     <Compile Include="Converters\ValueIsNotNullConverter.cs" />
+    <Compile Include="ErrorIcon.xaml.cs">
+      <DependentUpon>ErrorIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IViewMvc.cs" />
     <Compile Include="Messaging\MessageBoxService.cs" />
     <Compile Include="NotifyPropertyBase.cs" />
@@ -87,6 +90,9 @@
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewMvcBase.cs" />
+    <Compile Include="WarningIcon.xaml.cs">
+      <DependentUpon>WarningIcon.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -95,7 +101,15 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ErrorIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Spinner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WarningIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

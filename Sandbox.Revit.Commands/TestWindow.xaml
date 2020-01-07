@@ -17,8 +17,7 @@
                     IsCancel="True">Cancel</Button>
         </StackPanel>
         <mvc:Spinner />
-        <TextBlock Text="{Binding Error}" Foreground="Red"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
+        <mvc:ErrorIcon/>
+        <mvc:WarningIcon/>
     </Grid>
 </mvc:ViewMvcBase>

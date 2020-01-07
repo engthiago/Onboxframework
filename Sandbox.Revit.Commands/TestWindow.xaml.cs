@@ -34,12 +34,21 @@ namespace Onbox.Sandbox.Revit.Commands
 
         public async override void OnInit()
         {
-            await loggingService.Log("View initialized...");
+            await this.PerformAsync(async () =>
+            {
+                await Task.Delay(2000);
+                throw new Exception("Server error!");
+            }, 
+            error =>
+            {
+                Warning = error.Message;
+            });
         }
 
-        public async override void OnDestroy()
+        private void OnRetry(object sender, RoutedEventArgs e)
         {
-            await loggingService.Log("View Closed...");
+            messageService.Show("Retried");
+            Error = null;
         }
     }
 

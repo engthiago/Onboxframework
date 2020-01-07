@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Onbox.Mvc.V1.ErrorIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters"
+             xmlns:local="clr-namespace:Onbox.Mvc.V1"
+             mc:Ignorable="d"
+             x:Name="Host"
+             UseLayoutRounding="False"
+             Visibility="{Binding Error, Converter={c:NullVisibilityCollapse}, FallbackValue=Collapsed}">
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        <Grid>
+            <Ellipse Fill="#FFB40000"
+                     HorizontalAlignment="Center"
+                     Stroke="White"
+                     VerticalAlignment="Center"
+                     Height="32"
+                     Width="32" />
+            <StackPanel VerticalAlignment="Center">
+                <Rectangle Fill="White"
+                           Height="16.75"
+                           Width="3.75"
+                           RadiusY="0.719"
+                           RadiusX="0.719" />
+                <Rectangle Fill="White"
+                           Margin="0,3,0,0"
+                           Height="3.75"
+                           RadiusY="0.719"
+                           RadiusX="0.719"
+                           Width="3.75" />
+            </StackPanel>
+        </Grid>
+        <TextBlock Text="{Binding Error, FallbackValue=Error}"
+                   TextAlignment="Center"
+                   Foreground="{Binding Foreground, ElementName=Host}" />
+        <Button Content="Retry"
+                Visibility="{Binding CanRetry, ElementName=Host, Converter={c:BoolToVisibilityHideConverter}}"
+                Margin="0,7,0,0"
+                Click="OnRetryClicked"
+                Width="80"></Button>
+    </StackPanel>
+</UserControl>
