@@ -12,7 +12,9 @@
                  ResizeMode="NoResize"
                  SizeToContent="WidthAndHeight">
     <Grid>
-        <StackPanel mvc:If.OnErrorOrLoadingHide="True" Height="300" Width="300">
+        <StackPanel mvc:If.OnErrorOrLoadingHide="True"
+                    Height="300"
+                    Width="300">
             <Button IsEnabled="{Binding CanCloseWindow}"
                     IsCancel="True">Cancel</Button>
             <Button mvc:Is.Confirm="True">Ok</Button>

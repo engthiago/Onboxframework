@@ -66,7 +66,7 @@
                                              EndPoint="419.903,240.414">
                             <LinearGradientBrush.GradientStops>
                                 <GradientStop Offset="0.5"
-                                              Color="{Binding StartColor, ElementName=Host, FallbackValue=DarkGray}" />
+                                              Color="{Binding Color1, ElementName=Host, FallbackValue=DarkGray}" />
                                 <GradientStop Offset="1.00"
                                               Color="Transparent" />
                             </LinearGradientBrush.GradientStops>
@@ -86,9 +86,9 @@
                                              EndPoint="509.491,230.414">
                             <LinearGradientBrush.GradientStops>
                                 <GradientStop Offset="0.00"
-                                              Color="{Binding EndColor, ElementName=Host, FallbackValue=DarkGray}"/>
+                                              Color="{Binding Color2, ElementName=Host, FallbackValue=DarkGray}" />
                                 <GradientStop Offset="0.5"
-                                              Color="{Binding StartColor, ElementName=Host, FallbackValue=DarkGray}" />
+                                              Color="{Binding Color1, ElementName=Host, FallbackValue=DarkGray}" />
                             </LinearGradientBrush.GradientStops>
                             <LinearGradientBrush.Transform>
                                 <MatrixTransform Matrix="1.000,0.000,-0.000,-1.000,-489.491,245.373" />
@@ -97,7 +97,8 @@
                     </Path.Fill>
                 </Path>
             </Canvas>
-            <TextBlock Text="{Binding Text, ElementName=Host, UpdateSourceTrigger=PropertyChanged, FallbackValue=Loading...}"
+            <TextBlock Margin="0,4,0,0"
+                       Text="{Binding Text, ElementName=Host, UpdateSourceTrigger=PropertyChanged, FallbackValue=Loading...}"
                        HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>

@@ -92,6 +92,9 @@
     <Compile Include="Spinner.xaml.cs">
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SpinnerDashed.xaml.cs">
+      <DependentUpon>SpinnerDashed.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewMvcBase.cs" />
     <Compile Include="VisualTreeHelpers.cs" />
     <Compile Include="WarningIcon.xaml.cs">
@@ -110,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Spinner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpinnerDashed.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
