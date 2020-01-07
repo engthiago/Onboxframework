@@ -9,15 +9,14 @@
                  ShowInTaskbar="False"
                  mc:Ignorable="d"
                  Title="TestWindow"
-                 Height="545.666"
-                 Width="554.858">
+                 ResizeMode="NoResize"
+                 SizeToContent="WidthAndHeight">
     <Grid>
-        <StackPanel Visibility="{Binding IsLoading, Converter={c:BoolToVisibilityHideConverter}, ConverterParameter=False}">
+        <StackPanel mvc:If.OnErrorOrLoadingHide="True" Height="300" Width="300">
             <Button IsEnabled="{Binding CanCloseWindow}"
                     IsCancel="True">Cancel</Button>
         </StackPanel>
         <mvc:Spinner />
-        <mvc:ErrorIcon/>
-        <mvc:WarningIcon/>
+        <mvc:ErrorIcon OnRetry="OnRetry" CanRetry="True" />
     </Grid>
 </mvc:ViewMvcBase>

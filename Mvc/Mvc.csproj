@@ -54,6 +54,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="If.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BooleanToWidthConverter.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Converters\EnumtoVisibilityInvertedConveter.cs" />
     <Compile Include="Converters\GetListItemConverter.cs" />
     <Compile Include="Converters\MultiParametersConverter.cs" />
+    <Compile Include="Converters\NullVisibilityHide.cs" />
     <Compile Include="Converters\NullVisibilityCollapse.cs" />
     <Compile Include="Converters\TextToNoneWhenEmptyConveter.cs" />
     <Compile Include="Converters\TypeToVisibilityConverter.cs" />

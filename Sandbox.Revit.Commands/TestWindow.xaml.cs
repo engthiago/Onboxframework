@@ -41,13 +41,12 @@ namespace Onbox.Sandbox.Revit.Commands
             }, 
             error =>
             {
-                Warning = error.Message;
+                Error = error.Message;
             });
         }
 
         private void OnRetry(object sender, RoutedEventArgs e)
         {
-            messageService.Show("Retried");
             Error = null;
         }
     }
