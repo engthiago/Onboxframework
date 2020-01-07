@@ -60,7 +60,7 @@ namespace Onbox.Mvc.V1
         }
 
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(Spinner), new PropertyMetadata("Loading.."));
+            DependencyProperty.Register("Text", typeof(string), typeof(Spinner), new PropertyMetadata("Loading..."));
 
 
 

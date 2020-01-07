@@ -7,7 +7,6 @@
                  xmlns:local="clr-namespace:Sandbox.WPF"
                  mc:Ignorable="d"
                  Title="MainWindow"
-                 IsLoading="True"
                  Height="524.883"
                  Width="536.661">
     <Grid>
