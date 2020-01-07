@@ -3,8 +3,8 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.mvc"
-                 xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters;assembly=Onbox.mvc"
+                 xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.Mvc.V1"
+                 xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters;assembly=Onbox.Mvc.V1"
                  xmlns:local="clr-namespace:Onbox.Sandbox.Revit.Commands"
                  ShowInTaskbar="False"
                  mc:Ignorable="d"
@@ -19,7 +19,7 @@
                     IsCancel="True">Cancel</Button>
             <Button mvc:Is.Confirm="True">Ok</Button>
         </StackPanel>
-        <mvc:Spinner />
+        <!--<mvc:Spinner />-->
         <mvc:ErrorIcon OnRetry="OnRetry"
                        CanRetry="True" />
     </Grid>

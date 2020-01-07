@@ -4,8 +4,8 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:local="clr-namespace:Onbox.Sandbox.Revit.Commands"
-                     xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.mvc"
-                     xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters;assembly=Onbox.mvc"
+                     xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.Mvc.V1"
+                     xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters;assembly=Onbox.Mvc.V1"
                      mc:Ignorable="d"
                      Title="{Binding Title}"
                      Height="484.473"
@@ -54,7 +54,7 @@
                         Width="82">Sync Close</Button>
             </WrapPanel>
         </Grid>
-        <mvc:Spinner Visibility="{Binding IsLoading, Converter={c:BoolToVisibilityConverter}}" />
+        <!--<mvc:Spinner Visibility="{Binding IsLoading, Converter={c:BoolToVisibilityConverter}}" />-->
         <TextBlock Text="{Binding Error}"
                    Foreground="Red"
                    IsHitTestVisible="False"

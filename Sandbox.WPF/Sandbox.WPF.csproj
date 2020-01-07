@@ -110,7 +110,7 @@
       <Name>Di</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
-      <Project>{2f93c222-e73b-4cf1-8b3e-d7d4802bd9d9}</Project>
+      <Project>{06552675-1f55-4c83-a25b-4658ebac2822}</Project>
       <Name>Mvc</Name>
     </ProjectReference>
   </ItemGroup>

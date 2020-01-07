@@ -4,18 +4,21 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2F93C222-E73B-4CF1-8B3E-D7D4802BD9D9}</ProjectGuid>
+    <ProjectGuid>{06552675-1F55-4C83-A25B-4658EBAC2822}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Onbox.Mvc.V1</RootNamespace>
-    <AssemblyName>Onbox.Mvc</AssemblyName>
+    <AssemblyName>Onbox.Mvc.V1</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,9 +26,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Onbox.Mvc.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,28 +36,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="If.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BooleanToWidthConverter.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
@@ -73,61 +78,66 @@
     <Compile Include="Converters\EnumtoVisibilityInvertedConveter.cs" />
     <Compile Include="Converters\GetListItemConverter.cs" />
     <Compile Include="Converters\MultiParametersConverter.cs" />
-    <Compile Include="Converters\NullVisibilityHide.cs" />
     <Compile Include="Converters\NullVisibilityCollapse.cs" />
+    <Compile Include="Converters\NullVisibilityHide.cs" />
     <Compile Include="Converters\TextToNoneWhenEmptyConveter.cs" />
     <Compile Include="Converters\TypeToVisibilityConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Converters\ValueEqualsToConverter.cs" />
-    <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
     <Compile Include="Converters\ValueIsNotNullConverter.cs" />
-    <Compile Include="ErrorIcon.xaml.cs">
-      <DependentUpon>ErrorIcon.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Is.cs" />
-    <Compile Include="IViewMvc.cs" />
-    <Compile Include="Messaging\MessageBoxService.cs" />
-    <Compile Include="NotifyPropertyBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spinner.xaml.cs">
-      <DependentUpon>Spinner.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SpinnerDashed.xaml.cs">
-      <DependentUpon>SpinnerDashed.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
     <Compile Include="ViewMvcBase.cs" />
     <Compile Include="VisualTreeHelpers.cs" />
     <Compile Include="WarningIcon.xaml.cs">
       <DependentUpon>WarningIcon.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="ErrorIcon.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Spinner.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SpinnerDashed.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="ErrorIcon.xaml.cs">
+      <DependentUpon>ErrorIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="If.cs" />
+    <Compile Include="Is.cs" />
+    <Compile Include="IViewMvc.cs" />
     <Page Include="WarningIcon.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Messaging\MessageBoxService.cs" />
+    <Compile Include="NotifyPropertyBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{f340830f-cabc-439d-8684-05317d6dc13e}</Project>
+      <Project>{F340830F-CABC-439D-8684-05317D6DC13E}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
