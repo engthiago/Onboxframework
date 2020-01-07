@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Onbox.Core.V1.Messaging
 {
+    /// <summary>
+    /// Implementation for messages using <see cref="System.Diagnostics.Debug"/> console
+    /// </summary>
     public class MessageDebugService : IMessageService
     {
         private string title = "Message Log Service";
+
+
         public void Error(string message)
         {
             System.Diagnostics.Debug.WriteLine($"****** {title} Error ******");

@@ -17,7 +17,7 @@ namespace Onbox.Core.V1
     public static class CoreExtensions
     {
         /// <summary>
-        /// Adds <see cref="IHttpService"/> and <see cref="IJsonService"/> default implementation to the container
+        /// Adds <see cref="IHttpService"/>, <see cref="IJsonService"/>, and <see cref="ILoggingService"/> default implementations to the container
         /// </summary>
         /// <param name="container"></param>
         /// <returns></returns>
@@ -25,6 +25,7 @@ namespace Onbox.Core.V1
         {
             container.AddHttp();
             container.AddJson();
+            container.AddFileLogging();
 
             return container;
         }
@@ -37,15 +38,16 @@ namespace Onbox.Core.V1
         /// <returns></returns>
         public static Container AddFileLogging(this Container container, Action<FileLoggingSettings> config = null)
         {
-            // The default settings for file settings
-            var settings = new FileLoggingSettings
-            {
-                CanThrowExceptions = false,
-                FullPathName = $"{Path.GetTempPath()}/{System.Reflection.Assembly.GetCallingAssembly().GetName().Name}.log",
-                MaxFileSizeInBytes = 100
-            };
-
+            var settings = new FileLoggingSettings();
             config?.Invoke(settings);
+
+            var extension = ".log";
+
+            // Adjust the default settings if not config was passed or no valid config passed
+            settings.Path = string.IsNullOrWhiteSpace(settings.Path) ? Path.GetTempPath() : settings.Path;
+            settings.FileName = string.IsNullOrWhiteSpace(settings.FileName) ? System.Reflection.Assembly.GetCallingAssembly().GetName().Name + extension : settings.FileName;
+            settings.FileName = settings.FileName.EndsWith(extension) ? settings.FileName : settings.FileName + extension;
+            settings.MaxFileSizeInBytes = settings.MaxFileSizeInBytes == null ? 200000 : settings.MaxFileSizeInBytes;
 
             container.AddSingleton(settings);
             container.AddSingleton<ILoggingService, FileLoggingService>();
