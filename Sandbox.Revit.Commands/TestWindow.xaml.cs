@@ -47,8 +47,14 @@ namespace Onbox.Sandbox.Revit.Commands
 
         private void OnRetry(object sender, RoutedEventArgs e)
         {
-            Error = null;
+            OnInit();
         }
+
+        public override bool CanCloseDialog()
+        {
+            return this.messageService.Question("Are you sure?");
+        }
+
     }
 
     public interface ITestWindow : IViewMvc

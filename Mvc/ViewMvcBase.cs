@@ -154,7 +154,10 @@ namespace Onbox.Mvc.V1
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            e.Cancel = !this.CanCloseDialog();
+            if (DialogResult != true)
+            {
+                e.Cancel = !this.CanCloseDialog();
+            }
         }
 
         protected override void OnClosed(EventArgs e)

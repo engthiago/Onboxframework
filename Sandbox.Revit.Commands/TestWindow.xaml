@@ -15,8 +15,10 @@
         <StackPanel mvc:If.OnErrorOrLoadingHide="True" Height="300" Width="300">
             <Button IsEnabled="{Binding CanCloseWindow}"
                     IsCancel="True">Cancel</Button>
+            <Button mvc:Is.Confirm="True">Ok</Button>
         </StackPanel>
         <mvc:Spinner />
-        <mvc:ErrorIcon OnRetry="OnRetry" CanRetry="True" />
+        <mvc:ErrorIcon OnRetry="OnRetry"
+                       CanRetry="True" />
     </Grid>
 </mvc:ViewMvcBase>

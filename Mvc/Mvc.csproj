@@ -84,6 +84,7 @@
     <Compile Include="ErrorIcon.xaml.cs">
       <DependentUpon>ErrorIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Is.cs" />
     <Compile Include="IViewMvc.cs" />
     <Compile Include="Messaging\MessageBoxService.cs" />
     <Compile Include="NotifyPropertyBase.cs" />
@@ -92,6 +93,7 @@
       <DependentUpon>Spinner.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewMvcBase.cs" />
+    <Compile Include="VisualTreeHelpers.cs" />
     <Compile Include="WarningIcon.xaml.cs">
       <DependentUpon>WarningIcon.xaml</DependentUpon>
     </Compile>
