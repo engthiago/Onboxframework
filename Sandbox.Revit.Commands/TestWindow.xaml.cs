@@ -30,11 +30,12 @@ namespace Onbox.Sandbox.Revit.Commands
             this.InitializeComponent();
             this.messageService = messageService;
             this.loggingService = loggingService;
+
+            CanRetryOnError = true;
         }
 
         public async override void OnInit()
         {
-            CanRetryOnError = true;
             await this.PerformAsync(async () =>
             {
                 await Task.Delay(2000);
@@ -43,18 +44,16 @@ namespace Onbox.Sandbox.Revit.Commands
             error =>
             {
                 Error = error.Message;
-                Message = "Dont worry";
             });
         }
 
-        private void OnRetry(object sender, RoutedEventArgs e)
+        public async override void OnErrorRetry()
         {
-            OnInit();
-        }
-
-        public override bool CanCloseDialog()
-        {
-            return this.messageService.Question("Are you sure?");
+            await this.PerformAsync(async () =>
+            {
+                await Task.Delay(1500);
+                Message = "Hey man!";
+            });
         }
 
     }

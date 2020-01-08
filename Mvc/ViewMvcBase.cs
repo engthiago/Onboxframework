@@ -193,6 +193,14 @@ namespace Onbox.Mvc.V1
         {
         }
 
+        public virtual void OnErrorRetry()
+        {
+        }
+
+        public virtual void OnWarningRetry()
+        {
+        }
+
         public async Task<bool> PerformAsync(Func<Task> func, Action<Exception> onError = null, Action onComplete = null)
         {
             this.Error = null;

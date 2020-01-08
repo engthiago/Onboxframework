@@ -8,8 +8,6 @@ namespace Onbox.Mvc.V1
     /// </summary>
     public partial class WarningIcon : UserControl
     {
-        public event RoutedEventHandler OnRetry;
-
         public WarningIcon()
         {
             InitializeComponent();
@@ -17,7 +15,11 @@ namespace Onbox.Mvc.V1
 
         private void OnRetryClicked(object sender, RoutedEventArgs e)
         {
-            OnRetry?.Invoke(sender, e);
+            var window = VisualTreeHelpers.GetParent<Window>(this);
+            if (window is ViewMvcBase viewMvc)
+            {
+                viewMvc.OnWarningRetry();
+            }
         }
     }
 }

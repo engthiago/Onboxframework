@@ -10,18 +10,20 @@
                  mc:Ignorable="d"
                  Title="TestWindow"
                  ResizeMode="NoResize"
-                 SizeToContent="WidthAndHeight">
+                 Height="300"
+                 Width="300">
     <Grid>
-        <StackPanel mvc:If.OnErrorOrLoadingHide="True"
-                    Height="300"
-                    Width="300">
+        <WrapPanel mvc:If.OnErrorOrLoadingHide="True"
+                   VerticalAlignment="Bottom"
+                   HorizontalAlignment="Right">
             <Button IsEnabled="{Binding CanCloseWindow}"
-                    IsCancel="True">Cancel</Button>
-            <Button mvc:Is.Confirm="True">Ok</Button>
-        </StackPanel>
+                    IsCancel="True"
+                    Width="80">Cancel</Button>
+            <Button mvc:Is.Confirm="True"
+                    Width="80">Ok</Button>
+        </WrapPanel>
         <mvc:Spinner />
-        <mvc:WarningStack />
         <mvc:MessageStack />
-        <mvc:ErrorIcon OnRetry="OnRetry"/>
+        <mvc:ErrorIcon />
     </Grid>
 </mvc:ViewMvcBase>
