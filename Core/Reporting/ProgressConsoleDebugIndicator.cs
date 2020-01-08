@@ -51,5 +51,11 @@ namespace Onbox.Core.V1.Reporting
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
+
+        public void Reset(int total)
+        {
+            this.total = total <= 1 ? 1 : total;
+            this.current = 0;
+        }
     }
 }

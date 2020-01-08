@@ -31,8 +31,27 @@ namespace Onbox.Sandbox.Revit.Commands
 
             IProgressIndicator progressIndicator = container.Resolve<IProgressIndicator>();
 
-            progressIndicator.Run(100, true, () =>
+            progressIndicator.Run(50, true, () =>
             {
+                for (int i = 0; i < 50; i++)
+                {
+                    using (Transaction t = new Transaction(doc, "Long operation"))
+                    {
+                        t.Start();
+
+                        for (int k = 0; k < 1; k++)
+                        {
+                            var skp = SketchPlane.Create(doc, Plane.CreateByNormalAndOrigin(XYZ.BasisZ, XYZ.Zero));
+                            doc.Create.NewModelCurve(Line.CreateBound(XYZ.Zero, new XYZ(0, 10, 0)), skp);
+                        }
+
+                        t.RollBack();
+                    }
+                    progressIndicator.Iterate("Step [1]: " + (i + 1).ToString());
+                }
+
+                progressIndicator.Reset(100);
+
                 for (int i = 0; i < 100; i++)
                 {
                     using (Transaction t = new Transaction(doc, "Long operation"))
@@ -47,14 +66,9 @@ namespace Onbox.Sandbox.Revit.Commands
 
                         t.RollBack();
                     }
-
-                    if (i == 30)
-                    {
-                        throw new ProgressCancelledException("Ooops!");
-                    }
-
-                    progressIndicator.Iterate("Current: " + (i + 1).ToString());
+                    progressIndicator.Iterate("Step [2]: " + (i + 1).ToString());
                 }
+
             });
 
             return Result.Succeeded;

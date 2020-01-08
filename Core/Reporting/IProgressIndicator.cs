@@ -27,5 +27,10 @@ namespace Onbox.Core.V1.Reporting
         /// Runs progress action
         /// </summary>
         void Run(int total, bool canCancel, Action action);
+
+        /// <summary>
+        /// Resets the progress
+        /// </summary>
+        void Reset(int total);
     }
 }

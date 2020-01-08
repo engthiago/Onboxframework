@@ -140,6 +140,12 @@ namespace Onbox.Mvc.V1
         {
             return this.Finished;
         }
+
+        public void Reset(int total)
+        {
+            this.Total = total <= 1 ? 1 : total;
+            this.CurrentProgress = 0;
+        }
     }
 
 }
