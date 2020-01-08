@@ -86,6 +86,7 @@
     <Compile Include="Converters\ValueEqualsToConverter.cs" />
     <Compile Include="Converters\ValueIsNotNullConverter.cs" />
     <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
+    <Compile Include="LoadingLine.cs" />
     <Compile Include="Spinner.cs" />
     <Compile Include="SpinnerDashed.cs" />
     <Compile Include="ViewMvcBase.cs" />

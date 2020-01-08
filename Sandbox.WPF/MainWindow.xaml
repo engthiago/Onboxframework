@@ -11,6 +11,6 @@
                  Width="536.661">
     <Grid>
         <TextBlock Text="{Binding Name}"></TextBlock>
-        <mvc:Spinner />
+        <mvc:LoadingLine />
     </Grid>
 </mvc:ViewMvcBase>

@@ -170,4 +170,69 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+    <Style TargetType="{x:Type local:LoadingLine}">
+        <Setter Property="Color1"
+                Value="#0696d7" />
+        <Setter Property="Color2"
+                Value="Transparent" />
+        <Setter Property="Color3"
+                Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:LoadingLine}">
+                    <Grid>
+                        <Border VerticalAlignment="Top" Height="2">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop x:Name="C1"
+                                                  Color="{Binding Color2, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <GradientStop x:Name="C2"
+                                                  Color="{Binding Color1, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <GradientStop x:Name="C3"
+                                                  Color="{Binding Color2, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetName="C3"
+                                                             Storyboard.TargetProperty="Offset"
+                                                             From="-1"
+                                                             To="2"
+                                                             Duration="0:0:2" />
+                                            <DoubleAnimation Storyboard.TargetName="C2"
+                                                             Storyboard.TargetProperty="Offset"
+                                                             From="-1.5"
+                                                             To="1.5"
+                                                             Duration="0:0:2" />
+                                            <DoubleAnimation Storyboard.TargetName="C1"
+                                                             Storyboard.TargetProperty="Offset"
+                                                             From="-2"
+                                                             To="1"
+                                                             Duration="0:0:2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                        </Border>
+                        <TextBlock Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding DataContext.IsLoading}"
+                         Value="False">
+                <Setter Property="Opacity"
+                        Value="0" />
+                <Setter Property="Width"
+                        Value="0" />
+                <Setter Property="Height"
+                        Value="0" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
