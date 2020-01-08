@@ -101,7 +101,10 @@ namespace Onbox.Mvc.V1
             this.CurrentTaskName = name;
             this.CurrentProgress++;
             this.RefreshAllProperties();
+
+            // Focus the window
             this.Activate();
+            this.Focus();
 
             this.HandleCancelled();
         }

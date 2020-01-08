@@ -15,10 +15,9 @@
                    ResizeMode="NoResize"
                    SizeToContent="WidthAndHeight"
                    Keyboard.KeyDown="OnKeyDown">
-    <!--Need to use Keyboard.KeyDown event abot unfortunately because input bindinds didnt work on this case -->
+
     <StackPanel>
         <Grid>
-            <!--Using visibility hide instead of collapse converter to maintain the size of the window-->
             <Grid local:If.OnErrorHide="True">
                 <cc:ProgressBarControl Total="{Binding Total}"
                                        Visibility="{Binding RequestCancel, Converter={c:BoolToVisibilityHideConverter}, ConverterParameter=False}"
