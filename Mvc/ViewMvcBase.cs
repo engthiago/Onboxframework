@@ -17,6 +17,7 @@ namespace Onbox.Mvc.V1
         public bool IsLoading { get; set; }
         public string Error { get; set; }
         public string Warning { get; set; }
+        public string Message { get; set; }
 
         private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
 

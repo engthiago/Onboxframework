@@ -19,9 +19,12 @@
                     IsCancel="True">Cancel</Button>
             <Button mvc:Is.Confirm="True">Ok</Button>
         </StackPanel>
-        <mvc:LoadingLine />
+        <mvc:Spinner Color2="BlueViolet"
+                     Color1="Transparent"
+                     Color3="BlueViolet"/>
+        <mvc:WarningStack />
+        <mvc:MessageStack />
         <mvc:ErrorIcon OnRetry="OnRetry"
                        CanRetry="True" />
-        <mvc:WarningStack />
     </Grid>
 </mvc:ViewMvcBase>

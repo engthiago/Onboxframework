@@ -15,35 +15,35 @@ using System.Windows.Shapes;
 
 namespace Onbox.Mvc.V1
 {
-    public class WarningStack : Control
+    public class MessageStack : Control
     {
-        private FrameworkElement clearWarningControl;
+        private FrameworkElement clearMessageControl;
 
-        static WarningStack()
+        static MessageStack()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(WarningStack), new FrameworkPropertyMetadata(typeof(WarningStack)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageStack), new FrameworkPropertyMetadata(typeof(MessageStack)));
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (this.clearWarningControl != null)
+            if (this.clearMessageControl != null)
             {
-                this.clearWarningControl.MouseLeftButtonDown -= this.OnClearError;
+                this.clearMessageControl.MouseLeftButtonDown -= this.OnClearMessage;
             }
-            this.clearWarningControl = this.GetTemplateChild("PART_BTNCLOSE") as FrameworkElement;
-            if (this.clearWarningControl != null)
+            this.clearMessageControl = this.GetTemplateChild("PART_BTNCLOSE") as FrameworkElement;
+            if (this.clearMessageControl != null)
             {
-                this.clearWarningControl.MouseLeftButtonDown += this.OnClearError;
+                this.clearMessageControl.MouseLeftButtonDown += this.OnClearMessage;
             }
         }
 
-        private void OnClearError(object sender, MouseButtonEventArgs e)
+        private void OnClearMessage(object sender, MouseButtonEventArgs e)
         {
             var window = VisualTreeHelpers.GetParent<Window>(this);
             if (window != null && window.DataContext is ViewMvcBase viewMvcBase)
             {
-                viewMvcBase.Warning = null;
+                viewMvcBase.Message = null;
             }
         }
     }

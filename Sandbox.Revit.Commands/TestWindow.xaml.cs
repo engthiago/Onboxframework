@@ -43,6 +43,7 @@ namespace Onbox.Sandbox.Revit.Commands
             {
                 Error = error.Message;
                 Warning = "This is a warning...";
+                Message = "Dont worry";
             });
         }
 

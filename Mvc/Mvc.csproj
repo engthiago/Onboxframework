@@ -90,6 +90,7 @@
     <Compile Include="CustomControls\ProgressBarControl.xaml.cs">
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessageStack.cs" />
     <Compile Include="ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
