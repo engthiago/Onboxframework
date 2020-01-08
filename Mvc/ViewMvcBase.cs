@@ -19,6 +19,9 @@ namespace Onbox.Mvc.V1
         public string Warning { get; set; }
         public string Message { get; set; }
 
+        public bool CanRetryOnError { get; set; }
+        public bool CanRetryOnWarning { get; set; }
+
         private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
 
         private const int GWL_STYLE = -16,

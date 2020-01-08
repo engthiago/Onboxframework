@@ -40,7 +40,7 @@
                    TextAlignment="Center"
                    Foreground="{Binding Foreground, ElementName=Host}" />
         <Button Content="Retry"
-                Visibility="{Binding CanRetry, ElementName=Host, Converter={c:BoolToVisibilityHideConverter}}"
+                Visibility="{Binding CanRetryOnWarning , Converter={c:BoolToVisibilityHideConverter}}"
                 Margin="0,7,0,0"
                 Click="OnRetryClicked"
                 Width="80"></Button>

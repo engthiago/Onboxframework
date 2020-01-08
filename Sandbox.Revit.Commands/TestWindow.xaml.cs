@@ -34,6 +34,7 @@ namespace Onbox.Sandbox.Revit.Commands
 
         public async override void OnInit()
         {
+            CanRetryOnError = true;
             await this.PerformAsync(async () =>
             {
                 await Task.Delay(2000);
@@ -42,7 +43,6 @@ namespace Onbox.Sandbox.Revit.Commands
             error =>
             {
                 Error = error.Message;
-                Warning = "This is a warning...";
                 Message = "Dont worry";
             });
         }
