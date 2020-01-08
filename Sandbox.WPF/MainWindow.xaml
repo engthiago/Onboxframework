@@ -6,6 +6,7 @@
                  xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.Mvc.V1"
                  xmlns:local="clr-namespace:Sandbox.WPF"
                  mc:Ignorable="d"
+                 IsLoading="True"
                  Title="MainWindow"
                  Height="524.883"
                  Width="536.661">

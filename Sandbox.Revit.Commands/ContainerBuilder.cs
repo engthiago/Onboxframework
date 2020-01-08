@@ -1,6 +1,7 @@
 ﻿using Onbox.Core.V1;
 using Onbox.Core.V1.Logging;
 using Onbox.Core.V1.Messaging;
+using Onbox.Core.V1.Reporting;
 using Onbox.Di.V1;
 using Onbox.Mvc.V1;
 using Onbox.Mvc.V1.Messaging;
@@ -16,7 +17,7 @@ namespace Onbox.Sandbox.Revit.Commands
             container.AddOnboxCore();
 
             container.AddSingleton<IMessageService, MessageBoxService>();
-
+            container.AddTransient<IProgressIndicator, ProgressIndicatorView>();
 
 
             container.AddTransient<ITestWindow, TestWindow>();

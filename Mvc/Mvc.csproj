@@ -87,6 +87,12 @@
     <Compile Include="Converters\ValueIsNotNullConverter.cs" />
     <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
     <Compile Include="LoadingLine.cs" />
+    <Compile Include="CustomControls\ProgressBarControl.xaml.cs">
+      <DependentUpon>ProgressBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProgressIndicatorView.xaml.cs">
+      <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Spinner.cs" />
     <Compile Include="SpinnerDashed.cs" />
     <Compile Include="ViewMvcBase.cs" />
@@ -104,6 +110,14 @@
     <Compile Include="If.cs" />
     <Compile Include="Is.cs" />
     <Compile Include="IViewMvc.cs" />
+    <Page Include="CustomControls\ProgressBarControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProgressIndicatorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
