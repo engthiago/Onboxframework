@@ -21,7 +21,7 @@ namespace Onbox.Sandbox.WPF
     /// </summary>
     public partial class MainWindow : ViewMvcBase
     {
-
+        public string SomethingToSearch { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace Onbox.Sandbox.WPF
 
         public override void OnInit()
         {
-            Name = "Eduardo";
+            SomethingToSearch = "You can type anything here...";
         }
 
     }
