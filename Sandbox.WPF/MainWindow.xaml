@@ -9,14 +9,15 @@
                  IsLoading="False"
                  Title="MainWindow"
                  Height="524.883"
-                 Width="738.161">
+                 Width="512.161">
     <Grid>
-        <TextBlock Text="{Binding Name}"></TextBlock>
         <StackPanel>
-            <DockPanel HorizontalAlignment="Right">
+            <TextBlock Margin="0,0,0,10" Text="{Binding Name}"></TextBlock>
+            <mvc:SearchControl SearchText="{Binding Name}" />
+            <WrapPanel HorizontalAlignment="Right">
                 <mvc:ImgButton Images="Add" />
-                <mvc:ImgButton Images="Add_To_Right"/>
-                <mvc:ImgButton Images="Adsk"/>
+                <mvc:ImgButton Images="Add_To_Right" />
+                <mvc:ImgButton Images="Adsk" />
                 <mvc:ImgButton Images="Apply" />
                 <mvc:ImgButton Images="Arrow_Left_Green" />
                 <mvc:ImgButton Images="Arrow_Right_Green" />
@@ -25,25 +26,43 @@
                 <mvc:ImgButton Images="Cloud" />
                 <mvc:ImgButton Images="Cloud_Down" />
                 <mvc:ImgButton Images="Cloud_Up" />
+                <mvc:ImgButton Images="Copy" />
+                <mvc:ImgButton Images="Cut" />
                 <mvc:ImgButton Images="Delete" />
                 <mvc:ImgButton Images="Duplicate" />
                 <mvc:ImgButton Images="Edit" />
+                <mvc:ImgButton Images="Element_Mirror" />
+                <mvc:ImgButton Images="Element_Move" />
+                <mvc:ImgButton Images="Element_Rotate" />
+                <mvc:ImgButton Images="Element_Scale" />
+                <mvc:ImgButton Images="Element_Select" />
+                <mvc:ImgButton Images="Find" />
+                <mvc:ImgButton Images="Folder" />
+                <mvc:ImgButton Images="Gear" />
+                <mvc:ImgButton Images="Image" />
                 <mvc:ImgButton Images="Info" />
+                <mvc:ImgButton Images="Light" />
                 <mvc:ImgButton Images="Move_Down" />
                 <mvc:ImgButton Images="Move_Up" />
                 <mvc:ImgButton Images="New" />
                 <mvc:ImgButton Images="Open" />
+                <mvc:ImgButton Images="Paste" />
+                <mvc:ImgButton Images="Print" />
+                <mvc:ImgButton Images="Question" />
+                <mvc:ImgButton Images="Redo" />
                 <mvc:ImgButton Images="Remove" />
                 <mvc:ImgButton Images="Remove_To_Left" />
                 <mvc:ImgButton Images="Rename" />
                 <mvc:ImgButton Images="Save" />
+                <mvc:ImgButton Images="Save_As" />
                 <mvc:ImgButton Images="Search" />
+                <mvc:ImgButton Images="Settings" />
                 <mvc:ImgButton Images="Sort_Name_Down" />
                 <mvc:ImgButton Images="Sort_Name_Up" />
                 <mvc:ImgButton Images="Sync" />
+                <mvc:ImgButton Images="Undo" />
                 <mvc:ImgButton Images="Warnings" />
-            </DockPanel>
-            <mvc:SearchControl SearchText="{Binding Name}" />
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </mvc:ViewMvcBase>

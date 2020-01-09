@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Onbox.Mvc.V1
 {
@@ -69,22 +59,41 @@ namespace Onbox.Mvc.V1
         Cloud,
         Cloud_Down,
         Cloud_Up,
+        Copy,
+        Cut,
         Delete,
         Duplicate,
         Edit,
+        Element_Mirror,
+        Element_Move,
+        Element_Rotate,
+        Element_Scale,
+        Element_Select,
+        Find,
+        Folder,
+        Gear,
+        Image,
         Info,
+        Light,
         Move_Down,
         Move_Up,
         New,
         Open,
+        Paste,
+        Print,
+        Question,
         Remove,
+        Redo,
         Remove_To_Left,
         Rename,
         Save,
+        Save_As,
         Search,
+        Settings,
         Sort_Name_Down,
         Sort_Name_Up,
         Sync,
+        Undo,
         Warnings
     }
 }
