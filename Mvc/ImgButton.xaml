@@ -10,7 +10,7 @@
              Width="23"
              Height="23"
              x:Name="Host"
-             UseLayoutRounding="False"
+             UseLayoutRounding="True"
              RenderOptions.BitmapScalingMode="NearestNeighbor">
     <Grid>
         <cc:EmptyButton>
@@ -76,7 +76,7 @@
                         <Trigger Property="IsPressed"
                                  Value="True">
                             <Setter Property="Padding"
-                                    Value="2,2,0,0" />
+                                    Value="1,1,0,0" />
                             <Setter Property="Background"
                                     Value="#c0dcf3" />
                             <Setter Property="BorderBrush"
