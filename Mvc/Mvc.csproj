@@ -46,6 +46,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,6 +61,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorPicker.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BitmapToBitmapSource.cs" />
     <Compile Include="Converters\BooleanToWidthConverter.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Converters\GetListItemConverter.cs" />
     <Compile Include="Converters\BitmapSourceGrayscaleConverter.cs" />
     <Compile Include="Converters\BitmapSourceToBitmap.cs" />
+    <Compile Include="Converters\HtmlToBrushConverter.cs" />
     <Compile Include="Converters\MultiParametersConverter.cs" />
     <Compile Include="Converters\NullVisibilityCollapse.cs" />
     <Compile Include="Converters\NullVisibilityHide.cs" />
