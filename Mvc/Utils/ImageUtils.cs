@@ -7,6 +7,43 @@ namespace Onbox.Mvc.V1.Utils
 {
     public static class ImageUtils
     {
+        public static BitmapSource BitmapSourceToGrayScale(Bitmap originalBitmap)
+        {
+            try
+            {
+                if (originalBitmap == null) return null;
+                if (originalBitmap.VerticalResolution == 0) return null;
+
+                int width = originalBitmap.Width;
+                int height = originalBitmap.Height;
+
+                var bitmap = new Bitmap(width, height);
+
+                for (int i = 0; i < width; i++)
+                {
+                    for (int j = 0; j < height; j++)
+                    {
+                        var color = originalBitmap.GetPixel(i, j);
+                        if (color.A != 0)
+                        {
+                            var newColorData = (color.R + color.G + color.B) / 3;
+                            var newColor = System.Drawing.Color.FromArgb(color.A, newColorData, newColorData, newColorData);
+                            bitmap.SetPixel(i, j, newColor);
+                        }
+                    }
+                }
+
+                originalBitmap.Dispose();
+                var newImg = Convert(bitmap, ImageFormat.Png);
+                return newImg;
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+
         public static BitmapSource BitmapSourceToGrayScale(BitmapImage image)
         {
             try
@@ -55,6 +92,27 @@ namespace Onbox.Mvc.V1.Utils
                 {
                     PngBitmapEncoder enc = new PngBitmapEncoder();
                     enc.Frames.Add(BitmapFrame.Create(bitmapsource));
+                    enc.Save(outStream);
+                    bitmap = new Bitmap(outStream);
+                }
+                return bitmap;
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+
+        public static Bitmap Convert(BitmapFrame frame)
+        {
+            try
+            {
+                Bitmap bitmap;
+                using (MemoryStream outStream = new MemoryStream())
+                {
+                    PngBitmapEncoder enc = new PngBitmapEncoder();
+                    enc.Frames.Add(BitmapFrame.Create(frame));
                     enc.Save(outStream);
                     bitmap = new Bitmap(outStream);
                 }

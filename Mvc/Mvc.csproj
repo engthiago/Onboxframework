@@ -258,10 +258,10 @@
     <Resource Include="Resources\tglButton\Arrow_Right_Green.png" />
     <Resource Include="Resources\tglButton\Constraints0.png" />
     <Resource Include="Resources\tglButton\Constraints1.png" />
-    <Resource Include="Resources\tglButton\element_pin16.png" />
-    <Resource Include="Resources\tglButton\element_unpin16.png" />
-    <Resource Include="Resources\tglButton\padLock0.png" />
-    <Resource Include="Resources\tglButton\padLock1.png" />
+    <Resource Include="Resources\tglButton\Pin.png" />
+    <Resource Include="Resources\tglButton\Unpin.png" />
+    <Resource Include="Resources\tglButton\PadLock0.png" />
+    <Resource Include="Resources\tglButton\PadLock1.png" />
     <Resource Include="Resources\tglButton\Redo.png" />
     <Resource Include="Resources\tglButton\Remove.png" />
     <Resource Include="Resources\tglButton\Remove_To_Left.png" />
