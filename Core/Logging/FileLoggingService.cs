@@ -51,10 +51,18 @@ namespace Onbox.Core.V1.Logging
         {
             try
             {
-                var fullPath = Path.Combine(this.settings.Path, this.settings.FileName);
+                var fullPath = this.settings.FileName;
+                if (!this.settings.SaveOnCurrentPath)
+                {
+                    if (!Directory.Exists(this.settings.Path))
+                    {
+                        Directory.CreateDirectory(this.settings.Path);
+                    }
+                    fullPath = Path.Combine(this.settings.Path, this.settings.FileName);
+                }
 
                 var fileInfo = new FileInfo(fullPath);
-                if (fileInfo.Exists && fileInfo.Length > settings.MaxFileSizeInBytes)
+                if (fileInfo.Exists && fileInfo.Length > this.settings.MaxFileSizeInBytes)
                 {
                     fileInfo.Delete();
                 }
@@ -84,7 +92,7 @@ namespace Onbox.Core.V1.Logging
         /// </summary>
         public bool CanThrowExceptions { get; set; }
         /// <summary>
-        /// [Default = %temp%] The full directory path where the file will be saved, if SaveOnCurrentPath = true, this will be ignored
+        /// [Default = %temp%] The full directory path where the file will be saved, if <see cref="SaveOnCurrentPath"/> = true, this will be ignored
         /// </summary>
         public string Path { get; set; }
         /// <summary>
@@ -96,7 +104,8 @@ namespace Onbox.Core.V1.Logging
         /// </summary>
         public string FileName { get; set; }
         /// <summary>
-        /// [Default = false] This will ignore the <see cref="Path"/> property and will save the log in the current directory
+        /// [Default = false] This will ignore the <see cref="Path"/> property and will save the log in the current directory, USEFUL for RevitIO
+        /// <para>WARNING: Setting it to true on a normal desktop scenario should not work because it will try to save it on Revit's main directory</para>
         /// </summary>
         public bool SaveOnCurrentPath { get; set; }
     }
