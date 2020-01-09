@@ -22,6 +22,7 @@ namespace Onbox.Sandbox.WPF
     public partial class MainWindow : ViewMvcBase
     {
         public string SomethingToSearch { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +31,10 @@ namespace Onbox.Sandbox.WPF
         public override void OnInit()
         {
             SomethingToSearch = "You can type anything here...";
+        }
+
+        public override void OnAfterInit()
+        {
         }
 
     }

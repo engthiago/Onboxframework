@@ -84,16 +84,20 @@ namespace Onbox.Core.V1.Logging
         /// </summary>
         public bool CanThrowExceptions { get; set; }
         /// <summary>
-        /// [Default = %temp%] The full directory path where the file will be saved
+        /// [Default = %temp%] The full directory path where the file will be saved, if SaveOnCurrentPath = true, this will be ignored
         /// </summary>
         public string Path { get; set; }
         /// <summary>
-        /// [Default = 200000] The maxium size of the logging file, default is 200000 which means 200kb  
+        /// [Default = 600000] The maxium size of the logging file, default is 600000 which means 600kb  
         /// </summary>
         public long? MaxFileSizeInBytes { get; set; }
         /// <summary>
-        /// [Default = CallingAssembly] The name of the file used for logging, it will append .log to the filename if not provided
+        /// [Default = Onbox.Logging.log] The name of the file used for logging, it will append .log to the filename if not provided
         /// </summary>
         public string FileName { get; set; }
+        /// <summary>
+        /// [Default = false] This will ignore the <see cref="Path"/> property and will save the log in the current directory
+        /// </summary>
+        public bool SaveOnCurrentPath { get; set; }
     }
 }

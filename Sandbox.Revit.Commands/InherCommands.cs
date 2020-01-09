@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using Onbox.Core.V1.Logging;
 using Onbox.Core.V1.Messaging;
 using Onbox.Core.V1.Reporting;
 using Onbox.Mvc.V1;
@@ -14,8 +15,11 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            var test = this.container.Resolve<ITestWindow>();
-            test.ShowDialog();
+            //var test = this.container.Resolve<ITestWindow>();
+            //test.ShowDialog();
+
+            var logging = this.container.Resolve<ILoggingService>();
+            logging.Log("Test log now...");
 
             return Result.Succeeded;
         }

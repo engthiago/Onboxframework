@@ -16,7 +16,7 @@
         <WrapPanel mvc:If.OnErrorOrLoadingHide="True"
                    VerticalAlignment="Bottom"
                    HorizontalAlignment="Right">
-            <mvc:ImgButton ImageType="Apply" />
+            <mvc:ImgButton Images="Apply" />
             <Button IsEnabled="{Binding CanCloseWindow}"
                     IsCancel="True"
                     Width="80">Cancel</Button>

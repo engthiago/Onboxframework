@@ -45,9 +45,9 @@ namespace Onbox.Core.V1
 
             // Adjust the default settings if not config was passed or no valid config passed
             settings.Path = string.IsNullOrWhiteSpace(settings.Path) ? Path.GetTempPath() : settings.Path;
-            settings.FileName = string.IsNullOrWhiteSpace(settings.FileName) ? System.Reflection.Assembly.GetCallingAssembly().GetName().Name + extension : settings.FileName;
+            settings.FileName = string.IsNullOrWhiteSpace(settings.FileName) ? "Onbox.Logging" + extension : settings.FileName;
             settings.FileName = settings.FileName.EndsWith(extension) ? settings.FileName : settings.FileName + extension;
-            settings.MaxFileSizeInBytes = settings.MaxFileSizeInBytes == null ? 200000 : settings.MaxFileSizeInBytes;
+            settings.MaxFileSizeInBytes = settings.MaxFileSizeInBytes == null ? 600000 : settings.MaxFileSizeInBytes;
 
             container.AddSingleton(settings);
             container.AddSingleton<ILoggingService, FileLoggingService>();
