@@ -101,6 +101,9 @@
     <Compile Include="ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Spinner.cs" />
     <Compile Include="SpinnerDashed.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ProgressIndicatorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SearchControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

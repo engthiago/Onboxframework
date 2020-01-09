@@ -12,6 +12,11 @@
                  Width="536.661">
     <Grid>
         <TextBlock Text="{Binding Name}"></TextBlock>
-        <mvc:ImgButton ToolTip="Test" Images="Save" IsEnabled="True" />
+        <StackPanel>
+            <mvc:ImgButton ToolTip="Test"
+                           Images="Save"
+                           IsEnabled="True" />
+            <mvc:SearchControl SearchText="{Binding Name}" />
+        </StackPanel>
     </Grid>
 </mvc:ViewMvcBase>
