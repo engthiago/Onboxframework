@@ -260,18 +260,18 @@
     <Resource Include="Resources\imgButton\Revit_Link.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\tglButton\Add0.png" />
     <Resource Include="Resources\tglButton\Add1.png" />
-    <Resource Include="Resources\tglButton\AddList0.png" />
+    <Resource Include="Resources\tglButton\Add0.png" />
     <Resource Include="Resources\tglButton\AddList1.png" />
+    <Resource Include="Resources\tglButton\AddList0.png" />
     <Resource Include="Resources\tglButton\Arrow0.png" />
     <Resource Include="Resources\tglButton\Arrow1.png" />
-    <Resource Include="Resources\tglButton\Constraints0.png" />
     <Resource Include="Resources\tglButton\Constraints1.png" />
-    <Resource Include="Resources\tglButton\PadLock0.png" />
+    <Resource Include="Resources\tglButton\Constraints0.png" />
     <Resource Include="Resources\tglButton\PadLock1.png" />
-    <Resource Include="Resources\tglButton\Pin0.png" />
+    <Resource Include="Resources\tglButton\PadLock0.png" />
     <Resource Include="Resources\tglButton\Pin1.png" />
+    <Resource Include="Resources\tglButton\Pin0.png" />
     <Resource Include="Resources\tglButton\Undo0.png" />
     <Resource Include="Resources\tglButton\Undo1.png" />
   </ItemGroup>
