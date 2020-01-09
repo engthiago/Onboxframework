@@ -1,5 +1,4 @@
-﻿using Onbox.Mvc.V1;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,23 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Onbox.Sandbox.WPF
+namespace Onbox.Mvc.V1.CustomControls
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : ViewMvcBase
+    public class EmptyButton : Button
     {
-
-        public MainWindow()
+        static EmptyButton()
         {
-            InitializeComponent();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(EmptyButton), new FrameworkPropertyMetadata(typeof(EmptyButton)));
         }
-
-        public override void OnInit()
-        {
-            Name = "Eduardo";
-        }
-
     }
 }

@@ -36,15 +36,15 @@ namespace Onbox.Sandbox.Revit.Commands
 
         public async override void OnInit()
         {
-            await this.PerformAsync(async () =>
-            {
-                await Task.Delay(2000);
-                throw new Exception("Server error!");
-            }, 
-            error =>
-            {
-                Error = error.Message;
-            });
+            //await this.PerformAsync(async () =>
+            //{
+            //    await Task.Delay(2000);
+            //    throw new Exception("Server error!");
+            //}, 
+            //error =>
+            //{
+            //    Error = error.Message;
+            //});
         }
 
         public async override void OnErrorRetry()

@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Onbox.Mvc.V1.ImgButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:c="clr-namespace:Onbox.Mvc.V1.Converters"
+             xmlns:cc="clr-namespace:Onbox.Mvc.V1.CustomControls"
+             xmlns:local="clr-namespace:Onbox.Mvc.V1"
+             mc:Ignorable="d"
+             Width="23"
+             Height="23"
+             x:Name="Host"
+             UseLayoutRounding="False"
+             RenderOptions.BitmapScalingMode="NearestNeighbor">
+    <Grid>
+        <cc:EmptyButton>
+            <Grid>
+                <Image Width="16"
+                       Height="16"
+                       Source="{Binding Image, ElementName=Host, Converter={c:BitmapSourceGrayscaleConverter}}">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled"
+                                         Value="False">
+                                    <Setter Property="Opacity"
+                                            Value="0.5" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled"
+                                         Value="True">
+                                    <Setter Property="Opacity"
+                                            Value="0" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <Image Source="{Binding Image, ElementName=Host}"
+                       Width="16"
+                       Height="16">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled"
+                                         Value="False">
+                                    <Setter Property="Opacity"
+                                            Value="0" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled"
+                                         Value="True">
+                                    <Setter Property="Opacity"
+                                            Value="1" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Grid>
+            <cc:EmptyButton.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="BorderBrush"
+                                    Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="#d8e6f2" />
+                            <Setter Property="BorderBrush"
+                                    Value="#c0dcf3" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Padding"
+                                    Value="2,2,0,0" />
+                            <Setter Property="Background"
+                                    Value="#c0dcf3" />
+                            <Setter Property="BorderBrush"
+                                    Value="#90c8f6" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </cc:EmptyButton.Style>
+        </cc:EmptyButton>
+    </Grid>
+</UserControl>

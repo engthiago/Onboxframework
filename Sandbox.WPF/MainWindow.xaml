@@ -6,12 +6,12 @@
                  xmlns:mvc="clr-namespace:Onbox.Mvc.V1;assembly=Onbox.Mvc.V1"
                  xmlns:local="clr-namespace:Sandbox.WPF"
                  mc:Ignorable="d"
-                 IsLoading="True"
+                 IsLoading="False"
                  Title="MainWindow"
                  Height="524.883"
                  Width="536.661">
     <Grid>
         <TextBlock Text="{Binding Name}"></TextBlock>
-        <mvc:LoadingLine />
+        <mvc:ImgButton Images="New" />
     </Grid>
 </mvc:ViewMvcBase>
