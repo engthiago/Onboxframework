@@ -9,13 +9,14 @@
                  IsLoading="False"
                  Title="MainWindow"
                  Height="524.883"
-                 Width="652.161">
+                 Width="738.161">
     <Grid>
         <TextBlock Text="{Binding Name}"></TextBlock>
         <StackPanel>
             <DockPanel HorizontalAlignment="Right">
                 <mvc:ImgButton Images="Add" />
                 <mvc:ImgButton Images="Add_To_Right"/>
+                <mvc:ImgButton Images="Adsk"/>
                 <mvc:ImgButton Images="Apply" />
                 <mvc:ImgButton Images="Arrow_Left_Green" />
                 <mvc:ImgButton Images="Arrow_Right_Green" />
@@ -27,6 +28,7 @@
                 <mvc:ImgButton Images="Delete" />
                 <mvc:ImgButton Images="Duplicate" />
                 <mvc:ImgButton Images="Edit" />
+                <mvc:ImgButton Images="Info" />
                 <mvc:ImgButton Images="Move_Down" />
                 <mvc:ImgButton Images="Move_Up" />
                 <mvc:ImgButton Images="New" />
@@ -39,6 +41,7 @@
                 <mvc:ImgButton Images="Sort_Name_Down" />
                 <mvc:ImgButton Images="Sort_Name_Up" />
                 <mvc:ImgButton Images="Sync" />
+                <mvc:ImgButton Images="Warnings" />
             </DockPanel>
             <mvc:SearchControl SearchText="{Binding Name}" />
         </StackPanel>

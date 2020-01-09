@@ -60,6 +60,7 @@ namespace Onbox.Mvc.V1
     {
         Add,
         Add_To_Right,
+        Adsk,
         Apply,
         Arrow_Left_Green,
         Arrow_Right_Green,
@@ -71,6 +72,7 @@ namespace Onbox.Mvc.V1
         Delete,
         Duplicate,
         Edit,
+        Info,
         Move_Down,
         Move_Up,
         New,
@@ -82,6 +84,7 @@ namespace Onbox.Mvc.V1
         Search,
         Sort_Name_Down,
         Sort_Name_Up,
-        Sync
+        Sync,
+        Warnings
     }
 }
