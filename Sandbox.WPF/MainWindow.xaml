@@ -9,13 +9,37 @@
                  IsLoading="False"
                  Title="MainWindow"
                  Height="524.883"
-                 Width="536.661">
+                 Width="652.161">
     <Grid>
         <TextBlock Text="{Binding Name}"></TextBlock>
         <StackPanel>
-            <mvc:ImgButton ToolTip="Test"
-                           Images="Save"
-                           IsEnabled="True" />
+            <DockPanel HorizontalAlignment="Right">
+                <mvc:ImgButton Images="Add" />
+                <mvc:ImgButton Images="Add_To_Right"/>
+                <mvc:ImgButton Images="Apply" />
+                <mvc:ImgButton Images="Arrow_Left_Green" />
+                <mvc:ImgButton Images="Arrow_Right_Green" />
+                <mvc:ImgButton Images="Clear" />
+                <mvc:ImgButton Images="Close" />
+                <mvc:ImgButton Images="Cloud" />
+                <mvc:ImgButton Images="Cloud_Down" />
+                <mvc:ImgButton Images="Cloud_Up" />
+                <mvc:ImgButton Images="Delete" />
+                <mvc:ImgButton Images="Duplicate" />
+                <mvc:ImgButton Images="Edit" />
+                <mvc:ImgButton Images="Move_Down" />
+                <mvc:ImgButton Images="Move_Up" />
+                <mvc:ImgButton Images="New" />
+                <mvc:ImgButton Images="Open" />
+                <mvc:ImgButton Images="Remove" />
+                <mvc:ImgButton Images="Remove_To_Left" />
+                <mvc:ImgButton Images="Rename" />
+                <mvc:ImgButton Images="Save" />
+                <mvc:ImgButton Images="Search" />
+                <mvc:ImgButton Images="Sort_Name_Down" />
+                <mvc:ImgButton Images="Sort_Name_Up" />
+                <mvc:ImgButton Images="Sync" />
+            </DockPanel>
             <mvc:SearchControl SearchText="{Binding Name}" />
         </StackPanel>
     </Grid>
