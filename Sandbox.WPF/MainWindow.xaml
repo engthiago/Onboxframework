@@ -12,6 +12,6 @@
                  Width="536.661">
     <Grid>
         <TextBlock Text="{Binding Name}"></TextBlock>
-        <mvc:ImgButton Images="New" />
+        <mvc:ImgButton Images="Close" IsEnabled="True" />
     </Grid>
 </mvc:ViewMvcBase>

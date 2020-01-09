@@ -10,8 +10,7 @@ namespace Onbox.Mvc.V1.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Utils.ImageUtils.BitmapSourceToGrayScale(value as BitmapImage);
-            return null;
+            return Utils.ImageUtils.BitmapSourceToGrayScale(value as BitmapImage);
         }
         
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
