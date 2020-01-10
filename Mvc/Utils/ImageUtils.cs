@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -148,6 +149,12 @@ namespace Onbox.Mvc.V1.Utils
             }
 
             return null;
+        }
+
+        static public BitmapImage FromPath(string path)
+        {
+            var btmImage = new BitmapImage(new Uri(path));
+            return btmImage;
         }
     }
 }

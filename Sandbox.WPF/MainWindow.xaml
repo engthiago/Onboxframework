@@ -134,11 +134,19 @@
             <WrapPanel Margin="0,10,0,0" IsEnabled="False">
                 <mvc:ImgButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/PadLock0.png" />
                 <mvc:ImgButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png" />
-            </WrapPanel>  
-            <WrapPanel Margin="0,10,0,0" IsEnabled="True">
-                <mvc:ImgButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/PadLock0.png" />
-                <mvc:ImgButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png" />
+            </WrapPanel>
+            <WrapPanel Margin="0,10,0,0"
+                       IsEnabled="True">
                 <mvc:ColorPicker Color="Red" />
+            </WrapPanel>
+            <WrapPanel IsEnabled="True"
+                       Margin="0,10,0,0">
+                <mvc:ImgToggleButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png"
+                                     IsChecked="True" />
+            </WrapPanel>
+            <WrapPanel IsEnabled="False" Margin="0,10,0,0">
+                <mvc:ImgToggleButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png"
+                                     IsChecked="True" />
             </WrapPanel>
         </StackPanel>
     </Grid>

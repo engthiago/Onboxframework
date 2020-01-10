@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="ColorPicker.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
+    <Compile Include="Converters\BitmapSourceCheckToUnchekedConverter.cs" />
     <Compile Include="Converters\BitmapToBitmapSource.cs" />
     <Compile Include="Converters\BooleanToWidthConverter.cs" />
     <Compile Include="Converters\BoolInverterConverter.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ImgButton.xaml.cs">
       <DependentUpon>ImgButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImgToggleButton.cs" />
     <Compile Include="LoadingLine.cs" />
     <Compile Include="CustomControls\ProgressBarControl.xaml.cs">
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>

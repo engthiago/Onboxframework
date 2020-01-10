@@ -380,4 +380,95 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type local:ImgToggleButton}">
+        <Setter Property="Width"
+                Value="23" />
+        <Setter Property="Height"
+                Value="23" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="RenderOptions.BitmapScalingMode"
+                Value="NearestNeighbor" />
+        <Setter Property="UseLayoutRounding"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImgToggleButton}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Image Source="{Binding Source, ElementName=PART_UNCHECKED, Converter={c:BitmapSourceGrayscaleConverter}}"
+                                   x:Name="PART_DISABLED_UNCHECKED"
+                                   Width="16"
+                                   Height="16"
+                                   Opacity="0"></Image>
+                            <Image Source="{Binding Source, ElementName=PART_CHECKED, Converter={c:BitmapSourceGrayscaleConverter}}"
+                                   x:Name="PART_DISABLED_CHECKED"
+                                   Width="16"
+                                   Height="16"
+                                   Opacity="0"></Image>
+                            <Image Source="{Binding Image, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={c:BitmapSourceCheckToUnchekedConverter}}"
+                                   x:Name="PART_CHECKED"
+                                   Width="16"
+                                   Height="16"
+                                   Opacity="0"></Image>
+                            <Image Source="{Binding Image, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                   x:Name="PART_UNCHECKED"
+                                   Width="16"
+                                   Height="16"
+                                   Opacity="1"></Image>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter TargetName="PART_UNCHECKED"
+                                    Property="Opacity"
+                                    Value="0" />
+                            <Setter TargetName="PART_CHECKED"
+                                    Property="Opacity"
+                                    Value="1" />
+                            <Setter Property="Background"
+                                    Value="#c0dcf3" />
+                            <Setter Property="BorderBrush"
+                                    Value="#90c8f6" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="PART_UNCHECKED"
+                                    Property="Opacity"
+                                    Value="0" />
+                            <Setter TargetName="PART_CHECKED"
+                                    Property="Opacity"
+                                    Value="0" />
+                            <Setter TargetName="PART_DISABLED_UNCHECKED"
+                                    Property="Opacity"
+                                    Value="1" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled"
+                                           Value="False"></Condition>
+                                <Condition Property="IsChecked"
+                                           Value="True"></Condition>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="PART_DISABLED_UNCHECKED"
+                                        Property="Opacity"
+                                        Value="0" />
+                                <Setter TargetName="PART_DISABLED_CHECKED"
+                                        Property="Opacity"
+                                        Value="1" />
+                                <Setter Property="Background"
+                                        Value="#f3f3f3" />
+                                <Setter Property="BorderBrush"
+                                        Value="#c8c8c8" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
