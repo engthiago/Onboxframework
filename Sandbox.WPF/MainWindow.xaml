@@ -138,11 +138,18 @@
             </WrapPanel>
             <WrapPanel Margin="0,10,0,0"
                        IsEnabled="True">
-                <mvc:ColorPicker Color="Red" />
+                <mvc:ColorPicker Color="Red"
+                                 Margin="0,0,1,0" />
+                <mvc:ColorPicker Color="Green"
+                                 Margin="0,0,1,0" />
+                <mvc:ColorPicker Color="Blue"
+                                 Margin="0,0,1,0" />
+                <mvc:ColorPicker Color="Cyan"
+                                 Margin="0,0,1,0" />
             </WrapPanel>
             <WrapPanel IsEnabled="True"
                        Margin="0,10,0,0">
-                <mvc:ImgToggleButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png"
+                <mvc:ImgToggleButton Image="/Onbox.Mvc.V1;component/Resources/imgButton/New.png"
                                      IsChecked="True" />
             </WrapPanel>
             <WrapPanel IsEnabled="False"
@@ -152,11 +159,19 @@
             </WrapPanel>
             <WrapPanel IsEnabled="True"
                        Margin="0,10,0,0">
-                <mvc:ImgToggleButton Images="Confirm" IsChecked="True" />
+                <mvc:ImgToggleButton Images="Confirm"
+                                     IsChecked="True" />
+                <mvc:ImgToggleButton Images="Confirm"
+                                     HighlightBackgroundWhenChecked="False"
+                                     IsChecked="True" />
             </WrapPanel>
             <WrapPanel IsEnabled="False"
                        Margin="0,10,0,0">
-                <mvc:ImgToggleButton Images="Confirm" IsChecked="False" />
+                <mvc:ImgToggleButton Images="Confirm"
+                                     IsChecked="True" />
+                <mvc:ImgToggleButton Images="Confirm"
+                                     HighlightBackgroundWhenChecked="False"
+                                     IsChecked="True" />
             </WrapPanel>
         </StackPanel>
     </Grid>

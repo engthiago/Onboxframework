@@ -436,11 +436,21 @@
                             <Setter TargetName="PART_CHECKED"
                                     Property="Opacity"
                                     Value="1" />
-                            <Setter Property="Background"
-                                    Value="#c0dcf3" />
-                            <Setter Property="BorderBrush"
-                                    Value="#90c8f6" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked"
+                                           Value="True" />
+                                <Condition Property="HighlightBackgroundWhenChecked"
+                                           Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background"
+                                        Value="#c0dcf3" />
+                                <Setter Property="BorderBrush"
+                                        Value="#90c8f6" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <Trigger Property="IsEnabled"
                                  Value="False">
                             <Setter TargetName="PART_UNCHECKED"
@@ -467,6 +477,18 @@
                                 <Setter TargetName="PART_DISABLED_CHECKED"
                                         Property="Opacity"
                                         Value="1" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled"
+                                           Value="False"></Condition>
+                                <Condition Property="IsChecked"
+                                           Value="True"></Condition>
+                                <Condition Property="HighlightBackgroundWhenChecked"
+                                           Value="True"></Condition>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
                                 <Setter Property="Background"
                                         Value="#f3f3f3" />
                                 <Setter Property="BorderBrush"

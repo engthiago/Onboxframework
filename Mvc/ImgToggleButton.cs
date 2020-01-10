@@ -35,6 +35,16 @@ namespace Onbox.Mvc.V1
             }
         }
 
+        public bool HighlightBackgroundWhenChecked
+        {
+            get { return (bool)GetValue(HighlightBackgroundWhenCheckedProperty); }
+            set { SetValue(HighlightBackgroundWhenCheckedProperty, value); }
+        }
+
+        public static readonly DependencyProperty HighlightBackgroundWhenCheckedProperty =
+            DependencyProperty.Register("HighlightBackgroundWhenChecked", typeof(bool), typeof(ImgToggleButton), new PropertyMetadata(true));
+
+
         static ImgToggleButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ImgToggleButton), new FrameworkPropertyMetadata(typeof(ImgToggleButton)));
