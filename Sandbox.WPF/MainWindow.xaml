@@ -131,7 +131,8 @@
                 <mvc:ImgButton Images="Undo" />
                 <mvc:ImgButton Images="Warnings" />
             </WrapPanel>
-            <WrapPanel Margin="0,10,0,0" IsEnabled="False">
+            <WrapPanel Margin="0,10,0,0"
+                       IsEnabled="False">
                 <mvc:ImgButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/PadLock0.png" />
                 <mvc:ImgButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png" />
             </WrapPanel>
@@ -144,9 +145,18 @@
                 <mvc:ImgToggleButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png"
                                      IsChecked="True" />
             </WrapPanel>
-            <WrapPanel IsEnabled="False" Margin="0,10,0,0">
+            <WrapPanel IsEnabled="False"
+                       Margin="0,10,0,0">
                 <mvc:ImgToggleButton Image="/Onbox.Mvc.V1;component/Resources/tglButton/Constraints0.png"
                                      IsChecked="True" />
+            </WrapPanel>
+            <WrapPanel IsEnabled="True"
+                       Margin="0,10,0,0">
+                <mvc:ImgToggleButton IsChecked="True" />
+            </WrapPanel>
+            <WrapPanel IsEnabled="False"
+                       Margin="0,10,0,0">
+                <mvc:ImgToggleButton IsChecked="False" />
             </WrapPanel>
         </StackPanel>
     </Grid>

@@ -421,6 +421,13 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="#d8e6f2" />
+                            <Setter Property="BorderBrush"
+                                    Value="#c0dcf3" />
+                        </Trigger>
                         <Trigger Property="IsChecked"
                                  Value="True">
                             <Setter TargetName="PART_UNCHECKED"
