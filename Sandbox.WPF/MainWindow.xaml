@@ -152,11 +152,11 @@
             </WrapPanel>
             <WrapPanel IsEnabled="True"
                        Margin="0,10,0,0">
-                <mvc:ImgToggleButton IsChecked="True" />
+                <mvc:ImgToggleButton Images="Confirm" IsChecked="True" />
             </WrapPanel>
             <WrapPanel IsEnabled="False"
                        Margin="0,10,0,0">
-                <mvc:ImgToggleButton IsChecked="False" />
+                <mvc:ImgToggleButton Images="Confirm" IsChecked="False" />
             </WrapPanel>
         </StackPanel>
     </Grid>

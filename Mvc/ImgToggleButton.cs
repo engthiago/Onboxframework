@@ -47,6 +47,7 @@ namespace Onbox.Mvc.V1
         AddList,
         Arrow,
         Constraints,
+        Confirm,
         PadLock,
         Pin,
         Undo
