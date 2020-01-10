@@ -356,9 +356,9 @@
     </Style>
     <Style TargetType="{x:Type local:ColorPicker}">
         <Setter Property="Height"
-                Value="16" />
+                Value="23" />
         <Setter Property="Width"
-                Value="16" />
+                Value="23" />
         <Setter Property="UseLayoutRounding"
                 Value="True" />
         <Setter Property="Template">
