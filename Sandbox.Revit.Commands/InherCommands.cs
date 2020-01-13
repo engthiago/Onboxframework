@@ -15,11 +15,11 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            //var test = this.container.Resolve<ITestWindow>();
-            //test.ShowDialog();
+            var test = this.container.Resolve<ITestWindow>();
+            test.ShowDialog();
 
-            var logging = this.container.Resolve<ILoggingService>();
-            logging.Log("Test log now...");
+            //var logging = this.container.Resolve<ILoggingService>();
+            //logging.Log("Test log now...");
 
             return Result.Succeeded;
         }

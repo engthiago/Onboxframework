@@ -34,6 +34,7 @@
         </Grid>
         <TextBlock Text="{Binding Error, FallbackValue=Error}"
                    TextAlignment="Center"
+                   TextWrapping="WrapWithOverflow"
                    Foreground="{Binding Foreground, ElementName=Host}" />
         <Button Content="Retry"
                 Visibility="{Binding CanRetryOnError , Converter={c:BoolToVisibilityHideConverter}}"

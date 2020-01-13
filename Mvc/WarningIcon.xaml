@@ -38,6 +38,7 @@
         </Grid>
         <TextBlock Text="{Binding Warning, FallbackValue=Warning}"
                    TextAlignment="Center"
+                   TextWrapping="WrapWithOverflow"
                    Foreground="{Binding Foreground, ElementName=Host}" />
         <Button Content="Retry"
                 Visibility="{Binding CanRetryOnWarning , Converter={c:BoolToVisibilityHideConverter}}"
