@@ -1,6 +1,8 @@
 ﻿using Onbox.Core.V1.Json;
+using Onbox.Core.V1.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,12 +15,19 @@ namespace Onbox.Core.V1.Http
     public interface IHttpService
     {
         Task<T> GetAsync<T>(string endpoint, string token = null) where T : class;
+        Task<Stream> GetStreamAsync(string endpoint, string token = null);
         Task<T> DeleteAsync<T>(string endpoint, string token = null) where T : class;
         Task DeleteAsync(string endpoint, string token = null);
         Task<T> PutAsync<T>(string endpoint, object content, string token = null) where T : class;
         Task PutAsync(string endpoint, object content, string token = null);
+        Task<T> PutStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class;
+        Task PutStreamAsync(string enpoint, Stream content, string token = null);
+        Task<Stream> PutRequestStreamAsync(string endpoint, object content, string token = null);
         Task<T> PostAsync<T>(string endpoint, object content, string token = null) where T : class;
         Task PostAsync(string endpoint, object content, string token = null);
+        Task<T> PostStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class;
+        Task PostStreamAsync(string endpoint, Stream content, string token = null);
+        Task<Stream> PostRequestStreamAsync(string endpoint, object content, string token = null);
         Task<T> PatchAsync<T>(string endpoint, object content, string token = null) where T : class;
         Task PatchAsync(string endpoint, object content, string token = null);
     }
@@ -27,11 +36,12 @@ namespace Onbox.Core.V1.Http
     {
         private readonly HttpClient client;
         private readonly IJsonService jsonService;
+        private readonly ILoggingService loggingService;
 
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
 
-        public HttpService(IJsonService jsonService, HttpSettings httpSettings)
+        public HttpService(IJsonService jsonService, ILoggingService loggingService, HttpSettings httpSettings)
         {
             this.client = new HttpClient();
             this.Configure(httpSettings);
@@ -41,6 +51,7 @@ namespace Onbox.Core.V1.Http
                                                     SecurityProtocolType.Tls12;
 
             this.jsonService = jsonService;
+            this.loggingService = loggingService;
         }
 
 
@@ -50,10 +61,22 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.GetAsync(endpoint);
-            response.EnsureSuccessStatusCode();
+            EnsureSuccess(response);
 
             var json = await response.Content.ReadAsStringAsync();
             return this.ConvertResponseToType<T>(json);
+        }
+
+        public async Task<Stream> GetStreamAsync(string endpoint, string token = null)
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            var response = await this.client.GetAsync(endpoint);
+            await EnsureSuccess(response);
+
+            var stream = await response.Content.ReadAsStreamAsync();
+            return stream;
         }
 
         public async Task<T> DeleteAsync<T>(string endpoint, string token = null) where T : class
@@ -62,7 +85,7 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.DeleteAsync(endpoint);
-            response.EnsureSuccessStatusCode();
+            await EnsureSuccess(response);
 
             var json = await response.Content.ReadAsStringAsync();
             if (!string.IsNullOrWhiteSpace(json))
@@ -79,7 +102,7 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.DeleteAsync(endpoint);
-            response.EnsureSuccessStatusCode();
+            await EnsureSuccess(response);
         }
 
         public async Task<T> PutAsync<T>(string endpoint, object content, string token = null) where T : class
@@ -88,15 +111,17 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var payload = this.jsonService.Serialize(content);
-            var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
-
-            var response = await this.client.PutAsync(endpoint, jsonContent);
-            response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadAsStringAsync();
-            if (!string.IsNullOrWhiteSpace(json))
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                return this.ConvertResponseToType<T>(json);
+
+                var response = await this.client.PutAsync(endpoint, jsonContent);
+                await EnsureSuccess(response);
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    return this.ConvertResponseToType<T>(json);
+                }
             }
 
             return null;
@@ -108,10 +133,58 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var payload = this.jsonService.Serialize(content);
-            var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
+            {
 
-            var response = await this.client.PutAsync(endpoint, jsonContent);
-            response.EnsureSuccessStatusCode();
+                var response = await this.client.PutAsync(endpoint, jsonContent);
+                await EnsureSuccess(response);
+            }
+        }
+
+        public async Task<T> PutStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            using (var streamContent = new StreamContent(content))
+            {
+                var response = await this.client.PutAsync(endpoint, streamContent);
+                await EnsureSuccess(response);
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    return this.ConvertResponseToType<T>(json);
+                }
+
+                return null;
+            }
+
+        }
+
+        public async Task PutStreamAsync(string endpoint, Stream content, string token = null)
+        {
+            using (var streamContent = new StreamContent(content))
+            {
+                var response = await this.client.PutAsync(endpoint, streamContent);
+                await EnsureSuccess(response);
+            }
+        }
+
+        public async Task<Stream> PutRequestStreamAsync(string endpoint, object content, string token = null)
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            var payload = this.jsonService.Serialize(content);
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
+            {
+                var response = await this.client.PutAsync(endpoint, jsonContent);
+                await EnsureSuccess(response);
+
+                var stream = await response.Content.ReadAsStreamAsync();
+                return stream;
+            }
         }
 
         public async Task<T> PostAsync<T>(string endpoint, object content, string token = null) where T : class
@@ -120,15 +193,16 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var payload = this.jsonService.Serialize(content);
-            var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
-
-            var response = await this.client.PostAsync(endpoint, jsonContent);
-            response.EnsureSuccessStatusCode();
-
-            var json = await response.Content.ReadAsStringAsync();
-            if (!string.IsNullOrWhiteSpace(json))
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                return this.ConvertResponseToType<T>(json);
+                var response = await this.client.PostAsync(endpoint, jsonContent);
+                await EnsureSuccess(response);
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    return this.ConvertResponseToType<T>(json);
+                }
             }
 
             return null;
@@ -140,10 +214,59 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var payload = this.jsonService.Serialize(content);
-            var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
+            {
+                var response = await this.client.PostAsync(endpoint, jsonContent);
+                await EnsureSuccess(response);
+            }
+        }
 
-            var response = await this.client.PostAsync(endpoint, jsonContent);
-            response.EnsureSuccessStatusCode();
+        public async Task<T> PostStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            using (var streamContent = new StreamContent(content))
+            {
+                var response = await this.client.PostAsync(endpoint, streamContent);
+                await EnsureSuccess(response);
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    return this.ConvertResponseToType<T>(json);
+                }
+
+                return null;
+            }
+        }
+
+        public async Task PostStreamAsync(string endpoint, Stream content, string token = null)
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            using (var streamContent = new StreamContent(content))
+            {
+                var response = await this.client.PostAsync(endpoint, streamContent);
+                await EnsureSuccess(response);
+            }
+        }
+
+        public async Task<Stream> PostRequestStreamAsync(string endpoint, object content, string token = null)
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            var payload = this.jsonService.Serialize(content);
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
+            {
+                var response = await this.client.PostAsync(endpoint, jsonContent);
+                await EnsureSuccess(response);
+
+                var stream = await response.Content.ReadAsStreamAsync();
+                return stream;
+            }
         }
 
         public async Task<T> PatchAsync<T>(string endpoint, object content, string token = null) where T : class
@@ -152,23 +275,25 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var payload = this.jsonService.Serialize(content);
-            var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
-
-            var method = new HttpMethod("PATCH");
-            var request = new HttpRequestMessage(method, endpoint)
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                Content = jsonContent
-            };
 
-            HttpResponseMessage response = new HttpResponseMessage();
-            response = await this.client.SendAsync(request);
+                var method = new HttpMethod("PATCH");
+                var request = new HttpRequestMessage(method, endpoint)
+                {
+                    Content = jsonContent
+                };
 
-            response.EnsureSuccessStatusCode();
+                HttpResponseMessage response = new HttpResponseMessage();
+                response = await this.client.SendAsync(request);
 
-            var json = await response.Content.ReadAsStringAsync();
-            if (!string.IsNullOrWhiteSpace(json))
-            {
-                return this.ConvertResponseToType<T>(json);
+                await EnsureSuccess(response);
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    return this.ConvertResponseToType<T>(json);
+                }
             }
 
             return null;
@@ -180,18 +305,19 @@ namespace Onbox.Core.V1.Http
             this.SetTokenHeaders(token);
 
             var payload = this.jsonService.Serialize(content);
-            var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json");
-
-            var method = new HttpMethod("PATCH");
-            var request = new HttpRequestMessage(method, endpoint)
+            using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                Content = jsonContent
-            };
+                var method = new HttpMethod("PATCH");
+                var request = new HttpRequestMessage(method, endpoint)
+                {
+                    Content = jsonContent
+                };
 
-            HttpResponseMessage response = new HttpResponseMessage();
-            response = await this.client.SendAsync(request);
+                HttpResponseMessage response = new HttpResponseMessage();
+                response = await this.client.SendAsync(request);
 
-            response.EnsureSuccessStatusCode();
+                await EnsureSuccess(response);
+            }
         }
 
 
@@ -251,6 +377,22 @@ namespace Onbox.Core.V1.Http
             }
         }
 
+        private async Task EnsureSuccess(HttpResponseMessage response)
+        {
+            if (response == null) throw new Exception("Invalid Http Response");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return;
+            }
+
+            var responseJson = await response.RequestMessage.Content.ReadAsStringAsync();
+
+            await loggingService.Error($"{(int)response.StatusCode } {response.StatusCode.ToString()}: {responseJson}");
+
+            throw new HttpListenerException((int)response.StatusCode, response.StatusCode.ToString());
+        }
+
         private void Configure(HttpSettings settings)
         {
             this.client.Timeout = TimeSpan.FromMilliseconds(settings.Timeout);
@@ -263,7 +405,7 @@ namespace Onbox.Core.V1.Http
             {
                 this.client.DefaultRequestHeaders.Remove("cache-control");
             }
-            
+
             if (!string.IsNullOrWhiteSpace(cacheValue))
             {
                 this.client.DefaultRequestHeaders.Add("cache-control", cacheValue);
