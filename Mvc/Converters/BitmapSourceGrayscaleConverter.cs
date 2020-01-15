@@ -12,7 +12,7 @@ namespace Onbox.Mvc.V1.Converters
         {
             if (value is BitmapFrame frame)
             {
-                var img = Utils.ImageUtils.Convert(frame);
+                var img = Utils.ImageUtils.ConvertToBitmap(frame);
                 return Utils.ImageUtils.BitmapSourceToGrayScale(img);
             }
             else if (value is BitmapImage img)

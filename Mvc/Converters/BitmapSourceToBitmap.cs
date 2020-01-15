@@ -11,12 +11,12 @@ namespace Onbox.Mvc.V1.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Utils.ImageUtils.Convert(value as BitmapSource);
+            return Utils.ImageUtils.ConvertToBitmap(value as BitmapSource);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Utils.ImageUtils.Convert(value as Bitmap);
+            return Utils.ImageUtils.ConvertToBitmapSource(value as Bitmap);
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)

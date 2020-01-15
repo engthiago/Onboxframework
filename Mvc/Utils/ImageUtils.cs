@@ -35,7 +35,7 @@ namespace Onbox.Mvc.V1.Utils
                 }
 
                 originalBitmap.Dispose();
-                var newImg = Convert(bitmap, ImageFormat.Png);
+                var newImg = ConvertToBitmapSource(bitmap, ImageFormat.Png);
                 return newImg;
             }
             catch
@@ -49,7 +49,7 @@ namespace Onbox.Mvc.V1.Utils
         {
             try
             {
-                var originalBitmap = Convert(image);
+                var originalBitmap = ConvertToBitmap(image);
 
                 if (originalBitmap == null) return null;
                 if (originalBitmap.VerticalResolution == 0) return null;
@@ -74,7 +74,7 @@ namespace Onbox.Mvc.V1.Utils
                 }
 
                 originalBitmap.Dispose();
-                var newImg = Convert(bitmap, ImageFormat.Png);
+                var newImg = ConvertToBitmapSource(bitmap, ImageFormat.Png);
                 return newImg;
             }
             catch
@@ -84,7 +84,7 @@ namespace Onbox.Mvc.V1.Utils
             return null;
         }
 
-        public static Bitmap Convert(BitmapSource bitmapsource)
+        public static Bitmap ConvertToBitmap(BitmapSource bitmapsource)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Onbox.Mvc.V1.Utils
             return null;
         }
 
-        public static Bitmap Convert(BitmapFrame frame)
+        public static Bitmap ConvertToBitmap(BitmapFrame frame)
         {
             try
             {
@@ -126,12 +126,42 @@ namespace Onbox.Mvc.V1.Utils
             return null;
         }
 
-        static public BitmapSource Convert(Bitmap src)
+        static public BitmapSource ConvertToBitmapSource(Bitmap src)
         {
-            return Convert(src, ImageFormat.Png);
+            return ConvertToBitmapSource(src, ImageFormat.Png);
         }
 
-        static public BitmapSource Convert(Bitmap src, ImageFormat imageFormat)
+        static public Bitmap ConvertToBitmap(Stream stream)
+        {
+            try
+            {
+                using (Bitmap bitmap = Image.FromStream(stream) as Bitmap)
+                {
+                    return bitmap;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        static public BitmapSource ConvertToBitmapSource(Stream stream)
+        {
+            try
+            {
+                using (Bitmap bitmap = Image.FromStream(stream) as Bitmap)
+                {
+                    return ConvertToBitmapSource(bitmap);
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        static public BitmapSource ConvertToBitmapSource(Bitmap src, ImageFormat imageFormat)
         {
             try
             {

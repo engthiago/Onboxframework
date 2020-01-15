@@ -11,7 +11,7 @@
                  Height="524.883"
                  Width="358.828">
     <Grid>
-        <StackPanel>
+        <!--<StackPanel>
             <TextBlock Margin="0,0,0,10"
                        Text="{Binding SomethingToSearch}"></TextBlock>
             <mvc:SearchControl SearchText="{Binding SomethingToSearch}" />
@@ -173,6 +173,11 @@
                                      HighlightBackgroundWhenChecked="False"
                                      IsChecked="True" />
             </WrapPanel>
+        </StackPanel>-->
+        <StackPanel mvc:If.OnErrorOrLoadingHide="True">
+            <Image Width="200" Height="200" Source="{Binding Image}" />
         </StackPanel>
+        <mvc:Spinner />
+        <mvc:ErrorIcon />
     </Grid>
 </mvc:ViewMvcBase>
