@@ -29,6 +29,15 @@ namespace Onbox.Core.V1.Logging
         }
 
         /// <summary>
+        /// Logs an exception to the .log file
+        /// </summary>
+        public async Task Exception(Exception exception)
+        {
+            var type = "Exception";
+            await this.Log(exception?.Message, type);
+        }
+
+        /// <summary>
         /// Logs a message to the .log file
         /// </summary>
         public async Task Log(string message)

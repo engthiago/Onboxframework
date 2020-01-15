@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Onbox.Core.V1.Logging
 {
@@ -11,6 +12,10 @@ namespace Onbox.Core.V1.Logging
         /// Logs an error
         /// </summary>
         Task Error(string message);
+        /// <summary>
+        /// Logs an exception
+        /// </summary>
+        Task Exception(Exception exception);
         /// <summary>
         /// Logs a message
         /// </summary>
