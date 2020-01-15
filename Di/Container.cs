@@ -43,7 +43,7 @@ namespace Onbox.Di.V1
         /// <summary>
         /// Resets the entire container
         /// </summary>
-        void Reset();
+        void Clear();
 
         /// <summary>
         /// Asks the container for a new instance of a type
@@ -219,7 +219,7 @@ namespace Onbox.Di.V1
         /// <summary>
         /// Resets the entire container
         /// </summary>
-        public void Reset()
+        public void Clear()
         {
             this.types.Clear();
             this.instances.Clear();

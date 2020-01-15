@@ -212,7 +212,7 @@ namespace Tests
         [Test]
         public void ClearItself()
         {
-            sut.Reset();
+            sut.Clear();
         }
 
 

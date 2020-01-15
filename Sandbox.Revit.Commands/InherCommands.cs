@@ -85,7 +85,7 @@ namespace Onbox.Sandbox.Revit.Commands
     {
         public override Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            this.container.Reset();
+            this.container.Clear();
 
             return Result.Succeeded;
         }
