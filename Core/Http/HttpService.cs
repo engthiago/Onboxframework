@@ -24,6 +24,7 @@ namespace Onbox.Core.V1.Http
         Task PutStreamAsync(string enpoint, Stream content, string token = null);
         Task<Stream> PutRequestStreamAsync(string endpoint, object content, string token = null);
         Task<T> PostAsync<T>(string endpoint, object content, string token = null) where T : class;
+        Task<T> PostFormAsync<T>(string endpoint, IDictionary<string, string> content, string token = null) where T : class;
         Task PostAsync(string endpoint, object content, string token = null);
         Task<T> PostStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class;
         Task PostStreamAsync(string endpoint, Stream content, string token = null);
@@ -267,6 +268,26 @@ namespace Onbox.Core.V1.Http
                 var stream = await response.Content.ReadAsStreamAsync();
                 return stream;
             }
+        }
+
+        public async Task<T> PostFormAsync<T>(string endpoint, IDictionary<string, string> content, string token = null) where T : class
+        {
+            this.EnsureIsConnected();
+            this.SetTokenHeaders(token);
+
+            using (var formContent = new FormUrlEncodedContent(content))
+            {
+                var response = await this.client.PostAsync(endpoint, formContent);
+                await EnsureSuccess(response);
+
+                var json = await response.Content.ReadAsStringAsync();
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    return this.ConvertResponseToType<T>(json);
+                }
+            }
+
+            return null;
         }
 
         public async Task<T> PatchAsync<T>(string endpoint, object content, string token = null) where T : class

@@ -11,7 +11,7 @@ namespace Onbox.Core.V1.Http
         /// <summary>
         /// Timeout in milliseconds
         /// </summary>
-        public int Timeout { get; set; }
+        public int Timeout { get; set; } = 2500;
 
         /// <summary>
         /// The "cache-control" header will be set to no-cache by default
