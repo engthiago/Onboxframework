@@ -15,7 +15,7 @@ namespace Onbox.Mvc.V2
 
         public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(BitmapSource), typeof(ImgToggleButton), 
-                new PropertyMetadata(new BitmapImage(new Uri(@"pack://application:,,,/Onbox.Mvc.V1;component/Resources/tglButton/Add0.png"))));
+                new PropertyMetadata(new BitmapImage(new Uri(@"pack://application:,,,/Onbox.Mvc.V2;component/Resources/tglButton/Add0.png"))));
 
         public ToggleImgButtonOptions Images
         {
@@ -31,7 +31,7 @@ namespace Onbox.Mvc.V2
             if (d is ImgToggleButton imgButton)
             {
                 var name = e.NewValue.ToString();
-                imgButton.Image = new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.V1;component/Resources/tglButton/{name}0.png"));
+                imgButton.Image = new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.V2;component/Resources/tglButton/{name}0.png"));
             }
         }
 

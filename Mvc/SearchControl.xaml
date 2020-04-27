@@ -28,7 +28,7 @@
         <Image x:Name="PART_SearchIcon"
                UseLayoutRounding="True"
                RenderOptions.BitmapScalingMode="NearestNeighbor"
-               Source="/Onbox.Mvc.V1;component/Resources/imgButton/Search.png"
+               Source="/Onbox.Mvc.V2;component/Resources/imgButton/Search.png"
                IsHitTestVisible="False"
                Margin="4,0"
                HorizontalAlignment="Right"
@@ -43,7 +43,7 @@
               Width="16">
             <Image UseLayoutRounding="True"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"
-                   Source="/Onbox.Mvc.V1;component/Resources/imgButton/Clear.png"></Image>
+                   Source="/Onbox.Mvc.V2;component/Resources/imgButton/Clear.png"></Image>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
