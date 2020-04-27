@@ -1,11 +1,11 @@
-﻿using Onbox.Di.V1;
+﻿using Onbox.Di.V2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V1.Http
+namespace Onbox.Core.V2.Http
 {
     public static class HttpExtensions
     {

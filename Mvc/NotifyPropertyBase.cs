@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Onbox.Mvc.V1
+namespace Onbox.Mvc.V2
 {
     public class NotifyPropertyBase : INotifyPropertyChanged
     {

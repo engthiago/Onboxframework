@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V1.Converters
+namespace Onbox.Mvc.V2.Converters
 {
     public class GetListItemConverter : MarkupExtension, IValueConverter
     {

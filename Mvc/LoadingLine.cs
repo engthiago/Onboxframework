@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Onbox.Mvc.V1
+namespace Onbox.Mvc.V2
 {
     public class LoadingLine : Spinner
     {

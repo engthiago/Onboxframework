@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V1.Reporting
+namespace Onbox.Core.V2.Reporting
 {
     public class ProgressCancelledException : Exception
     {

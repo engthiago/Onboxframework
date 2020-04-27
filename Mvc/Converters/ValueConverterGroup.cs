@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Onbox.Mvc.V1.Converters
+namespace Onbox.Mvc.V2.Converters
 {
     public class ValueConverterGroup : List<IValueConverter>, IValueConverter
     {

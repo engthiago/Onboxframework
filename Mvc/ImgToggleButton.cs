@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 
-namespace Onbox.Mvc.V1
+namespace Onbox.Mvc.V2
 {
     public class ImgToggleButton : ToggleButton
     {

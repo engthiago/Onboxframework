@@ -1,7 +1,7 @@
-﻿using Onbox.Core.V1.Http;
-using Onbox.Core.V1.Json;
-using Onbox.Core.V1.Logging;
-using Onbox.Di.V1;
+﻿using Onbox.Core.V2.Http;
+using Onbox.Core.V2.Json;
+using Onbox.Core.V2.Logging;
+using Onbox.Di.V2;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V1
+namespace Onbox.Core.V2
 {
     /// <summary>
     /// Core extensions for Onbox's container

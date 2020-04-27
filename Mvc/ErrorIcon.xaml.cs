@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Onbox.Mvc.V1
+namespace Onbox.Mvc.V2
 {
     /// <summary>
     /// Interaction logic for ErrorIcon.xaml

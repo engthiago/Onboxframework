@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V1.Logging
+namespace Onbox.Core.V2.Logging
 {
     /// <summary>
     /// The contract for logging activities
