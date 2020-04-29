@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
-namespace Onbox.Di.V2
+namespace Onbox.Di.V3
 {
     /// <summary>
     /// Onbox's IOC container contract

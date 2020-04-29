@@ -4,7 +4,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
-namespace Onbox.Mvc.V2.Converters
+namespace Onbox.Mvc.V3.Converters
 {
     class BitmapSourceGrayscaleConverter : MarkupExtension, IValueConverter
     {

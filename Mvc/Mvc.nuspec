@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Thiago Almeida</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>$description$</description>
+    <releaseNotes>Initial Package</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>Onbox Library WPF MVC</tags>
+  </metadata>
+</package>

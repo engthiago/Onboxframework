@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V2.Converters
+namespace Onbox.Mvc.V3.Converters
 {
     public class BoolInverterConverter : MarkupExtension, IValueConverter
     {

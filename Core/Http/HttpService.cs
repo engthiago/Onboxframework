@@ -1,5 +1,5 @@
-﻿using Onbox.Core.V2.Json;
-using Onbox.Core.V2.Logging;
+﻿using Onbox.Core.V3.Json;
+using Onbox.Core.V3.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V2.Http
+namespace Onbox.Core.V3.Http
 {
     public interface IHttpService
     {
@@ -62,7 +62,7 @@ namespace Onbox.Core.V2.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.GetAsync(endpoint);
-            EnsureSuccess(response);
+            await EnsureSuccess(response);
 
             var json = await response.Content.ReadAsStringAsync();
             return this.ConvertResponseToType<T>(json);
@@ -407,9 +407,15 @@ namespace Onbox.Core.V2.Http
                 return;
             }
 
-            var responseJson = await response.RequestMessage.Content.ReadAsStringAsync();
-
-            await loggingService.Error($"{(int)response.StatusCode } {response.StatusCode.ToString()}: {responseJson}");
+            // Ignore errors on logging
+            try
+            {
+                var responseJson = await response.RequestMessage?.Content?.ReadAsStringAsync();
+                await loggingService.Error($"{(int)response.StatusCode } {response.StatusCode.ToString()}: {responseJson}");
+            }
+            catch
+            {
+            }
 
             throw new HttpListenerException((int)response.StatusCode, response.StatusCode.ToString());
         }

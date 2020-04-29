@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace Onbox.Mvc.V2
+namespace Onbox.Mvc.V3
 {
     public class VisualTreeHelpers
     {

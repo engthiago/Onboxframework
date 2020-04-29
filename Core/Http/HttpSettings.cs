@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V2.Http
+namespace Onbox.Core.V3.Http
 {
     public class HttpSettings
     {

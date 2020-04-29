@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V2.Reporting
+namespace Onbox.Core.V3.Reporting
 {
     /// <summary>
     /// Contract that reports information each iteration
