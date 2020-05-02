@@ -153,6 +153,8 @@ namespace Onbox.Di.V3
 
         private object Resolve(Type contract)
         {
+            Console.WriteLine("Stack: " + contract.ToString());
+
             // Always prioritize instances
             if (this.instances.ContainsKey(contract))
             {
@@ -167,7 +169,8 @@ namespace Onbox.Di.V3
             }
             else if (!contract.IsAbstract || this.types.ContainsKey(contract))
             {
-                return this.Resolve(contract, this.types);
+                var instance = this.Resolve(contract, this.types);
+                return instance;
             }
             else
             {
@@ -184,7 +187,6 @@ namespace Onbox.Di.V3
                 throw new InvalidOperationException($"Circular dependency between: {contract.Name} and {this.currentType.Name}.");
             }
             this.currentTypes.Add(contract);
-            this.currentType = contract;
 
             // If this is a concrete type just instantiate it, if not, get the concrete type on the dictionary
             Type implementation = contract;
@@ -205,6 +207,8 @@ namespace Onbox.Di.V3
             ParameterInfo[] constructorParameters = constructor.GetParameters();
             if (constructorParameters.Length == 0)
             {
+                Console.WriteLine("Instancing: " + implementation.ToString());
+                currentTypes.Remove(implementation);
                 return Activator.CreateInstance(implementation);
             }
             List<object> parameters = new List<object>(constructorParameters.Length);
@@ -212,6 +216,9 @@ namespace Onbox.Di.V3
             {
                 parameters.Add(this.Resolve(parameterInfo.ParameterType));
             }
+
+            Console.WriteLine("Instancing: " + implementation.ToString());
+            currentTypes.Remove(implementation);
             return constructor.Invoke(parameters.ToArray());
         }
 

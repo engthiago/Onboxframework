@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Onbox.Di.V2;
+using Onbox.Di.V3;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -63,6 +63,39 @@ namespace Di
         }
     }
 
+    public class SiteService
+    {
+        public SiteService(CoordinateService coordinateService, DetailsService detailsService)
+        {
+
+        }
+    }
+
+    public class CoordinateService
+    {
+        public CoordinateService(AngleService angleService, GlobeService globeService)
+        {
+
+        }
+    }
+
+    public class AngleService
+    {
+    }
+
+    public class GlobeService
+    {
+    }
+
+    public class DetailsService
+    {
+        public DetailsService(CoordinateService coordinateService, SiteService siteService)
+        {
+        }
+    }
+
+
+
     [TestFixture]
     public class ContainerShould
     {
@@ -112,6 +145,12 @@ namespace Di
         public void NotResolveCircularDependencies()
         {
             Assert.That(() => sut.Resolve<CircularDependencyMain>(), Throws.InstanceOf<InvalidOperationException>());
+        }
+
+        [Test]
+        public void ResolveScopedDependencies()
+        {
+            Assert.DoesNotThrow(() => sut.Resolve<SiteService>());
         }
 
         [Test]
