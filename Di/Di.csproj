@@ -7,8 +7,8 @@
     <ProjectGuid>{7ADE1A05-4EE6-4790-B634-9649BBDA7B67}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Di.V3</RootNamespace>
-    <AssemblyName>Onbox.Di.V3</AssemblyName>
+    <RootNamespace>Onbox.Di.V4</RootNamespace>
+    <AssemblyName>Onbox.Di.V4</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Onbox.Di.V3.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Onbox.Di.V4.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

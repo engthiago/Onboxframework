@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V3.Converters
+namespace Onbox.Mvc.V4.Converters
 {
     public class BoolToVisibilityConverter : MarkupExtension, IValueConverter
     {

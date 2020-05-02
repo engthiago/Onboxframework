@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Onbox.Mvc.V3
+namespace Onbox.Mvc.V4
 {
     public class MessageStack : Control
     {

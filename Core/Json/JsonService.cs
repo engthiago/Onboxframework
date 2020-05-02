@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Onbox.Core.V3.Json
+namespace Onbox.Core.V4.Json
 {
     public interface IJsonService
     {

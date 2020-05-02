@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Onbox.Mvc.V3
+namespace Onbox.Mvc.V4
 {
     /// <summary>
     /// Interaction logic for SearchControl.xaml

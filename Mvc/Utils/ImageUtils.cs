@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Onbox.Mvc.V3.Utils
+namespace Onbox.Mvc.V4.Utils
 {
     public static class ImageUtils
     {

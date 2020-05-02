@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V3.Logging
+namespace Onbox.Core.V4.Logging
 {
     /// <summary>
     /// Logs to a local file
