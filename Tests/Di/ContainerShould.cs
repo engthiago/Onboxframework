@@ -89,7 +89,7 @@ namespace Di
 
     public class DetailsService
     {
-        public DetailsService(CoordinateService coordinateService, SiteService siteService)
+        public DetailsService(CoordinateService coordinateService)
         {
         }
     }
