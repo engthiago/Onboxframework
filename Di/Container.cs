@@ -12,7 +12,7 @@ namespace Onbox.Di.V3
         /// <summary>
         /// Adds an implementation as a singleton on the container.
         /// </summary>
-        void AddSingleton<TImplementation>() where TImplementation: class;
+        void AddSingleton<TImplementation>() where TImplementation : class;
 
         /// <summary>
         /// Adds an instance as a singleton on the container
@@ -61,7 +61,6 @@ namespace Onbox.Di.V3
         private readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
 
         private readonly List<Type> currentTypes = new List<Type>();
-        private Type currentType;
 
         /// <summary>
         /// Adds an implementation as a singleton on the container.
@@ -153,7 +152,7 @@ namespace Onbox.Di.V3
 
         private object Resolve(Type contract)
         {
-            Console.WriteLine("Stack: " + contract.ToString());
+            Console.WriteLine("Container request: " + contract.ToString());
 
             // Always prioritize instances
             if (this.instances.ContainsKey(contract))
@@ -184,10 +183,9 @@ namespace Onbox.Di.V3
             // Check for Ciruclar dependencies
             if (this.currentTypes.Contains(contract))
             {
-                throw new InvalidOperationException($"Circular dependency between: {contract.Name} and {this.currentType.Name}.");
+                throw new InvalidOperationException($"Container found circular dependency on: {contract.Name}.");
             }
             this.currentTypes.Add(contract);
-            this.currentType = contract;
 
             // If this is a concrete type just instantiate it, if not, get the concrete type on the dictionary
             Type implementation = contract;
@@ -208,17 +206,18 @@ namespace Onbox.Di.V3
             ParameterInfo[] constructorParameters = constructor.GetParameters();
             if (constructorParameters.Length == 0)
             {
-                Console.WriteLine("Instancing: " + implementation.ToString());
+                Console.WriteLine("Container instantiated " + implementation.ToString());
                 currentTypes.Remove(implementation);
                 return Activator.CreateInstance(implementation);
             }
             List<object> parameters = new List<object>(constructorParameters.Length);
             foreach (ParameterInfo parameterInfo in constructorParameters)
             {
-                parameters.Add(this.Resolve(parameterInfo.ParameterType));
+                var type = parameterInfo.ParameterType;
+                parameters.Add(this.Resolve(type));
             }
 
-            Console.WriteLine("Instancing: " + implementation.ToString());
+            Console.WriteLine("Container instantiated " + implementation.ToString());
             currentTypes.Remove(implementation);
             return constructor.Invoke(parameters.ToArray());
         }
