@@ -187,6 +187,7 @@ namespace Onbox.Di.V3
                 throw new InvalidOperationException($"Circular dependency between: {contract.Name} and {this.currentType.Name}.");
             }
             this.currentTypes.Add(contract);
+            this.currentType = contract;
 
             // If this is a concrete type just instantiate it, if not, get the concrete type on the dictionary
             Type implementation = contract;
