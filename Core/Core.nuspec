@@ -12,5 +12,8 @@
     <releaseNotes>Initial Package</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>Onbox Core Library</tags>
+	<dependencies>
+		<dependency id="Onbox.Di.V4" version="4.0.0" />
+	</dependencies>
   </metadata>
 </package>
