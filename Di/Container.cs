@@ -150,6 +150,8 @@ namespace Onbox.Di.V3
             return type;
         }
 
+        private Type currentType;
+
         private object Resolve(Type contract)
         {
             Console.WriteLine("Container request: " + contract.ToString());
@@ -183,6 +185,19 @@ namespace Onbox.Di.V3
             // Check for Ciruclar dependencies
             if (this.currentTypes.Contains(contract))
             {
+                if (currentType == contract)
+                {
+                    Console.WriteLine($"Container found circular dependency on {currentType.Name} trying to inject itself.");
+                    throw new InvalidOperationException($"Container found circular dependency on {currentType.Name} trying to inject itself.");
+                }
+
+                if (currentType != null)
+                {
+                    Console.WriteLine($"Container found circular dependency between {currentType.Name} and {contract.Name}.");
+                    throw new InvalidOperationException($"Container found circular dependency between {currentType.Name} and {contract.Name}.");
+                }
+
+                Console.WriteLine($"Container found circular dependency on: {contract.Name}.");
                 throw new InvalidOperationException($"Container found circular dependency on: {contract.Name}.");
             }
             this.currentTypes.Add(contract);
@@ -214,6 +229,7 @@ namespace Onbox.Di.V3
             foreach (ParameterInfo parameterInfo in constructorParameters)
             {
                 var type = parameterInfo.ParameterType;
+                currentType = implementation;
                 parameters.Add(this.Resolve(type));
             }
 
