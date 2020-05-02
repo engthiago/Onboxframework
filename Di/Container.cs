@@ -53,14 +53,15 @@ namespace Onbox.Di.V3
     /// <summary>
     /// Onbox's IOC container implementation
     /// </summary>
-    public class Container : IContainer
+    public class Container : IContainer, IDisposable
     {
-        private readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
-        private readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
+        private IDictionary<Type, Type> types = new Dictionary<Type, Type>();
+        private IDictionary<Type, object> instances = new Dictionary<Type, object>();
 
-        private readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
+        private IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
 
-        private readonly List<Type> currentTypes = new List<Type>();
+        private List<Type> currentTypes = new List<Type>();
+        private Type currentType;
 
         /// <summary>
         /// Adds an implementation as a singleton on the container.
@@ -150,11 +151,9 @@ namespace Onbox.Di.V3
             return type;
         }
 
-        private Type currentType;
-
         private object Resolve(Type contract)
         {
-            Console.WriteLine("Container request: " + contract.ToString());
+            Console.WriteLine("Onbox Container request: " + contract.ToString());
 
             // Always prioritize instances
             if (this.instances.ContainsKey(contract))
@@ -175,7 +174,7 @@ namespace Onbox.Di.V3
             }
             else
             {
-                throw new KeyNotFoundException($"{contract.Name} not registered on the DI container.");
+                throw new KeyNotFoundException($"{contract.Name} not registered on Onbox Container.");
             }
         }
 
@@ -185,20 +184,24 @@ namespace Onbox.Di.V3
             // Check for Ciruclar dependencies
             if (this.currentTypes.Contains(contract))
             {
+                string error;
                 if (currentType == contract)
                 {
-                    Console.WriteLine($"Container found circular dependency on {currentType.Name} trying to inject itself.");
-                    throw new InvalidOperationException($"Container found circular dependency on {currentType.Name} trying to inject itself.");
+                    error = $"Onbox Container found circular dependency on {currentType.Name} trying to inject itself.";
+                    Console.WriteLine(error);
+                    throw new InvalidOperationException(error);
                 }
 
                 if (currentType != null)
                 {
-                    Console.WriteLine($"Container found circular dependency between {currentType.Name} and {contract.Name}.");
-                    throw new InvalidOperationException($"Container found circular dependency between {currentType.Name} and {contract.Name}.");
+                    error = $"Onbox Container found circular dependency between {currentType.Name} and {contract.Name}.";
+                    Console.WriteLine(error);
+                    throw new InvalidOperationException(error);
                 }
 
-                Console.WriteLine($"Container found circular dependency on: {contract.Name}.");
-                throw new InvalidOperationException($"Container found circular dependency on: {contract.Name}.");
+                error = $"Onbox Container found circular dependency on: {contract.Name}.";
+                Console.WriteLine(error);
+                throw new InvalidOperationException(error);
             }
             this.currentTypes.Add(contract);
 
@@ -213,7 +216,7 @@ namespace Onbox.Di.V3
             var constructors = implementation.GetConstructors();
             if (constructors.Length < 1)
             {
-                throw new InvalidOperationException($"{implementation.Name} has no available constructors. The container can not instantiate it.");
+                throw new InvalidOperationException($"Onbox Container: {implementation.Name} has no available constructors. The container can not instantiate it.");
             }
 
             ConstructorInfo constructor = constructors[0];
@@ -221,7 +224,7 @@ namespace Onbox.Di.V3
             ParameterInfo[] constructorParameters = constructor.GetParameters();
             if (constructorParameters.Length == 0)
             {
-                Console.WriteLine("Container instantiated " + implementation.ToString());
+                Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
                 currentTypes.Remove(implementation);
                 return Activator.CreateInstance(implementation);
             }
@@ -233,7 +236,7 @@ namespace Onbox.Di.V3
                 parameters.Add(this.Resolve(type));
             }
 
-            Console.WriteLine("Container instantiated " + implementation.ToString());
+            Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
             currentTypes.Remove(implementation);
             return constructor.Invoke(parameters.ToArray());
         }
@@ -246,6 +249,7 @@ namespace Onbox.Di.V3
             this.types.Clear();
             this.instances.Clear();
             this.singletonCache.Clear();
+            this.currentType = null;
         }
 
         /// <summary>
@@ -264,12 +268,34 @@ namespace Onbox.Di.V3
         {
             if (type.IsInterface)
             {
-                throw new InvalidOperationException($"Can not add {type.Name} to the container because it is an interface. You need to provide a concrete type or provide an instance.");
+                throw new InvalidOperationException($"Can not add {type.Name} to Onbox Container because it is an interface. You need to provide a concrete type or provide an instance.");
             }
             if (type.IsAbstract)
             {
-                throw new InvalidOperationException($"Can not add {type.Name} to the container because because it is an abstract type. You need to provide a concrete type or provide an instance.");
+                throw new InvalidOperationException($"Can not add {type.Name} to Onbox Container because because it is an abstract type. You need to provide a concrete type or provide an instance.");
             }
+        }
+
+        /// <summary>
+        /// Clears and releases resources from the container
+        /// </summary>
+        public void Dispose()
+        {
+            Console.WriteLine("Onbox Container disposing... ");
+
+            this.types?.Clear();
+            this.types = null;
+
+            this.instances?.Clear();
+            this.instances = null;
+
+            this.singletonCache?.Clear();
+            this.singletonCache = null;
+
+            this.currentTypes?.Clear();
+            this.currentTypes = null;
+           
+            this.currentType = null;
         }
     }
 }

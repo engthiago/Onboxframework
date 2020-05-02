@@ -105,6 +105,17 @@ namespace Di
         {
         }
 
+        [OneTimeSetUp]
+        public void WarmUp()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                using (var container = Container.Default())
+                {
+                }
+            }
+        }
+
         [SetUp]
         public void ReturnContainer()
         {
@@ -254,7 +265,19 @@ namespace Di
             sut.Clear();
         }
 
+        [OneTimeTearDown]
+        public void TearDown()
+        {
+            sut.Dispose();
+        }
 
+        [Test]
+        public void DisposeUsingStatement()
+        {
+            using (var container = Container.Default())
+            {
+            }
+        }
 
     }
 }
