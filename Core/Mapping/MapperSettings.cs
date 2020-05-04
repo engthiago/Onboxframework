@@ -2,57 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Onbox.Core.V4.Mapper
+namespace Onbox.Core.V5.Mapping
 {
-    /// <summary>
-    /// Onbox Mapper can Clone objects and map properties and lists
-    /// </summary>
-    public class Mapper
-    {
-        private readonly MappingConfigurator mappingConfigurator;
-
-        /// <summary>
-        /// Creates a new mapper object
-        /// </summary>
-        /// <param name="mappingConfigurator">Optional configurator that allows for adding post map actions, you can pass null if not needed</param>
-        public Mapper(MappingConfigurator mappingConfigurator)
-        {
-            this.mappingConfigurator = mappingConfigurator;
-            if (this.mappingConfigurator == null)
-            {
-                this.mappingConfigurator = new MappingConfigurator();
-            }
-        }
-
-        /// <summary>
-        /// Clones an object
-        /// </summary>
-        /// <returns>The cloned object with all properties copied</returns>
-        public TSorce Map<TSorce>(object source) where TSorce : new()
-        {
-            var target = new TSorce();
-            mappingConfigurator.Map(source, target);
-            return target;
-        }
-
-        /// <summary>
-        /// Maps one object to another
-        /// </summary>
-        /// <param name="source">The source object</param>
-        /// <param name="target">The target objects that the properties will be copied to</param>
-        public void Map<TSorce, TTarget>(TSorce source, TTarget target) where TSorce : new() where TTarget : new()
-        {
-            mappingConfigurator.Map(source, target);
-        }
-    }
-
     /// <summary>
     /// A Mapping configurator that will tell <see cref="Mapper"/> how to map objects
     /// </summary>
-    public class MappingConfigurator
+    public class MapperSettings
     {
         Dictionary<string, Delegate> keys = new Dictionary<string, Delegate>();
 

@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
-using Onbox.Core.V4.Mapper;
+using Onbox.Core.V5;
+using Onbox.Core.V5.Mapping;
+using Onbox.Di.V5;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +18,22 @@ namespace Core
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
+
+            public Person Child { get; set; }
+        }
+
+        public class DifferentPerson
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+
+        }
+
+        public class FullNamedPerson
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public string FullName { get; set; }
 
             public Person Child { get; set; }
         }
@@ -71,9 +89,9 @@ namespace Core
         }
 
         [Test]
-        public void AddConfigurator()
+        public void AddMappingPostAction()
         {
-            var mapconfig = new MappingConfigurator();
+            var mapconfig = new MapperSettings();
             mapconfig.AddMappingPostAction((Person p, Person p1) =>
             {
                 p1.FirstName = "Daniel";
@@ -93,6 +111,90 @@ namespace Core
             };
             var person2 = mapper.Map<Person>(person);
             Assert.That(person2.FirstName == "Daniel");
+        }
+
+        [Test]
+        public void UseContainersPostActions()
+        {
+            var container = new Container();
+            container.AddMapper(config =>
+            {
+                config.AddMappingPostAction((Person p, Person p1) =>
+                {
+                    p1.FirstName = "Daniel";
+                });
+            });
+
+            var mapper = container.Resolve<IMapper>();
+
+            var person = new Person
+            {
+                FirstName = "Thiago",
+                LastName = "Almeida",
+                Child = new Person
+                {
+                    FirstName = "Jessica",
+                    LastName = "Almeida"
+                }
+            };
+
+            var person2 = mapper.Map<Person>(person);
+            Assert.That(person2.FirstName == "Daniel");
+            Assert.That(person2.LastName == "Almeida");
+        }
+
+
+        [Test]
+        public void MapToDifferentTypesAutomatically()
+        {
+            var container = new Container();
+            container.AddMapper();
+
+            var mapper = container.Resolve<IMapper>();
+
+            var person = new Person
+            {
+                FirstName = "Thiago",
+                LastName = "Almeida",
+                Child = new Person
+                {
+                    FirstName = "Jessica",
+                    LastName = "Almeida"
+                }
+            };
+
+            var person2 = mapper.Map<DifferentPerson>(person);
+            Assert.That(person2.FirstName == "Thiago");
+        }        
+        
+        [Test]
+        public void MapToDifferentTypesAndRunPostActions()
+        {
+            var container = new Container();
+            container.AddMapper(config =>
+            {
+                config.AddMappingPostAction((Person p, FullNamedPerson p1) =>
+                {
+                    p1.FullName = $"{p1.FirstName} {p1.LastName}";
+                    p1.FullName.Trim();
+                });
+            });
+
+            var mapper = container.Resolve<IMapper>();
+
+            var person = new Person
+            {
+                FirstName = "Thiago",
+                LastName = "Almeida",
+                Child = new Person
+                {
+                    FirstName = "Jessica",
+                    LastName = "Almeida"
+                }
+            };
+
+            var person2 = mapper.Map<FullNamedPerson>(person);
+            Assert.That(person2.FullName == "Thiago Almeida");
         }
 
         [Test]

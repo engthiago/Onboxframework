@@ -55,10 +55,14 @@
     <Compile Include="Json\JsonService.cs" />
     <Compile Include="Logging\FileLoggingService.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
-    <Compile Include="Mapper\Mapper.cs" />
+    <Compile Include="Mapping\Mapper.cs" />
+    <Compile Include="Mapping\MapperSettings.cs" />
     <Compile Include="Messaging\IMessageService.cs" />
     <Compile Include="Messaging\MessageDebugService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReactFactory\Debouncer.cs" />
+    <Compile Include="ReactFactory\Interval.cs" />
+    <Compile Include="ReactFactory\ReactFactory.cs" />
     <Compile Include="Reporting\ProgressCancelledException.cs" />
     <Compile Include="Reporting\IProgressIndicator.cs" />
     <Compile Include="Reporting\ProgressConsoleDebugIndicator.cs" />

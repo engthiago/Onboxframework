@@ -1,6 +1,7 @@
 ﻿using Onbox.Core.V5.Http;
 using Onbox.Core.V5.Json;
 using Onbox.Core.V5.Logging;
+using Onbox.Core.V5.Mapping;
 using Onbox.Di.V5;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace Onbox.Core.V5
         /// <summary>
         /// Adds <see cref="IHttpService"/>, <see cref="IJsonService"/>, and <see cref="ILoggingService"/> default implementations to the container
         /// </summary>
-        /// <param name="container"></param>
-        /// <returns></returns>
+        /// <param name="container">The container in context</param>
+        /// <returns>The container in context</returns>
         public static Container AddOnboxCore(this Container container)
         {
             container.AddHttp();
@@ -33,9 +34,9 @@ namespace Onbox.Core.V5
         /// <summary>
         /// Adds <see cref="ILoggingService"/> as <see cref="FileLoggingService"/> to the container
         /// </summary>
-        /// <param name="container"></param>
+        /// <param name="container">The container in context</param>
         /// <param name="config">If no configuration is specified it will log to the user's temp folder with a maximum size of 200kb</param>
-        /// <returns></returns>
+        /// <returns>The container in context</returns>
         public static Container AddFileLogging(this Container container, Action<FileLoggingSettings> config = null)
         {
             var settings = new FileLoggingSettings();
@@ -52,6 +53,22 @@ namespace Onbox.Core.V5
             container.AddSingleton(settings);
             container.AddSingleton<ILoggingService, FileLoggingService>();
 
+            return container;
+        }
+
+        /// <summary>
+        /// Adds <see cref="IMapper"/> as <see cref="Mapper"/> to the container
+        /// </summary>
+        /// <param name="container">The container in context</param>
+        /// <param name="config">If no configuration is specified it will add no post mapping actions</param>
+        /// <returns>The container in context</returns>
+        public static Container AddMapper(this Container container, Action<MapperSettings> config = null)
+        {
+            var setting = new MapperSettings();
+            config?.Invoke(setting);
+
+            container.AddSingleton(setting);
+            container.AddSingleton<IMapper, Mapper>();
             return container;
         }
     }
