@@ -18,7 +18,7 @@ namespace Onbox.Core.V5
     public static class CoreExtensions
     {
         /// <summary>
-        /// Adds <see cref="IHttpService"/>, <see cref="IJsonService"/>, and <see cref="ILoggingService"/> default implementations to the container
+        /// Adds <see cref="IHttpService"/>, <see cref="IJsonService"/>, <see cref="ILoggingService"/>, and <see cref="IMapper"/> default implementations to the container
         /// </summary>
         /// <param name="container">The container in context</param>
         /// <returns>The container in context</returns>
@@ -27,6 +27,7 @@ namespace Onbox.Core.V5
             container.AddHttp();
             container.AddJson();
             container.AddFileLogging();
+            container.AddMapper();
 
             return container;
         }
