@@ -182,7 +182,7 @@ namespace Onbox.Mvc.V5
 
         public virtual Task OnInitAsync()
         {
-            return Task.CompletedTask;
+            return Task.Delay(0);
         }
 
         public virtual void OnDestroy()
