@@ -13,7 +13,7 @@
     <copyright>Copyright 2020</copyright>
     <tags>Onbox Core Library</tags>
 	<dependencies>
-		<dependency id="Onbox.Di.V5" version="5.0.0" />
+		<dependency id="Onbox.Di.V6" version="6.0.0" />
 	</dependencies>
   </metadata>
 </package>

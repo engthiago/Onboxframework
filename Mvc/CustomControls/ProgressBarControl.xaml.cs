@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Onbox.Mvc.V5.CustomControls
+namespace Onbox.Mvc.V6.CustomControls
 {
     /// <summary>
     /// Interaction logic for ProgressBarControl.xaml

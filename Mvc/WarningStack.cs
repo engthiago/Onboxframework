@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Onbox.Mvc.V5
+namespace Onbox.Mvc.V6
 {
     public class WarningStack : Control
     {

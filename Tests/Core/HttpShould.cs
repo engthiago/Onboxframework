@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
-using Onbox.Core.V5;
-using Onbox.Core.V5.Http;
-using Onbox.Core.V5.Json;
-using Onbox.Di.V5;
+using Onbox.Core.V6;
+using Onbox.Core.V6.Http;
+using Onbox.Core.V6.Json;
+using Onbox.Di.V6;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
-using Onbox.Core.V5.Logging;
+using Onbox.Core.V6.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

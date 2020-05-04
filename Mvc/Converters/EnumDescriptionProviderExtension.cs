@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V5.Converters
+namespace Onbox.Mvc.V6.Converters
 {
     public class EnumDescriptionProviderExtension : MarkupExtension
     {

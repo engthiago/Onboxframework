@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Onbox.Di.V5
+namespace Onbox.Di.V6
 {
     /// <summary>
     /// Onbox's IOC container contract

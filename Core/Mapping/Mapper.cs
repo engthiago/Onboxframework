@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V5.Mapping
+namespace Onbox.Core.V6.Mapping
 {
     /// <summary>
     /// Onbox Mapper can clone objects and map properties and lists

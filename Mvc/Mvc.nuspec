@@ -13,10 +13,8 @@
     <copyright>Copyright 2020</copyright>
     <tags>Onbox Library WPF MVC</tags>
 	<dependencies>
-		<dependency id="Onbox.Core.V5" version="5.0.0" />
-		<dependency id="Onbox.Di.V5" version="5.0.0" />
+		<dependency id="Onbox.Core.V6" version="6.0.0" />
 		<dependency id="PropertyChanged.Fody" version="2.5.9" />
-		<dependency id="Fody" version="3.1.3" />
 	</dependencies>
   </metadata>
 </package>

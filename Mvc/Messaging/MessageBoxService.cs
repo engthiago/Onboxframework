@@ -1,6 +1,6 @@
-﻿using Onbox.Core.V5.Messaging;
+﻿using Onbox.Core.V6.Messaging;
 
-namespace Onbox.Mvc.V5.Messaging
+namespace Onbox.Mvc.V6.Messaging
 {
     public class MessageBoxService : IMessageService
     {

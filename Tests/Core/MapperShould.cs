@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Onbox.Core.V5;
-using Onbox.Core.V5.Mapping;
-using Onbox.Di.V5;
+using Onbox.Core.V6;
+using Onbox.Core.V6.Mapping;
+using Onbox.Di.V6;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

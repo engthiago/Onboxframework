@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Onbox.Mvc.V5
+namespace Onbox.Mvc.V6
 {
     public interface IViewMvc
     {

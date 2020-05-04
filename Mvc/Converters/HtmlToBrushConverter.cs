@@ -4,7 +4,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace Onbox.Mvc.V5.Converters
+namespace Onbox.Mvc.V6.Converters
 {
     public class HtmlToBrushConverter : MarkupExtension, IValueConverter
     {
