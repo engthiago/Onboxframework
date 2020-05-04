@@ -55,6 +55,7 @@
     <Compile Include="Json\JsonService.cs" />
     <Compile Include="Logging\FileLoggingService.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
+    <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Messaging\IMessageService.cs" />
     <Compile Include="Messaging\MessageDebugService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests.Json
+namespace Json
 {
     [TestFixture]
     public class JsonServiceShould
