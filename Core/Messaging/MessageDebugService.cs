@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V4.Messaging
+namespace Onbox.Core.V5.Messaging
 {
     /// <summary>
     /// Implementation for messages using <see cref="System.Diagnostics.Debug"/> console

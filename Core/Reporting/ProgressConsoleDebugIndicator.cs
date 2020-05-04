@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V4.Reporting
+namespace Onbox.Core.V5.Reporting
 {
     /// <summary>
     /// Reports progress to the debug console

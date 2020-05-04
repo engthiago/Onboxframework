@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Standard.Core", "Standard.Core\Standard.Core.csproj", "{36F0810A-42BC-4C33-959A-50A09017B0FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactFactory", "ReactFactory\ReactFactory.csproj", "{37350F4A-AE33-49FA-9190-1BC012057CB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{36F0810A-42BC-4C33-959A-50A09017B0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36F0810A-42BC-4C33-959A-50A09017B0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36F0810A-42BC-4C33-959A-50A09017B0FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37350F4A-AE33-49FA-9190-1BC012057CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37350F4A-AE33-49FA-9190-1BC012057CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37350F4A-AE33-49FA-9190-1BC012057CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37350F4A-AE33-49FA-9190-1BC012057CB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

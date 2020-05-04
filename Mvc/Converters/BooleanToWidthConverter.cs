@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Onbox.Mvc.V4.Converters
+namespace Onbox.Mvc.V5.Converters
 {
     public class BooleanToWidthConverter : IValueConverter
     {

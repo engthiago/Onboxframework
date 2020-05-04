@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Onbox.Core.V4.Reporting;
+using Onbox.Core.V5.Reporting;
 
-namespace Onbox.Mvc.V4
+namespace Onbox.Mvc.V5
 {
     /// <summary>
     /// Reports progress via a WPF Window

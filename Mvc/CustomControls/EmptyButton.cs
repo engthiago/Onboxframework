@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Onbox.Mvc.V4.CustomControls
+namespace Onbox.Mvc.V5.CustomControls
 {
     public class EmptyButton : Button
     {

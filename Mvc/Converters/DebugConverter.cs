@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V4.Converters
+namespace Onbox.Mvc.V5.Converters
 {
     public class DebugConverter : MarkupExtension, IValueConverter
     {

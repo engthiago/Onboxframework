@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Onbox.Di.V4;
+using Onbox.Di.V5;
 using System;
 
-namespace Onbox.Core.V4.Json
+namespace Onbox.Core.V5.Json
 {
     public static class JsonExtensions
     {
