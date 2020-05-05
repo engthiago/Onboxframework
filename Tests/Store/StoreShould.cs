@@ -19,7 +19,7 @@ namespace Tests.Store
         {
         }
 
-        public class Person : NotifyPropertyBase
+        public class Person
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
@@ -90,6 +90,8 @@ namespace Tests.Store
                 Console.WriteLine("Updated person: Child");
             });
 
+            store.PropertyChanged += this.Store_PropertyChanged;
+
 
             store.SetState(new Person { FirstName = "Thiago", LastName = "Almeida" }, new PersonAction());
             store.SetState(new Person { FirstName = "Arnold", LastName = "Almeida" }, new ChildAction());
@@ -106,7 +108,7 @@ namespace Tests.Store
 
         private void Store_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Console.WriteLine(e.PropertyName);
+            Console.WriteLine("State changed...");
         }
     }
 }
