@@ -24,8 +24,7 @@ namespace WpfApp2
     {
         public string TextProp { get; set; }
 
-        public Debouncer httpDebouncer => ReactFactory.Debouncer();
-        public Interval interval;
+        public Debouncer httpDebouncer = ReactFactory.Debouncer();
 
         public MainWindow()
         {
@@ -34,22 +33,12 @@ namespace WpfApp2
 
         public override void OnInit()
         {
-            interval = ReactFactory.Interval(IntervalCalled, 500, 1000);
         }
 
-        public override void OnDestroy()
-        {
-            interval.Stop();
-        }
 
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            httpDebouncer.Debounce(HttpRequestMock);
-        }
-
-        private void IntervalCalled(int run)
-        {
-            Console.WriteLine("Interval called:" + run);
+            httpDebouncer.Debounce(HttpRequestMock, 500);
         }
 
         private void HttpRequestMock()
