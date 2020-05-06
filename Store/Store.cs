@@ -1,16 +1,19 @@
 ﻿using Onbox.Core.V6.Mapping;
+using Onbox.Core.V6.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Onbox.Core.V6.Json;
 
 namespace Onbox.Store.V6
 {
-    public class StateHistory<T> where T : class, new()
+    public class StateEntry<T> where T : class, new()
     {
         public DateTimeOffset UpdatedAt { get; set; }
         public T OldState { get; set; }
         public T NewState { get; set; }
-        public string Action { get; set; }
+        public string ActionName { get; set; }
+        public string ActionPath { get; set; }
     }
 
     public interface IStorageSubscription
@@ -39,40 +42,58 @@ namespace Onbox.Store.V6
 
     public interface IStoreAction<T> where T : new()
     {
-        string GetAction();
+        string GetActionName();
+        string GetActionPath();
     }
 
-    public interface IStore<T>: INotifyPropertyChanged where T : class, new()
+    public interface IStore<T> where T : class, new()
     {
-        T State { get; }
-        Type GetPropertyType(Type type, string path);
+        void EnableLogging();
+        void DisableLogging();
         void SetState<TState>(TState state, IStoreAction<TState> action) where TState : new();
+        TState Select<TState>(IStoreAction<TState> action) where TState : new();
         IStorageSubscription Subscribe<TState>(IStoreAction<TState> action, Action<TState> callback) where TState : new();
+        List<StateEntry<T>> GetHistory();
     }
 
     public class Store<T> : IStore<T> where T : class, new()
     {
         private T store = new T();
-        public T State => this.store;
+        //public T State => this.mapper.Map<T>(this.store);
 
         private readonly IMapper mapper;
+        private readonly ILoggingService logging;
+        private readonly IJsonService jsonService;
 
-        private readonly List<StateHistory<T>> stateHistory = new List<StateHistory<T>>();
+        private bool isLogEnabled;
 
+        private readonly List<StateEntry<T>> stateHistory = new List<StateEntry<T>>();
         public List<Delegate> maincallbacks = new List<Delegate>();
         public Dictionary<string, List<Delegate>> callbacks = new Dictionary<string, List<Delegate>>();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public Store(IMapper mapper)
+        public Store(IMapper mapper, ILoggingService logging, IJsonService jsonService)
         {
-            this.stateHistory.Add(new StateHistory<T> { Action = null, NewState = null, UpdatedAt = DateTimeOffset.UtcNow });
+            this.stateHistory.Add(new StateEntry<T> { ActionName = null, NewState = null, UpdatedAt = DateTimeOffset.UtcNow });
             this.mapper = mapper;
+            this.logging = logging;
+            this.jsonService = jsonService;
+        }
+
+
+
+        public void EnableLogging()
+        {
+            isLogEnabled = true;
+        }
+
+        public void DisableLogging()
+        {
+            isLogEnabled = false;
         }
 
         public IStorageSubscription Subscribe<TState>(IStoreAction<TState> action, Action<TState> callback) where TState : new()
         {
-            var actionString = action.GetAction();
+            var actionString = action.GetActionPath();
 
             if (actionString == null)
             {
@@ -96,56 +117,35 @@ namespace Onbox.Store.V6
             }
         }
 
-        private void EnsureActionType<TState>(IStoreAction<TState> action, string actionString) where TState : new()
+        public TState Select<TState>(IStoreAction<TState> action) where TState: new()
         {
-            if (actionString != null)
+            // Ensures that the action has the correct type
+            var actionString = action?.GetActionPath();
+            EnsureActionType(action, actionString);
+
+            var pathArr = actionString?.Split('.');
+
+            // Gets the Object that will be changed
+            object currentObject = GetStoreObjectByPath(this.store, pathArr);
+
+            if (currentObject == null)
             {
-                var propertyType = GetPropertyType(typeof(T), actionString);
-                if (propertyType == null)
-                {
-                    throw new ArgumentException($"Action {action.GetType().FullName} has an invalid path: {actionString}");
-                }
-
-                var tpe = typeof(TState);
-                if (tpe != propertyType)
-                {
-                    throw new ArgumentException($"Action {action.GetType().FullName} has a property type mismatch, it should be {tpe.FullName} instead of {propertyType.FullName}");
-                }
-            }
-        }
-
-        public Type GetPropertyType(Type type, string path)
-        {
-            var currentType = type;
-            var pathArr = path?.Split('.');
-
-            foreach (var pathItem in pathArr)
-            {
-                if (currentType == null)
-                {
-                    return null;
-                }
-                var prop = currentType.GetProperty(pathItem);
-                if (prop == null)
-                {
-                    return null;
-                }
-
-                currentType = prop.PropertyType;
+                new TState();
             }
 
-            return currentType;
+            return this.mapper.Map<TState>(currentObject);
         }
 
         public void SetState<TState>(TState state, IStoreAction<TState> action) where TState : new()
         {
             // Ensures that the action has the correct type
-            var actionString = action?.GetAction();
-            EnsureActionType(action, actionString);
+            var actionPath = action?.GetActionPath();
+            var actionName = action?.GetActionName();
+            EnsureActionType(action, actionPath);
 
             // Copies the new state of the store
             var newStore = this.mapper.Map<T>(this.store);
-            var pathArr = actionString?.Split('.');
+            var pathArr = actionPath?.Split('.');
 
             // Gets the Object that will be changed
             object currentObject = GetStoreObjectByPath(newStore, pathArr);
@@ -154,9 +154,10 @@ namespace Onbox.Store.V6
             mapper.Map(state, currentObject);
 
             // Adds the state history
-            var stateEntry = new StateHistory<T>
+            var stateEntry = new StateEntry<T>
             {
-                Action = actionString,
+                ActionPath = actionPath,
+                ActionName = actionName,
                 OldState = this.store,
                 NewState = newStore,
                 UpdatedAt = DateTimeOffset.Now
@@ -167,16 +168,16 @@ namespace Onbox.Store.V6
             this.store = newStore;
 
             // Notifies the subscribers to cild states
-            if (actionString != null && callbacks.ContainsKey(actionString))
+            if (actionPath != null && callbacks.ContainsKey(actionPath))
             {
-                foreach (var callback in callbacks[actionString])
+                foreach (var callback in callbacks[actionPath])
                 {
                     callback.DynamicInvoke(currentObject);
                 }
             }
 
             // Notifies the main subscribers
-            if (actionString == null)
+            if (actionPath == null)
             {
                 foreach (var callback in maincallbacks)
                 {
@@ -184,9 +185,23 @@ namespace Onbox.Store.V6
                 }
             }
 
+            // Logs the history
+            if (isLogEnabled)
+            {
+                logging.Log($"*** State changed on {typeof(T).Name} ***");
+                logging.Log(jsonService.Serialize(stateEntry));
+            }
+
             // Notifies that the state was changed
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.State)));
+            //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.State)));
         }
+
+        public List<StateEntry<T>> GetHistory()
+        {
+            return this.mapper.Map<List<StateEntry<T>>>(this.stateHistory);
+        }
+
+
 
         private object GetStoreObjectByPath(T newStore, string[] pathArr)
         {
@@ -209,6 +224,47 @@ namespace Onbox.Store.V6
             }
 
             return currentObject;
+        }
+
+        private void EnsureActionType<TState>(IStoreAction<TState> action, string actionString) where TState : new()
+        {
+            if (actionString != null)
+            {
+                var propertyType = GetPropertyType(typeof(T), actionString);
+                if (propertyType == null)
+                {
+                    throw new ArgumentException($"Action {action.GetType().FullName} has an invalid path: {actionString}");
+                }
+
+                var tpe = typeof(TState);
+                if (tpe != propertyType)
+                {
+                    throw new ArgumentException($"Action {action.GetType().FullName} has a property type mismatch, it should be {tpe.FullName} instead of {propertyType.FullName}");
+                }
+            }
+        }
+
+        private Type GetPropertyType(Type type, string path)
+        {
+            var currentType = type;
+            var pathArr = path?.Split('.');
+
+            foreach (var pathItem in pathArr)
+            {
+                if (currentType == null)
+                {
+                    return null;
+                }
+                var prop = currentType.GetProperty(pathItem);
+                if (prop == null)
+                {
+                    return null;
+                }
+
+                currentType = prop.PropertyType;
+            }
+
+            return currentType;
         }
     }
 }

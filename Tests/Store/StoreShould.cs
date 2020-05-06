@@ -5,7 +5,7 @@ using Onbox.Store.V6;
 using System;
 using System.Reflection;
 
-namespace Tests.Store
+namespace Store
 {
     [TestFixture]
     public class StoreShould
@@ -17,6 +17,7 @@ namespace Tests.Store
 
         public class Cat : Pet
         {
+            public string Breed { get; set; }
         }
 
         public class Person
@@ -35,7 +36,12 @@ namespace Tests.Store
 
         public class PersonAction : IStoreAction<Person>
         {
-            public string GetAction()
+            public string GetActionName()
+            {
+                return "Edit Person";
+            }
+
+            public string GetActionPath()
             {
                 return null;
             }
@@ -43,7 +49,12 @@ namespace Tests.Store
 
         public class ChildAction : IStoreAction<Person>
         {
-            public string GetAction()
+            public string GetActionName()
+            {
+                return "Edit Child";
+            }
+
+            public string GetActionPath()
             {
                 return "Child";
             }
@@ -51,7 +62,12 @@ namespace Tests.Store
 
         public class PetAction : IStoreAction<Pet>
         {
-            public string GetAction()
+            public string GetActionName()
+            {
+                return "Edit Pet";
+            }
+
+            public string GetActionPath()
             {
                 return "Pet";
             }
@@ -59,7 +75,12 @@ namespace Tests.Store
 
         public class ChildChildAction : IStoreAction<Person>
         {
-            public string GetAction()
+            public string GetActionName()
+            {
+                return "Edit Grandchild";
+            }
+
+            public string GetActionPath()
             {
                 return "Child.Child";
             }
@@ -75,34 +96,23 @@ namespace Tests.Store
 
             var store = container.Resolve<Store<Person>>();
 
-            var subs = store.Subscribe(new ChildChildAction(), (person) =>
-            {
-                Console.WriteLine("Updated person: Child child");
-            });
-
-            var subs2 = store.Subscribe(new ChildAction(), (person) =>
-            {
-                Console.WriteLine("Updated person: Child");
-            });
 
             var subs3 = store.Subscribe(new PetAction(), (pet) =>
             {
-                Console.WriteLine("Updated person: Child");
+                Console.WriteLine("Updated cat");
             });
 
-            store.PropertyChanged += this.Store_PropertyChanged;
-
+            //store.PropertyChanged += this.Store_PropertyChanged;
 
             store.SetState(new Person { FirstName = "Thiago", LastName = "Almeida" }, new PersonAction());
             store.SetState(new Person { FirstName = "Arnold", LastName = "Almeida" }, new ChildAction());
             store.SetState(new Person { FirstName = "Bruno", LastName = "Almeida" }, new ChildChildAction());
-            store.SetState(new Cat { Name = "Caetano" }, new PetAction());
+            store.SetState(new Cat { Name = "Caetano", Breed = "AA" }, new PetAction());
 
 
-            Assert.That(store.State.Child.Child.FirstName == "Bruno");
+            //Assert.That(store.State.Child.Child.FirstName == "Bruno");
 
-            subs.Unsubscribe();
-            subs2.Unsubscribe();
+
             subs3.Unsubscribe();
         }
 
