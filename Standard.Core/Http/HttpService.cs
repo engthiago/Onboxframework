@@ -37,13 +37,16 @@ namespace Onbox.Standard.Core.Http
     public class HttpService : IHttpService
     {
         private readonly HttpClient client;
-        private readonly IJsonService jsonService;
         private readonly HttpSettings httpSettings;
+        private readonly IJsonService jsonService;
 
         public HttpService(IJsonService jsonService, HttpSettings httpSettings)
         {
             this.client = new HttpClient();
             this.Configure(httpSettings);
+
+            // Timeout can be configured only once during the lifetime
+            this.client.Timeout = TimeSpan.FromMilliseconds(httpSettings.Timeout);
 
             this.jsonService = jsonService;
             this.httpSettings = httpSettings;
@@ -56,7 +59,6 @@ namespace Onbox.Standard.Core.Http
 
         private void Configure(HttpSettings settings)
         {
-            this.client.Timeout = TimeSpan.FromMilliseconds(settings.Timeout);
             this.SetCacheHeaders(settings.AllowCache ? null : "no-cache");
         }
 

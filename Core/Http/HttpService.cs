@@ -422,7 +422,6 @@ namespace Onbox.Core.V6.Http
 
         private void Configure(HttpSettings settings)
         {
-            this.client.Timeout = TimeSpan.FromMilliseconds(settings.Timeout);
             this.SetCacheHeaders(settings.AllowCache ? null : "no-cache");
         }
 
