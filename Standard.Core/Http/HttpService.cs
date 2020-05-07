@@ -27,12 +27,18 @@ namespace Onbox.Standard.Core.Http
         Task<Stream> PostRequestStreamAsync(string endpoint, object content, string token = null);
         Task<T> PatchAsync<T>(string endpoint, object content, string token = null) where T : class;
         Task PatchAsync(string endpoint, object content, string token = null);
+
+        IHttpService AddHeader(string name, string value);
+        IHttpService RemoveHeader(string name);
+        IHttpService SetTokenHeaders(string token);
+        void ClearHeaders();
     }
 
     public class HttpService : IHttpService
     {
         private readonly HttpClient client;
         private readonly IJsonService jsonService;
+        private readonly HttpSettings httpSettings;
 
         public HttpService(IJsonService jsonService, HttpSettings httpSettings)
         {
@@ -40,6 +46,7 @@ namespace Onbox.Standard.Core.Http
             this.Configure(httpSettings);
 
             this.jsonService = jsonService;
+            this.httpSettings = httpSettings;
         }
 
         ~HttpService()
@@ -47,11 +54,43 @@ namespace Onbox.Standard.Core.Http
             client.Dispose();
         }
 
+        private void Configure(HttpSettings settings)
+        {
+            this.client.Timeout = TimeSpan.FromMilliseconds(settings.Timeout);
+            this.SetCacheHeaders(settings.AllowCache ? null : "no-cache");
+        }
+
+        public IHttpService AddHeader(string name, string value)
+        {
+            this.SetHeader(name, value);
+            return this;
+        }
+
+        public IHttpService RemoveHeader(string name)
+        {
+            this.SetHeader(name, null);
+            return this;
+        }
+
+        public IHttpService SetTokenHeaders(string token)
+        {
+            string headerValue = null;
+            if (!string.IsNullOrWhiteSpace(token) && !token.ToLower().StartsWith("bearer"))
+            {
+                headerValue = $"Bearer {token}";
+            }
+            this.SetHeader("Authorization", headerValue);
+            return this;
+        }
+
+
         public async Task<T> GetAsync<T>(string endpoint, string token = null) where T : class
         {
             this.SetTokenHeaders(token);
 
             var response = await this.client.GetAsync(endpoint);
+
+            this.ClearHeaders();
             await EnsureSuccess(response);
 
             var json = await response.Content.ReadAsStringAsync();
@@ -63,6 +102,8 @@ namespace Onbox.Standard.Core.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.GetAsync(endpoint);
+
+            this.ClearHeaders();
             await EnsureSuccess(response);
 
             var stream = await response.Content.ReadAsStreamAsync();
@@ -74,15 +115,12 @@ namespace Onbox.Standard.Core.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.DeleteAsync(endpoint);
+
+            this.ClearHeaders();
             await EnsureSuccess(response);
 
             var json = await response.Content.ReadAsStringAsync();
-            if (!string.IsNullOrWhiteSpace(json))
-            {
-                return this.ConvertResponseToType<T>(json);
-            }
-
-            return null;
+            return this.ConvertResponseToType<T>(json);
         }
 
         public async Task DeleteAsync(string endpoint, string token = null)
@@ -90,6 +128,8 @@ namespace Onbox.Standard.Core.Http
             this.SetTokenHeaders(token);
 
             var response = await this.client.DeleteAsync(endpoint);
+
+            this.ClearHeaders();
             await EnsureSuccess(response);
         }
 
@@ -102,6 +142,8 @@ namespace Onbox.Standard.Core.Http
             {
 
                 var response = await this.client.PutAsync(endpoint, jsonContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -123,6 +165,8 @@ namespace Onbox.Standard.Core.Http
             {
 
                 var response = await this.client.PutAsync(endpoint, jsonContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
             }
         }
@@ -134,6 +178,8 @@ namespace Onbox.Standard.Core.Http
             using (var streamContent = new StreamContent(content))
             {
                 var response = await this.client.PutAsync(endpoint, streamContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -149,9 +195,13 @@ namespace Onbox.Standard.Core.Http
 
         public async Task PutStreamAsync(string endpoint, Stream content, string token = null)
         {
+            this.SetTokenHeaders(token);
+
             using (var streamContent = new StreamContent(content))
             {
                 var response = await this.client.PutAsync(endpoint, streamContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
             }
         }
@@ -164,6 +214,8 @@ namespace Onbox.Standard.Core.Http
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
                 var response = await this.client.PutAsync(endpoint, jsonContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var stream = await response.Content.ReadAsStreamAsync();
@@ -179,6 +231,8 @@ namespace Onbox.Standard.Core.Http
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
                 var response = await this.client.PostAsync(endpoint, jsonContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -199,6 +253,8 @@ namespace Onbox.Standard.Core.Http
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
                 var response = await this.client.PostAsync(endpoint, jsonContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
             }
         }
@@ -213,6 +269,8 @@ namespace Onbox.Standard.Core.Http
                 await EnsureSuccess(response);
 
                 var json = await response.Content.ReadAsStringAsync();
+
+                this.ClearHeaders();
                 if (!string.IsNullOrWhiteSpace(json))
                 {
                     return this.ConvertResponseToType<T>(json);
@@ -229,6 +287,8 @@ namespace Onbox.Standard.Core.Http
             using (var streamContent = new StreamContent(content))
             {
                 var response = await this.client.PostAsync(endpoint, streamContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
             }
         }
@@ -241,6 +301,8 @@ namespace Onbox.Standard.Core.Http
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
                 var response = await this.client.PostAsync(endpoint, jsonContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var stream = await response.Content.ReadAsStreamAsync();
@@ -255,6 +317,8 @@ namespace Onbox.Standard.Core.Http
             using (var formContent = new FormUrlEncodedContent(content))
             {
                 var response = await this.client.PostAsync(endpoint, formContent);
+
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -284,6 +348,7 @@ namespace Onbox.Standard.Core.Http
                 HttpResponseMessage response = new HttpResponseMessage();
                 response = await this.client.SendAsync(request);
 
+                this.ClearHeaders();
                 await EnsureSuccess(response);
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -309,53 +374,50 @@ namespace Onbox.Standard.Core.Http
                     Content = jsonContent
                 };
 
-                HttpResponseMessage response = new HttpResponseMessage();
-                response = await this.client.SendAsync(request);
+                HttpResponseMessage response = await this.client.SendAsync(request);
 
+                this.ClearHeaders();
                 await EnsureSuccess(response);
             }
         }
 
-
-        private void SetTokenHeaders(string token)
+        private void SetHeader(string name, string value)
         {
-            if (!string.IsNullOrWhiteSpace(token))
+            if (!string.IsNullOrWhiteSpace(value))
             {
-                if (this.client.DefaultRequestHeaders.Contains("Authorization"))
+                if (this.client.DefaultRequestHeaders.Contains(name))
                 {
-                    this.client.DefaultRequestHeaders.Remove("Authorization");
+                    this.client.DefaultRequestHeaders.Remove(name);
                 }
 
-                this.client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                this.client.DefaultRequestHeaders.Add(name, value);
             }
             else
             {
-                this.client.DefaultRequestHeaders.Remove("Authorization");
+                this.client.DefaultRequestHeaders.Remove(name);
             }
+        }
+
+        public void ClearHeaders()
+        {
+            this.client.DefaultRequestHeaders.Clear();
+            this.Configure(this.httpSettings);
         }
 
         private T ConvertResponseToType<T>(string json)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(json))
-                {
-                    throw new Exception("Response json is empty");
-                }
+                //if (string.IsNullOrWhiteSpace(json))
+                //{
+                //    throw new Exception("Response json is empty");
+                //}
                 var data = this.jsonService.Deserialize<T>(json);
                 return data;
             }
             catch (Exception)
             {
                 throw new InvalidCastException($"Could not convert response to {typeof(T).Name}");
-            }
-        }
-
-        private void EnsureValidJson(string json)
-        {
-            if (string.IsNullOrWhiteSpace(json))
-            {
-                throw new HttpListenerException(400, "Could not get a valid response from the server.");
             }
         }
 
@@ -368,13 +430,7 @@ namespace Onbox.Standard.Core.Http
                 return;
             }
 
-            throw new HttpListenerException((int)response.StatusCode, response.StatusCode.ToString());
-        }
-
-        private void Configure(HttpSettings settings)
-        {
-            this.client.Timeout = TimeSpan.FromMilliseconds(settings.Timeout);
-            this.SetCacheHeaders(settings.AllowCache ? null : "no-cache");
+            throw new HttpListenerException((int)response.StatusCode, await response.RequestMessage.Content.ReadAsStringAsync());
         }
 
         private void SetCacheHeaders(string cacheValue)
