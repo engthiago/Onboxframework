@@ -1,11 +1,11 @@
-﻿using Onbox.Core.V6.Mapping;
-using Onbox.Core.V6.Logging;
+﻿using Onbox.Core.V7.Mapping;
+using Onbox.Core.V7.Logging;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Onbox.Core.V6.Json;
+using Onbox.Core.V7.Json;
 
-namespace Onbox.Store.V6
+namespace Onbox.Store.V7
 {
     public class StateEntry<T> where T : class, new()
     {

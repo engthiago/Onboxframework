@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Onbox.Core.V6.Json;
+using Onbox.Core.V7.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:WpfApp1"
 		WindowStartupLocation="CenterScreen"
-		xmlns:mvc="clr-namespace:Onbox.Mvc.V6;assembly=Onbox.Mvc.V6"
+		xmlns:mvc="clr-namespace:Onbox.Mvc.V7;assembly=Onbox.Mvc.V7"
 		mc:Ignorable="d"
 		Title="MainWindow"
 		Height="514.062"

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V6.ReactFactory
+namespace Onbox.Core.V7.ReactFactory
 {
     /// <summary>
     /// Onbox Debouncer runs an action after a particular time span has passed without another action is fired

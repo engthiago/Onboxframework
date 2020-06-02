@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V6.Converters
+namespace Onbox.Mvc.V7.Converters
 {
     public class CountToVisibilityConverter : MarkupExtension, IValueConverter
     {

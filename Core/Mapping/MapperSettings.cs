@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Onbox.Core.V6.Mapping
+namespace Onbox.Core.V7.Mapping
 {
     /// <summary>
     /// A Mapping configurator that will tell <see cref="Mapper"/> how to map objects

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Onbox.Mvc.V6.SearchControl"
+﻿<UserControl x:Class="Onbox.Mvc.V7.SearchControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,7 +28,7 @@
         <Image x:Name="PART_SearchIcon"
                UseLayoutRounding="True"
                RenderOptions.BitmapScalingMode="NearestNeighbor"
-               Source="/Onbox.Mvc.V6;component/Resources/imgButton/Search.png"
+               Source="/Onbox.Mvc.V7;component/Resources/imgButton/Search.png"
                IsHitTestVisible="False"
                Margin="4,0"
                HorizontalAlignment="Right"
@@ -43,7 +43,7 @@
               Width="16">
             <Image UseLayoutRounding="True"
                    RenderOptions.BitmapScalingMode="NearestNeighbor"
-                   Source="/Onbox.Mvc.V6;component/Resources/imgButton/Clear.png"></Image>
+                   Source="/Onbox.Mvc.V7;component/Resources/imgButton/Clear.png"></Image>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>

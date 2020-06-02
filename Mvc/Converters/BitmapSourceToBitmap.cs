@@ -5,7 +5,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
-namespace Onbox.Mvc.V6.Converters
+namespace Onbox.Mvc.V7.Converters
 {
     public class BitmapSourceToBitmap : MarkupExtension, IValueConverter
     {

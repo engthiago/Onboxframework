@@ -1,4 +1,4 @@
-﻿using Onbox.Store.V6;
+﻿using Onbox.Store.V7;
 
 namespace WpfApp1
 {

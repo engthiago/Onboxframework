@@ -1,5 +1,5 @@
-﻿using Onbox.Mvc.V6;
-using Onbox.Store.V6;
+﻿using Onbox.Mvc.V7;
+using Onbox.Store.V7;
 using System.Windows;
 
 namespace WpfApp1

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 
-namespace Onbox.Mvc.V6
+namespace Onbox.Mvc.V7
 {
     public class ImgToggleButton : ToggleButton
     {
@@ -15,7 +15,7 @@ namespace Onbox.Mvc.V6
 
         public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(BitmapSource), typeof(ImgToggleButton), 
-                new PropertyMetadata(new BitmapImage(new Uri(@"pack://application:,,,/Onbox.Mvc.V6;component/Resources/tglButton/Add0.png"))));
+                new PropertyMetadata(new BitmapImage(new Uri(@"pack://application:,,,/Onbox.Mvc.V7;component/Resources/tglButton/Add0.png"))));
 
         public ToggleImgButtonOptions Images
         {
@@ -31,7 +31,7 @@ namespace Onbox.Mvc.V6
             if (d is ImgToggleButton imgButton)
             {
                 var name = e.NewValue.ToString();
-                imgButton.Image = new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.V6;component/Resources/tglButton/{name}0.png"));
+                imgButton.Image = new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.V7;component/Resources/tglButton/{name}0.png"));
             }
         }
 

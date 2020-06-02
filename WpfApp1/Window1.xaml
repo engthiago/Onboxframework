@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
-		xmlns:mvc="clr-namespace:Onbox.Mvc.V6;assembly=Onbox.Mvc.V6"
+		xmlns:mvc="clr-namespace:Onbox.Mvc.V7;assembly=Onbox.Mvc.V7"
         mc:Ignorable="d"
 		WindowStartupLocation="CenterScreen"
         Title="Window1" Height="450" Width="800">

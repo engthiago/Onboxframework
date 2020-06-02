@@ -1,5 +1,5 @@
-﻿using Onbox.Core.V6.Json;
-using Onbox.Core.V6.Logging;
+﻿using Onbox.Core.V7.Json;
+using Onbox.Core.V7.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V6.Http
+namespace Onbox.Core.V7.Http
 {
     public interface IHttpService
     {

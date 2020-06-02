@@ -1,4 +1,4 @@
-﻿namespace Onbox.Core.V6.Messaging
+﻿namespace Onbox.Core.V7.Messaging
 {
     /// <summary>
     /// Contract for messaging activities

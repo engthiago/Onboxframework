@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Onbox.Mvc.V6
+namespace Onbox.Mvc.V7
 {
     public class ColorPicker : Control
     {

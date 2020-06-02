@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Onbox.Mvc.V6.Properties {
+namespace Onbox.Mvc.V7.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

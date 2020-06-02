@@ -1,5 +1,5 @@
-﻿using Onbox.Core.V6.ReactFactory;
-using Onbox.Mvc.V6;
+﻿using Onbox.Core.V7.ReactFactory;
+using Onbox.Mvc.V7;
 using System;
 using System.Collections.Generic;
 using System.Linq;

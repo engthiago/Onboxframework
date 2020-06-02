@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Onbox.Di.V6;
+using Onbox.Di.V7;
 using Moq;
 using System;
 using System.Collections.Generic;

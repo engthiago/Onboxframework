@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Onbox.Core.V6;
-using Onbox.Mvc.V6;
-using Onbox.Store.V6;
+using Onbox.Core.V7;
+using Onbox.Mvc.V7;
+using Onbox.Store.V7;
 using System;
 using System.Reflection;
 
@@ -89,7 +89,7 @@ namespace Store
         [Test]
         public void SetItsState()
         {
-            var container = Onbox.Di.V6.Container.Default();
+            var container = Onbox.Di.V7.Container.Default();
             container.AddOnboxCore();
 
             container.AddSingleton<Store<Person>>();

@@ -1,6 +1,6 @@
-﻿using Onbox.Core.V6;
-using Onbox.Mvc.V6;
-using Onbox.Store.V6;
+﻿using Onbox.Core.V7;
+using Onbox.Mvc.V7;
+using Onbox.Store.V7;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : ViewMvcBase
     {
-        Onbox.Di.V6.Container container;
+        Onbox.Di.V7.Container container;
         public Pet Pet { get; set; }
 
         private IStorageSubscription subs;
@@ -75,7 +75,7 @@ namespace WpfApp1
 
         private void BuildContainer()
         {
-            container = Onbox.Di.V6.Container.Default();
+            container = Onbox.Di.V7.Container.Default();
             container.AddOnboxCore();
             container.AddSingleton<IStore<Person>, Store<Person>>();
         }
