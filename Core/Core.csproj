@@ -49,8 +49,10 @@
   <ItemGroup>
     <Compile Include="CoreExtensions.cs" />
     <Compile Include="Http\HttpExtensions.cs" />
+    <Compile Include="Http\HttpInterceptor.cs" />
     <Compile Include="Http\HttpService.cs" />
     <Compile Include="Http\HttpSettings.cs" />
+    <Compile Include="Http\IHttpInterceptor.cs" />
     <Compile Include="Json\JsonExtensions.cs" />
     <Compile Include="Json\JsonService.cs" />
     <Compile Include="Logging\FileLoggingService.cs" />

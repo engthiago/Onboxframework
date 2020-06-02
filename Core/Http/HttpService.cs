@@ -3,7 +3,6 @@ using Onbox.Core.V7.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
@@ -39,12 +38,13 @@ namespace Onbox.Core.V7.Http
         private readonly HttpClient client;
         private readonly IJsonService jsonService;
         private readonly ILoggingService loggingService;
+        private readonly IHttpInterceptor httpInterceptor;
         private readonly HttpSettings httpSettings;
 
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
 
-        public HttpService(IJsonService jsonService, ILoggingService loggingService, HttpSettings httpSettings)
+        public HttpService(IJsonService jsonService, ILoggingService loggingService, IHttpInterceptor httpInterceptor, HttpSettings httpSettings)
         {
             this.client = new HttpClient();
             this.Configure(httpSettings);
@@ -52,13 +52,27 @@ namespace Onbox.Core.V7.Http
             // Timeout can be configured only once during the lifetime
             this.client.Timeout = TimeSpan.FromMilliseconds(httpSettings.Timeout);
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls |
-                                                    SecurityProtocolType.Tls11 |
-                                                    SecurityProtocolType.Tls12;
-
             this.jsonService = jsonService;
             this.loggingService = loggingService;
+            this.httpInterceptor = httpInterceptor;
             this.httpSettings = httpSettings;
+        }
+
+        private HttpRequestMessage GetRequestMessage(HttpMethod httpMethod, string endpoint, HttpContent content = null)
+        {
+            var request = new HttpRequestMessage(httpMethod, endpoint);
+
+            foreach (var header in this.client.DefaultRequestHeaders)
+            {
+                request.Headers.Add(header.Key, header.Value);
+            }
+
+            if (content != null)
+            {
+                request.Content = content;
+            }
+
+            return request;
         }
 
 
@@ -67,9 +81,14 @@ namespace Onbox.Core.V7.Http
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
 
-            var response = await this.client.GetAsync(endpoint);
+            var request = this.GetRequestMessage(HttpMethod.Get, endpoint);
+            this.httpInterceptor.BeforeSending(request);
+
+            var response = await this.client.SendAsync(request);
 
             this.ClearHeaders();
+
+            this.httpInterceptor.AfterSending(response);
             await EnsureSuccess(response);
 
             var json = await response.Content.ReadAsStringAsync();
@@ -80,6 +99,9 @@ namespace Onbox.Core.V7.Http
         {
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
+
+            var request = this.GetRequestMessage(HttpMethod.Get, endpoint);
+            this.httpInterceptor.BeforeSending(request);
 
             var response = await this.client.GetAsync(endpoint);
 
@@ -95,7 +117,10 @@ namespace Onbox.Core.V7.Http
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
 
-            var response = await this.client.DeleteAsync(endpoint);
+            var request = this.GetRequestMessage(HttpMethod.Delete, endpoint);
+            this.httpInterceptor.BeforeSending(request);
+
+            var response = await this.client.SendAsync(request);
 
             this.ClearHeaders();
             await EnsureSuccess(response);
@@ -114,7 +139,10 @@ namespace Onbox.Core.V7.Http
             this.EnsureIsConnected();
             this.SetTokenHeaders(token);
 
-            var response = await this.client.DeleteAsync(endpoint);
+            var request = this.GetRequestMessage(HttpMethod.Delete, endpoint);
+            this.httpInterceptor.BeforeSending(request);
+
+            var response = await this.client.SendAsync(request);
 
             this.ClearHeaders();
             await EnsureSuccess(response);
@@ -129,7 +157,10 @@ namespace Onbox.Core.V7.Http
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
 
-                var response = await this.client.PutAsync(endpoint, jsonContent);
+                var request = this.GetRequestMessage(HttpMethod.Put, endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -152,8 +183,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
+                var request = this.GetRequestMessage(HttpMethod.Put, endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
 
-                var response = await this.client.PutAsync(endpoint, jsonContent);
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -167,7 +200,10 @@ namespace Onbox.Core.V7.Http
 
             using (var streamContent = new StreamContent(content))
             {
-                var response = await this.client.PutAsync(endpoint, streamContent);
+                var request = this.GetRequestMessage(HttpMethod.Put, endpoint, streamContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -187,7 +223,10 @@ namespace Onbox.Core.V7.Http
         {
             using (var streamContent = new StreamContent(content))
             {
-                var response = await this.client.PutAsync(endpoint, streamContent);
+                var request = this.GetRequestMessage(HttpMethod.Put, endpoint, streamContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -202,7 +241,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                var response = await this.client.PutAsync(endpoint, jsonContent);
+                var request = this.GetRequestMessage(HttpMethod.Put, endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -220,7 +262,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                var response = await this.client.PostAsync(endpoint, jsonContent);
+                var request = this.GetRequestMessage(HttpMethod.Post, endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -243,7 +288,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                var response = await this.client.PostAsync(endpoint, jsonContent);
+                var request = this.GetRequestMessage(HttpMethod.Post, endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -257,7 +305,10 @@ namespace Onbox.Core.V7.Http
 
             using (var streamContent = new StreamContent(content))
             {
-                var response = await this.client.PostAsync(endpoint, streamContent);
+                var request = this.GetRequestMessage(HttpMethod.Post, endpoint, streamContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -279,7 +330,10 @@ namespace Onbox.Core.V7.Http
 
             using (var streamContent = new StreamContent(content))
             {
-                var response = await this.client.PostAsync(endpoint, streamContent);
+                var request = this.GetRequestMessage(HttpMethod.Post, endpoint, streamContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -294,7 +348,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                var response = await this.client.PostAsync(endpoint, jsonContent);
+                var request = this.GetRequestMessage(HttpMethod.Post, endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -311,7 +368,10 @@ namespace Onbox.Core.V7.Http
 
             using (var formContent = new FormUrlEncodedContent(content))
             {
-                var response = await this.client.PostAsync(endpoint, formContent);
+                var request = this.GetRequestMessage(HttpMethod.Post, endpoint, formContent);
+                this.httpInterceptor.BeforeSending(request);
+
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -334,15 +394,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
+                var request = this.GetRequestMessage(new HttpMethod("PATCH"), endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
 
-                var method = new HttpMethod("PATCH");
-                var request = new HttpRequestMessage(method, endpoint)
-                {
-                    Content = jsonContent
-                };
-
-                HttpResponseMessage response = new HttpResponseMessage();
-                response = await this.client.SendAsync(request);
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);
@@ -365,14 +420,10 @@ namespace Onbox.Core.V7.Http
             var payload = this.jsonService.Serialize(content);
             using (var jsonContent = new StringContent(payload, Encoding.UTF8, "application/json"))
             {
-                var method = new HttpMethod("PATCH");
-                var request = new HttpRequestMessage(method, endpoint)
-                {
-                    Content = jsonContent
-                };
+                var request = this.GetRequestMessage(new HttpMethod("PATCH"), endpoint, jsonContent);
+                this.httpInterceptor.BeforeSending(request);
 
-                HttpResponseMessage response = new HttpResponseMessage();
-                response = await this.client.SendAsync(request);
+                var response = await this.client.SendAsync(request);
 
                 this.ClearHeaders();
                 await EnsureSuccess(response);

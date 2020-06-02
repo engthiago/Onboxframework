@@ -14,6 +14,8 @@ namespace Core
     [TestFixture]
     public class MapperShould
     {
+        private Mapper sut;
+
         public class Person
         {
             public string FirstName { get; set; }
@@ -38,6 +40,14 @@ namespace Core
             public Person Child { get; set; }
         }
 
+        [SetUp]
+        public void Setup()
+        {
+            var mapperConfigurator = new MapperConfigurator();
+            var mapperOperator = new MapperOperator(mapperConfigurator);
+            sut = new Mapper(mapperOperator);
+        }
+
         [Test]
         public void CloneObject()
         {
@@ -52,8 +62,7 @@ namespace Core
                 }
             };
 
-            Mapper mapper = new Mapper(null);
-            var person2 = mapper.Map<Person>(person);
+            var person2 = sut.Map<Person>(person);
 
             person.FirstName = "Bruna";
             person.Child.FirstName = "Isa";
@@ -80,8 +89,7 @@ namespace Core
             var person2 = new Person();
             person2.FirstName = "Bruna";
 
-            Mapper mapper = new Mapper(null);
-            mapper.Map(person, person2);
+            sut.Map(person, person2);
 
             Assert.That(person2.FirstName == person.FirstName);
             Assert.That(person2.LastName == person.LastName);
@@ -91,13 +99,14 @@ namespace Core
         [Test]
         public void AddMappingPostAction()
         {
-            var mapconfig = new MapperSettings();
-            mapconfig.AddMappingPostAction((Person p, Person p1) =>
+            var mapConfig = new MapperConfigurator();
+            var mapOperator = new MapperOperator(mapConfig);
+            mapConfig.AddMappingPostAction((Person p, Person p1) =>
             {
                 p1.FirstName = "Daniel";
             });
 
-            Mapper mapper = new Mapper(mapconfig);
+            Mapper mapper = new Mapper(mapOperator);
 
             var person = new Person
             {
@@ -205,8 +214,7 @@ namespace Core
 
             var list = new List<Person> { person, person2 };
 
-            Mapper mapper = new Mapper(null);
-            var list2 = mapper.Map<ObservableCollection<Person>>(list);
+            var list2 = sut.Map<ObservableCollection<Person>>(list);
 
             var person3 = list2[0];
             person3.FirstName = "Nelson";

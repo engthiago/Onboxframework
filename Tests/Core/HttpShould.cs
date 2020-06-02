@@ -18,17 +18,25 @@ namespace Core
     [TestFixture]
     public class HttpShould
     {
-        HttpService sut;
+        IHttpService sut;
         string token;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            var mockJson = new JsonService(new JsonSerializerSettings());
-            var mockLogging = new FileLoggingService(new FileLoggingSettings());
-            var mockHttpSettings = new HttpSettings();
+            var container = Container.Default();
+            container.AddOnboxCore();
 
-            sut = new HttpService(mockJson, mockLogging, mockHttpSettings);
+            container.AddHttp(null,
+                request =>
+                {
+                },
+                result =>
+                {
+                });
+
+
+            sut = container.Resolve<IHttpService>();
         }
 
         [SetUp]
