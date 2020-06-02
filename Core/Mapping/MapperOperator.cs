@@ -2,36 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Onbox.Core.V7.Mapping
 {
-    /// <summary>
-    /// A Mapping configurator that will tell <see cref="Mapper"/> how to map objects
-    /// </summary>
-    public class MapperSettings
+    public class MapperOperator : IMapperOperator
     {
-        Dictionary<string, Delegate> keys = new Dictionary<string, Delegate>();
+        private readonly IMapperConfigurator mapperConfigurator;
 
-        /// <summary>
-        /// Adds a new an action that will be run after the map is complete
-        /// </summary>
-        public void AddMappingPostAction<TSource, TTaget>(Action<TSource, TTaget> action) where TSource : new() where TTaget : new()
+        public MapperOperator(IMapperConfigurator mapperConfigurator)
         {
-            var mapKey = typeof(TSource).FullName + typeof(TTaget).FullName;
-            keys[mapKey] = action;
+            this.mapperConfigurator = mapperConfigurator;
         }
 
-        private Delegate GetMapFunction(Type source, Type target)
-        {
-            var mapKey = source.FullName + target.FullName;
-            if (keys != null && keys.TryGetValue(mapKey, out Delegate result))
-            {
-                return result;
-            }
-            return null;
-        }
-
-        internal object Map(object source, object target)
+        public object Map(object source, object target)
         {
             if (source == null)
             {
@@ -70,13 +55,25 @@ namespace Onbox.Core.V7.Mapping
                 throw new InvalidCastException($"Can not map between {sourceType.FullName} and {targetType.FullName}");
             }
 
-            var mapingFunction = GetMapFunction(sourceType, targetType);
+            var mapingFunction = this.mapperConfigurator.GetMapFunction(sourceType, targetType);
             if (mapingFunction != null)
             {
                 mapingFunction.DynamicInvoke(source, target);
             }
 
             return target;
+        }
+
+        public object Map(object source)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+
+            var type = source.GetType();
+            var target = Activator.CreateInstance(type);
+            return Map(source, target);
         }
 
         private void CopyProperties(object source, object target, Type sourceType, Type targetType)
@@ -107,18 +104,6 @@ namespace Onbox.Core.V7.Mapping
                     }
                 }
             }
-        }
-
-        internal object Map(object source)
-        {
-            if (source == null)
-            {
-                return null;
-            }
-
-            var type = source.GetType();
-            var target = Activator.CreateInstance(type);
-            return Map(source, target);
         }
     }
 }

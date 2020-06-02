@@ -9,12 +9,12 @@ namespace Onbox.Core.V7.Http
 {
     public static class HttpExtensions
     {
-        public static Container AddHttp(this Container container)
+        public static IContainer AddHttp(this IContainer container)
         {
             return AddHttp(container, null);
         }
 
-        public static Container AddHttp(this Container container, Action<HttpSettings> config)
+        public static IContainer AddHttp(this IContainer container, Action<HttpSettings> config)
         {
             container.ConfigureHttp(config)
                      .AddSingleton<IHttpService, HttpService>();
@@ -22,7 +22,7 @@ namespace Onbox.Core.V7.Http
             return container;
         }
 
-        public static Container ConfigureHttp(this Container container, Action<HttpSettings> config)
+        public static IContainer ConfigureHttp(this IContainer container, Action<HttpSettings> config)
         {
             var settings = new HttpSettings
             {

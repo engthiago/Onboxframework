@@ -7,8 +7,8 @@
     <ProjectGuid>{F340830F-CABC-439D-8684-05317D6DC13E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Core.V6</RootNamespace>
-    <AssemblyName>Onbox.Core.V6</AssemblyName>
+    <RootNamespace>Onbox.Core.V7</RootNamespace>
+    <AssemblyName>Onbox.Core.V7</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Onbox.Core.V6.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Onbox.Core.V7.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,8 +55,11 @@
     <Compile Include="Json\JsonService.cs" />
     <Compile Include="Logging\FileLoggingService.cs" />
     <Compile Include="Logging\ILoggingService.cs" />
+    <Compile Include="Mapping\IMapperConfigurator.cs" />
+    <Compile Include="Mapping\IMapperOperator.cs" />
     <Compile Include="Mapping\Mapper.cs" />
-    <Compile Include="Mapping\MapperSettings.cs" />
+    <Compile Include="Mapping\MapperConfigurator.cs" />
+    <Compile Include="Mapping\MapperOperator.cs" />
     <Compile Include="Messaging\IMessageService.cs" />
     <Compile Include="Messaging\MessageDebugService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

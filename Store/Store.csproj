@@ -7,8 +7,8 @@
     <ProjectGuid>{6156FE2D-AC8F-43A9-8C59-3B4E66C4B0C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Store</RootNamespace>
-    <AssemblyName>Store</AssemblyName>
+    <RootNamespace>Onbox.Store.V7</RootNamespace>
+    <AssemblyName>Onbox.Store.V7</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Onbox.Core.V6, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Core.V6.6.0.0\lib\net452\Onbox.Core.V6.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Di.V6, Version=6.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Di.V6.6.0.0\lib\net452\Onbox.Di.V6.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +46,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{f340830f-cabc-439d-8684-05317d6dc13e}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Di\Di.csproj">
+      <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
+      <Name>Di</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

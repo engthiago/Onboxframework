@@ -2,7 +2,6 @@
 using Onbox.Core.V7.Logging;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using Onbox.Core.V7.Json;
 
 namespace Onbox.Store.V7
@@ -78,8 +77,6 @@ namespace Onbox.Store.V7
             this.logging = logging;
             this.jsonService = jsonService;
         }
-
-
 
         public void EnableLogging()
         {

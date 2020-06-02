@@ -22,7 +22,7 @@ namespace Onbox.Core.V7
         /// </summary>
         /// <param name="container">The container in context</param>
         /// <returns>The container in context</returns>
-        public static Container AddOnboxCore(this Container container)
+        public static IContainer AddOnboxCore(this IContainer container)
         {
             container.AddHttp();
             container.AddJson();
@@ -38,7 +38,7 @@ namespace Onbox.Core.V7
         /// <param name="container">The container in context</param>
         /// <param name="config">If no configuration is specified it will log to the user's temp folder with a maximum size of 200kb</param>
         /// <returns>The container in context</returns>
-        public static Container AddFileLogging(this Container container, Action<FileLoggingSettings> config = null)
+        public static IContainer AddFileLogging(this IContainer container, Action<FileLoggingSettings> config = null)
         {
             var settings = new FileLoggingSettings();
             config?.Invoke(settings);
@@ -63,13 +63,15 @@ namespace Onbox.Core.V7
         /// <param name="container">The container in context</param>
         /// <param name="config">If no configuration is specified it will add no post mapping actions</param>
         /// <returns>The container in context</returns>
-        public static Container AddMapper(this Container container, Action<MapperSettings> config = null)
+        public static IContainer AddMapper(this IContainer container, Action<MapperConfigurator> config = null)
         {
-            var setting = new MapperSettings();
+            var setting = new MapperConfigurator();
             config?.Invoke(setting);
 
-            container.AddSingleton(setting);
+            container.AddSingleton<IMapperConfigurator>(setting);
+            container.AddSingleton<IMapperOperator, MapperOperator>();
             container.AddSingleton<IMapper, Mapper>();
+
             return container;
         }
     }

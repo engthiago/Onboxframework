@@ -10,7 +10,7 @@ namespace Onbox.Core.V7.Json
         /// <summary>
         /// Adds JsonService with default settings for Revit: CamelCaseProperties, Ignores nulls, and Ignores Reference loop
         /// </summary>
-        public static Container AddJson(this Container container)
+        public static IContainer AddJson(this IContainer container)
         {
             return AddJson(container, null);
         }
@@ -18,7 +18,7 @@ namespace Onbox.Core.V7.Json
         /// <summary>
         /// Adds JsonService with custom settings configuration
         /// </summary>
-        public static Container AddJson(this Container container, Action<JsonSerializerSettings> config)
+        public static IContainer AddJson(this IContainer container, Action<JsonSerializerSettings> config)
         {
             container.ConfigureJson(config)
                      .AddSingleton<IJsonService, JsonService>();
@@ -29,7 +29,7 @@ namespace Onbox.Core.V7.Json
         /// <summary>
         /// Runtime configuration for custom Json Settings
         /// </summary>
-        public static Container ConfigureJson(this Container container, Action<JsonSerializerSettings> config)
+        public static IContainer ConfigureJson(this IContainer container, Action<JsonSerializerSettings> config)
         {
             // Default Settings
             var settings = new JsonSerializerSettings

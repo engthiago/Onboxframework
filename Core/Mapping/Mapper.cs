@@ -15,10 +15,9 @@ namespace Onbox.Core.V7.Mapping
         void Map<TSorce, TTarget>(TSorce source, TTarget target) where TSorce : new() where TTarget : new();
 
         /// <summary>
-        /// Maps one object to another
+        /// Clones an object (Maps to a new instance)
         /// </summary>
-        /// <param name="source">The source object</param>
-        /// <param name="target">The target objects that the properties will be copied to</param>
+        /// <returns>The cloned object with all properties copied</returns>
         TSorce Map<TSorce>(object source) where TSorce : new();
     }
 
@@ -27,19 +26,14 @@ namespace Onbox.Core.V7.Mapping
     /// </summary>
     public class Mapper : IMapper
     {
-        private readonly MapperSettings mappingConfigurator;
+        private readonly IMapperOperator mapperOperator;
 
         /// <summary>
         /// Creates a new mapper object
         /// </summary>
-        /// <param name="mappingConfigurator">Optional configurator that allows for adding post map actions, you can pass null if not needed</param>
-        public Mapper(MapperSettings mappingConfigurator)
+        public Mapper(IMapperOperator mapperOperator)
         {
-            this.mappingConfigurator = mappingConfigurator;
-            if (this.mappingConfigurator == null)
-            {
-                this.mappingConfigurator = new MapperSettings();
-            }
+            this.mapperOperator = mapperOperator;
         }
 
         /// <summary>
@@ -49,7 +43,7 @@ namespace Onbox.Core.V7.Mapping
         public TSorce Map<TSorce>(object source) where TSorce : new()
         {
             var target = new TSorce();
-            mappingConfigurator.Map(source, target);
+            this.mapperOperator.Map(source, target);
             return target;
         }
 
@@ -60,7 +54,7 @@ namespace Onbox.Core.V7.Mapping
         /// <param name="target">The target objects that the properties will be copied to</param>
         public void Map<TSorce, TTarget>(TSorce source, TTarget target) where TSorce : new() where TTarget : new()
         {
-            mappingConfigurator.Map(source, target);
+            this.mapperOperator.Map(source, target);
         }
     }
 }
