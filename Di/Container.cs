@@ -48,6 +48,8 @@ namespace Onbox.Di.V7
         /// Asks the container for a new instance of a type
         /// </summary>
         T Resolve<T>();
+
+        void Dispose();
     }
 
     /// <summary>

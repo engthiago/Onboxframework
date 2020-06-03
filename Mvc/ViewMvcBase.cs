@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Onbox.Core.V7;
+using Onbox.Revit.V7;
+using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -32,19 +34,23 @@ namespace Onbox.Mvc.V7
         private Action<string> onInitAsyncError;
         private Action onInitComplete;
 
+        private IntPtr mainWindowHandle;
+
         [DllImport("user32.dll")]
         extern private static int GetWindowLong(IntPtr hwnd, int index);
 
         [DllImport("user32.dll")]
         extern private static int SetWindowLong(IntPtr hwnd, int index, int value);
 
-        public ViewMvcBase()
+        public ViewMvcBase(IRevitUIApp revitUIApp)
         {
             this.DataContext = this;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.ShowInTaskbar = false;
-            this.SetRevitAsParent();
             this.ResizeMode = ResizeMode.CanResizeWithGrip;
+            this.mainWindowHandle = revitUIApp.GetRevitWindowHandle();
+            this.SetRevitAsParent();
+
 
             this.Loaded += this.OnViewLoaded;
             this.ContentRendered += this.OnViewRendered;
@@ -104,13 +110,20 @@ namespace Onbox.Mvc.V7
         /// </summary>
         private void SetRevitAsParent()
         {
-            System.Windows.Interop.WindowInteropHelper x = new System.Windows.Interop.WindowInteropHelper(this);
-            x.Owner = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+            GetWindowHandle();
 
-            IntPtr hwnd = x.Handle;
-            var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
+            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
+            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
+        }
 
-            SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
+        private void GetWindowHandle()
+        {
+            if (this.mainWindowHandle == null)
+            {
+                System.Windows.Interop.WindowInteropHelper x = new System.Windows.Interop.WindowInteropHelper(this);
+                x.Owner = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+                this.mainWindowHandle = x.Handle;
+            }
         }
 
         /// <summary>
@@ -118,11 +131,10 @@ namespace Onbox.Mvc.V7
         /// </summary>
         protected void HideMinimizeMaximizeButton()
         {
-            System.Windows.Interop.WindowInteropHelper x = new System.Windows.Interop.WindowInteropHelper(this);
-            IntPtr hwnd = x.Handle;
-            var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
+            GetWindowHandle();
 
-            SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
+            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
+            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
         }
 
         /// <summary>
@@ -130,11 +142,10 @@ namespace Onbox.Mvc.V7
         /// </summary>
         protected void HideMinimizeButton()
         {
-            System.Windows.Interop.WindowInteropHelper x = new System.Windows.Interop.WindowInteropHelper(this);
-            IntPtr hwnd = x.Handle;
-            var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
+            GetWindowHandle();
 
-            SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MINIMIZEBOX));
+            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
+            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MINIMIZEBOX));
         }
 
         /// <summary>

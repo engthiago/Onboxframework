@@ -1,4 +1,6 @@
-﻿using Onbox.Core.V7.Reporting;
+﻿using Onbox.Core.V7;
+using Onbox.Core.V7.Reporting;
+using Onbox.Revit.V7;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +28,7 @@ namespace Onbox.Mvc.V7
         private Action action { get; set; }
 
 
-        public ProgressIndicatorView()
+        public ProgressIndicatorView(IRevitUIApp revitUIApp) : base(revitUIApp)
         {
             this.InitializeComponent();
             this.DataContext = this;
