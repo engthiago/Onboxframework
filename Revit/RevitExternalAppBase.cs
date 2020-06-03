@@ -123,6 +123,7 @@ namespace Onbox.Revit.V7
             };
 
             ContainerInstance.AddSingleton<IRevitUIApp>(revitUIApp);
+            ContainerInstance.AddSingleton<Document>(null);
         }
 
     }
