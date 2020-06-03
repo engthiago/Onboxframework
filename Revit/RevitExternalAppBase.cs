@@ -2,6 +2,7 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Onbox.Di.V7;
+using Onbox.Revit.V7.UI;
 using System;
 
 namespace Onbox.Revit.V7
@@ -37,12 +38,32 @@ namespace Onbox.Revit.V7
 
         public abstract void OnShutdown(IContainerProvider container, UIControlledApplication application);
 
+        public Result OnStartup(UIControlledApplication application)
+        {
+            HookupRevitEvents(application);
+
+            AddRevit(application);
+
+            var imageManager = new ImageManager();
+            var ribbonManager = new RibbonManager(application, imageManager);
+
+            OnStartup(ContainerInstance, application);
+            OnCreateRibbon(ribbonManager);
+
+            return Result.Succeeded;
+        }
+
+        private void HookupRevitEvents(UIControlledApplication application)
+        {
+            application.ControlledApplication.DocumentChanged += this.OnDocumentChanged;
+            application.ControlledApplication.DocumentOpened += this.OnDocumentOpened;
+            application.ControlledApplication.DocumentClosed += this.OnDocumentClosed;
+            application.ControlledApplication.DocumentCreated += this.OnDocumentCreated;
+        }
+
         public Result OnShutdown(UIControlledApplication application)
         {
-            application.ControlledApplication.DocumentChanged -= this.OnDocumentChanged;
-            application.ControlledApplication.DocumentOpened -= this.OnDocumentOpened;
-            application.ControlledApplication.DocumentClosed -= this.OnDocumentClosed;
-            application.ControlledApplication.DocumentCreated -= this.OnDocumentCreated;
+            UnhookRevitEvents(application);
 
             try
             {
@@ -56,18 +77,16 @@ namespace Onbox.Revit.V7
             return Result.Succeeded;
         }
 
-        public Result OnStartup(UIControlledApplication application)
+        private void UnhookRevitEvents(UIControlledApplication application)
         {
-            application.ControlledApplication.DocumentChanged += this.OnDocumentChanged;
-            application.ControlledApplication.DocumentOpened += this.OnDocumentOpened;
-            application.ControlledApplication.DocumentClosed += this.OnDocumentClosed;
-            application.ControlledApplication.DocumentCreated += this.OnDocumentCreated;
+            application.ControlledApplication.DocumentChanged -= this.OnDocumentChanged;
+            application.ControlledApplication.DocumentOpened -= this.OnDocumentOpened;
+            application.ControlledApplication.DocumentClosed -= this.OnDocumentClosed;
+            application.ControlledApplication.DocumentCreated -= this.OnDocumentCreated;
+        }
 
-            AddRevit(application);
-
-            OnStartup(ContainerInstance, application);
-
-            return Result.Succeeded;
+        public virtual void OnCreateRibbon(IRibbonManager ribbonManager)
+        {
         }
 
         private void OnDocumentCreated(object sender, Autodesk.Revit.DB.Events.DocumentCreatedEventArgs e)
