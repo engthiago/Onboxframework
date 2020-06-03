@@ -5,9 +5,20 @@ using System.Reflection;
 namespace Onbox.Di.V7
 {
     /// <summary>
+    /// Onbox's IOC container read only contract
+    /// </summary>
+    public interface IContainerProvider
+    {
+        /// <summary>
+        /// Asks the container for a new instance of a type
+        /// </summary>
+        T Resolve<T>();
+    }
+
+    /// <summary>
     /// Onbox's IOC container contract
     /// </summary>
-    public interface IContainer
+    public interface IContainer : IContainerProvider
     {
         /// <summary>
         /// Adds an implementation as a singleton on the container.
@@ -45,10 +56,8 @@ namespace Onbox.Di.V7
         void Clear();
 
         /// <summary>
-        /// Asks the container for a new instance of a type
+        /// Clears and releases resources from the container
         /// </summary>
-        T Resolve<T>();
-
         void Dispose();
     }
 
@@ -57,10 +66,10 @@ namespace Onbox.Di.V7
     /// </summary>
     public class Container : IContainer, IDisposable
     {
-        private IDictionary<Type, Type> types = new Dictionary<Type, Type>();
-        private IDictionary<Type, object> instances = new Dictionary<Type, object>();
+        private readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
+        private readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
 
-        private IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
+        private readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
 
         private List<Type> currentTypes = new List<Type>();
         private Type currentType;
@@ -180,7 +189,6 @@ namespace Onbox.Di.V7
             }
         }
 
-
         private object Resolve(Type contract, IDictionary<Type, Type> dic)
         {
             // Check for Ciruclar dependencies
@@ -244,13 +252,14 @@ namespace Onbox.Di.V7
         }
 
         /// <summary>
-        /// Resets the entire container
+        /// Clears and releases resources from the container
         /// </summary>
         public void Clear()
         {
-            this.types.Clear();
-            this.instances.Clear();
-            this.singletonCache.Clear();
+            this.types?.Clear();
+            this.instances?.Clear();
+            this.singletonCache?.Clear();
+            this.currentTypes?.Clear();
             this.currentType = null;
         }
 
@@ -285,19 +294,7 @@ namespace Onbox.Di.V7
         {
             Console.WriteLine("Onbox Container disposing... ");
 
-            this.types?.Clear();
-            this.types = null;
-
-            this.instances?.Clear();
-            this.instances = null;
-
-            this.singletonCache?.Clear();
-            this.singletonCache = null;
-
-            this.currentTypes?.Clear();
-            this.currentTypes = null;
-           
-            this.currentType = null;
+            Clear();
         }
     }
 }

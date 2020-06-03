@@ -35,22 +35,59 @@ namespace Onbox.Revit.V7
 
         public abstract void OnStartup(IContainer container, UIControlledApplication application);
 
-        public abstract void OnShutdown(IContainer container, UIControlledApplication application);
+        public abstract void OnShutdown(IContainerProvider container, UIControlledApplication application);
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            OnShutdown(container, application);
-            container.Dispose();
+            application.ControlledApplication.DocumentChanged -= this.OnDocumentChanged;
+            application.ControlledApplication.DocumentOpened -= this.OnDocumentOpened;
+            application.ControlledApplication.DocumentClosed -= this.OnDocumentClosed;
+            application.ControlledApplication.DocumentCreated -= this.OnDocumentCreated;
+
+            try
+            {
+                OnShutdown(ContainerInstance, application);
+            }
+            finally
+            {
+                ContainerInstance.Dispose();
+            }
 
             return Result.Succeeded;
         }
 
         public Result OnStartup(UIControlledApplication application)
         {
+            application.ControlledApplication.DocumentChanged += this.OnDocumentChanged;
+            application.ControlledApplication.DocumentOpened += this.OnDocumentOpened;
+            application.ControlledApplication.DocumentClosed += this.OnDocumentClosed;
+            application.ControlledApplication.DocumentCreated += this.OnDocumentCreated;
+
             AddRevit(application);
-            OnStartup(container, application);
+
+            OnStartup(ContainerInstance, application);
 
             return Result.Succeeded;
+        }
+
+        private void OnDocumentCreated(object sender, Autodesk.Revit.DB.Events.DocumentCreatedEventArgs e)
+        {
+            ContainerInstance.AddSingleton(e.Document);
+        }
+
+        private void OnDocumentClosed(object sender, Autodesk.Revit.DB.Events.DocumentClosedEventArgs e)
+        {
+            ContainerInstance.AddSingleton<Document>(null);
+        }
+
+        private void OnDocumentOpened(object sender, Autodesk.Revit.DB.Events.DocumentOpenedEventArgs e)
+        {
+            ContainerInstance.AddSingleton(e.Document);
+        }
+
+        private void OnDocumentChanged(object sender, Autodesk.Revit.DB.Events.DocumentChangedEventArgs e)
+        {
+            ContainerInstance.AddSingleton(e.GetDocument());
         }
 
         private void AddRevit(UIControlledApplication application)
