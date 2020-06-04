@@ -10,8 +10,6 @@ namespace Onbox.Mvc.V7
     {
         private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
 
-        private IntPtr mainWindowHandle;
-
         private const int GWL_STYLE = -16,
                   WS_MAXIMIZEBOX = 0x10000,
                   WS_MINIMIZEBOX = 0x20000;
@@ -24,13 +22,16 @@ namespace Onbox.Mvc.V7
 
         public RevitViewMvcBase(IRevitUIApp revitUIApp)
         {
-            this.mainWindowHandle = revitUIApp.GetRevitWindowHandle();
+            System.Windows.Interop.WindowInteropHelper helper
+              = new System.Windows.Interop.WindowInteropHelper(
+                    this);
 
-            this.SetRevitAsParent();
-            this.Loaded += this.RevitViewMvcBase_Loaded;
+            helper.Owner = revitUIApp.GetRevitWindowHandle();
+
+            this.SourceInitialized += this.RevitViewMvcBase_SourceInitialized;
         }
 
-        private void RevitViewMvcBase_Loaded(object sender, RoutedEventArgs e)
+        private void RevitViewMvcBase_SourceInitialized(object sender, EventArgs e)
         {
             switch (this.titleVisibility)
             {
@@ -51,35 +52,13 @@ namespace Onbox.Mvc.V7
         }
 
         /// <summary>
-        /// Sets Revit as the parent window of this WPF Window. This should only be placed ON THE CONSTRUCTOR
-        /// </summary>
-        private void SetRevitAsParent()
-        {
-            GetWindowHandle();
-
-            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
-            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
-        }
-
-        private void GetWindowHandle()
-        {
-            if (this.mainWindowHandle == null)
-            {
-                System.Windows.Interop.WindowInteropHelper x = new System.Windows.Interop.WindowInteropHelper(this);
-                x.Owner = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
-                this.mainWindowHandle = x.Handle;
-            }
-        }
-
-        /// <summary>
         /// Hides both Maximize and Minimize button from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
         /// </summary>
         protected void HideMinimizeMaximizeButton()
         {
-            GetWindowHandle();
-
-            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
-            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
+            IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
+            SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
         }
 
         /// <summary>
@@ -87,10 +66,9 @@ namespace Onbox.Mvc.V7
         /// </summary>
         protected void HideMinimizeButton()
         {
-            GetWindowHandle();
-
-            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
-            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MINIMIZEBOX));
+            IntPtr hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+            var currentStyle = GetWindowLong(hwnd, GWL_STYLE);
+            SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MINIMIZEBOX));
         }
 
         public void SetTitleVisibility(TitleVisibility titleVisibility)
