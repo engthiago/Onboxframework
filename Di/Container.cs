@@ -270,6 +270,7 @@ namespace Onbox.Di.V7
         public static Container Default()
         {
             var container = new Container();
+            container.AddSingleton<IContainerProvider>(container);
             container.AddSingleton<IContainer>(container);
 
             return container;

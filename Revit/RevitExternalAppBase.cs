@@ -7,7 +7,21 @@ using System;
 
 namespace Onbox.Revit.V7
 {
-    public abstract class RevitExternalAppBase : IExternalApplication
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    sealed class ContainerOriginAttribute : Attribute
+    {
+        public ContainerOriginAttribute()
+        {
+        }
+    }
+
+    public abstract class RevitExternalAppBase : RevitExternalAppBase<Container>
+    {
+    }
+
+    [ContainerOrigin]
+    public abstract class RevitExternalAppBase<TContainer> : IExternalApplication 
+        where TContainer : class, IContainer, new()
     {
         private static volatile IContainer container;
         private static object syncRoot = new Object();
@@ -21,7 +35,10 @@ namespace Onbox.Revit.V7
                     lock (syncRoot)
                     {
                         if (container == null)
-                            container = Container.Default();
+                        {
+                            container = new TContainer();
+                        }
+                            
                     }
                 }
 
@@ -44,10 +61,13 @@ namespace Onbox.Revit.V7
 
             AddRevit(application);
 
-            var imageManager = new ImageManager();
-            var ribbonManager = new RibbonManager(application, imageManager);
+            ContainerInstance.AddSingleton(ContainerInstance);
+            ContainerInstance.AddSingleton<IContainerProvider>(ContainerInstance);
 
             OnStartup(ContainerInstance, application);
+
+            var imageManager = new ImageManager();
+            var ribbonManager = new RibbonManager(application, imageManager);
             OnCreateRibbon(ribbonManager);
 
             return Result.Succeeded;
