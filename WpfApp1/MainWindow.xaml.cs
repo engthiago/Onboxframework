@@ -1,4 +1,5 @@
 ﻿using Onbox.Core.V7;
+using Onbox.Core.V7.Messaging;
 using Onbox.Mvc.V7;
 using Onbox.Store.V7;
 using System;
@@ -19,6 +20,7 @@ namespace WpfApp1
         public Pet Pet { get; set; }
 
         private IStorageSubscription subs;
+        private IStorageSubscription subs2;
         private IStore<Person> store;
 
         public List<StateEntry<Person>> History { get; set; }
@@ -47,15 +49,20 @@ namespace WpfApp1
 
         public override void OnInit()
         {
-            subs = store.Subscribe(new EditPetAction(), pet =>
+            //subs = store.Subscribe(new EditPetAction(), pet =>
+            //{
+            //    Pet = pet;
+            //});
+
+            subs2 = store.Subscribe<Person>(null, person =>
             {
-                Pet = pet;
             });
         }
 
         public override void OnDestroy()
         {
-            subs.Unsubscribe();
+            //subs.Unsubscribe();
+            subs2.Unsubscribe();
         }
 
         private void OnOpenPet(object sender, RoutedEventArgs e)

@@ -1,11 +1,8 @@
 ﻿using Onbox.Core.V7;
-using Onbox.Revit.V7;
 using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Shell;
 
 namespace Onbox.Mvc.V7
 {
@@ -24,33 +21,17 @@ namespace Onbox.Mvc.V7
         public bool CanRetryOnError { get; set; }
         public bool CanRetryOnWarning { get; set; }
 
-        private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
-
-        private const int GWL_STYLE = -16,
-                  WS_MAXIMIZEBOX = 0x10000,
-                  WS_MINIMIZEBOX = 0x20000;
 
         private Func<Task> onInitAsyncFunc;
         private Action<string> onInitAsyncError;
         private Action onInitComplete;
 
-        private IntPtr mainWindowHandle;
-
-        [DllImport("user32.dll")]
-        extern private static int GetWindowLong(IntPtr hwnd, int index);
-
-        [DllImport("user32.dll")]
-        extern private static int SetWindowLong(IntPtr hwnd, int index, int value);
-
-        public ViewMvcBase(IRevitUIApp revitUIApp)
+        public ViewMvcBase()
         {
             this.DataContext = this;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.ShowInTaskbar = false;
             this.ResizeMode = ResizeMode.CanResizeWithGrip;
-            this.mainWindowHandle = revitUIApp.GetRevitWindowHandle();
-            this.SetRevitAsParent();
-
 
             this.Loaded += this.OnViewLoaded;
             this.ContentRendered += this.OnViewRendered;
@@ -58,23 +39,6 @@ namespace Onbox.Mvc.V7
 
         private async void OnViewLoaded(object sender, RoutedEventArgs e)
         {
-            switch (this.titleVisibility)
-            {
-                case TitleVisibility.Default:
-                    break;
-                case TitleVisibility.HideMinimize:
-                    this.HideMinimizeButton();
-                    break;
-                case TitleVisibility.HideMinimizeAndMaximize:
-                    this.HideMinimizeMaximizeButton();
-                    break;
-                case TitleVisibility.HideTitleBar:
-                    this.HideTitleBar();
-                    break;
-                default:
-                    break;
-            }
-
             OnInit();
 
             await OnInitAsync();
@@ -103,59 +67,6 @@ namespace Onbox.Mvc.V7
         private void OnViewRendered(object sender, EventArgs e)
         {
             OnAfterInit();
-        }
-
-        /// <summary>
-        /// Sets Revit as the parent window of this WPF Window. This should only be placed ON THE CONSTRUCTOR
-        /// </summary>
-        private void SetRevitAsParent()
-        {
-            GetWindowHandle();
-
-            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
-            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
-        }
-
-        private void GetWindowHandle()
-        {
-            if (this.mainWindowHandle == null)
-            {
-                System.Windows.Interop.WindowInteropHelper x = new System.Windows.Interop.WindowInteropHelper(this);
-                x.Owner = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
-                this.mainWindowHandle = x.Handle;
-            }
-        }
-
-        /// <summary>
-        /// Hides both Maximize and Minimize button from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
-        /// </summary>
-        protected void HideMinimizeMaximizeButton()
-        {
-            GetWindowHandle();
-
-            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
-            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MAXIMIZEBOX & ~WS_MINIMIZEBOX));
-        }
-
-        /// <summary>
-        /// Hides both Minimize button from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
-        /// </summary>
-        protected void HideMinimizeButton()
-        {
-            GetWindowHandle();
-
-            var currentStyle = GetWindowLong(this.mainWindowHandle, GWL_STYLE);
-            SetWindowLong(this.mainWindowHandle, GWL_STYLE, (currentStyle & ~WS_MINIMIZEBOX));
-        }
-
-        /// <summary>
-        /// Hides the Title bat from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
-        /// </summary>
-        private void HideTitleBar()
-        {
-            var wChrome = new WindowChrome();
-            wChrome.CaptionHeight = 0;
-            WindowChrome.SetWindowChrome(this, wChrome);
         }
 
         public void SetOwner(object owner)
@@ -260,10 +171,7 @@ namespace Onbox.Mvc.V7
             this.Title = !string.IsNullOrWhiteSpace(title) ? title : "";
         }
 
-        public void SetTitleVisibility(TitleVisibility titleVisibility)
-        {
-            this.titleVisibility = titleVisibility;
-        }
+
 
         public void RunOnInitFunc(Func<Task> func, Action<string> error = null, Action complete = null)
         {

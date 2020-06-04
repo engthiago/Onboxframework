@@ -8,7 +8,6 @@ namespace Onbox.Mvc.V7
         void RunOnInitFunc(Func<Task> func, Action<string> error = null, Action complete = null);
         void SetOwner(object owner);
         void SetTitle(string title);
-        void SetTitleVisibility(TitleVisibility titleVisibility);
         bool? ShowDialog();
     }
 }

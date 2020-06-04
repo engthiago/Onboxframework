@@ -15,6 +15,19 @@ namespace WpfApp1
         }
     }
 
+    public class AnyAction : IStoreAction<Person>
+    {
+        public string GetActionName()
+        {
+            return "Any Action";
+        }
+
+        public string GetActionPath()
+        {
+            return null;
+        }
+    }
+
 
     public class SelectPetAction : IStoreAction<Pet>
     {

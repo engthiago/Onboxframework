@@ -90,10 +90,16 @@ namespace Onbox.Store.V7
 
         public IStorageSubscription Subscribe<TState>(IStoreAction<TState> action, Action<TState> callback) where TState : new()
         {
+            if (action == null)
+            {
+                throw new ArgumentException("Can not subscribe to Onbox Store with a null action");
+            }
+
             var actionString = action.GetActionPath();
 
             if (actionString == null)
             {
+                maincallbacks.Add(callback);
                 return new StorageSubscription(maincallbacks, callback);
             }
 
@@ -114,7 +120,7 @@ namespace Onbox.Store.V7
             }
         }
 
-        public TState Select<TState>(IStoreAction<TState> action) where TState: new()
+        public TState Select<TState>(IStoreAction<TState> action) where TState : new()
         {
             // Ensures that the action has the correct type
             var actionString = action?.GetActionPath();
@@ -164,19 +170,16 @@ namespace Onbox.Store.V7
             // Changes the store to the new state
             this.store = newStore;
 
-            // Notifies the subscribers to cild states
+            // Notifies the main subscribers
+            foreach (var callback in maincallbacks)
+            {
+                callback.DynamicInvoke(this.store);
+            }
+
+            // Notifies the subscribers to child states
             if (actionPath != null && callbacks.ContainsKey(actionPath))
             {
                 foreach (var callback in callbacks[actionPath])
-                {
-                    callback.DynamicInvoke(currentObject);
-                }
-            }
-
-            // Notifies the main subscribers
-            if (actionPath == null)
-            {
-                foreach (var callback in maincallbacks)
                 {
                     callback.DynamicInvoke(currentObject);
                 }
