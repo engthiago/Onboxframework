@@ -7,7 +7,7 @@ namespace Onbox.Revit.V7
 {
     public abstract class RevitExternalCommandBase<TApplication> : IExternalCommand where TApplication : RevitExternalAppBase, new ()
     {
-        protected readonly IContainerProvider container;
+        protected readonly IContainerResolver container;
 
         public RevitExternalCommandBase()
         {
@@ -25,7 +25,7 @@ namespace Onbox.Revit.V7
             }
 
             var method = type.GetMethod(nameof(RevitExternalAppBase.GetContainer), BindingFlags.Static | BindingFlags.Public);
-            this.container = method.Invoke(null, null) as IContainerProvider;
+            this.container = method.Invoke(null, null) as IContainerResolver;
 
             if (this.container == null)
             {

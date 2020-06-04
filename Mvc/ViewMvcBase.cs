@@ -6,6 +6,9 @@ using System.Windows;
 
 namespace Onbox.Mvc.V7
 {
+    /// <summary>
+    /// Provides base functionality for WPF MVC Pattern
+    /// </summary>
     public abstract class ViewMvcBase : Window, INotifyPropertyChanged, IViewMvc
     {
         /// <summary>

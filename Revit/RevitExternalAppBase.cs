@@ -53,7 +53,7 @@ namespace Onbox.Revit.V7
 
         public abstract void OnStartup(IContainer container, UIControlledApplication application);
 
-        public abstract void OnShutdown(IContainerProvider container, UIControlledApplication application);
+        public abstract void OnShutdown(IContainerResolver container, UIControlledApplication application);
 
         public Result OnStartup(UIControlledApplication application)
         {
@@ -62,7 +62,7 @@ namespace Onbox.Revit.V7
             AddRevit(application);
 
             ContainerInstance.AddSingleton(ContainerInstance);
-            ContainerInstance.AddSingleton<IContainerProvider>(ContainerInstance);
+            ContainerInstance.AddSingleton<IContainerResolver>(ContainerInstance);
 
             OnStartup(ContainerInstance, application);
 

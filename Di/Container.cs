@@ -7,7 +7,7 @@ namespace Onbox.Di.V7
     /// <summary>
     /// Onbox's IOC container read only contract
     /// </summary>
-    public interface IContainerProvider
+    public interface IContainerResolver
     {
         /// <summary>
         /// Asks the container for a new instance of a type
@@ -18,7 +18,7 @@ namespace Onbox.Di.V7
     /// <summary>
     /// Onbox's IOC container contract
     /// </summary>
-    public interface IContainer : IContainerProvider
+    public interface IContainer : IContainerResolver
     {
         /// <summary>
         /// Adds an implementation as a singleton on the container.
@@ -270,7 +270,7 @@ namespace Onbox.Di.V7
         public static Container Default()
         {
             var container = new Container();
-            container.AddSingleton<IContainerProvider>(container);
+            container.AddSingleton<IContainerResolver>(container);
             container.AddSingleton<IContainer>(container);
 
             return container;

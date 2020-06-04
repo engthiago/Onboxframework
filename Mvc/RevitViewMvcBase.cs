@@ -6,6 +6,9 @@ using System.Windows.Shell;
 
 namespace Onbox.Mvc.V7
 {
+    /// <summary>
+    /// Provides specific Revit functionaliy to <see cref="ViewMvcBase"/> like set Revit as parent window and Title Bar visibility
+    /// </summary>
     public abstract class RevitViewMvcBase : ViewMvcBase, IRevitViewMvcBase
     {
         private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
@@ -20,11 +23,13 @@ namespace Onbox.Mvc.V7
         [DllImport("user32.dll")]
         extern private static int SetWindowLong(IntPtr hwnd, int index, int value);
 
+        /// <summary>
+        /// Provides specific Revit functionaliy to <see cref="ViewMvcBase"/> like set Revit as parent window and Title Bar visibility
+        /// </summary>
+        /// <param name="revitUIApp">Some information of the current instance of Revit UI App</param>
         public RevitViewMvcBase(IRevitUIApp revitUIApp)
         {
-            System.Windows.Interop.WindowInteropHelper helper
-              = new System.Windows.Interop.WindowInteropHelper(
-                    this);
+            System.Windows.Interop.WindowInteropHelper helper = new System.Windows.Interop.WindowInteropHelper(this);
 
             helper.Owner = revitUIApp.GetRevitWindowHandle();
 
@@ -71,6 +76,9 @@ namespace Onbox.Mvc.V7
             SetWindowLong(hwnd, GWL_STYLE, (currentStyle & ~WS_MINIMIZEBOX));
         }
 
+        /// <summary>
+        /// Tells how to display this windows's Title Bar, Minimize, and Maximize buttons
+        /// </summary>
         public void SetTitleVisibility(TitleVisibility titleVisibility)
         {
             this.titleVisibility = titleVisibility;
