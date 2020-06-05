@@ -101,7 +101,6 @@
       <DependentUpon>ImgButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImgToggleButton.cs" />
-    <Compile Include="IRevitViewMvcBase.cs" />
     <Compile Include="LoadingLine.cs" />
     <Compile Include="CustomControls\ProgressBarControl.xaml.cs">
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>
@@ -110,7 +109,6 @@
     <Compile Include="ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RevitViewMvcBase.cs" />
     <Compile Include="SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
     </Compile>
@@ -288,10 +286,6 @@
     <ProjectReference Include="..\Di\Di.csproj">
       <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
       <Name>Di</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Revit\Revit.csproj">
-      <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
-      <Name>Revit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

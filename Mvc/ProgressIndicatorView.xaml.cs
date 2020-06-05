@@ -1,6 +1,4 @@
-﻿using Onbox.Core.V7;
-using Onbox.Core.V7.Reporting;
-using Onbox.Revit.V7;
+﻿using Onbox.Core.V7.Reporting;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,7 +9,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Reports progress via a WPF Window
     /// </summary>
-    public partial class ProgressIndicatorView : RevitViewMvcBase, IProgressIndicator
+    public partial class ProgressIndicatorView : ViewMvcBase, IProgressIndicator
     {
         public int Total { get; set; }
         public int CurrentProgress { get; set; }
@@ -28,11 +26,10 @@ namespace Onbox.Mvc.V7
         private Action action { get; set; }
 
 
-        public ProgressIndicatorView(IRevitUIApp revitUIApp) : base(revitUIApp)
+        public ProgressIndicatorView()
         {
             this.InitializeComponent();
             this.DataContext = this;
-            this.SetTitleVisibility(TitleVisibility.HideTitleBar);
             this.CancellingMessage = "Cancelling... Please wait";
         }
 

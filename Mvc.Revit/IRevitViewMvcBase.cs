@@ -1,4 +1,6 @@
-﻿namespace Onbox.Mvc.V7
+﻿using Onbox.Mvc.V7;
+
+namespace Onbox.Mvc.Revit.V7
 {
     /// <summary>
     /// Provides specific Revit functionaliy to <see cref="IViewMvc"/> like set Revit as parent window and Title Bar visibility
