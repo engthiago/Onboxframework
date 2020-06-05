@@ -1,15 +1,16 @@
 ﻿using Onbox.Core.V7.Reporting;
+using Onbox.Revit.V7;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.Revit.V7
 {
     /// <summary>
     /// Reports progress via a WPF Window
     /// </summary>
-    public partial class ProgressIndicatorView : ViewMvcBase, IProgressIndicator
+    public partial class RevitProgressIndicatorView : RevitViewMvcBase, IProgressIndicator
     {
         public int Total { get; set; }
         public int CurrentProgress { get; set; }
@@ -23,10 +24,10 @@ namespace Onbox.Mvc.V7
         public string CancellingMessage { get; set; }
 
 
-        private Action action { get; set; }
+        private Action action;
 
 
-        public ProgressIndicatorView()
+        public RevitProgressIndicatorView(IRevitUIApp revitUIApp) : base(revitUIApp)
         {
             this.InitializeComponent();
             this.DataContext = this;
@@ -37,7 +38,10 @@ namespace Onbox.Mvc.V7
         {
             try
             {
-                this.action?.Invoke();
+                for (int i = 0; i < Total; i++)
+                {
+                    this.action?.Invoke();
+                }
                 this.Finish();
             }
             catch (ProgressCancelledException e)
@@ -86,7 +90,7 @@ namespace Onbox.Mvc.V7
                 this.CanCancel = false; //No need for it anymore, it will hide itself on UI
                 this.RequestCancel = true;
 
-                await Task.Delay(2000);
+                await Task.Delay(1000);
 
                 this.Close();
             }
@@ -126,6 +130,7 @@ namespace Onbox.Mvc.V7
         {
             if (this.RequestCancel)
             {
+                this.Cancel();
                 throw new ProgressCancelledException();
             }
         }

@@ -83,9 +83,17 @@
       <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
       <Name>Di</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mvc.Revit\Mvc.Revit.csproj">
+      <Project>{1902d3ea-f7f0-4efa-8237-805859e794f5}</Project>
+      <Name>Mvc.Revit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{06552675-1F55-4C83-A25B-4658EBAC2822}</Project>
       <Name>Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit\Revit.csproj">
+      <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
+      <Name>Revit</Name>
     </ProjectReference>
     <ProjectReference Include="..\Store\Store.csproj">
       <Project>{6156fe2d-ac8f-43a9-8c59-3b4e66c4b0c8}</Project>

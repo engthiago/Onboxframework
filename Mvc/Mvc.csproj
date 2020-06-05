@@ -106,9 +106,6 @@
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MessageStack.cs" />
-    <Compile Include="ProgressIndicatorView.xaml.cs">
-      <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
     </Compile>
@@ -138,10 +135,6 @@
     <Page Include="ImgButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ProgressIndicatorView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="SearchControl.xaml">
       <Generator>MSBuild:Compile</Generator>
