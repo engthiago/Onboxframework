@@ -75,6 +75,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Availability\AvailableAlways.cs" />
+    <Compile Include="Availability\AvailableOnAnyDocument.cs" />
+    <Compile Include="Availability\AvailableOnFamily.cs" />
+    <Compile Include="Availability\AvailableOnProject.cs" />
     <Compile Include="RevitExternalCommandBase.cs" />
     <Compile Include="RevitExternalAppBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
