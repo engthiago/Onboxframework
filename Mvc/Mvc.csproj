@@ -106,6 +106,8 @@
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MessageStack.cs" />
+    <Compile Include="Navigator.cs" />
+    <Compile Include="NavigatorComponent.cs" />
     <Compile Include="SearchControl.xaml.cs">
       <DependentUpon>SearchControl.xaml</DependentUpon>
     </Compile>
