@@ -7,13 +7,33 @@ using System.Threading.Tasks;
 
 namespace Onbox.Revit.V7.UI
 {
+    /// <summary>
+    /// Ribbon Manager will help you create Tabs, Panels and Buttons in Revit
+    /// </summary>
     public interface IRibbonManager
     {
+        /// <summary>
+        /// Get Revit UI Controlled App
+        /// </summary>
+        /// <returns></returns>
         UIControlledApplication GetApp();
+        /// <summary>
+        /// Creates a Ribbon Panel
+        /// </summary>
         IRibbonPanelManager CreatePanel(string tabName, string panelName);
-        IRibbonTabManager CreateRibbon(string name);
+        /// <summary>
+        /// Creates a Ribbon Panel on Revit's Addins Tab
+        /// </summary>
+        IRibbonPanelManager CreatePanel(string panelName);
+        /// <summary>
+        /// Creates a Ribbon Tab
+        /// </summary>
+        IRibbonTabManager CreateTab(string name);
     }
 
+    /// <summary>
+    /// Ribbon Manager will help you create Tabs, Panels and Buttons in Revit
+    /// </summary>
     public class RibbonManager : IRibbonManager
     {
         private readonly UIControlledApplication app;
@@ -25,7 +45,7 @@ namespace Onbox.Revit.V7.UI
             this.imageManager = imageManager;
         }
 
-        public IRibbonTabManager CreateRibbon(string name)
+        public IRibbonTabManager CreateTab(string name)
         {
             try
             {
@@ -36,6 +56,13 @@ namespace Onbox.Revit.V7.UI
             }
 
             return new RibbonTabManager(this.app, name, this.imageManager);
+        }
+
+        public IRibbonPanelManager CreatePanel(string panelName)
+        {
+            var panel = this.app.CreateRibbonPanel(panelName);
+            var itembuilder = new RibbonPanelManager(null, panel, this.imageManager);
+            return itembuilder;
         }
 
         public IRibbonPanelManager CreatePanel(string tabName, string panelName)
@@ -57,6 +84,8 @@ namespace Onbox.Revit.V7.UI
         {
             return this.app;
         }
+
+
     }
 
     public class RibbonTabManager : IRibbonTabManager
