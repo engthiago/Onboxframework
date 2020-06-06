@@ -75,9 +75,13 @@
     <Compile Include="Converters\CollectionToStringConverter.cs" />
     <Compile Include="Converters\CollectionToVisibility.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
-    <Compile Include="Converters\CountToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntToDataGridHeadersVisibilityConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
-    <Compile Include="Converters\DoubleMultiplierConverter.cs" />
+    <Compile Include="Converters\NumberIsSmallerCoverter.cs" />
+    <Compile Include="Converters\NumberIsBiggerConverter.cs" />
+    <Compile Include="Converters\NumberMultiplyConverter.cs" />
+    <Compile Include="Converters\NumberSubstractConverter.cs" />
+    <Compile Include="Converters\NumberSumConverter.cs" />
     <Compile Include="Converters\EnumDescriptionConverter.cs" />
     <Compile Include="Converters\EnumDescriptionProviderExtension.cs" />
     <Compile Include="Converters\EnumListDescriptionConverter.cs" />

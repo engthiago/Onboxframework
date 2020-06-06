@@ -9,25 +9,25 @@ using System.Windows.Markup;
 
 namespace Onbox.Mvc.V7.Converters
 {
-    public class DoubleMultiplierConverter : MarkupExtension, IValueConverter
+    public class NumberIsSmallerConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null) return 0;
+            if (value == null) return false;
 
-            if (Double.TryParse(value.ToString(), out double raw))
+            if (double.TryParse(value.ToString(), out double raw))
             {
                 if (parameter != null && double.TryParse(parameter.ToString(), out double multiplier))
                 {
-                    return raw * multiplier;
+                    return raw < multiplier;
                 }
                 else
                 {
-                    return raw;
+                    return false;
                 }
             }
 
-            return 0;
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

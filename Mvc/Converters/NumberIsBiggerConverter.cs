@@ -4,30 +4,35 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace Onbox.Mvc.V7.Converters
 {
-    public class CountToVisibilityConverter : MarkupExtension, IValueConverter
+    public class NumberIsBiggerConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
-                return DataGridHeadersVisibility.None;
-            if (!Int32.TryParse(value.ToString(), out int num))
-                return DataGridHeadersVisibility.None;
-            if (num == 0)
-                return DataGridHeadersVisibility.None;
+            if (value == null) return false;
 
-            return DataGridHeadersVisibility.Column;
+            if (double.TryParse(value.ToString(), out double raw))
+            {
+                if (parameter != null && double.TryParse(parameter.ToString(), out double multiplier))
+                {
+                    return raw > multiplier;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            return null;
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
