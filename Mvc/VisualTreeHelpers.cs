@@ -37,10 +37,10 @@ namespace Onbox.Mvc.V7
             return parent as T;
         }
 
-        public static IMvcLifeCycle GetParentMvcComponent(DependencyObject d)
+        public static IMvcLifecycleComponent GetParentMvcComponent(DependencyObject d)
         {
             var parent = VisualTreeHelper.GetParent(d) as FrameworkElement;
-            Type targetType = typeof(IMvcLifeCycle);
+            Type targetType = typeof(IMvcLifecycleComponent);
             while (parent != null)
             {
                 Type type = parent.GetType();
@@ -52,7 +52,7 @@ namespace Onbox.Mvc.V7
                 parent = VisualTreeHelper.GetParent(parent) as FrameworkElement;
             }
 
-            return parent as IMvcLifeCycle;
+            return parent as IMvcLifecycleComponent;
         }
 
         public static DependencyObject GetParent(string typeName, DependencyObject d)

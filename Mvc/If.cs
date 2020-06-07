@@ -26,7 +26,7 @@ namespace Onbox.Mvc.V7
 
         private static void OnErrorCollapseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && element.DataContext is IMvcLifeCycle viewMvc && (bool)e.NewValue == true)
+            if (d is FrameworkElement element && element.DataContext is IMvcLifecycleComponent viewMvc && (bool)e.NewValue == true)
             {
                 Binding errorBinding = new Binding(nameof(viewMvc.Error));
                 errorBinding.Source = viewMvc;
@@ -55,7 +55,7 @@ namespace Onbox.Mvc.V7
 
         private static void OnErrorHideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && element.DataContext is IMvcLifeCycle viewMvc && (bool)e.NewValue == true)
+            if (d is FrameworkElement element && element.DataContext is IMvcLifecycleComponent viewMvc && (bool)e.NewValue == true)
             {
                 Binding errorBinding = new Binding(nameof(viewMvc.Error));
                 errorBinding.Source = viewMvc;
@@ -84,7 +84,7 @@ namespace Onbox.Mvc.V7
 
         private static void OnErroDisableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && element.DataContext is IMvcLifeCycle viewMvc && (bool)e.NewValue == true)
+            if (d is FrameworkElement element && element.DataContext is IMvcLifecycleComponent viewMvc && (bool)e.NewValue == true)
             {
                 Binding errorBinding = new Binding(nameof(viewMvc.Error));
                 errorBinding.Source = viewMvc;
@@ -115,7 +115,7 @@ namespace Onbox.Mvc.V7
 
         private static void OnErrorOrLoadingCollapseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && element.DataContext is IMvcLifeCycle viewMvc && (bool)e.NewValue == true)
+            if (d is FrameworkElement element && element.DataContext is IMvcLifecycleComponent viewMvc && (bool)e.NewValue == true)
             {
                 MultiBinding multiBinding = new MultiBinding();
                 multiBinding.Bindings.Add(new Binding(nameof(viewMvc.Error)));
@@ -174,7 +174,7 @@ namespace Onbox.Mvc.V7
 
         private static void OnErrorOrLoadingHideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && element.DataContext is IMvcLifeCycle viewMvc && (bool)e.NewValue == true)
+            if (d is FrameworkElement element && element.DataContext is IMvcLifecycleComponent viewMvc && (bool)e.NewValue == true)
             {
                 MultiBinding multiBinding = new MultiBinding();
                 multiBinding.Bindings.Add(new Binding(nameof(viewMvc.Error)));
@@ -233,7 +233,7 @@ namespace Onbox.Mvc.V7
 
         private static void OnErrorOrLoadingDisableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is FrameworkElement element && element.DataContext is IMvcLifeCycle viewMvc && (bool)e.NewValue == true)
+            if (d is FrameworkElement element && element.DataContext is IMvcLifecycleComponent viewMvc && (bool)e.NewValue == true)
             {
                 MultiBinding multiBinding = new MultiBinding();
                 multiBinding.Bindings.Add(new Binding(nameof(viewMvc.Error)));

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace Onbox.Mvc.V7
 {
-    public abstract class MvcComponentBase : Page, INotifyPropertyChanged, IMvcComponent, IMvcLifeCycle
+    public abstract class MvcComponentBase : Page, INotifyPropertyChanged, IMvcComponent, IMvcLifecycleComponent
     {
         public bool IsLoading { get; set; }
         public string Error { get; set; }

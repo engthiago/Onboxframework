@@ -10,27 +10,30 @@ namespace Onbox.Mvc.V7
 {
     public interface INavigator
     {
-        INavigatorSubscription Attach<TView, TNavComponent>(TView window, TNavComponent component)
-            where TView : Window
-            where TNavComponent : NavigatorComponent;
-        Page GetCurrentPage<TView>(string componentName = "Navigator") where TView : Window;
-        void ClearNavigation<TView>(string componentName = "Navigator") where TView : Window;
-        void Navigate<TView, TPage>(string componentName = "Navigator")
-            where TView : Window
-            where TPage : Page, new();
-
-        INavigatorSubscription Subscribe<TView>(Action<Page> action) where TView : Window;
-        INavigatorSubscription Subscribe<TView>(string componentName, Action<Page> action) where TView : Window;
+        INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component)
+            where TParent : IMvcLifecycleComponent
+            where TNavComponent : NavigatorComponent, new();
+        MvcComponentBase GetCurrentPage<TParent>(string componentName = "Navigator") 
+            where TParent : IMvcLifecycleComponent;
+        void ClearNavigation<TView>(string componentName = "Navigator") 
+            where TView : IMvcLifecycleComponent;
+        void Navigate<TParent, TPage>(string componentName = "Navigator")
+            where TParent : IMvcLifecycleComponent
+            where TPage : MvcComponentBase, new();
+        INavigatorSubscription Subscribe<TParent>(Action<MvcComponentBase> action) 
+            where TParent : IMvcLifecycleComponent;
+        INavigatorSubscription Subscribe<TParent>(string componentName, Action<MvcComponentBase> action) 
+            where TParent : IMvcLifecycleComponent;
     }
 
     public class Navigator : INavigator
     {
-        public readonly Dictionary<string, Dictionary<string, Type>> pageDictionary = new Dictionary<string, Dictionary<string, Type>>();
-        public readonly Dictionary<string, Dictionary<string, List<Action<Page>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<Page>>>>();
+        public readonly Dictionary<string, Dictionary<string, Type>> componentDictionary = new Dictionary<string, Dictionary<string, Type>>();
+        public readonly Dictionary<string, Dictionary<string, List<Action<MvcComponentBase>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<MvcComponentBase>>>>();
 
-        public INavigatorSubscription Attach<TView, TNavComponent>(TView window, TNavComponent component) where TView : Window where TNavComponent : NavigatorComponent
+        public INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component) where TParent : IMvcLifecycleComponent where TNavComponent : NavigatorComponent, new()
         {
-            if (window == null)
+            if (parentComponent == null)
             {
                 throw new ArgumentException("Can not attach Navigator into a null View");
             }
@@ -48,11 +51,11 @@ namespace Onbox.Mvc.V7
             component.Loaded += this.Component_Loaded;
             component.Unloaded += this.Component_Unloaded;
 
-            var windowIdentifier = GetWindowIdentifier(window);
+            var parentIdentifier = GetParentIdentifier(parentComponent);
 
-            if (pageDictionary.ContainsKey(windowIdentifier))
+            if (componentDictionary.ContainsKey(parentIdentifier))
             {
-                var navigators = pageDictionary[windowIdentifier];
+                var navigators = componentDictionary[parentIdentifier];
                 if (navigators == null)
                 {
                     navigators = new Dictionary<string, Type>();
@@ -60,10 +63,10 @@ namespace Onbox.Mvc.V7
             }
             else
             {
-                pageDictionary[windowIdentifier] = new Dictionary<string, Type>();
+                componentDictionary[parentIdentifier] = new Dictionary<string, Type>();
             }
 
-            var subs = Subscribe(windowIdentifier, component.Name, (page) => component.Content = page);
+            var subs = Subscribe(parentIdentifier, component.Name, (page) => component.Content = page);
             component.NavigatorSubscription = subs;
             return subs;
         }
@@ -72,11 +75,11 @@ namespace Onbox.Mvc.V7
         {
             if (sender is NavigatorComponent navigatorComponent)
             {
-                // Go up until get a window
-                if (navigatorComponent.Parent is Window window)
+                var parent = VisualTreeHelpers.GetParentMvcComponent(navigatorComponent);
+                if (parent != null)
                 {
-                    var windowIdentifier = GetWindowIdentifier(window);
-                    window.Dispatcher.Invoke(() => navigatorComponent.Content = GetCurrentPage(windowIdentifier, navigatorComponent.Name));
+                    var parentIdentifier = GetParentIdentifier(parent);
+                    navigatorComponent.Content = GetCurrentPage(parentIdentifier, navigatorComponent.Name);
                 }
             }
         }
@@ -89,45 +92,45 @@ namespace Onbox.Mvc.V7
             }
         }
 
-        private string GetWindowIdentifier(Window window)
+        private string GetParentIdentifier(IMvcLifecycleComponent parent)
         {
-            var type = window.GetType();
+            var type = parent.GetType();
             return type.FullName;
         }
 
-        private string GetWindowIdentifier<TView>() where TView : Window
+        private string GetParentIdentifier<TParent>() where TParent : IMvcLifecycleComponent
         {
-            var type = typeof(TView);
+            var type = typeof(TParent);
             var identitifier = type.FullName;
             return identitifier;
         }
 
-        public Page GetCurrentPage<TView>(string componentName = "Navigator") where TView : Window
+        public MvcComponentBase GetCurrentPage<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
         {
-            string identitifier = GetWindowIdentifier<TView>();
+            string identitifier = GetParentIdentifier<TParent>();
             return GetCurrentPage(identitifier, componentName);
         }
 
-        private Page GetCurrentPage(string windowIdentifier, string componentName)
+        private MvcComponentBase GetCurrentPage(string parentIdentifier, string componentName)
         {
-            if (pageDictionary.ContainsKey(windowIdentifier))
+            if (componentDictionary.ContainsKey(parentIdentifier))
             {
-                var navigators = pageDictionary[windowIdentifier];
+                var navigators = componentDictionary[parentIdentifier];
                 if (navigators != null && navigators.ContainsKey(componentName))
                 {
                     var pageType = navigators[componentName];
-                    return InstantiatePage(pageType);
+                    return InstantiateComponent(pageType);
                 }
             }
 
             return null;
         }
 
-        private Page InstantiatePage(Type pageType)
+        private MvcComponentBase InstantiateComponent(Type pageType)
         {
             if (pageType != null)
             {
-                return Activator.CreateInstance(pageType) as Page;
+                return Activator.CreateInstance(pageType) as MvcComponentBase;
             }
             else
             {
@@ -135,42 +138,42 @@ namespace Onbox.Mvc.V7
             }
         }
 
-        public void Navigate<TView, TPage>(string componentName = "Navigator") where TView : Window where TPage : Page, new()
+        public void Navigate<TParent, TPage>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent where TPage : MvcComponentBase, new()
         {
-            var windowIdentifier = GetWindowIdentifier<TView>();
-            var pageType = typeof(TPage);
-            Navigate(windowIdentifier, componentName, pageType);
+            var parentIdentifier = GetParentIdentifier<TParent>();
+            var componentType = typeof(TPage);
+            Navigate(parentIdentifier, componentName, componentType);
         }
 
-        public void ClearNavigation<TView>(string componentName = "Navigator") where TView : Window
+        public void ClearNavigation<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
         {
-            var windowIdentifier = GetWindowIdentifier<TView>();
-            Navigate(windowIdentifier, componentName, null);
+            var parentIdentifier = GetParentIdentifier<TParent>();
+            Navigate(parentIdentifier, componentName, null);
         }
 
-        private void Navigate(string windowIdentifier, string componentName, Type pageType)
+        private void Navigate(string parentIdentifier, string componentName, Type pageType)
         {
-            if (!pageDictionary.ContainsKey(windowIdentifier))
+            if (!componentDictionary.ContainsKey(parentIdentifier))
             {
-                pageDictionary[windowIdentifier] = new Dictionary<string, Type>();
+                componentDictionary[parentIdentifier] = new Dictionary<string, Type>();
             }
 
-            var navigators = pageDictionary[windowIdentifier];
+            var navigators = componentDictionary[parentIdentifier];
             if (navigators == null)
             {
                 navigators = new Dictionary<string, Type>();
-                pageDictionary[componentName] = navigators;
+                componentDictionary[componentName] = navigators;
             }
 
             navigators[componentName] = pageType;
-            NotifySubscribers(windowIdentifier, componentName, pageType);
+            NotifySubscribers(parentIdentifier, componentName, pageType);
         }
 
-        private void NotifySubscribers(string windowIdentifier, string componentName, Type pageType)
+        private void NotifySubscribers(string parentIdentifier, string componentName, Type pageType)
         {
-            if (actionDictionary.ContainsKey(windowIdentifier))
+            if (actionDictionary.ContainsKey(parentIdentifier))
             {
-                var navigatorsActions = actionDictionary[windowIdentifier];
+                var navigatorsActions = actionDictionary[parentIdentifier];
 
                 if (navigatorsActions == null)
                 {
@@ -184,7 +187,7 @@ namespace Onbox.Mvc.V7
                     {
                         foreach (var action in actions)
                         {
-                            var page = InstantiatePage(pageType);
+                            var page = InstantiateComponent(pageType);
                             action.Invoke(page);
                         }
                     }
@@ -192,44 +195,44 @@ namespace Onbox.Mvc.V7
             }
         }
 
-        public INavigatorSubscription Subscribe<TView>(Action<Page> action) where TView : Window
+        public INavigatorSubscription Subscribe<TParent>(Action<MvcComponentBase> action) where TParent : IMvcLifecycleComponent
         {
             var componentName = "Navigator";
-            return Subscribe<TView>(componentName, action);
+            return Subscribe<TParent>(componentName, action);
         }
 
-        public INavigatorSubscription Subscribe<TView>(string componentName, Action<Page> action) where TView : Window
+        public INavigatorSubscription Subscribe<TParent>(string componentName, Action<MvcComponentBase> action) where TParent : IMvcLifecycleComponent
         {
-            var windowIdentifier = GetWindowIdentifier<TView>();
-            return Subscribe(windowIdentifier, componentName, action);
+            var parentIdentifier = GetParentIdentifier<TParent>();
+            return Subscribe(parentIdentifier, componentName, action);
         }
 
-        private INavigatorSubscription Subscribe(string windowIdentifier, string componentName, Action<Page> action)
+        private INavigatorSubscription Subscribe(string parentIdentifier, string componentName, Action<MvcComponentBase> action)
         {
             if (string.IsNullOrWhiteSpace(componentName))
             {
                 componentName = "Navigator";
             }
 
-            var windowNavigatorActions = new Dictionary<string, List<Action<Page>>>();
-            var navigatorActions = new List<Action<Page>>();
+            var parentNavigatorActions = new Dictionary<string, List<Action<MvcComponentBase>>>();
+            var navigatorActions = new List<Action<MvcComponentBase>>();
 
-            if (actionDictionary.ContainsKey(windowIdentifier))
+            if (actionDictionary.ContainsKey(parentIdentifier))
             {
-                windowNavigatorActions = actionDictionary[windowIdentifier];
+                parentNavigatorActions = actionDictionary[parentIdentifier];
             }
             else
             {
-                actionDictionary[windowIdentifier] = windowNavigatorActions;
+                actionDictionary[parentIdentifier] = parentNavigatorActions;
             }
 
-            if (windowNavigatorActions.ContainsKey(componentName))
+            if (parentNavigatorActions.ContainsKey(componentName))
             {
-                navigatorActions = windowNavigatorActions[componentName];
+                navigatorActions = parentNavigatorActions[componentName];
             }
             else
             {
-                windowNavigatorActions[componentName] = navigatorActions;
+                parentNavigatorActions[componentName] = navigatorActions;
             }
 
             navigatorActions.Add(action);
@@ -245,10 +248,10 @@ namespace Onbox.Mvc.V7
 
     public class NavigatorSubscription : INavigatorSubscription
     {
-        private Action<Page> action;
-        private List<Action<Page>> actions;
+        private Action<MvcComponentBase> action;
+        private List<Action<MvcComponentBase>> actions;
 
-        public NavigatorSubscription(Action<Page> action, List<Action<Page>> actions)
+        public NavigatorSubscription(Action<MvcComponentBase> action, List<Action<MvcComponentBase>> actions)
         {
             this.action = action;
             this.actions = actions;

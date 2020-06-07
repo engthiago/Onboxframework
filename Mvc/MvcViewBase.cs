@@ -9,7 +9,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides base functionality for WPF MVC Pattern
     /// </summary>
-    public abstract class MvcViewBase : Window, INotifyPropertyChanged, IMvcView, IMvcViewLifeCycle
+    public abstract class MvcViewBase : Window, INotifyPropertyChanged, IMvcView, IMvcLifecycleView
     {
         /// <summary>
         /// Event that gets fired when any property changes on child classes

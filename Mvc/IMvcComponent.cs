@@ -5,6 +5,7 @@ namespace Onbox.Mvc.V7
 {
     public interface IMvcComponent
     {
+        string Name { get; set; }
         /// <summary>
         /// Runs an async method on View Initialization
         /// </summary>

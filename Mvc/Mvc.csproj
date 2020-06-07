@@ -107,7 +107,7 @@
       <DependentUpon>ImgButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImgToggleButton.cs" />
-    <Compile Include="IMvcLifeCycle.cs" />
+    <Compile Include="IMvcLifecycleComponent.cs" />
     <Compile Include="LoadingLine.cs" />
     <Compile Include="CustomControls\ProgressBarControl.xaml.cs">
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>

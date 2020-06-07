@@ -2,7 +2,7 @@
 
 namespace Onbox.Mvc.V7
 {
-    public interface IMvcLifeCycle
+    public interface IMvcLifecycleComponent
     {
         bool CanRetryOnError { get; set; }
         bool CanRetryOnWarning { get; set; }
@@ -18,7 +18,7 @@ namespace Onbox.Mvc.V7
         void OnWarningRetry();
     }
 
-    public interface IMvcViewLifeCycle : IMvcLifeCycle
+    public interface IMvcLifecycleView : IMvcLifecycleComponent
     {
         void OnAfterInit();
     }
