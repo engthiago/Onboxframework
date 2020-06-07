@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Onbox.Di.V7;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,26 +13,32 @@ namespace Onbox.Mvc.V7
     {
         INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component)
             where TParent : IMvcLifecycleComponent
-            where TNavComponent : NavigatorComponent, new();
+            where TNavComponent : NavigatorComponent;
         MvcComponentBase GetCurrentPage<TParent>(string componentName = "Navigator") 
             where TParent : IMvcLifecycleComponent;
-        void ClearNavigation<TView>(string componentName = "Navigator") 
-            where TView : IMvcLifecycleComponent;
-        void Navigate<TParent, TPage>(string componentName = "Navigator")
-            where TParent : IMvcLifecycleComponent
-            where TPage : MvcComponentBase, new();
-        INavigatorSubscription Subscribe<TParent>(Action<MvcComponentBase> action) 
+        void ClearNavigation<TParent>(string componentName = "Navigator") 
             where TParent : IMvcLifecycleComponent;
-        INavigatorSubscription Subscribe<TParent>(string componentName, Action<MvcComponentBase> action) 
+        void Navigate<TParent, TComponent>(string componentName = "Navigator")
+            where TParent : IMvcLifecycleComponent
+            where TComponent : IMvcComponent;
+        INavigatorSubscription Subscribe<TParent>(Action<IMvcComponent> action) 
+            where TParent : IMvcLifecycleComponent;
+        INavigatorSubscription Subscribe<TParent>(string componentName, Action<IMvcComponent> action) 
             where TParent : IMvcLifecycleComponent;
     }
 
     public class Navigator : INavigator
     {
         public readonly Dictionary<string, Dictionary<string, Type>> componentDictionary = new Dictionary<string, Dictionary<string, Type>>();
-        public readonly Dictionary<string, Dictionary<string, List<Action<MvcComponentBase>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<MvcComponentBase>>>>();
+        public readonly Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>>();
+        private readonly IContainerResolver container;
 
-        public INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component) where TParent : IMvcLifecycleComponent where TNavComponent : NavigatorComponent, new()
+        public Navigator(IContainerResolver container)
+        {
+            this.container = container;
+        }
+
+        public INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component) where TParent : IMvcLifecycleComponent where TNavComponent : NavigatorComponent
         {
             if (parentComponent == null)
             {
@@ -126,11 +133,11 @@ namespace Onbox.Mvc.V7
             return null;
         }
 
-        private MvcComponentBase InstantiateComponent(Type pageType)
+        private MvcComponentBase InstantiateComponent(Type componentType)
         {
-            if (pageType != null)
+            if (componentType != null)
             {
-                return Activator.CreateInstance(pageType) as MvcComponentBase;
+                return this.container.Resolve(componentType) as MvcComponentBase;
             }
             else
             {
@@ -138,10 +145,10 @@ namespace Onbox.Mvc.V7
             }
         }
 
-        public void Navigate<TParent, TPage>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent where TPage : MvcComponentBase, new()
+        public void Navigate<TParent, TComponent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent where TComponent : IMvcComponent
         {
             var parentIdentifier = GetParentIdentifier<TParent>();
-            var componentType = typeof(TPage);
+            var componentType = typeof(TComponent);
             Navigate(parentIdentifier, componentName, componentType);
         }
 
@@ -151,7 +158,7 @@ namespace Onbox.Mvc.V7
             Navigate(parentIdentifier, componentName, null);
         }
 
-        private void Navigate(string parentIdentifier, string componentName, Type pageType)
+        private void Navigate(string parentIdentifier, string componentName, Type componentType)
         {
             if (!componentDictionary.ContainsKey(parentIdentifier))
             {
@@ -165,11 +172,11 @@ namespace Onbox.Mvc.V7
                 componentDictionary[componentName] = navigators;
             }
 
-            navigators[componentName] = pageType;
-            NotifySubscribers(parentIdentifier, componentName, pageType);
+            navigators[componentName] = componentType;
+            NotifySubscribers(parentIdentifier, componentName, componentType);
         }
 
-        private void NotifySubscribers(string parentIdentifier, string componentName, Type pageType)
+        private void NotifySubscribers(string parentIdentifier, string componentName, Type componentType)
         {
             if (actionDictionary.ContainsKey(parentIdentifier))
             {
@@ -187,7 +194,7 @@ namespace Onbox.Mvc.V7
                     {
                         foreach (var action in actions)
                         {
-                            var page = InstantiateComponent(pageType);
+                            var page = InstantiateComponent(componentType);
                             action.Invoke(page);
                         }
                     }
@@ -195,27 +202,27 @@ namespace Onbox.Mvc.V7
             }
         }
 
-        public INavigatorSubscription Subscribe<TParent>(Action<MvcComponentBase> action) where TParent : IMvcLifecycleComponent
+        public INavigatorSubscription Subscribe<TParent>(Action<IMvcComponent> action) where TParent : IMvcLifecycleComponent
         {
             var componentName = "Navigator";
             return Subscribe<TParent>(componentName, action);
         }
 
-        public INavigatorSubscription Subscribe<TParent>(string componentName, Action<MvcComponentBase> action) where TParent : IMvcLifecycleComponent
+        public INavigatorSubscription Subscribe<TParent>(string componentName, Action<IMvcComponent> action) where TParent : IMvcLifecycleComponent
         {
             var parentIdentifier = GetParentIdentifier<TParent>();
             return Subscribe(parentIdentifier, componentName, action);
         }
 
-        private INavigatorSubscription Subscribe(string parentIdentifier, string componentName, Action<MvcComponentBase> action)
+        private INavigatorSubscription Subscribe(string parentIdentifier, string componentName, Action<IMvcComponent> action)
         {
             if (string.IsNullOrWhiteSpace(componentName))
             {
                 componentName = "Navigator";
             }
 
-            var parentNavigatorActions = new Dictionary<string, List<Action<MvcComponentBase>>>();
-            var navigatorActions = new List<Action<MvcComponentBase>>();
+            var parentNavigatorActions = new Dictionary<string, List<Action<IMvcComponent>>>();
+            var navigatorActions = new List<Action<IMvcComponent>>();
 
             if (actionDictionary.ContainsKey(parentIdentifier))
             {
@@ -248,10 +255,10 @@ namespace Onbox.Mvc.V7
 
     public class NavigatorSubscription : INavigatorSubscription
     {
-        private Action<MvcComponentBase> action;
-        private List<Action<MvcComponentBase>> actions;
+        private Action<IMvcComponent> action;
+        private List<Action<IMvcComponent>> actions;
 
-        public NavigatorSubscription(Action<MvcComponentBase> action, List<Action<MvcComponentBase>> actions)
+        public NavigatorSubscription(Action<IMvcComponent> action, List<Action<IMvcComponent>> actions)
         {
             this.action = action;
             this.actions = actions;

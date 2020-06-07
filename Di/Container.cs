@@ -13,6 +13,10 @@ namespace Onbox.Di.V7
         /// Asks the container for a new instance of a type
         /// </summary>
         T Resolve<T>();
+        /// <summary>
+        /// Asks the container for a new instance of a type
+        /// </summary>
+        object Resolve(Type type);
     }
 
     /// <summary>
@@ -153,16 +157,24 @@ namespace Onbox.Di.V7
         /// <summary>
         /// Asks the container for a new instance of a type
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         public T Resolve<T>()
         {
-            var type = (T)this.Resolve(typeof(T));
+            var instance = (T)this.ResolveObject(typeof(T));
             this.currentTypes.Clear();
-            return type;
+            return instance;
         }
 
-        private object Resolve(Type contract)
+        /// <summary>
+        /// Asks the container for a new instance of a type
+        /// </summary>
+        public object Resolve(Type type)
+        {
+            var instance = this.ResolveObject(type);
+            this.currentTypes.Clear();
+            return instance;
+        }
+
+        private object ResolveObject(Type contract)
         {
             Console.WriteLine("Onbox Container request: " + contract.ToString());
 
@@ -173,14 +185,14 @@ namespace Onbox.Di.V7
             }
             else if (this.singletonCache.ContainsKey(contract))
             {
-                var instance = this.Resolve(contract, this.singletonCache);
+                var instance = this.ResolveObject(contract, this.singletonCache);
                 this.instances[contract] = instance;
                 this.singletonCache.Remove(contract);
                 return instance;
             }
             else if (!contract.IsAbstract || this.types.ContainsKey(contract))
             {
-                var instance = this.Resolve(contract, this.types);
+                var instance = this.ResolveObject(contract, this.types);
                 return instance;
             }
             else
@@ -189,7 +201,7 @@ namespace Onbox.Di.V7
             }
         }
 
-        private object Resolve(Type contract, IDictionary<Type, Type> dic)
+        private object ResolveObject(Type contract, IDictionary<Type, Type> dic)
         {
             // Check for Ciruclar dependencies
             if (this.currentTypes.Contains(contract))
@@ -243,7 +255,7 @@ namespace Onbox.Di.V7
             {
                 var type = parameterInfo.ParameterType;
                 currentType = implementation;
-                parameters.Add(this.Resolve(type));
+                parameters.Add(this.ResolveObject(type));
             }
 
             Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
