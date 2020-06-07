@@ -40,10 +40,10 @@ namespace Onbox.Mvc.V7
 
         private void OnClearMessage(object sender, MouseButtonEventArgs e)
         {
-            var window = VisualTreeHelpers.GetParent<Window>(this);
-            if (window != null && window.DataContext is MvcViewBase viewMvcBase)
+            var component = VisualTreeHelpers.GetParentMvcComponent(this);
+            if (component != null)
             {
-                viewMvcBase.Message = null;
+                component.Message = null;
             }
         }
     }

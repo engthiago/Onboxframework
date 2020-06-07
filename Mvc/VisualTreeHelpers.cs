@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -34,10 +31,28 @@ namespace Onbox.Mvc.V7
                     break;
                 }
 
-                parent = parent.Parent as FrameworkElement;
+                parent = VisualTreeHelper.GetParent(parent) as FrameworkElement;
             }
 
             return parent as T;
+        }
+
+        public static IMvcLifeCycle GetParentMvcComponent(DependencyObject d)
+        {
+            var parent = VisualTreeHelper.GetParent(d) as FrameworkElement;
+            Type targetType = typeof(IMvcLifeCycle);
+            while (parent != null)
+            {
+                Type type = parent.GetType();
+                if (type.GetInterfaces().Contains(targetType))
+                {
+                    break;
+                }
+
+                parent = VisualTreeHelper.GetParent(parent) as FrameworkElement;
+            }
+
+            return parent as IMvcLifeCycle;
         }
 
         public static DependencyObject GetParent(string typeName, DependencyObject d)
@@ -51,24 +66,24 @@ namespace Onbox.Mvc.V7
             return parent;
         }
 
-        public static T GetVisualChild<T>(DependencyObject d) where T : FrameworkElement
-        {
-            var child = VisualTreeHelper.GetParent(d) as FrameworkElement;
-            Type type = typeof(T);
-            while (child != null && child.GetType() != type)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(d); i++)
-                {
-                    var subChild = VisualTreeHelper.GetChild(d, i);
-                    if (subChild.GetType() == type)
-                    {
-                        child = subChild as FrameworkElement;
-                        break;
-                    }
-                }
-            }
+        //public static T GetVisualChild<T>(DependencyObject d) where T : FrameworkElement
+        //{
+        //    var child = VisualTreeHelper.GetParent(d) as FrameworkElement;
+        //    Type type = typeof(T);
+        //    while (child != null && child.GetType() != type)
+        //    {
+        //        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(d); i++)
+        //        {
+        //            var subChild = VisualTreeHelper.GetChild(d, i);
+        //            if (subChild.GetType() == type)
+        //            {
+        //                child = subChild as FrameworkElement;
+        //                break;
+        //            }
+        //        }
+        //    }
 
-            return child as T;
-        }
+        //    return child as T;
+        //}
     }
 }

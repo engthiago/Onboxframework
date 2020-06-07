@@ -15,10 +15,10 @@ namespace Onbox.Mvc.V7
 
         private void OnRetryClicked(object sender, RoutedEventArgs e)
         {
-            var window = VisualTreeHelpers.GetParent<Window>(this);
-            if (window is MvcViewBase viewMvc)
+            var component = VisualTreeHelpers.GetParentMvcComponent(this);
+            if (component != null)
             {
-                viewMvc.OnWarningRetry();
+                component.OnWarningRetry();
             }
         }
     }

@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorPicker.cs" />
-    <Compile Include="Component.cs" />
+    <Compile Include="MvcComponent.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BitmapSourceCheckToUnchekedConverter.cs" />
     <Compile Include="Converters\BitmapToBitmapSource.cs" />
