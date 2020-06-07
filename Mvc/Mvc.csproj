@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorPicker.cs" />
+    <Compile Include="Component.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BitmapSourceCheckToUnchekedConverter.cs" />
     <Compile Include="Converters\BitmapToBitmapSource.cs" />
@@ -101,10 +102,12 @@
     <Compile Include="Converters\ValueIsNotNullConverter.cs" />
     <Compile Include="Converters\ValueNotEqualsToConverter .cs" />
     <Compile Include="CustomControls\EmptyButton.cs" />
+    <Compile Include="IMvcComponent.cs" />
     <Compile Include="ImgButton.xaml.cs">
       <DependentUpon>ImgButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImgToggleButton.cs" />
+    <Compile Include="IMvcLifeCycle.cs" />
     <Compile Include="LoadingLine.cs" />
     <Compile Include="CustomControls\ProgressBarControl.xaml.cs">
       <DependentUpon>ProgressBarControl.xaml</DependentUpon>
@@ -118,7 +121,7 @@
     <Compile Include="Spinner.cs" />
     <Compile Include="SpinnerDashed.cs" />
     <Compile Include="Utils\ImageUtils.cs" />
-    <Compile Include="ViewMvcBase.cs" />
+    <Compile Include="MvcViewBase.cs" />
     <Compile Include="VisualTreeHelpers.cs" />
     <Compile Include="WarningIcon.xaml.cs">
       <DependentUpon>WarningIcon.xaml</DependentUpon>
@@ -133,7 +136,7 @@
     </Compile>
     <Compile Include="If.cs" />
     <Compile Include="Is.cs" />
-    <Compile Include="IViewMvc.cs" />
+    <Compile Include="IMvcView.cs" />
     <Page Include="CustomControls\ProgressBarControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

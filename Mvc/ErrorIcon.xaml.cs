@@ -16,7 +16,7 @@ namespace Onbox.Mvc.V7
         private void OnRetryClicked(object sender, RoutedEventArgs e)
         {
             var window = VisualTreeHelpers.GetParent<Window>(this);
-            if (window is ViewMvcBase viewMvc)
+            if (window is MvcViewBase viewMvc)
             {
                 viewMvc.OnErrorRetry();
             }

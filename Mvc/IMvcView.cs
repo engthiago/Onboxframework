@@ -6,15 +6,8 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides base functionality for WPF MVC Pattern
     /// </summary>
-    public interface IViewMvc
+    public interface IMvcView : IMvcComponent
     {
-        /// <summary>
-        /// Runs an async method on View Initialization
-        /// </summary>
-        /// <param name="func">The method to run</param>
-        /// <param name="error">If an exception is raised</param>
-        /// <param name="complete">After completing the method</param>
-        void RunOnInitFunc(Func<Task> func, Action<string> error = null, Action complete = null);
         /// <summary>
         /// Set another window as the Owner of this Window
         /// </summary>
@@ -30,7 +23,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides Modal dialog feature
     /// </summary>
-    public interface IViewMvcModal : IViewMvc
+    public interface IViewMvcModal
     {
         /// <summary>
         /// Opens a window and returns only when the newly opened window is closed
@@ -42,7 +35,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides Modeless dialog feature
     /// </summary>
-    public interface IViewMvcModeless : IViewMvc
+    public interface IViewMvcModeless
     {
         /// <summary>
         /// Opens the window and returns without waiting for the newly opened window to close

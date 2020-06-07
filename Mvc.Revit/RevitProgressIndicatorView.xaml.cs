@@ -10,7 +10,7 @@ namespace Onbox.Mvc.Revit.V7
     /// <summary>
     /// Reports progress via a WPF Window
     /// </summary>
-    public partial class RevitProgressIndicatorView : RevitViewMvcBase, IProgressIndicator
+    public partial class RevitProgressIndicatorView : RevitMvcViewBase, IProgressIndicator
     {
         public int Total { get; set; }
         public int CurrentProgress { get; set; }

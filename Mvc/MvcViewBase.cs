@@ -9,7 +9,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides base functionality for WPF MVC Pattern
     /// </summary>
-    public abstract class ViewMvcBase : Window, INotifyPropertyChanged, IViewMvc
+    public abstract class MvcViewBase : Window, INotifyPropertyChanged, IMvcView, IMvcViewLifeCycle
     {
         /// <summary>
         /// Event that gets fired when any property changes on child classes
@@ -29,7 +29,7 @@ namespace Onbox.Mvc.V7
         private Action<string> onInitAsyncError;
         private Action onInitComplete;
 
-        public ViewMvcBase()
+        public MvcViewBase()
         {
             this.DataContext = this;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;

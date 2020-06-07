@@ -59,7 +59,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRevitViewMvcBase.cs" />
+    <Compile Include="IRevitMvcViewBase.cs" />
     <Compile Include="MvcExtensions.cs" />
     <Compile Include="RevitProgressIndicatorView.xaml.cs">
       <DependentUpon>RevitProgressIndicatorView.xaml</DependentUpon>
@@ -77,7 +77,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RevitViewMvcBase.cs" />
+    <Compile Include="RevitMvcViewBase.cs" />
     <Compile Include="RevitViewAttacher.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

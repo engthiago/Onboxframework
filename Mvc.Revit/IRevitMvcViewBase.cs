@@ -3,9 +3,9 @@
 namespace Onbox.Mvc.Revit.V7
 {
     /// <summary>
-    /// Provides specific Revit functionaliy to <see cref="IViewMvc"/> like set Revit as parent window and Title Bar visibility
+    /// Provides specific Revit functionaliy to <see cref="IMvcView"/> like set Revit as parent window and Title Bar visibility
     /// </summary>
-    public interface IRevitViewMvcBase : IViewMvc
+    public interface IRevitMvcViewBase : IMvcView
     {
         /// <summary>
         /// Tells how to display this windows's Title Bar, Minimize, and Maximize buttons
