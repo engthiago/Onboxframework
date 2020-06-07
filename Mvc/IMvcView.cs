@@ -23,7 +23,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides Modal dialog feature
     /// </summary>
-    public interface IViewMvcModal
+    public interface IMvcViewModal
     {
         /// <summary>
         /// Opens a window and returns only when the newly opened window is closed
@@ -35,7 +35,7 @@ namespace Onbox.Mvc.V7
     /// <summary>
     /// Provides Modeless dialog feature
     /// </summary>
-    public interface IViewMvcModeless
+    public interface IMvcViewModeless
     {
         /// <summary>
         /// Opens the window and returns without waiting for the newly opened window to close
