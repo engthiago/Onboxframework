@@ -6,6 +6,9 @@ namespace Onbox.Mvc.Revit.V7
 {
     public static class MvcExtensions
     {
+        /// <summary>
+        /// Adds <see cref="IProgressIndicator"/> as <see cref="RevitProgressIndicatorView"/> and <see cref="INavigator"/> as <see cref="Navigator"/>
+        /// </summary>
         public static IContainer AddRevitMvc(this IContainer container)
         {
             container.AddTransient<IProgressIndicator, RevitProgressIndicatorView>();
