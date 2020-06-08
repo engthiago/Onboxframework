@@ -9,12 +9,15 @@ using System.Windows.Controls;
 
 namespace Onbox.Mvc.V7
 {
+    /// <summary>
+    /// Provides ways to Navigate between components and get notified when a <see cref="NavigatorComponent"/> recieves a new component to navigate to
+    /// </summary>
     public interface INavigator
     {
         INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component)
             where TParent : IMvcLifecycleComponent
             where TNavComponent : NavigatorComponent;
-        MvcComponentBase GetCurrentPage<TParent>(string componentName = "Navigator") 
+        IMvcComponent GetCurrentComponent<TParent>(string componentName = "Navigator") 
             where TParent : IMvcLifecycleComponent;
         void ClearNavigation<TParent>(string componentName = "Navigator") 
             where TParent : IMvcLifecycleComponent;
@@ -27,6 +30,9 @@ namespace Onbox.Mvc.V7
             where TParent : IMvcLifecycleComponent;
     }
 
+    /// <summary>
+    /// Provides ways to Navigate between components and get notified when a <see cref="NavigatorComponent"/> recieves a new component to navigate to
+    /// </summary>
     public class Navigator : INavigator
     {
         private readonly Dictionary<string, Dictionary<string, Type>> componentDictionary = new Dictionary<string, Dictionary<string, Type>>();
@@ -129,7 +135,7 @@ namespace Onbox.Mvc.V7
             return identitifier;
         }
 
-        public MvcComponentBase GetCurrentPage<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
+        public IMvcComponent GetCurrentComponent<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
         {
             string identitifier = GetParentIdentifier<TParent>();
             return GetCurrentComponent(identitifier, componentName);
