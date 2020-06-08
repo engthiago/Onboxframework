@@ -29,8 +29,8 @@ namespace Onbox.Mvc.V7
 
     public class Navigator : INavigator
     {
-        public readonly Dictionary<string, Dictionary<string, Type>> componentDictionary = new Dictionary<string, Dictionary<string, Type>>();
-        public readonly Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>>();
+        private readonly Dictionary<string, Dictionary<string, Type>> componentDictionary = new Dictionary<string, Dictionary<string, Type>>();
+        private readonly Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>>();
         private readonly IContainerResolver container;
 
         private readonly int maxNavigatorHierarchy = 16;
