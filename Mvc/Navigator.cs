@@ -33,6 +33,8 @@ namespace Onbox.Mvc.V7
         public readonly Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>> actionDictionary = new Dictionary<string, Dictionary<string, List<Action<IMvcComponent>>>>();
         private readonly IContainerResolver container;
 
+        private readonly int maxNavigatorHierarchy = 16;
+
         public Navigator(IContainerResolver container)
         {
             this.container = container;
@@ -73,7 +75,13 @@ namespace Onbox.Mvc.V7
                 componentDictionary[parentIdentifier] = new Dictionary<string, Type>();
             }
 
-            var subs = Subscribe(parentIdentifier, component.Name, (page) => component.Content = page);
+            var subs = Subscribe(parentIdentifier, component.Name, (comp) =>
+            {
+                if (!ReachedMaxNavigatorHierarchy(component))
+                {
+                    component.Content = comp;
+                }
+            });
             component.NavigatorSubscription = subs;
             return subs;
         }
@@ -86,9 +94,18 @@ namespace Onbox.Mvc.V7
                 if (parent != null)
                 {
                     var parentIdentifier = GetParentIdentifier(parent);
-                    navigatorComponent.Content = GetCurrentPage(parentIdentifier, navigatorComponent.Name);
+                    var current = GetCurrentComponent(parentIdentifier, navigatorComponent.Name);
+                    if (!ReachedMaxNavigatorHierarchy(navigatorComponent))
+                    {
+                        navigatorComponent.Content = current;
+                    }
                 }
             }
+        }
+
+        private bool ReachedMaxNavigatorHierarchy(NavigatorComponent navigator)
+        {
+            return VisualTreeHelpers.GetCircularParentHierarchyCount(navigator, maxNavigatorHierarchy);
         }
 
         private void Component_Unloaded(object sender, RoutedEventArgs e)
@@ -115,10 +132,10 @@ namespace Onbox.Mvc.V7
         public MvcComponentBase GetCurrentPage<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
         {
             string identitifier = GetParentIdentifier<TParent>();
-            return GetCurrentPage(identitifier, componentName);
+            return GetCurrentComponent(identitifier, componentName);
         }
 
-        private MvcComponentBase GetCurrentPage(string parentIdentifier, string componentName)
+        private MvcComponentBase GetCurrentComponent(string parentIdentifier, string componentName)
         {
             if (componentDictionary.ContainsKey(parentIdentifier))
             {

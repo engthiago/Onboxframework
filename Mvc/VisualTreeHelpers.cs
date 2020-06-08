@@ -55,15 +55,54 @@ namespace Onbox.Mvc.V7
             return parent as IMvcLifecycleComponent;
         }
 
-        public static DependencyObject GetParent(string typeName, DependencyObject d)
+        internal static DependencyObject GetParent(string fullTypeName, DependencyObject d)
         {
             var parent = VisualTreeHelper.GetParent(d);
-            while (parent != null && parent.GetType().Name != typeName)
+            while (parent != null && parent.GetType().FullName != fullTypeName)
             {
                 parent = VisualTreeHelper.GetParent(parent);
             }
 
             return parent;
+        }
+
+        internal static DependencyObject GetParent(DependencyObject d, Type target)
+        {
+            var parent = VisualTreeHelper.GetParent(d);
+            while (parent != null && parent.GetType() != target)
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            return parent;
+        }
+
+        internal static bool GetCircularParentHierarchyCount(DependencyObject d, int limit = 64)
+        {
+            var type = d.GetType();
+            var parent = VisualTreeHelper.GetParent(d);
+            var counter = 0;
+            while (parent != null)
+            {
+                if (parent.GetType() == type)
+                {
+                    counter++;
+                }
+
+                if (counter >= limit)
+                {
+                    return true;
+                }
+
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+
+            if (counter >= limit)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         //public static T GetVisualChild<T>(DependencyObject d) where T : FrameworkElement
