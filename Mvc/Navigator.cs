@@ -19,7 +19,7 @@ namespace Onbox.Mvc.V7
         /// </summary>
         /// <typeparam name="TParent">The Parent to the Navigator Component, generally a View or a MvcComponent</typeparam>
         /// <typeparam name="TNavComponent">the Navigator Component itself</typeparam>
-        INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component)
+        void Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component)
             where TParent : IMvcLifecycleComponent
             where TNavComponent : NavigatorComponent;
 
@@ -67,7 +67,7 @@ namespace Onbox.Mvc.V7
             this.container = container;
         }
 
-        public INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component) where TParent : IMvcLifecycleComponent where TNavComponent : NavigatorComponent
+        public void Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component) where TParent : IMvcLifecycleComponent where TNavComponent : NavigatorComponent
         {
             if (parentComponent == null)
             {
@@ -110,7 +110,6 @@ namespace Onbox.Mvc.V7
                 }
             });
             component.NavigatorSubscription = subs;
-            return subs;
         }
 
         private void Component_Loaded(object sender, RoutedEventArgs e)
