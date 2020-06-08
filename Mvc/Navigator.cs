@@ -14,18 +14,39 @@ namespace Onbox.Mvc.V7
     /// </summary>
     public interface INavigator
     {
+        /// <summary>
+        /// Hooks up a <see cref="NavigatorComponent"/> and its parent to the Navigation System. It will automatically be notified of navigation changes and control its life cycle and cleaning up after unloading.
+        /// </summary>
+        /// <typeparam name="TParent">The Parent to the Navigator Component, generally a View or a MvcComponent</typeparam>
+        /// <typeparam name="TNavComponent">the Navigator Component itself</typeparam>
         INavigatorSubscription Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component)
             where TParent : IMvcLifecycleComponent
             where TNavComponent : NavigatorComponent;
+
+        /// <summary>
+        /// Gets the current Component associated to a specific <see cref="NavigatorComponent"/>
+        /// </summary>
         IMvcComponent GetCurrentComponent<TParent>(string componentName = "Navigator") 
             where TParent : IMvcLifecycleComponent;
+        /// <summary>
+        /// Clears a specific <see cref="NavigatorComponent"/>, setting its child to null
+        /// </summary>
         void ClearNavigation<TParent>(string componentName = "Navigator") 
             where TParent : IMvcLifecycleComponent;
+        /// <summary>
+        /// Navigates a specific <see cref="NavigatorComponent"/> to a specific <see cref="IMvcComponent"/>
+        /// </summary>
         void Navigate<TParent, TComponent>(string componentName = "Navigator")
             where TParent : IMvcLifecycleComponent
             where TComponent : IMvcComponent;
+        /// <summary>
+        /// Gets notified when the default <see cref="NavigatorComponent"/> (x:Name == 'Navigator') of a specific Parent changes. Remember to call Unsubscribe to avoid memory leaks.
+        /// </summary>
         INavigatorSubscription Subscribe<TParent>(Action<IMvcComponent> action) 
             where TParent : IMvcLifecycleComponent;
+        /// <summary>
+        /// Gets notified when a <see cref="NavigatorComponent"/> of a specific Parent changes. Remember to call Unsubscribe to avoid memory leaks.
+        /// </summary>
         INavigatorSubscription Subscribe<TParent>(string componentName, Action<IMvcComponent> action) 
             where TParent : IMvcLifecycleComponent;
     }
