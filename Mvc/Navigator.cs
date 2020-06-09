@@ -62,11 +62,19 @@ namespace Onbox.Mvc.V7
 
         private readonly int maxNavigatorHierarchy = 16;
 
+        /// <summary>
+        /// Provides ways to Navigate between components and get notified when a <see cref="NavigatorComponent"/> recieves a new component to navigate to
+        /// </summary>
         public Navigator(IContainerResolver container)
         {
             this.container = container;
         }
 
+        /// <summary>
+        /// Hooks up a <see cref="NavigatorComponent"/> and its parent to the Navigation System. It will automatically be notified of navigation changes and control its life cycle and cleaning up after unloading.
+        /// </summary>
+        /// <typeparam name="TParent">The Parent to the Navigator Component, generally a View or a MvcComponent</typeparam>
+        /// <typeparam name="TNavComponent">the Navigator Component itself</typeparam>
         public void Attach<TParent, TNavComponent>(TParent parentComponent, TNavComponent component) where TParent : IMvcLifecycleComponent where TNavComponent : NavigatorComponent
         {
             if (parentComponent == null)
@@ -155,6 +163,9 @@ namespace Onbox.Mvc.V7
             return identitifier;
         }
 
+        /// <summary>
+        /// Gets the current Component associated to a specific <see cref="NavigatorComponent"/>
+        /// </summary>
         public IMvcComponent GetCurrentComponent<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
         {
             string identitifier = GetParentIdentifier<TParent>();
@@ -188,6 +199,9 @@ namespace Onbox.Mvc.V7
             }
         }
 
+        /// <summary>
+        /// Navigates a specific <see cref="NavigatorComponent"/> to a specific <see cref="IMvcComponent"/>
+        /// </summary>
         public void Navigate<TParent, TComponent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent where TComponent : IMvcComponent
         {
             var parentIdentifier = GetParentIdentifier<TParent>();
@@ -195,6 +209,9 @@ namespace Onbox.Mvc.V7
             Navigate(parentIdentifier, componentName, componentType);
         }
 
+        /// <summary>
+        /// Clears a specific <see cref="NavigatorComponent"/>, setting its child to null
+        /// </summary>
         public void ClearNavigation<TParent>(string componentName = "Navigator") where TParent : IMvcLifecycleComponent
         {
             var parentIdentifier = GetParentIdentifier<TParent>();
@@ -244,13 +261,17 @@ namespace Onbox.Mvc.V7
                 }
             }
         }
-
+        /// <summary>
+        /// Gets notified when the default <see cref="NavigatorComponent"/> (x:Name == 'Navigator') of a specific Parent changes. Remember to call Unsubscribe to avoid memory leaks.
+        /// </summary>
         public INavigatorSubscription Subscribe<TParent>(Action<IMvcComponent> action) where TParent : IMvcLifecycleComponent
         {
             var componentName = "Navigator";
             return Subscribe<TParent>(componentName, action);
         }
-
+        /// <summary>
+        /// Gets notified when a <see cref="NavigatorComponent"/> of a specific Parent changes. Remember to call Unsubscribe to avoid memory leaks.
+        /// </summary>
         public INavigatorSubscription Subscribe<TParent>(string componentName, Action<IMvcComponent> action) where TParent : IMvcLifecycleComponent
         {
             var parentIdentifier = GetParentIdentifier<TParent>();
@@ -291,22 +312,37 @@ namespace Onbox.Mvc.V7
         }
     }
 
+    /// <summary>
+    /// Subscription to a <see cref="INavigator"/>
+    /// </summary>
     public interface INavigatorSubscription
     {
+        /// <summary>
+        /// Unsubscribes from the callback and cleans up the resources
+        /// </summary>
         void UnSubscribe();
     }
 
+    /// <summary>
+    /// Subscription to a <see cref="INavigator"/>
+    /// </summary>
     public class NavigatorSubscription : INavigatorSubscription
     {
         private Action<IMvcComponent> action;
         private List<Action<IMvcComponent>> actions;
 
+        /// <summary>
+        /// Subscription to a <see cref="INavigator"/>
+        /// </summary>
         public NavigatorSubscription(Action<IMvcComponent> action, List<Action<IMvcComponent>> actions)
         {
             this.action = action;
             this.actions = actions;
         }
 
+        /// <summary>
+        /// Unsubscribes from the callback and cleans up the resources
+        /// </summary>
         public void UnSubscribe()
         {
             this.actions.Remove(action);
