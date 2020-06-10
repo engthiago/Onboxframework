@@ -120,4 +120,8 @@
   </Target>
   <Import Project="..\packages\Microsoft.CodeCoverage.16.5.0-preview-20200110-02\build\netstandard1.0\Microsoft.CodeCoverage.targets" Condition="Exists('..\packages\Microsoft.CodeCoverage.16.5.0-preview-20200110-02\build\netstandard1.0\Microsoft.CodeCoverage.targets')" />
   <Import Project="..\packages\Microsoft.NET.Test.Sdk.16.5.0-preview-20200110-02\build\net40\Microsoft.NET.Test.Sdk.targets" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.16.5.0-preview-20200110-02\build\net40\Microsoft.NET.Test.Sdk.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

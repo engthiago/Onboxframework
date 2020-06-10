@@ -38,6 +38,24 @@ namespace Onbox.Mvc.V7
 
             this.Loaded += this.OnViewLoaded;
             this.ContentRendered += this.OnViewRendered;
+            this.Deactivated += this.OnDeactivated;
+            this.Activated += this.OnActivated;
+        }
+
+        private void OnActivated(object sender, EventArgs e)
+        {
+            if (this.Content is UIElement uIElement)
+            {
+                uIElement.Opacity = 1;
+            }
+        }
+
+        private void OnDeactivated(object sender, EventArgs e)
+        {
+            if (this.Content is UIElement uIElement)
+            {
+                uIElement.Opacity = 0.5;
+            }
         }
 
         private async void OnViewLoaded(object sender, RoutedEventArgs e)

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Revit", "Revit\Revit.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc.Revit", "Mvc.Revit\Mvc.Revit.csproj", "{1902D3EA-F7F0-4EFA-8237-805859E794F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceFramework", "ReferenceFramework\ReferenceFramework.csproj", "{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,14 @@ Global
 		{1902D3EA-F7F0-4EFA-8237-805859E794F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1902D3EA-F7F0-4EFA-8237-805859E794F5}.Release|x64.ActiveCfg = Release|Any CPU
 		{1902D3EA-F7F0-4EFA-8237-805859E794F5}.Release|x64.Build.0 = Release|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Debug|x64.Build.0 = Debug|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Release|x64.ActiveCfg = Release|Any CPU
+		{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
