@@ -114,7 +114,7 @@ namespace Onbox.Mvc.V7
             {
                 if (!ReachedMaxNavigatorHierarchy(component))
                 {
-                    component.Content = comp;
+                    component.CurrentComponent = comp;
                 }
             });
             component.NavigatorSubscription = subs;
@@ -131,7 +131,7 @@ namespace Onbox.Mvc.V7
                     var current = GetCurrentComponent(parentIdentifier, navigatorComponent.Name);
                     if (!ReachedMaxNavigatorHierarchy(navigatorComponent))
                     {
-                        navigatorComponent.Content = current;
+                        navigatorComponent.CurrentComponent = current;
                     }
                 }
             }

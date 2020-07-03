@@ -64,6 +64,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\SlideAnimations.cs" />
     <Compile Include="ColorPicker.cs" />
     <Compile Include="MvcComponent.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
