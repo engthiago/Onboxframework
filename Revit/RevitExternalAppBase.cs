@@ -1,54 +1,29 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.DB;
-using Autodesk.Revit.UI;
+﻿using Autodesk.Revit.UI;
 using Onbox.Di.V7;
 using Onbox.Revit.V7.UI;
-using System;
+using System.Collections.Concurrent;
 
 namespace Onbox.Revit.V7
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    sealed class ContainerOriginAttribute : Attribute
-    {
-        public ContainerOriginAttribute()
-        {
-        }
-    }
-
     public abstract class RevitExternalAppBase : RevitExternalAppBase<Container>
     {
     }
 
-    [ContainerOrigin]
-    public abstract class RevitExternalAppBase<TContainer> : IExternalApplication 
+    public abstract class RevitExternalAppBase<TContainer> : IExternalApplication
         where TContainer : class, IContainer, new()
     {
-        private static volatile IContainer container;
-        private static object syncRoot = new Object();
+        private static RevitEventTracker revitEventTracker;
+        private static bool hookedUpEvents;
+        private static ConcurrentDictionary<string, IContainer> containers = new ConcurrentDictionary<string, IContainer>();
 
-        private static IContainer ContainerInstance
+        internal static IContainer GetContainer(string guid)
         {
-            get
+            if (containers.TryGetValue(guid, out IContainer container))
             {
-                if (container == null)
-                {
-                    lock (syncRoot)
-                    {
-                        if (container == null)
-                        {
-                            container = new TContainer();
-                        }
-                            
-                    }
-                }
-
                 return container;
             }
-        }
 
-        public static IContainer GetContainer()
-        {
-            return ContainerInstance;
+            return null;
         }
 
         public abstract void OnStartup(IContainer container, UIControlledApplication application);
@@ -57,14 +32,33 @@ namespace Onbox.Revit.V7
 
         public Result OnStartup(UIControlledApplication application)
         {
-            HookupRevitEvents(application);
+            var containerGuid = ContainerProviderReflector.GetContainerGuid(this);
 
-            AddRevit(application);
+            IContainer container = new TContainer();
 
-            ContainerInstance.AddSingleton(ContainerInstance);
-            ContainerInstance.AddSingleton<IContainerResolver>(ContainerInstance);
+            // Do not duplicate existing container with the same GUID, instead, share same container
+            if (containers.ContainsKey(containerGuid))
+            {
+                container = containers[containerGuid];
+            }
+            else
+            {
+                containers[containerGuid] = container;
+                container.AddSingleton(container);
+                container.AddSingleton<IContainerResolver>(container);
+            }
 
-            OnStartup(ContainerInstance, application);
+            // Only Hook events once, accross all apps using Onbox
+            if (!hookedUpEvents)
+            {
+                hookedUpEvents = true;
+                revitEventTracker = new RevitEventTracker(containers);
+                revitEventTracker.HookupRevitEvents(application);
+            }
+
+            RevitInjector.AddRevitUI(container, application);
+
+            OnStartup(container, application);
 
             var imageManager = new ImageManager();
             var ribbonManager = new RibbonManager(application, imageManager);
@@ -73,78 +67,33 @@ namespace Onbox.Revit.V7
             return Result.Succeeded;
         }
 
-        private void HookupRevitEvents(UIControlledApplication application)
-        {
-            application.ControlledApplication.DocumentChanged += this.OnDocumentChanged;
-            application.ControlledApplication.DocumentOpened += this.OnDocumentOpened;
-            application.ControlledApplication.DocumentClosed += this.OnDocumentClosed;
-            application.ControlledApplication.DocumentCreated += this.OnDocumentCreated;
-        }
-
         public Result OnShutdown(UIControlledApplication application)
         {
-            UnhookRevitEvents(application);
+            revitEventTracker.UnhookRevitEvents(application);
 
-            try
+            foreach (var item in containers)
             {
-                OnShutdown(ContainerInstance, application);
-            }
-            finally
-            {
-                ContainerInstance.Dispose();
+                var container = item.Value;
+
+                try
+                {
+                    OnShutdown(container, application);
+                }
+                finally
+                {
+                    container.Dispose();
+                    containers.TryRemove(item.Key, out IContainer removedContainer);
+                }
             }
 
             return Result.Succeeded;
-        }
-
-        private void UnhookRevitEvents(UIControlledApplication application)
-        {
-            application.ControlledApplication.DocumentChanged -= this.OnDocumentChanged;
-            application.ControlledApplication.DocumentOpened -= this.OnDocumentOpened;
-            application.ControlledApplication.DocumentClosed -= this.OnDocumentClosed;
-            application.ControlledApplication.DocumentCreated -= this.OnDocumentCreated;
         }
 
         public virtual void OnCreateRibbon(IRibbonManager ribbonManager)
         {
         }
 
-        private void OnDocumentCreated(object sender, Autodesk.Revit.DB.Events.DocumentCreatedEventArgs e)
-        {
-            ContainerInstance.AddSingleton(e.Document);
-        }
 
-        private void OnDocumentClosed(object sender, Autodesk.Revit.DB.Events.DocumentClosedEventArgs e)
-        {
-            ContainerInstance.AddSingleton<Document>(null);
-        }
-
-        private void OnDocumentOpened(object sender, Autodesk.Revit.DB.Events.DocumentOpenedEventArgs e)
-        {
-            ContainerInstance.AddSingleton(e.Document);
-        }
-
-        private void OnDocumentChanged(object sender, Autodesk.Revit.DB.Events.DocumentChangedEventArgs e)
-        {
-            ContainerInstance.AddSingleton(e.GetDocument());
-        }
-
-        private void AddRevit(UIControlledApplication application)
-        {
-            var revitUIApp = new RevitUIApp
-            {
-                isViewerMode = application.IsViewerModeActive,
-                languageType = (RevitLanguage)application.ControlledApplication.Language.GetHashCode(),
-                versionBuild = application.ControlledApplication.VersionBuild,
-                versionNumber = application.ControlledApplication.VersionNumber,
-                subVersionNumber = application.ControlledApplication.SubVersionNumber,
-                versionName = application.ControlledApplication.VersionName,
-                revitWindowHandle = application.MainWindowHandle
-            };
-
-            ContainerInstance.AddSingleton<IRevitUIApp>(revitUIApp);
-            ContainerInstance.AddSingleton<Document>(null);
-        }
 
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Onbox.Di.V7;
-using System.Reflection;
 
 namespace Onbox.Revit.V7
 {
@@ -12,20 +11,9 @@ namespace Onbox.Revit.V7
         public RevitExternalCommandBase()
         {
             var type = typeof(TApplication);
-            var isContainerOrigin = false;
 
-            while (!isContainerOrigin)
-            {
-                type = type.BaseType;
-                if (type == null)
-                {
-                    throw new System.Exception("Container Origin not found!");
-                }
-                isContainerOrigin = type.GetCustomAttribute<ContainerOriginAttribute>() != null ? true : false;
-            }
-
-            var method = type.GetMethod(nameof(RevitExternalAppBase.GetContainer), BindingFlags.Static | BindingFlags.Public);
-            this.container = method.Invoke(null, null) as IContainerResolver;
+            var containerGuid = ContainerProviderReflector.GetContainerGuid(type);
+            this.container = RevitExternalAppBase.GetContainer(containerGuid);
 
             if (this.container == null)
             {
