@@ -39,6 +39,7 @@ namespace Onbox.Revit.V7
             application.ControlledApplication.DocumentClosed -= this.OnDocumentClosed;
             application.ControlledApplication.DocumentCreated -= this.OnDocumentCreated;
 
+            // Makes sure to unhook the ViewChanged event and get rid of reference to uiApplication
             UnhookViewChanged();
         }
 
