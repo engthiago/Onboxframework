@@ -77,12 +77,13 @@
   <ItemGroup>
     <Compile Include="ContainerProviderAttribute.cs" />
     <Compile Include="ContainerProviderReflector.cs" />
+    <Compile Include="IRevitExternalApp.cs" />
+    <Compile Include="RevitContainerBase.cs" />
     <Compile Include="RevitEventTracker.cs" />
     <Compile Include="RevitExternalCommandBase.cs" />
     <Compile Include="RevitExternalAppBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRevitUIApp.cs" />
-    <Compile Include="RevitInjector.cs" />
     <Compile Include="RevitLanguage.cs" />
     <Compile Include="RevitUIApp.cs" />
     <Compile Include="UI\ImageManager.cs" />

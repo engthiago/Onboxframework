@@ -1,99 +1,91 @@
 ﻿using Autodesk.Revit.UI;
 using Onbox.Di.V7;
 using Onbox.Revit.V7.UI;
-using System.Collections.Concurrent;
 
 namespace Onbox.Revit.V7
 {
+    /// <summary>
+    /// The base class implementation of RevitExternalAppBase using <see cref="Container"/> implementation for convinience
+    /// <para>This class provides OnStartup, OnCreateRibbon, and OnShutdown lifecycle events.</para>
+    /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
+    /// </summary>
     public abstract class RevitExternalAppBase : RevitExternalAppBase<Container>
     {
     }
 
-    public abstract class RevitExternalAppBase<TContainer> : IExternalApplication
-        where TContainer : class, IContainer, new()
+    /// <summary>
+    /// The implementation of a generic IContainer type, if you like to use <see cref="Container"/>, you can use <see cref="RevitExternalAppBase"/> implementation instead
+    /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
+    /// </summary>
+    /// <typeparam name="TContainer">The contract for container implementations</typeparam>
+    public abstract class RevitExternalAppBase<TContainer> : RevitContainerBase, IRevitExternalApp where TContainer : class, IContainer, new()
     {
-        private static RevitEventTracker revitEventTracker;
-        private static bool hookedUpEvents;
-        private static ConcurrentDictionary<string, IContainer> containers = new ConcurrentDictionary<string, IContainer>();
+        public abstract Result OnStartup(IContainer container, UIControlledApplication application);
 
-        internal static IContainer GetContainer(string guid)
-        {
-            if (containers.TryGetValue(guid, out IContainer container))
-            {
-                return container;
-            }
-
-            return null;
-        }
-
-        public abstract void OnStartup(IContainer container, UIControlledApplication application);
-
-        public abstract void OnShutdown(IContainerResolver container, UIControlledApplication application);
+        public abstract Result OnShutdown(IContainerResolver container, UIControlledApplication application);
 
         public Result OnStartup(UIControlledApplication application)
         {
             var containerGuid = ContainerProviderReflector.GetContainerGuid(this);
 
-            IContainer container = new TContainer();
+            var container = new TContainer();
+            this.InjectContainerToItself(container);
 
-            // Do not duplicate existing container with the same GUID, instead, share same container
-            if (containers.ContainsKey(containerGuid))
+            this.HookUpContainer(container, containerGuid);
+            this.HookupEventTracker(application, container, containerGuid);
+
+            this.AddRevitUI(container, application);
+
+            try
             {
-                container = containers[containerGuid];
+                // Calls the client's Startup
+                var result = OnStartup(container, application);
+                if (result != Result.Succeeded)
+                {
+                    return result;
+                }
+
+                // Calls the client's CreateRibbon
+                var imageManager = new ImageManager();
+                var ribbonManager = new RibbonManager(application, imageManager);
+                OnCreateRibbon(ribbonManager);
+
+                return result;
             }
-            else
+            catch
             {
-                containers[containerGuid] = container;
-                container.AddSingleton(container);
-                container.AddSingleton<IContainerResolver>(container);
+                // If an exception the client's code, throw the exception to the stack
+                throw;
             }
-
-            // Only Hook events once, accross all apps using Onbox
-            if (!hookedUpEvents)
-            {
-                hookedUpEvents = true;
-                revitEventTracker = new RevitEventTracker(containers);
-                revitEventTracker.HookupRevitEvents(application);
-            }
-
-            RevitInjector.AddRevitUI(container, application);
-
-            OnStartup(container, application);
-
-            var imageManager = new ImageManager();
-            var ribbonManager = new RibbonManager(application, imageManager);
-            OnCreateRibbon(ribbonManager);
-
-            return Result.Succeeded;
         }
 
         public Result OnShutdown(UIControlledApplication application)
         {
-            revitEventTracker.UnhookRevitEvents(application);
+            var containerGuid = ContainerProviderReflector.GetContainerGuid(this);
+            var container = containers[containerGuid];
 
-            foreach (var item in containers)
+            try
             {
-                var container = item.Value;
-
-                try
-                {
-                    OnShutdown(container, application);
-                }
-                finally
-                {
-                    container.Dispose();
-                    containers.TryRemove(item.Key, out IContainer removedContainer);
-                }
+                // Unhooks the events
+                UnhookEventTracker(application, containerGuid);
+                // Calls the client's Shotdown
+                return OnShutdown(container, application);
             }
-
-            return Result.Succeeded;
+            catch
+            {
+                // If anything goes wrong with the client's code, throw the exception to the stack
+                throw;
+            }
+            finally
+            {
+                // Unhooks and cleans the container even if an exception is thrown
+                UnhookContainer(containerGuid, container);
+            }
         }
 
         public virtual void OnCreateRibbon(IRibbonManager ribbonManager)
         {
         }
-
-
 
     }
 }

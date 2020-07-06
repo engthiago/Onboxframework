@@ -6,21 +6,21 @@ namespace Onbox.Revit.V7
 {
     public abstract class RevitExternalCommandBase<TApplication> : IExternalCommand where TApplication : RevitExternalAppBase, new ()
     {
-        protected readonly IContainerResolver container;
-
-        public RevitExternalCommandBase()
+        public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            var type = typeof(TApplication);
+            IContainer container = GetContainer();
 
-            var containerGuid = ContainerProviderReflector.GetContainerGuid(type);
-            this.container = RevitExternalAppBase.GetContainer(containerGuid);
-
-            if (this.container == null)
-            {
-                this.container = Container.Default();
-            }
+            return Execute(container, commandData, ref message, elements);
         }
 
-        public abstract Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements);
+        private static IContainer GetContainer()
+        {
+            var type = typeof(TApplication);
+            var containerGuid = ContainerProviderReflector.GetContainerGuid(type);
+            var container = RevitContainerBase.GetContainer(containerGuid);
+            return container;
+        }
+
+        public abstract Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements);
     }
 }

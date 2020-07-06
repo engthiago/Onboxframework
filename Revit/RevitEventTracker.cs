@@ -1,17 +1,16 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Onbox.Di.V7;
-using System.Collections.Concurrent;
 
 namespace Onbox.Revit.V7
 {
     internal class RevitEventTracker
     {
-        private readonly ConcurrentDictionary<string, IContainer> containers;
+        private readonly IContainer container;
 
-        public RevitEventTracker(ConcurrentDictionary<string, IContainer>  containers)
+        public RevitEventTracker(IContainer container)
         {
-            this.containers = containers;
+            this.container = container;
         }
 
         internal void HookupRevitEvents(UIControlledApplication application)
@@ -33,34 +32,24 @@ namespace Onbox.Revit.V7
         private void OnDocumentChanged(object sender, Autodesk.Revit.DB.Events.DocumentChangedEventArgs e)
         {
             var doc = e.GetDocument();
-            foreach (var item in containers)
-            {
-                item.Value.AddSingleton(doc);
-            }
+            this.container.AddSingleton(doc);
         }
 
         private void OnDocumentCreated(object sender, Autodesk.Revit.DB.Events.DocumentCreatedEventArgs e)
         {
-            foreach (var item in containers)
-            {
-                item.Value.AddSingleton(e.Document);
-            }
+            var doc = e.Document;
+            this.container.AddSingleton(doc);
         }
 
         private void OnDocumentClosed(object sender, Autodesk.Revit.DB.Events.DocumentClosedEventArgs e)
         {
-            foreach (var item in containers)
-            {
-                item.Value.AddSingleton<Document>(null);
-            }
+            this.container.AddSingleton<Document>(null);
         }
 
         private void OnDocumentOpened(object sender, Autodesk.Revit.DB.Events.DocumentOpenedEventArgs e)
         {
-            foreach (var item in containers)
-            {
-                item.Value.AddSingleton(e.Document);
-            }
+            var doc = e.Document;
+            this.container.AddSingleton(doc);
         }
     }
 }
