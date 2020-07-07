@@ -14,9 +14,27 @@ namespace Onbox.Revit.V7
         /// </summary>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            // Gets the original container
             IContainer container = GetContainer();
+            
+            // Creates an scoped copy of the container
+            var scope = container.CreateScope();
 
-            return Execute(container, commandData, ref message, elements);
+            try
+            {
+                // Runs the users Execute command
+                return Execute(scope, commandData, ref message, elements);
+            }
+            catch
+            {
+                // If an exception is thrown on user's code, trows it back to the stack
+                throw;
+            }
+            finally
+            {
+                // Cleans up the scoped copy of the container
+                scope.Dispose();
+            }
         }
 
         private static IContainer GetContainer()

@@ -1,82 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Onbox.Di.V7
 {
     /// <summary>
-    /// Onbox's IOC container read only contract
-    /// </summary>
-    public interface IContainerResolver
-    {
-        /// <summary>
-        /// Asks the container for a new instance of a type
-        /// </summary>
-        T Resolve<T>();
-        /// <summary>
-        /// Asks the container for a new instance of a type
-        /// </summary>
-        object Resolve(Type type);
-    }
-
-    /// <summary>
-    /// Onbox's IOC container contract
-    /// </summary>
-    public interface IContainer : IContainerResolver
-    {
-        /// <summary>
-        /// Adds an implementation as a singleton on the container.
-        /// </summary>
-        void AddSingleton<TImplementation>() where TImplementation : class;
-
-        /// <summary>
-        /// Adds an instance as a singleton on the container
-        /// </summary>
-        void AddSingleton<TImplementation>(TImplementation instance) where TImplementation : class;
-
-        /// <summary>
-        /// Adds an implementation to a contract as a singleton on the container
-        /// </summary>
-        void AddSingleton<TContract, TImplementation>() where TImplementation : TContract;
-
-        /// <summary>
-        /// Adds an instance as a singleton on the container
-        /// </summary>
-        void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract;
-
-        /// <summary>
-        /// Adds an implementation as a transient on the container.
-        /// </summary>
-        void AddTransient<TImplementation>() where TImplementation : class;
-
-        /// <summary>
-        /// Adds an implementation to a contract as transient on the container
-        /// </summary>
-        void AddTransient<TContract, TImplementation>() where TImplementation : TContract;
-
-        /// <summary>
-        /// Resets the entire container
-        /// </summary>
-        void Clear();
-
-        /// <summary>
-        /// Clears and releases resources from the container
-        /// </summary>
-        void Dispose();
-    }
-
-    /// <summary>
     /// Onbox's IOC container implementation
     /// </summary>
     public class Container : IContainer, IDisposable
     {
-        private readonly IDictionary<Type, Type> types = new Dictionary<Type, Type>();
-        private readonly IDictionary<Type, object> instances = new Dictionary<Type, object>();
+        private IDictionary<Type, Type> transientTypes = new Dictionary<Type, Type>();
 
-        private readonly IDictionary<Type, Type> singletonCache = new Dictionary<Type, Type>();
+        private IDictionary<Type, Type> scopedTypes = new Dictionary<Type, Type>();
 
-        private List<Type> currentTypes = new List<Type>();
+        private IDictionary<Type, object> singletonInstances = new Dictionary<Type, object>();
+        private IDictionary<Type, Type> singletonTypes = new Dictionary<Type, Type>();
+
+
+        private readonly IDictionary<Type, object> scopedInstances = new Dictionary<Type, object>();
+        private readonly List<Type> currentTypes = new List<Type>();
         private Type currentType;
+
 
         /// <summary>
         /// Adds an implementation as a singleton on the container.
@@ -88,7 +33,7 @@ namespace Onbox.Di.V7
         {
             var type = typeof(TImplementation);
             EnsureNonAbstractClass(type);
-            this.singletonCache[type] = type;
+            this.singletonTypes[type] = type;
         }
 
         /// <summary>
@@ -98,7 +43,7 @@ namespace Onbox.Di.V7
         /// <param name="instance"></param>
         public void AddSingleton<TImplementation>(TImplementation instance) where TImplementation : class
         {
-            this.instances[typeof(TImplementation)] = instance;
+            this.singletonInstances[typeof(TImplementation)] = instance;
         }
 
         /// <summary>
@@ -108,11 +53,11 @@ namespace Onbox.Di.V7
         /// <typeparam name="TContract"></typeparam>
         /// <typeparam name="TImplementation"></typeparam>
         /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
-        public void AddSingleton<TContract, TImplementation>() where TImplementation : TContract
+        public void AddSingleton<TContract, TImplementation>() where TImplementation : class, TContract
         {
             var type = typeof(TImplementation);
             EnsureNonAbstractClass(type);
-            this.singletonCache[typeof(TContract)] = type;
+            this.singletonTypes[typeof(TContract)] = type;
         }
 
         /// <summary>
@@ -122,7 +67,7 @@ namespace Onbox.Di.V7
         /// <typeparam name="TImplementation"></typeparam>
         public void AddSingleton<TContract, TImplementation>(TImplementation instance) where TImplementation : TContract
         {
-            this.instances[typeof(TContract)] = instance;
+            this.singletonInstances[typeof(TContract)] = instance;
         }
 
 
@@ -136,7 +81,7 @@ namespace Onbox.Di.V7
         {
             var type = typeof(TImplementation);
             EnsureNonAbstractClass(type);
-            this.types[type] = type;
+            this.transientTypes[type] = type;
         }
 
         /// <summary>
@@ -146,11 +91,31 @@ namespace Onbox.Di.V7
         /// <typeparam name="TContract"></typeparam>
         /// <typeparam name="TImplementation"></typeparam>
         /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
-        public void AddTransient<TContract, TImplementation>() where TImplementation : TContract
+        public void AddTransient<TContract, TImplementation>() where TImplementation : class, TContract
         {
             var type = typeof(TImplementation);
             EnsureNonAbstractClass(type);
-            this.types[typeof(TContract)] = type;
+            this.transientTypes[typeof(TContract)] = type;
+        }
+
+        /// <summary>
+        /// Adds a scoped implementation to a contract on the container.
+        /// </summary>
+        public void AddScoped<TContract, TImplementation>() where TImplementation : class, TContract
+        {
+            var type = typeof(TImplementation);
+            EnsureNonAbstractClass(type);
+            this.scopedTypes[typeof(TContract)] = type;
+        }
+
+        /// <summary>
+        /// Adds a scoped implementation on the container.
+        /// </summary>
+        public void AddScoped<TImplementation>() where TImplementation : class
+        {
+            var type = typeof(TImplementation);
+            EnsureNonAbstractClass(type);
+            this.scopedTypes[type] = type;
         }
 
 
@@ -179,20 +144,30 @@ namespace Onbox.Di.V7
             Console.WriteLine("Onbox Container request: " + contract.ToString());
 
             // Always prioritize instances
-            if (this.instances.ContainsKey(contract))
+            if (this.singletonInstances.ContainsKey(contract))
             {
-                return this.instances[contract];
+                return this.singletonInstances[contract];
             }
-            else if (this.singletonCache.ContainsKey(contract))
+            else if (this.singletonTypes.ContainsKey(contract))
             {
-                var instance = this.ResolveObject(contract, this.singletonCache);
-                this.instances[contract] = instance;
-                this.singletonCache.Remove(contract);
+                var instance = this.ResolveObject(contract, this.singletonTypes);
+                this.singletonInstances[contract] = instance;
+                this.singletonTypes.Remove(contract);
                 return instance;
             }
-            else if (!contract.IsAbstract || this.types.ContainsKey(contract))
+            if (this.scopedInstances.ContainsKey(contract))
             {
-                var instance = this.ResolveObject(contract, this.types);
+                return this.scopedInstances[contract];
+            }
+            else if (this.scopedTypes.ContainsKey(contract))
+            {
+                var instance = this.ResolveObject(contract, this.scopedTypes);
+                this.scopedInstances[contract] = instance;
+                return instance;
+            }
+            else if (!contract.IsAbstract || this.transientTypes.ContainsKey(contract))
+            {
+                var instance = this.ResolveObject(contract, this.transientTypes);
                 return instance;
             }
             else
@@ -268,24 +243,13 @@ namespace Onbox.Di.V7
         /// </summary>
         public void Clear()
         {
-            this.types?.Clear();
-            this.instances?.Clear();
-            this.singletonCache?.Clear();
+            this.transientTypes?.Clear();
+            this.singletonInstances?.Clear();
+            this.singletonTypes?.Clear();
+            this.scopedInstances?.Clear();
+            this.scopedTypes?.Clear();
             this.currentTypes?.Clear();
             this.currentType = null;
-        }
-
-        /// <summary>
-        /// Creates the default container implementation and adds it to itself as a abstract singleton of type <see cref="IContainer"/>
-        /// </summary>
-        /// <returns></returns>
-        public static Container Default()
-        {
-            var container = new Container();
-            container.AddSingleton<IContainerResolver>(container);
-            container.AddSingleton<IContainer>(container);
-
-            return container;
         }
 
         private static void EnsureNonAbstractClass(Type type)
@@ -306,8 +270,25 @@ namespace Onbox.Di.V7
         public void Dispose()
         {
             Console.WriteLine("Onbox Container disposing... ");
-
             Clear();
+        }
+
+        /// <summary>
+        /// Creates a scoped context copy of this container
+        /// </summary>
+        public IContainerResolver CreateScope()
+        {
+            // Creates a copy of the Container with the relevant types and instances
+            var container = new Container();
+            container.transientTypes = this.transientTypes.ToDictionary(k => k.Key, v => v.Value);
+            container.singletonInstances = this.singletonInstances.ToDictionary(k => k.Key, v => v.Value);
+            container.singletonTypes = this.singletonTypes.ToDictionary(k => k.Key, v => v.Value);
+            container.scopedTypes = this.scopedTypes.ToDictionary(k => k.Key, v => v.Value);
+
+            // This will override the singleton instances for the scoped ones
+            container.AddSingleton<IContainerResolver>(container);
+            container.AddSingleton<IContainer>(container);
+            return container;
         }
     }
 }
