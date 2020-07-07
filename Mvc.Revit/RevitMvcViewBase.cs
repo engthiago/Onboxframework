@@ -14,7 +14,7 @@ namespace Onbox.Mvc.Revit.V7
         /// Provides specific Revit functionaliy to <see cref="MvcViewBase"/> like set Revit as parent window and Title Bar visibility
         /// </summary>
         /// <param name="revitUIApp">Some information of the current instance of Revit UI App</param>
-        public RevitMvcViewBase(IRevitUIApp revitUIApp)
+        public RevitMvcViewBase(IRevitAppData revitUIApp)
         {
             var attacher = new RevitViewAttacher(this, revitUIApp.GetRevitWindowHandle(), this.titleVisibility);
             attacher.Attach();

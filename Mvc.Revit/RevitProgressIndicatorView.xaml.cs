@@ -27,7 +27,7 @@ namespace Onbox.Mvc.Revit.V7
         private Action action;
 
 
-        public RevitProgressIndicatorView(IRevitUIApp revitUIApp) : base(revitUIApp)
+        public RevitProgressIndicatorView(IRevitAppData revitUIApp) : base(revitUIApp)
         {
             this.InitializeComponent();
             this.DataContext = this;

@@ -97,7 +97,7 @@ namespace Onbox.Revit.V7
 
         internal IContainer AddRevitUI(IContainer container, UIControlledApplication application)
         {
-            var revitUIApp = new RevitUIApp
+            var revitUIApp = new RevitAppData
             {
                 isViewerMode = application.IsViewerModeActive,
                 languageType = (RevitLanguage)application.ControlledApplication.Language.GetHashCode(),
@@ -108,7 +108,7 @@ namespace Onbox.Revit.V7
                 revitWindowHandle = application.MainWindowHandle
             };
 
-            container.AddSingleton<IRevitUIApp>(revitUIApp);
+            container.AddSingleton<IRevitAppData>(revitUIApp);
             return container;
         }
 
