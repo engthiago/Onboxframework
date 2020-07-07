@@ -18,12 +18,16 @@ namespace Onbox.Revit.V7
     /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
     /// </summary>
     /// <typeparam name="TContainer">The contract for container implementations</typeparam>
-    public abstract class RevitExternalAppBase<TContainer> : RevitContainerBase, IRevitExternalApp where TContainer : class, IContainer, new()
+    public abstract class RevitExternalAppBase<TContainer> : RevitContainerProviderBase, IRevitExternalApp where TContainer : class, IContainer, new()
     {
+        /// <summary>
+        /// Implement this method to execute some tasks when Autodesk Revit starts.
+        /// </summary>
         public abstract Result OnStartup(IContainer container, UIControlledApplication application);
 
-        public abstract Result OnShutdown(IContainerResolver container, UIControlledApplication application);
-
+        /// <summary>
+        /// Implement this method to execute some tasks when Autodesk Revit starts.
+        /// </summary>
         public Result OnStartup(UIControlledApplication application)
         {
             var containerGuid = ContainerProviderReflector.GetContainerGuid(this);
@@ -59,6 +63,14 @@ namespace Onbox.Revit.V7
             }
         }
 
+        /// <summary>
+        /// Implement this method to execute some tasks when Autodesk Revit shuts down.
+        /// </summary>
+        public abstract Result OnShutdown(IContainerResolver container, UIControlledApplication application);
+
+        /// <summary>
+        /// Implement this method to execute some tasks when Autodesk Revit shuts down.
+        /// </summary>
         public Result OnShutdown(UIControlledApplication application)
         {
             var containerGuid = ContainerProviderReflector.GetContainerGuid(this);
@@ -83,6 +95,9 @@ namespace Onbox.Revit.V7
             }
         }
 
+        /// <summary>
+        /// Lifecycle hook to create Ribbon UI when Revit starts.
+        /// </summary>
         public virtual void OnCreateRibbon(IRibbonManager ribbonManager)
         {
         }

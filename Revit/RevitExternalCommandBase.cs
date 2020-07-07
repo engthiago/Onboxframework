@@ -4,8 +4,14 @@ using Onbox.Di.V7;
 
 namespace Onbox.Revit.V7
 {
+    /// <summary>
+    /// Base class to implement when implementing RevitExternal Commands with containers
+    /// </summary>
     public abstract class RevitExternalCommandBase<TApplication> : IExternalCommand where TApplication : RevitExternalAppBase, new ()
     {
+        /// <summary>
+        /// Execution of External Command
+        /// </summary>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
             IContainer container = GetContainer();
@@ -17,10 +23,13 @@ namespace Onbox.Revit.V7
         {
             var type = typeof(TApplication);
             var containerGuid = ContainerProviderReflector.GetContainerGuid(type);
-            var container = RevitContainerBase.GetContainer(containerGuid);
+            var container = RevitContainerProviderBase.GetContainer(containerGuid);
             return container;
         }
 
+        /// <summary>
+        /// Execution of External Command
+        /// </summary>
         public abstract Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements);
     }
 }

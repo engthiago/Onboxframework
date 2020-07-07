@@ -1,5 +1,4 @@
-﻿using Autodesk.Revit.DB;
-using Autodesk.Revit.UI;
+﻿using Autodesk.Revit.UI;
 using Onbox.Di.V7;
 using System;
 using System.Collections.Concurrent;
@@ -10,7 +9,7 @@ namespace Onbox.Revit.V7
     /// <summary>
     /// The most base class for a container provider, it will manage containers and events during its lifetime
     /// </summary>
-    public abstract class RevitContainerBase
+    public abstract class RevitContainerProviderBase
     {
         internal static ConcurrentDictionary<string, IContainer> containers = new ConcurrentDictionary<string, IContainer>();
         internal static Dictionary<string, RevitEventTracker> events = new Dictionary<string, RevitEventTracker>();

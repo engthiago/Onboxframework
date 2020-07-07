@@ -78,7 +78,7 @@
     <Compile Include="ContainerProviderAttribute.cs" />
     <Compile Include="ContainerProviderReflector.cs" />
     <Compile Include="IRevitExternalApp.cs" />
-    <Compile Include="RevitContainerBase.cs" />
+    <Compile Include="RevitContainerProviderBase.cs" />
     <Compile Include="RevitEventTracker.cs" />
     <Compile Include="RevitExternalCommandBase.cs" />
     <Compile Include="RevitExternalAppBase.cs" />

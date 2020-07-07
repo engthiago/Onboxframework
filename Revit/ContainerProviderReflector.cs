@@ -11,7 +11,7 @@ namespace Onbox.Revit.V7
         /// <summary>
         /// Locates the container guid passing in an instance of an app
         /// </summary>
-        static internal string GetContainerGuid(RevitContainerBase target)
+        static internal string GetContainerGuid(RevitContainerProviderBase target)
         {
             var type = target.GetType();
             var containerGuid = GetContainerGuid(type);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Onbox.Revit.V7
 {
@@ -11,13 +7,13 @@ namespace Onbox.Revit.V7
     /// </summary>
     public class RevitAppData : IRevitAppData
     {
-        public RevitLanguage languageType;
-        public string subVersionNumber;
-        public string versionNumber;
-        public string versionBuild;
-        public string versionName;
-        public IntPtr revitWindowHandle;
-        public bool isViewerMode;
+        internal RevitLanguage languageType;
+        internal string subVersionNumber;
+        internal string versionNumber;
+        internal string versionBuild;
+        internal string versionName;
+        internal IntPtr revitWindowHandle;
+        internal bool isViewerMode;
 
         /// <summary>
         /// Revit's language
