@@ -51,10 +51,5 @@ namespace Onbox.Di.V7
         /// Resets the entire container
         /// </summary>
         void Clear();
-
-        /// <summary>
-        /// Clears and releases resources from the container
-        /// </summary>
-        void Dispose();
     }
 }
