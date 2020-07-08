@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Di.V7
+namespace Onbox.Abstractions.V7
 {
     /// <summary>
     /// Onbox's IOC container read only contract

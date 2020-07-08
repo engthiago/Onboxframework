@@ -1,14 +1,11 @@
-﻿using Onbox.Core.V7.Http;
+﻿using Onbox.Abstractions.V7;
+using Onbox.Core.V7.Http;
 using Onbox.Core.V7.Json;
 using Onbox.Core.V7.Logging;
 using Onbox.Core.V7.Mapping;
-using Onbox.Di.V7;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Onbox.Core.V7
 {

@@ -94,6 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.csproj">
+      <Project>{b7fee131-b5cf-4dad-af94-ce15605a4fc8}</Project>
+      <Name>Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{F340830F-CABC-439D-8684-05317D6DC13E}</Project>
       <Name>Core</Name>

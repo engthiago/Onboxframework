@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Onbox.Di.V7;
+using Onbox.Abstractions.V7;
 using System;
 
 namespace Onbox.Core.V7.Json

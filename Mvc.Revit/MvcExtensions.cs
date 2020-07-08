@@ -1,4 +1,5 @@
-﻿using Onbox.Core.V7.Messaging;
+﻿using Onbox.Abstractions.V7;
+using Onbox.Core.V7.Messaging;
 using Onbox.Core.V7.Reporting;
 using Onbox.Di.V7;
 using Onbox.Mvc.V7;
