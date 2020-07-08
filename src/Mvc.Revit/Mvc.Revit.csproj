@@ -102,10 +102,6 @@
       <Project>{F340830F-CABC-439D-8684-05317D6DC13E}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Di\Di.csproj">
-      <Project>{7ADE1A05-4EE6-4790-B634-9649BBDA7B67}</Project>
-      <Name>Di</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{06552675-1f55-4c83-a25b-4658ebac2822}</Project>
       <Name>Mvc</Name>

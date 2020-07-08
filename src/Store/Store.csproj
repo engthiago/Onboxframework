@@ -58,10 +58,6 @@
       <Project>{f340830f-cabc-439d-8684-05317d6dc13e}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Di\Di.csproj">
-      <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
-      <Name>Di</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
