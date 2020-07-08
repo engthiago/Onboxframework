@@ -56,20 +56,17 @@
     <Compile Include="Json\JsonExtensions.cs" />
     <Compile Include="Json\JsonService.cs" />
     <Compile Include="Logging\FileLoggingService.cs" />
-    <Compile Include="Logging\ILoggingService.cs" />
     <Compile Include="Mapping\IMapperConfigurator.cs" />
     <Compile Include="Mapping\IMapperOperator.cs" />
     <Compile Include="Mapping\Mapper.cs" />
     <Compile Include="Mapping\MapperConfigurator.cs" />
     <Compile Include="Mapping\MapperOperator.cs" />
-    <Compile Include="Messaging\IMessageService.cs" />
     <Compile Include="Messaging\MessageDebugService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactFactory\Debouncer.cs" />
     <Compile Include="ReactFactory\Interval.cs" />
     <Compile Include="ReactFactory\ReactFactory.cs" />
     <Compile Include="Reporting\ProgressCancelledException.cs" />
-    <Compile Include="Reporting\IProgressIndicator.cs" />
     <Compile Include="Reporting\ProgressConsoleDebugIndicator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Onbox.Abstractions.V7;
 
 namespace Onbox.Core.V7.Json
 {
-    public interface IJsonService
-    {
-        T Deserialize<T>(string json);
-        string Serialize(object instance);
-    }
-
     public class JsonService : IJsonService
     {
         readonly JsonSerializerSettings settings;

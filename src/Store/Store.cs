@@ -1,8 +1,7 @@
 ﻿using Onbox.Core.V7.Mapping;
-using Onbox.Core.V7.Logging;
 using System;
 using System.Collections.Generic;
-using Onbox.Core.V7.Json;
+using Onbox.Abstractions.V7;
 
 namespace Onbox.Store.V7
 {

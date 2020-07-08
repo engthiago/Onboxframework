@@ -1,4 +1,4 @@
-﻿using Onbox.Core.V7.Messaging;
+﻿using Onbox.Abstractions.V7;
 
 namespace Onbox.Mvc.V7.Messaging
 {
