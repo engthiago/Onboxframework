@@ -44,7 +44,7 @@ namespace Onbox.Revit.V7
         static private string GetContainerAttributeGuid(object attribute)
         {
             var containerProviderType = attribute.GetType();
-            var containerGuidProperty = containerProviderType.GetProperty(nameof(ContainerProviderAttribute.containerGuid));
+            var containerGuidProperty = containerProviderType.GetProperty(nameof(ContainerProviderAttribute.ContainerGuid));
             var containerGuid = containerGuidProperty?.GetValue(attribute)?.ToString();
 
             if (string.IsNullOrWhiteSpace(containerGuid))
