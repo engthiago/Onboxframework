@@ -7,21 +7,36 @@ namespace Onbox.Di.V7
 {
     /// <summary>
     /// Onbox's IOC container implementation
-    /// </summary>
+    /// </summary>d
     public class Container : IContainer, IDisposable
     {
-        private IDictionary<Type, Type> transientTypes = new Dictionary<Type, Type>();
+        /// <summary>
+        /// The list of current transient types currently registered
+        /// </summary>
+        protected IDictionary<Type, Type> transientTypes = new Dictionary<Type, Type>();
 
-        private IDictionary<Type, Type> scopedTypes = new Dictionary<Type, Type>();
+        /// <summary>
+        /// The list of current scoped types currently registered
+        /// </summary>
+        protected IDictionary<Type, Type> scopedTypes = new Dictionary<Type, Type>();
 
-        private IDictionary<Type, object> singletonInstances = new Dictionary<Type, object>();
-        private IDictionary<Type, Type> singletonTypes = new Dictionary<Type, Type>();
+        /// <summary>
+        /// The list of current singleton instances currently registered
+        /// </summary>
+        protected IDictionary<Type, object> singletonInstances = new Dictionary<Type, object>();
 
+        /// <summary>
+        /// The list of current singleton types currently registered
+        /// </summary>
+        protected IDictionary<Type, Type> singletonTypes = new Dictionary<Type, Type>();
 
-        private readonly IDictionary<Type, object> scopedInstances = new Dictionary<Type, object>();
+        /// <summary>
+        /// The list of current scoped instances currently registered
+        /// </summary>
+        protected readonly IDictionary<Type, object> scopedInstances = new Dictionary<Type, object>();
+
         private readonly List<Type> currentTypes = new List<Type>();
         private Type currentType;
-
 
         /// <summary>
         /// Adds an implementation as a singleton on the container.
