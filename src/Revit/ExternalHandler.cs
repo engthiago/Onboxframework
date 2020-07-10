@@ -40,12 +40,23 @@ namespace Onbox.Revit.V7
             {
                 var actionKey = actions.First();
                 var taskKey = actionKey.Key;
-                if (!taskKey.IsCanceled)
+
+                try
                 {
-                    actionKey.Value.Action?.Invoke(app);
-                    actionKey.Key.RunSynchronously();
+                    if (!taskKey.IsCanceled)
+                    {
+                        actionKey.Value.Action?.Invoke(app);
+                    }
                 }
-                actions.Remove(actionKey.Key);
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    actionKey.Key.RunSynchronously();
+                    actions.Remove(actionKey.Key);
+                }
             }
         }
 
