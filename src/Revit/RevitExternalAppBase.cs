@@ -37,7 +37,7 @@ namespace Onbox.Revit.V7
             this.InjectContainerToItself(container);
 
             this.HookUpContainer(container, containerGuid);
-            this.HookupEventTracker(application, container, containerGuid);
+            this.HookupRevitContext(application, container);
 
             this.AddRevitUI(container, application);
 
@@ -80,7 +80,7 @@ namespace Onbox.Revit.V7
             try
             {
                 // Unhooks the events
-                UnhookEventTracker(application, containerGuid);
+                UnhookRevitContext(application, containerGuid);
                 // Calls the client's Shotdown
                 return OnShutdown(container, application);
             }

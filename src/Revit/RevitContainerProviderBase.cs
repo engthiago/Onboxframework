@@ -2,7 +2,6 @@
 using Onbox.Abstractions.V7;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace Onbox.Revit.V7
 {
@@ -12,7 +11,6 @@ namespace Onbox.Revit.V7
     public abstract class RevitContainerProviderBase
     {
         internal static ConcurrentDictionary<string, IContainer> containers = new ConcurrentDictionary<string, IContainer>();
-        internal static Dictionary<string, RevitEventTracker> events = new Dictionary<string, RevitEventTracker>();
 
         internal static IContainer GetContainer(string guid)
         {
@@ -27,21 +25,6 @@ namespace Onbox.Revit.V7
             }
 
             throw new Exception($"No container found for this Application with specified GUID: {guid}");
-        }
-
-        internal static RevitEventTracker GetEvent(string guid)
-        {
-            if (string.IsNullOrWhiteSpace(guid))
-            {
-                throw new Exception($"Application should have a valid GUID to locate the event tracker");
-            }
-
-            if (events.TryGetValue(guid, out RevitEventTracker eventTracker))
-            {
-                return eventTracker;
-            }
-
-            throw new Exception($"No Event Tracker found for this Application with specified GUID: {guid}");
         }
 
         internal IContainer HookUpContainer(IContainer container, string containerGuid)
@@ -73,25 +56,27 @@ namespace Onbox.Revit.V7
             return container;
         }
 
-        internal RevitEventTracker HookupEventTracker(UIControlledApplication application, IContainer container, string containerGuid)
+        internal IContainer HookupRevitContext(UIControlledApplication application, IContainer container)
         {
-            var eventTracker = new RevitEventTracker(container);
-            eventTracker.HookupRevitEvents(application);
-            events.Add(containerGuid, eventTracker);
-
-            return eventTracker;
+            var revitContext = new RevitContext();
+            revitContext.HookupRevitEvents(application);
+            container.AddSingleton<IRevitContext>(revitContext);
+            return container;
         }
 
-        internal RevitEventTracker UnhookEventTracker(UIControlledApplication application, string containerGuid)
+        internal IContainer UnhookRevitContext(UIControlledApplication application, string containerGuid)
         {
-            if (events.TryGetValue(containerGuid, out RevitEventTracker eventTracker))
+            try
             {
-                eventTracker.UnhookRevitEvents(application);
-                events.Remove(containerGuid);
-                return eventTracker;
+                var container = GetContainer(containerGuid);
+                var revitContext = container.Resolve<IRevitContext>();
+                revitContext.UnhookRevitEvents(application);
+                return container;
+            } 
+            catch
+            {
+                return null;
             }
-
-            return null;
         }
 
         internal IContainer AddRevitUI(IContainer container, UIControlledApplication application)
