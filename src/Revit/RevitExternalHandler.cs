@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.UI;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -9,9 +10,10 @@ namespace Onbox.Revit.V7
 {
     public interface IRevitEventHandler : IExternalEventHandler
     {
-        Task RunAsync(Action<UIApplication> action);
-        Task RunAsync(Action<UIApplication> action, CancellationTokenSource cancelSource);
-        Task<T> RunAsync<T>(Func<UIApplication, T> action);
+        Task RunAsync(Action<UIApplication> action, CancellationTokenSource cancelSource = null);
+        Task<T> RunAsync<T>(Func<UIApplication, T> action, CancellationTokenSource cancellationToken = null);
+        void CancelAll();
+        int GetQueueCount();
     }
 
     internal enum DelegateType
@@ -29,15 +31,15 @@ namespace Onbox.Revit.V7
         internal CancellationTokenSource Cancellation { get; set; }
     }
 
-    public class ExternalHandler : IRevitEventHandler
+    public class RevitExternalHandler : IRevitEventHandler
     {
         private readonly string name;
         private readonly ExternalEvent externalEvent;
-        private readonly IDictionary<Task, FuncTask> actions = new Dictionary<Task, FuncTask>();
+        private readonly IDictionary<Task, FuncTask> queue = new ConcurrentDictionary<Task, FuncTask>();
         private readonly IRevitContext revitContext;
         private object contextResult;
 
-        public ExternalHandler(RevitEventSettings settings, IRevitContext revitContext)
+        public RevitExternalHandler(RevitEventSettings settings, IRevitContext revitContext)
         {
             this.revitContext = revitContext;
             this.name = settings.Name;
@@ -51,11 +53,21 @@ namespace Onbox.Revit.V7
             }
         }
 
+        public void CancelAll()
+        {
+            this.queue.Clear();
+        }
+
+        public int GetQueueCount()
+        {
+            return this.queue.Count();
+        }
+
         public void Execute(UIApplication app)
         {
-            if (actions.Any())
+            if (queue.Any())
             {
-                var actionKey = actions.First();
+                var actionKey = queue.First();
                 var taskKey = actionKey.Key;
 
                 if (actionKey.Value.DelegateType == DelegateType.Action)
@@ -84,7 +96,7 @@ namespace Onbox.Revit.V7
             }
             finally
             {
-                actions.Remove(actionKey.Key);
+                queue.Remove(actionKey.Key);
                 actionKey.Key.RunSynchronously();
             }
         }
@@ -104,7 +116,7 @@ namespace Onbox.Revit.V7
             }
             finally
             {
-                actions.Remove(actionKey.Key);
+                queue.Remove(actionKey.Key);
                 actionKey.Key.RunSynchronously();
                 this.contextResult = null;
             }
@@ -115,12 +127,7 @@ namespace Onbox.Revit.V7
             return name;
         }
 
-        public async Task RunAsync(Action<UIApplication> action)
-        {
-            await RunAsync(action, new CancellationTokenSource());
-        }
-
-        public async Task RunAsync(Action<UIApplication> action, CancellationTokenSource cancelSource)
+        public async Task RunAsync(Action<UIApplication> action, CancellationTokenSource cancelSource = null)
         {
             if (revitContext.IsInRevitContext())
             {
@@ -129,26 +136,13 @@ namespace Onbox.Revit.V7
                 return;
             }
 
-            var task = new Task(DummyAction, cancelSource.Token);
-            await AddTask(action, task, cancelSource);
-        }
-
-        public async Task<T> RunAsync<T>(Func<UIApplication, T> action)
-        {
-            if (revitContext.IsInRevitContext())
+            if (cancelSource == null)
             {
-                var app = revitContext.GetUIApplication();
-                var result = action.Invoke(app);
-                return result;
+                cancelSource = new CancellationTokenSource();
             }
 
-            var task = new Task<object>(DummyFunc);
-            var funcTask = new FuncTask { Action = action, Cancellation = new CancellationTokenSource(), DelegateType = DelegateType.Func };
-            actions.Add(task, funcTask);
-            externalEvent.Raise();
-
-            var asyncResult = await task;
-            return (T)asyncResult;
+            var task = new Task(DummyAction, cancelSource.Token);
+            await AddTask(action, task, cancelSource);
         }
 
         private async Task AddTask(Action<UIApplication> action, Task task, CancellationTokenSource tokenSource)
@@ -158,9 +152,42 @@ namespace Onbox.Revit.V7
                 return;
             }
 
-            actions.Add(task, new FuncTask { Action = action, Cancellation = tokenSource });
+            queue.Add(task, new FuncTask { Action = action, Cancellation = tokenSource });
             externalEvent.Raise();
             await task;
+        }
+
+        public async Task<T> RunAsync<T>(Func<UIApplication, T> action, CancellationTokenSource cancelSource = null)
+        {
+            if (revitContext.IsInRevitContext())
+            {
+                var app = revitContext.GetUIApplication();
+                var result = action.Invoke(app);
+                return result;
+            }
+
+            if (cancelSource == null)
+            {
+                cancelSource = new CancellationTokenSource();
+            }
+
+            var task = new Task<object>(DummyFunc, cancelSource.Token);
+            return await AddTask(action, task, cancelSource);
+        }
+
+        private async Task<T> AddTask<T>(Func<UIApplication, T> action, Task<object> task, CancellationTokenSource tokenSource)
+        {
+            if (tokenSource.IsCancellationRequested)
+            {
+                return default;
+            }
+
+            var funcTask = new FuncTask { Action = action, Cancellation = tokenSource, DelegateType = DelegateType.Func };
+            queue.Add(task, funcTask);
+            externalEvent.Raise();
+
+            var asyncResult = await task;
+            return (T)asyncResult;
         }
 
         private void DummyAction()

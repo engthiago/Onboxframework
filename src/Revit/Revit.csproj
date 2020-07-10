@@ -87,7 +87,7 @@
     <Compile Include="IRevitAppData.cs" />
     <Compile Include="RevitLanguage.cs" />
     <Compile Include="RevitAppData.cs" />
-    <Compile Include="ExternalHandler.cs" />
+    <Compile Include="RevitExternalHandler.cs" />
     <Compile Include="UI\ImageManager.cs" />
     <Compile Include="UI\RibbonTabManager.cs" />
     <Compile Include="UI\RibbonHelpers.cs" />

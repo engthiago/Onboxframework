@@ -2,9 +2,6 @@
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace Onbox.Revit.V7
 {
@@ -167,11 +164,11 @@ namespace Onbox.Revit.V7
                     t.RollBack();
                     return true;
                 }
-                catch (Autodesk.Revit.Exceptions.InvalidOperationException ex)
+                catch (Autodesk.Revit.Exceptions.InvalidOperationException)
                 {
                     return false;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
