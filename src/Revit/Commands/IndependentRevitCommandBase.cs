@@ -2,9 +2,9 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.V7;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.V7.Commands
 {
-    public abstract class RevitExternalContainerCommandBase<TContainerFactory> : IExternalCommand where TContainerFactory : class, IContainerFactory, new()
+    public abstract class IndependentRevitCommandBase<TContainerFactory> : IExternalCommand where TContainerFactory : class, IContainerFactory, new()
     {
         /// <summary>
         /// Execution of External Command

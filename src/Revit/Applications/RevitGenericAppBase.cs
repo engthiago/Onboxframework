@@ -1,25 +1,15 @@
 ﻿using Autodesk.Revit.UI;
 using Onbox.Abstractions.V7;
-using Onbox.Di.V7;
 using Onbox.Revit.V7.UI;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.V7.Applications
 {
     /// <summary>
-    /// The base class implementation of RevitExternalAppBase using <see cref="Container"/> implementation for convinience
-    /// <para>This class provides OnStartup, OnCreateRibbon, and OnShutdown lifecycle events.</para>
-    /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
-    /// </summary>
-    public abstract class RevitExternalAppBase : RevitExternalAppBase<Container>
-    {
-    }
-
-    /// <summary>
-    /// The implementation of a generic IContainer type, if you like to use <see cref="Container"/>, you can use <see cref="RevitExternalAppBase"/> implementation instead
+    /// The implementation of a generic IContainer type, if you like to use <see cref="Container"/>, you can use <see cref="RevitAppBase"/> implementation instead
     /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
     /// </summary>
     /// <typeparam name="TContainer">The contract for container implementations</typeparam>
-    public abstract class RevitExternalAppBase<TContainer> : RevitContainerProviderBase, IRevitExternalApp where TContainer : class, IContainer, new()
+    public abstract class RevitAppBase<TContainer> : RevitContainerProviderBase, IRevitExternalApp where TContainer : class, IContainer, new()
     {
         /// <summary>
         /// Implement this method to execute some tasks when Autodesk Revit starts.

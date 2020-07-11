@@ -1,13 +1,14 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.V7;
+using Onbox.Revit.V7.Applications;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.V7.Commands
 {
     /// <summary>
     /// Base class to implement when implementing RevitExternal Commands with containers
     /// </summary>
-    public abstract class RevitExternalCommandBase<TApplication> : IExternalCommand where TApplication : RevitExternalAppBase, new ()
+    public abstract class RevitCommandBase<TApplication> : IExternalCommand where TApplication : RevitAppBase, new()
     {
         /// <summary>
         /// Execution of External Command
@@ -16,7 +17,7 @@ namespace Onbox.Revit.V7
         {
             // Gets the original container
             IContainer container = GetContainer();
-            
+
             // Creates an scoped copy of the container
             var scope = container.CreateScope();
 
