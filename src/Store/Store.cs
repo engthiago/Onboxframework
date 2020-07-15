@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Onbox.Abstractions.V7;
 using System.Linq.Expressions;
+using System.Linq;
 
 namespace Onbox.Store.V7
 {
@@ -39,7 +40,7 @@ namespace Onbox.Store.V7
         }
     }
 
-    public interface IStoreAction<TStore, TState, TSlice> where TStore : IStore<TState> where TState : class, new() where TSlice : class, new()
+    public interface IStoreAction<TState, TSlice> where TState : class, new() where TSlice : class, new()
     {
         string GetActionName();
         Expression<Func<TState, TSlice>> GetActionPath();
@@ -49,9 +50,9 @@ namespace Onbox.Store.V7
     {
         void EnableLogging();
         void DisableLogging();
-        void SetState<TStore, TSlice>(TState state, IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new();
-        TSlice Select<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new();
-        IStorageSubscription Subscribe<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action, Action<TSlice> callback) where TStore : IStore<TState> where TSlice : class, new();
+        void SetState<TSlice>(IStoreAction<TState, TSlice> action, TState state) where TSlice : class, new();
+        TSlice Select<TSlice>(IStoreAction<TState, TSlice> action) where TSlice : class, new();
+        IStorageSubscription Subscribe<TSlice>(IStoreAction<TState, TSlice> action, Action<TSlice> callback) where TSlice : class, new();
         List<StateEntry<TState>> GetHistory();
     }
 
@@ -91,58 +92,7 @@ namespace Onbox.Store.V7
 
 
 
-        public IStorageSubscription Subscribe<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action, Action<TSlice> callback) where TStore : IStore<TState> where TSlice : class, new()
-        {
-            if (action == null)
-            {
-                throw new ArgumentException("Can not subscribe to Onbox Store with a null action");
-            }
-
-            var actionString = action.GetActionPath().Body.ToString();
-
-            if (actionString == null)
-            {
-                maincallbacks.Add(callback);
-                return new StorageSubscription(maincallbacks, callback);
-            }
-
-            EnsureActionType(action, actionString);
-
-            if (callbacks.ContainsKey(actionString))
-            {
-                var list = callbacks[actionString];
-                list.Add(callback);
-                return new StorageSubscription(list, callback);
-            }
-            else
-            {
-                var list = new List<Delegate>();
-                list.Add(callback);
-                callbacks.Add(actionString, list);
-                return new StorageSubscription(list, callback);
-            }
-        }
-
-        public TSlice Select<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new()
-        {
-            // Ensures that the action has the correct type
-            var actionString = action?.GetActionPath().Body.ToString();
-            EnsureActionType(action, actionString);
-
-            var pathArr = actionString?.Split('.');
-
-            // Gets the Object that will be changed
-            object currentObject = GetStoreObjectByPath(this.state, pathArr);
-
-            if (currentObject == null)
-            {
-                currentObject = new TSlice();
-            }
-
-            return this.mapper.Map<TSlice>(currentObject);
-        }
-
-        public void SetState<TStore, TSlice>(TState state, IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new()
+        public void SetState<TSlice>(IStoreAction<TState, TSlice> action, TState state) where TSlice : class, new()
         {
             // Ensures that the action has the correct type
             var actionPath = action?.GetActionPath().Body.ToString();
@@ -199,14 +149,64 @@ namespace Onbox.Store.V7
             //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.State)));
         }
 
+        public TSlice Select<TSlice>(IStoreAction<TState, TSlice> action) where TSlice : class, new()
+        {
+            // Ensures that the action has the correct type
+            var actionString = action?.GetActionPath().Body.ToString();
+            EnsureActionType(action, actionString);
 
+            var pathArr = actionString?.Split('.');
 
+            // Gets the Object that will be changed
+            object currentObject = GetStoreObjectByPath(this.state, pathArr);
 
+            if (currentObject == null)
+            {
+                currentObject = new TSlice();
+            }
+
+            return this.mapper.Map<TSlice>(currentObject);
+        }
+
+        public IStorageSubscription Subscribe<TSlice>(IStoreAction<TState, TSlice> action, Action<TSlice> callback) where TSlice : class, new()
+        {
+            if (action == null)
+            {
+                throw new ArgumentException("Can not subscribe to Onbox Store with a null action");
+            }
+
+            var actionString = action.GetActionPath().Body.ToString();
+
+            if (actionString == null)
+            {
+                maincallbacks.Add(callback);
+                return new StorageSubscription(maincallbacks, callback);
+            }
+
+            EnsureActionType(action, actionString);
+
+            if (callbacks.ContainsKey(actionString))
+            {
+                var list = callbacks[actionString];
+                list.Add(callback);
+                return new StorageSubscription(list, callback);
+            }
+            else
+            {
+                var list = new List<Delegate>();
+                list.Add(callback);
+                callbacks.Add(actionString, list);
+                return new StorageSubscription(list, callback);
+            }
+        }
 
         public List<StateEntry<TState>> GetHistory()
         {
             return this.mapper.Map<List<StateEntry<TState>>>(this.stateHistory);
         }
+
+
+
 
         private object GetStoreObjectByPath(TState newStore, string[] pathArr)
         {
@@ -231,8 +231,8 @@ namespace Onbox.Store.V7
             return currentObject;
         }
 
-        private void EnsureActionType<TStore, TState, TSlice>(IStoreAction<TStore, TState, TSlice> action, string actionString) 
-            where TStore : IStore<TState> where TState : class, new() where TSlice : class, new()
+        private void EnsureActionType<TState, TSlice>(IStoreAction<TState, TSlice> action, string actionString) 
+             where TState : class, new() where TSlice : class, new()
         {
             if (actionString != null)
             {
@@ -253,7 +253,7 @@ namespace Onbox.Store.V7
         private Type GetPropertyType(Type type, string path)
         {
             var currentType = type;
-            var pathArr = path?.Split('.');
+            var pathArr = path?.Split('.').Skip(1);
 
             foreach (var pathItem in pathArr)
             {
@@ -272,7 +272,6 @@ namespace Onbox.Store.V7
 
             return currentType;
         }
-
 
     }
 }
