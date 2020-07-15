@@ -2,14 +2,15 @@
 using System;
 using System.Collections.Generic;
 using Onbox.Abstractions.V7;
+using System.Linq.Expressions;
 
 namespace Onbox.Store.V7
 {
-    public class StateEntry<T> where T : class, new()
+    public class StateEntry<TState> where TState : class, new()
     {
         public DateTimeOffset UpdatedAt { get; set; }
-        public T OldState { get; set; }
-        public T NewState { get; set; }
+        public TState OldState { get; set; }
+        public TState NewState { get; set; }
         public string ActionName { get; set; }
         public string ActionPath { get; set; }
     }
@@ -38,25 +39,25 @@ namespace Onbox.Store.V7
         }
     }
 
-    public interface IStoreAction<T> where T : new()
+    public interface IStoreAction<TStore, TState, TSlice> where TStore : IStore<TState> where TState : class, new() where TSlice : class, new()
     {
         string GetActionName();
-        string GetActionPath();
+        Expression<Func<TState, TSlice>> GetActionPath();
     }
 
-    public interface IStore<T> where T : class, new()
+    public interface IStore<TState> where TState : class, new()
     {
         void EnableLogging();
         void DisableLogging();
-        void SetState<TState>(TState state, IStoreAction<TState> action) where TState : new();
-        TState Select<TState>(IStoreAction<TState> action) where TState : new();
-        IStorageSubscription Subscribe<TState>(IStoreAction<TState> action, Action<TState> callback) where TState : new();
-        List<StateEntry<T>> GetHistory();
+        void SetState<TStore, TSlice>(TState state, IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new();
+        TSlice Select<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new();
+        IStorageSubscription Subscribe<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action, Action<TSlice> callback) where TStore : IStore<TState> where TSlice : class, new();
+        List<StateEntry<TState>> GetHistory();
     }
 
-    public class Store<T> : IStore<T> where T : class, new()
+    public class Store<TState> : IStore<TState> where TState : class, new() 
     {
-        private T store = new T();
+        private TState state = new TState();
         //public T State => this.mapper.Map<T>(this.store);
 
         private readonly IMapper mapper;
@@ -65,13 +66,13 @@ namespace Onbox.Store.V7
 
         private bool isLogEnabled;
 
-        private readonly List<StateEntry<T>> stateHistory = new List<StateEntry<T>>();
+        private readonly List<StateEntry<TState>> stateHistory = new List<StateEntry<TState>>();
         public List<Delegate> maincallbacks = new List<Delegate>();
         public Dictionary<string, List<Delegate>> callbacks = new Dictionary<string, List<Delegate>>();
 
         public Store(IMapper mapper, ILoggingService logging, IJsonService jsonService)
         {
-            this.stateHistory.Add(new StateEntry<T> { ActionName = null, NewState = null, UpdatedAt = DateTimeOffset.UtcNow });
+            this.stateHistory.Add(new StateEntry<TState> { ActionName = null, NewState = null, UpdatedAt = DateTimeOffset.UtcNow });
             this.mapper = mapper;
             this.logging = logging;
             this.jsonService = jsonService;
@@ -87,14 +88,17 @@ namespace Onbox.Store.V7
             isLogEnabled = false;
         }
 
-        public IStorageSubscription Subscribe<TState>(IStoreAction<TState> action, Action<TState> callback) where TState : new()
+
+
+
+        public IStorageSubscription Subscribe<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action, Action<TSlice> callback) where TStore : IStore<TState> where TSlice : class, new()
         {
             if (action == null)
             {
                 throw new ArgumentException("Can not subscribe to Onbox Store with a null action");
             }
 
-            var actionString = action.GetActionPath();
+            var actionString = action.GetActionPath().Body.ToString();
 
             if (actionString == null)
             {
@@ -119,34 +123,34 @@ namespace Onbox.Store.V7
             }
         }
 
-        public TState Select<TState>(IStoreAction<TState> action) where TState : new()
+        public TSlice Select<TStore, TSlice>(IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new()
         {
             // Ensures that the action has the correct type
-            var actionString = action?.GetActionPath();
+            var actionString = action?.GetActionPath().Body.ToString();
             EnsureActionType(action, actionString);
 
             var pathArr = actionString?.Split('.');
 
             // Gets the Object that will be changed
-            object currentObject = GetStoreObjectByPath(this.store, pathArr);
+            object currentObject = GetStoreObjectByPath(this.state, pathArr);
 
             if (currentObject == null)
             {
-                new TState();
+                currentObject = new TSlice();
             }
 
-            return this.mapper.Map<TState>(currentObject);
+            return this.mapper.Map<TSlice>(currentObject);
         }
 
-        public void SetState<TState>(TState state, IStoreAction<TState> action) where TState : new()
+        public void SetState<TStore, TSlice>(TState state, IStoreAction<TStore, TState, TSlice> action) where TStore : IStore<TState> where TSlice : class, new()
         {
             // Ensures that the action has the correct type
-            var actionPath = action?.GetActionPath();
+            var actionPath = action?.GetActionPath().Body.ToString();
             var actionName = action?.GetActionName();
             EnsureActionType(action, actionPath);
 
             // Copies the new state of the store
-            var newStore = this.mapper.Map<T>(this.store);
+            var newStore = this.mapper.Map<TState>(this.state);
             var pathArr = actionPath?.Split('.');
 
             // Gets the Object that will be changed
@@ -156,23 +160,23 @@ namespace Onbox.Store.V7
             mapper.Map(state, currentObject);
 
             // Adds the state history
-            var stateEntry = new StateEntry<T>
+            var stateEntry = new StateEntry<TState>
             {
                 ActionPath = actionPath,
                 ActionName = actionName,
-                OldState = this.store,
+                OldState = this.state,
                 NewState = newStore,
                 UpdatedAt = DateTimeOffset.Now
             };
             stateHistory.Add(stateEntry);
 
             // Changes the store to the new state
-            this.store = newStore;
+            this.state = newStore;
 
             // Notifies the main subscribers
             foreach (var callback in maincallbacks)
             {
-                callback.DynamicInvoke(this.store);
+                callback.DynamicInvoke(this.state);
             }
 
             // Notifies the subscribers to child states
@@ -187,7 +191,7 @@ namespace Onbox.Store.V7
             // Logs the history
             if (isLogEnabled)
             {
-                logging.Log($"*** State changed on {typeof(T).Name} ***");
+                logging.Log($"*** State changed on {typeof(TState).Name} ***");
                 logging.Log(jsonService.Serialize(stateEntry));
             }
 
@@ -195,14 +199,16 @@ namespace Onbox.Store.V7
             //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.State)));
         }
 
-        public List<StateEntry<T>> GetHistory()
+
+
+
+
+        public List<StateEntry<TState>> GetHistory()
         {
-            return this.mapper.Map<List<StateEntry<T>>>(this.stateHistory);
+            return this.mapper.Map<List<StateEntry<TState>>>(this.stateHistory);
         }
 
-
-
-        private object GetStoreObjectByPath(T newStore, string[] pathArr)
+        private object GetStoreObjectByPath(TState newStore, string[] pathArr)
         {
             object currentObject = newStore;
             if (pathArr != null)
@@ -225,11 +231,12 @@ namespace Onbox.Store.V7
             return currentObject;
         }
 
-        private void EnsureActionType<TState>(IStoreAction<TState> action, string actionString) where TState : new()
+        private void EnsureActionType<TStore, TState, TSlice>(IStoreAction<TStore, TState, TSlice> action, string actionString) 
+            where TStore : IStore<TState> where TState : class, new() where TSlice : class, new()
         {
             if (actionString != null)
             {
-                var propertyType = GetPropertyType(typeof(T), actionString);
+                var propertyType = GetPropertyType(typeof(TSlice), actionString);
                 if (propertyType == null)
                 {
                     throw new ArgumentException($"Action {action.GetType().FullName} has an invalid path: {actionString}");
@@ -265,5 +272,7 @@ namespace Onbox.Store.V7
 
             return currentType;
         }
+
+
     }
 }
