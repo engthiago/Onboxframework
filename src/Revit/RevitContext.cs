@@ -134,7 +134,7 @@ namespace Onbox.Revit.V7
 
         private bool UnhookViewChanged()
         {
-            if (hookupViewChanged)
+            if (hookupViewChanged && this.uiApplication != null)
             {
                 hookupViewChanged = false;
                 this.uiApplication.ViewActivated -= this.OnViewChanged;

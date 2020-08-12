@@ -15,6 +15,12 @@
         /// Clones an object (Maps to a new instance)
         /// </summary>
         /// <returns>The cloned object with all properties copied</returns>
-        TSorce Map<TSorce>(object source) where TSorce : new();
+        TSource Clone<TSource>(TSource source) where TSource : new();
+
+        /// <summary>
+        /// Clones an object (Maps to a new instance)
+        /// </summary>
+        /// <returns>The cloned object with all properties copied</returns>
+        TSource Clone<TSource>(object source) where TSource : new();
     }
 }
