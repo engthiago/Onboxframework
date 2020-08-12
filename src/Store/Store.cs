@@ -34,11 +34,20 @@ namespace Onbox.Store.V7
         public string ActionPath { get; set; }
     }
 
+    /// <summary>
+    /// A copy of the subscription for Store Actions
+    /// </summary>
     public interface IStorageSubscription
     {
+        /// <summary>
+        /// Unsubscribe and cleanup
+        /// </summary>
         void Unsubscribe();
     }
 
+    /// <summary>
+    /// A copy of the subscription for Store Actions
+    /// </summary>
     public class StorageSubscription : IStorageSubscription
     {
         private readonly List<Delegate> callbacks;
@@ -50,6 +59,9 @@ namespace Onbox.Store.V7
             this.target = target;
         }
 
+        /// <summary>
+        /// Unsubscribe and cleanup
+        /// </summary>
         public void Unsubscribe()
         {
             Console.WriteLine("Unsubscribing...");
@@ -58,22 +70,70 @@ namespace Onbox.Store.V7
         }
     }
 
+    /// <summary>
+    /// An action responsible for dispatching events and accessing a particular slice of the store
+    /// </summary>
+    /// <typeparam name="TState">The type of the global state</typeparam>
+    /// <typeparam name="TSlice">The type of slice</typeparam>
     public interface IStoreAction<TState, TSlice> where TState : class, new() where TSlice : class, new()
     {
+        /// <summary>
+        /// The name that will be shown on the state history
+        /// </summary>
+        /// <returns></returns>
         string GetActionName();
+
+        /// <summary>
+        /// The expression responsible for accessing the slice of the state
+        /// </summary>
+        /// <returns></returns>
         Expression<Func<TState, TSlice>> GetActionPath();
     }
 
+    /// <summary>
+    /// The global state management
+    /// </summary>
+    /// <typeparam name="TState">The type of the global state</typeparam>
     public interface IStore<TState> where TState : class, new()
     {
+        /// <summary>
+        /// Enable logging of the state when actions are dispatched
+        /// </summary>
         void EnableLogging();
+        /// <summary>
+        /// Disables logging of the state when actions are dispatched
+        /// </summary>
         void DisableLogging();
+        /// <summary>
+        /// Sets a specific slice of the global state
+        /// </summary>
+        /// <typeparam name="TSlice">The type of the slice that will be changed</typeparam>
+        /// <param name="action">The action responsible for the slice</param>
+        /// <param name="state">The new state to be dispatched</param>
         void SetState<TSlice>(IStoreAction<TState, TSlice> action, TSlice state) where TSlice : class, new();
+        /// <summary>
+        /// Selects a specific slice of the global state
+        /// </summary>
+        /// <typeparam name="TSlice">The type of the slice</typeparam>
+        /// <param name="action">The action responsible for the slice</param>
         TSlice Select<TSlice>(IStoreAction<TState, TSlice> action) where TSlice : class, new();
+        /// <summary>
+        /// Subscribe to a specifc slice of the global state
+        /// </summary>
+        /// <typeparam name="TSlice">The type of the slice</typeparam>
+        /// <param name="action">The action responsible for the slice</param>
+        /// <param name="callback">The callback perfomerd when the slice is changed</param>
         IStorageSubscription Subscribe<TSlice>(IStoreAction<TState, TSlice> action, Action<TSlice> callback) where TSlice : class, new();
+        /// <summary>
+        /// Gets the complete history of the global state
+        /// </summary>
         List<StateEntry<TState>> GetHistory();
     }
 
+    /// <summary>
+    /// The global state management
+    /// </summary>
+    /// <typeparam name="TState">The type of the global state</typeparam>
     public class Store<TState> : IStore<TState> where TState : class, new()
     {
         private TState state = new TState();
@@ -88,6 +148,9 @@ namespace Onbox.Store.V7
         private readonly List<Delegate> maincallbacks = new List<Delegate>();
         private readonly Dictionary<string, List<Delegate>> callbacks = new Dictionary<string, List<Delegate>>();
 
+        /// <summary>
+        /// The constructor for this implementation of state management
+        /// </summary>
         public Store(IMapper mapper, ILoggingService logging, IJsonService jsonService)
         {
             this.stateHistory.Add(new StateEntry<TState> { ActionName = null, NewState = null, UpdatedAt = DateTimeOffset.UtcNow });
@@ -96,19 +159,28 @@ namespace Onbox.Store.V7
             this.jsonService = jsonService;
         }
 
+        /// <summary>
+        /// Enable logging of the state when actions are dispatched
+        /// </summary>
         public void EnableLogging()
         {
             isLogEnabled = true;
         }
 
+        /// <summary>
+        /// Disables logging of the state when actions are dispatched
+        /// </summary>
         public void DisableLogging()
         {
             isLogEnabled = false;
         }
 
-
-
-
+        /// <summary>
+        /// Sets a specific slice of the global state
+        /// </summary>
+        /// <typeparam name="TSlice">The type of the slice that will be changed</typeparam>
+        /// <param name="action">The action responsible for the slice</param>
+        /// <param name="slice">The new state to be dispatched</param>
         public void SetState<TSlice>(IStoreAction<TState, TSlice> action, TSlice slice) where TSlice : class, new()
         {
             // Ensures that the action is valid
@@ -166,6 +238,12 @@ namespace Onbox.Store.V7
             //this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.State)));
         }
 
+        /// <summary>
+        /// Selects a specific slice of the global state
+        /// </summary>
+        /// <typeparam name="TSlice">The type of the slice</typeparam>
+        /// <param name="action">The action responsible for the slice</param>
+        /// <returns></returns>
         public TSlice Select<TSlice>(IStoreAction<TState, TSlice> action) where TSlice : class, new()
         {
             EnsureValidAction(action);
@@ -176,6 +254,12 @@ namespace Onbox.Store.V7
             return this.mapper.Clone<TSlice>(currentObject);
         }
 
+        /// <summary>
+        /// Subscribe to a specifc slice of the global state
+        /// </summary>
+        /// <typeparam name="TSlice">The type of the slice</typeparam>
+        /// <param name="action">The action responsible for the slice</param>
+        /// <param name="callback">The callback perfomerd when the slice is changed</param>
         public IStorageSubscription Subscribe<TSlice>(IStoreAction<TState, TSlice> action, Action<TSlice> callback) where TSlice : class, new()
         {
             EnsureValidAction(action);
@@ -203,11 +287,13 @@ namespace Onbox.Store.V7
             }
         }
 
+        /// <summary>
+        /// Gets the complete history of the global state
+        /// </summary>
         public List<StateEntry<TState>> GetHistory()
         {
             return this.mapper.Clone(this.stateHistory);
         }
-
 
 
         private string GetPath<TSlice>(IStoreAction<TState, TSlice> action) where TSlice : class, new()
@@ -247,36 +333,12 @@ namespace Onbox.Store.V7
             return currentObject;
         }
 
-        private void EnsureValidAction<TState, TSlice>(IStoreAction<TState, TSlice> action)
-             where TState : class, new() where TSlice : class, new()
+        private void EnsureValidAction<TSlice>(IStoreAction<TState, TSlice> action) where TSlice : class, new()
         {
             if (action == null)
             {
                 throw new ArgumentException($"Action can not be null");
             }
-        }
-
-        private Type GetPropertyType(Type type, string path)
-        {
-            var currentType = type;
-            var pathArr = path?.Split('.').Skip(1);
-
-            foreach (var pathItem in pathArr)
-            {
-                if (currentType == null)
-                {
-                    return null;
-                }
-                var prop = currentType.GetProperty(pathItem);
-                if (prop == null)
-                {
-                    return null;
-                }
-
-                currentType = prop.PropertyType;
-            }
-
-            return currentType;
         }
 
     }
