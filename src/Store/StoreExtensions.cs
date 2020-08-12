@@ -14,7 +14,8 @@ namespace Onbox.Store.V7
         /// </summary>
         public static IContainer AddStore<T>(this IContainer container) where T : class, new()
         {
-            container.AddSingleton<IStore<T>, Store<T>>();
+            var store = container.Resolve<Store<T>>();
+            container.AddSingleton<IStore<T>, Store<T>>(store);
 
             return container;
         }

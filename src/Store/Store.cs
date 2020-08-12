@@ -6,12 +6,31 @@ using System.Linq;
 
 namespace Onbox.Store.V7
 {
+    /// <summary>
+    /// A snapshot of the state in a give point in time
+    /// </summary>
+    /// <typeparam name="TState"></typeparam>
     public class StateEntry<TState> where TState : class, new()
     {
+        /// <summary>
+        /// When the state was updated
+        /// </summary>
         public DateTimeOffset UpdatedAt { get; set; }
+        /// <summary>
+        /// The state before this modification
+        /// </summary>
         public TState OldState { get; set; }
+        /// <summary>
+        /// The state after this modification
+        /// </summary>
         public TState NewState { get; set; }
+        /// <summary>
+        /// The action responsible for this modification
+        /// </summary>
         public string ActionName { get; set; }
+        /// <summary>
+        /// The action path responsible this modification
+        /// </summary>
         public string ActionPath { get; set; }
     }
 
@@ -95,7 +114,7 @@ namespace Onbox.Store.V7
             // Ensures that the action is valid
             EnsureValidAction(action);
 
-            var actionPath = action?.GetActionPath().Body.ToString();
+            var actionPath = this.GetPath(action);
             var actionName = action?.GetActionName();
 
             // Copies the new state of the store

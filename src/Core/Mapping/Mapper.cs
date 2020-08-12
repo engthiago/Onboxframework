@@ -23,7 +23,8 @@ namespace Onbox.Core.V7.Mapping
         /// <returns>The cloned object with all properties copied</returns>
         public TSource Clone<TSource>(TSource source) where TSource : new()
         {
-            var target = this.Clone(source);
+            var target = new TSource();
+            this.mapperOperator.Map(source, target);
             return target;
         }
 
