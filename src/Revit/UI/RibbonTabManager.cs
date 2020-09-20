@@ -29,6 +29,10 @@ namespace Onbox.Revit.V7.UI
         /// Creates a Ribbon Tab
         /// </summary>
         IRibbonTabManager CreateTab(string name);
+        /// <summary>
+        /// Gets Ribbon line break string
+        /// </summary>
+        string GetLineBreak();
     }
 
     /// <summary>
@@ -39,12 +43,18 @@ namespace Onbox.Revit.V7.UI
         private readonly UIControlledApplication app;
         private readonly ImageManager imageManager;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public RibbonManager(UIControlledApplication app, ImageManager imageManager)
         {
             this.app = app;
             this.imageManager = imageManager;
         }
 
+        /// <summary>
+        /// Creates a Ribbon Tab
+        /// </summary>
         public IRibbonTabManager CreateTab(string name)
         {
             try
@@ -58,6 +68,9 @@ namespace Onbox.Revit.V7.UI
             return new RibbonTabManager(this.app, name, this.imageManager);
         }
 
+        /// <summary>
+        /// Creates a Ribbon Panel on Revit's Addins Tab
+        /// </summary>
         public IRibbonPanelManager CreatePanel(string panelName)
         {
             var panel = this.app.CreateRibbonPanel(panelName);
@@ -65,6 +78,9 @@ namespace Onbox.Revit.V7.UI
             return itembuilder;
         }
 
+        /// <summary>
+        /// Creates a Ribbon Panel
+        /// </summary>
         public IRibbonPanelManager CreatePanel(string tabName, string panelName)
         {
             try
@@ -80,12 +96,22 @@ namespace Onbox.Revit.V7.UI
             return itembuilder;
         }
 
+        /// <summary>
+        /// Get Revit UI Controlled App
+        /// </summary>
+        /// <returns></returns>
         public UIControlledApplication GetApp()
         {
             return this.app;
         }
 
-
+        /// <summary>
+        /// Gets Ribbon line break string
+        /// </summary>
+        public string GetLineBreak()
+        {
+            return "\r\n";
+        }
     }
 
     public class RibbonTabManager : IRibbonTabManager
