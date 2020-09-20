@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Onbox.Abstractions.V7;
 
-namespace Onbox.Standard.Core.Http
+namespace Onbox.Http.V7.Http
 {
+    /// <summary>
+    /// Preferences for the default implementation of <see cref="IHttpService"/>
+    /// </summary>
     public class HttpSettings
     {
         /// <summary>

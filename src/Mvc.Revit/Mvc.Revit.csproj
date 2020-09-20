@@ -94,13 +94,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\Abstractions.csproj">
-      <Project>{b7fee131-b5cf-4dad-af94-ce15605a4fc8}</Project>
-      <Name>Abstractions</Name>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
+      <Project>{5C9FC71D-7306-4450-BA94-C055D36CC9C8}</Project>
+      <Name>Abstractions.Standard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{F340830F-CABC-439D-8684-05317D6DC13E}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\Core.Standard\Core.Standard.csproj">
+      <Project>{e07602ac-d1cc-4def-8290-fe37a89afa79}</Project>
+      <Name>Core.Standard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{06552675-1f55-4c83-a25b-4658ebac2822}</Project>

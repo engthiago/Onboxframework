@@ -44,13 +44,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Abstractions\Abstractions.csproj">
-      <Project>{b7fee131-b5cf-4dad-af94-ce15605a4fc8}</Project>
-      <Name>Abstractions</Name>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
+      <Project>{5C9FC71D-7306-4450-BA94-C055D36CC9C8}</Project>
+      <Name>Abstractions.Standard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{f340830f-cabc-439d-8684-05317d6dc13e}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\Core.Standard\Core.Standard.csproj">
+      <Project>{e07602ac-d1cc-4def-8290-fe37a89afa79}</Project>
+      <Name>Core.Standard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Di\Di.csproj">
       <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
@@ -68,9 +68,9 @@
       <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
       <Name>Revit</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Store\Store.csproj">
-      <Project>{6156fe2d-ac8f-43a9-8c59-3b4e66c4b0c8}</Project>
-      <Name>Store</Name>
+    <ProjectReference Include="..\Store.Standard\Store.Standard.csproj">
+      <Project>{3258b9eb-7a7c-4f4f-bdde-10e02836b3e9}</Project>
+      <Name>Store.Standard</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
