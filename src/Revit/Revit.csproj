@@ -87,6 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRevitAppData.cs" />
     <Compile Include="Commands\IndependentRevitCommandBase.cs" />
+    <Compile Include="RevitExternalHandlerExtensions.cs" />
     <Compile Include="RevitLanguage.cs" />
     <Compile Include="RevitAppData.cs" />
     <Compile Include="RevitExternalHandler.cs" />
