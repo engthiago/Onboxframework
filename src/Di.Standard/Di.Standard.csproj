@@ -7,6 +7,10 @@
     <Version>7.0.0</Version>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Thiago\source\repos\engthiago\OnboxLibrary\src\Di.Standard\Onbox.Di.V7.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj" />
   </ItemGroup>
