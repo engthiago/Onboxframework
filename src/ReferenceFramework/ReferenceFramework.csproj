@@ -76,10 +76,6 @@
       <Project>{e07602ac-d1cc-4def-8290-fe37a89afa79}</Project>
       <Name>Core.Standard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Di\Di.csproj">
-      <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
-      <Name>Di</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Mvc.Revit\Mvc.Revit.csproj">
       <Project>{1902d3ea-f7f0-4efa-8237-805859e794f5}</Project>
       <Name>Mvc.Revit</Name>

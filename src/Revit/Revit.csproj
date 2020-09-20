@@ -95,13 +95,13 @@
     <Compile Include="UI\RibbonHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Di.Standard\Di.Standard.csproj">
+      <Project>{a10619b9-a9a1-4b34-9f3a-c0a84d262f69}</Project>
+      <Name>Di.Standard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
       <Project>{5C9FC71D-7306-4450-BA94-C055D36CC9C8}</Project>
       <Name>Abstractions.Standard</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Di\Di.csproj">
-      <Project>{7ade1a05-4ee6-4790-b634-9649bbda7b67}</Project>
-      <Name>Di</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

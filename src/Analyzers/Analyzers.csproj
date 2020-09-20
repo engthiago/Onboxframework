@@ -23,6 +23,7 @@
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <AssemblyName>Onbox.Analyzers.V7</AssemblyName>
     <RootNamespace>Onbox.Analyzers.V7</RootNamespace>
+    <Version>7.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
