@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Abstractions\Abstractions.Standard.csproj" />
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj" />
   </ItemGroup>
 
 </Project>
