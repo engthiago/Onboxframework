@@ -56,12 +56,13 @@
     <Compile Include="Json\JsonExtensions.cs" />
     <Compile Include="Json\JsonService.cs" />
     <Compile Include="Logging\FileLoggingService.cs" />
-    <Compile Include="Mapping\IMapperConfigurator.cs" />
+    <Compile Include="Mapping\IMapperActionManager.cs" />
     <Compile Include="Mapping\IMapperOperator.cs" />
     <Compile Include="Mapping\Mapper.cs" />
-    <Compile Include="Mapping\MapperConfigurator.cs" />
+    <Compile Include="Mapping\MapperActionManager.cs" />
     <Compile Include="Mapping\MapperOperator.cs" />
     <Compile Include="Messaging\MessageDebugService.cs" />
+    <Compile Include="OnboxExceptionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReactFactory\Debouncer.cs" />
     <Compile Include="ReactFactory\Interval.cs" />

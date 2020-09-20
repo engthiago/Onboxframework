@@ -11,14 +11,23 @@ using System.Windows.Media.Imaging;
 
 namespace Onbox.Revit.V7.UI
 {
+    /// <summary>
+    /// Deals with image conversions
+    /// </summary>
     public class ImageManager
     {
+        /// <summary>
+        /// Converts an assembly resource to a BitmapImage
+        /// </summary>
         public BitmapImage ConvertBitmapSource(string targetResourceName, Assembly assembly)
         {
             var stream = assembly.GetManifestResourceStream(assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith(targetResourceName)));
             return ConvertToBitmapSource(stream) as BitmapImage;
         }
 
+        /// <summary>
+        /// Converts a stream to a BitmapSource
+        /// </summary>
         public BitmapSource ConvertToBitmapSource(Stream stream)
         {
             try
@@ -34,6 +43,9 @@ namespace Onbox.Revit.V7.UI
             }
         }
 
+        /// <summary>
+        /// Converts a Bitmap to a BitmapSource
+        /// </summary>
         public BitmapSource ConvertToBitmapSource(Bitmap src, ImageFormat imageFormat)
         {
             try

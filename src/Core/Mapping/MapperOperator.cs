@@ -2,20 +2,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Onbox.Core.V7.Mapping
 {
+    /// <summary>
+    /// Support contract for performing mapping
+    /// </summary>
     public class MapperOperator : IMapperOperator
     {
-        private readonly IMapperConfigurator mapperConfigurator;
+        private readonly IMapperActionManager mapperConfigurator;
 
-        public MapperOperator(IMapperConfigurator mapperConfigurator)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public MapperOperator(IMapperActionManager mapperConfigurator)
         {
             this.mapperConfigurator = mapperConfigurator;
         }
 
+        /// <summary>
+        /// Creates a new object as a deep copy of the input object
+        /// </summary>
         public object Map(object source, object target)
         {
             if (source == null)
@@ -55,7 +62,7 @@ namespace Onbox.Core.V7.Mapping
                 throw new InvalidCastException($"Can not map between {sourceType.FullName} and {targetType.FullName}");
             }
 
-            var mapingFunction = this.mapperConfigurator.GetMapFunction(sourceType, targetType);
+            var mapingFunction = this.mapperConfigurator.GetMapPostAction(sourceType, targetType);
             if (mapingFunction != null)
             {
                 mapingFunction.DynamicInvoke(source, target);
@@ -64,6 +71,9 @@ namespace Onbox.Core.V7.Mapping
             return target;
         }
 
+        /// <summary>
+        /// Maps properties of one object to another
+        /// </summary>
         public object Map(object source)
         {
             if (source == null)

@@ -60,12 +60,12 @@ namespace Onbox.Core.V7
         /// <param name="container">The container in context</param>
         /// <param name="config">If no configuration is specified it will add no post mapping actions</param>
         /// <returns>The container in context</returns>
-        public static IContainer AddMapper(this IContainer container, Action<MapperConfigurator> config = null)
+        public static IContainer AddMapper(this IContainer container, Action<MapperActionManager> config = null)
         {
-            var setting = new MapperConfigurator();
+            var setting = new MapperActionManager();
             config?.Invoke(setting);
 
-            container.AddSingleton<IMapperConfigurator>(setting);
+            container.AddSingleton<IMapperActionManager>(setting);
             container.AddSingleton<IMapperOperator, MapperOperator>();
             container.AddSingleton<IMapper, Mapper>();
 

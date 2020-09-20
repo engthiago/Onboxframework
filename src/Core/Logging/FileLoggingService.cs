@@ -15,6 +15,9 @@ namespace Onbox.Core.V7.Logging
     {
         private readonly FileLoggingSettings settings;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public FileLoggingService(FileLoggingSettings settings)
         {
             this.settings = settings;

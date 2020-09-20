@@ -25,7 +25,7 @@ namespace Onbox.Revit.V7.UI
                 System.Windows.Media.Imaging.BitmapImage currentImage32 = this.imageManager.ConvertBitmapSource(targetImage + "32.png", commandType.Assembly);
                 currentBtn.LargeImage = currentImage32;
             }
-            catch (Exception) { /*System.Windows.MessageBox.Show(e.Message + "\n" + e.StackTrace + "\n" + e.Source);*/ }
+            catch (Exception) { }
 
             try
             {
@@ -51,7 +51,7 @@ namespace Onbox.Revit.V7.UI
                 System.Windows.Media.Imaging.BitmapImage currentImage32 = this.imageManager.ConvertBitmapSource(targetImage + "32.png", commandType.Assembly);
                 currentBtn.LargeImage = currentImage32;
             }
-            catch (Exception) { /*System.Windows.MessageBox.Show(e.Message + "\n" + e.StackTrace + "\n" + e.Source);*/ }
+            catch (Exception) { }
 
             try
             {
@@ -77,7 +77,7 @@ namespace Onbox.Revit.V7.UI
                 System.Windows.Media.Imaging.BitmapImage currentImage32 = this.imageManager.ConvertBitmapSource(targetImage + "32.png", commandType.Assembly);
                 currentBtn.LargeImage = currentImage32;
             }
-            catch (Exception) { /*System.Windows.MessageBox.Show(e.Message + "\n" + e.StackTrace + "\n" + e.Source);*/ }
+            catch (Exception) { }
 
             try
             {

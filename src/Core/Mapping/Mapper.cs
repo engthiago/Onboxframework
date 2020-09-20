@@ -3,7 +3,7 @@
 namespace Onbox.Core.V7.Mapping
 {
     /// <summary>
-    /// Onbox Mapper can clone objects and map properties and lists
+    /// Onbox implementation of mapper service. Similar to Automapper
     /// </summary>
     public class Mapper : IMapper
     {

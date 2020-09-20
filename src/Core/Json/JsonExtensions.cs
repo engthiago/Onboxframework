@@ -5,6 +5,9 @@ using System;
 
 namespace Onbox.Core.V7.Json
 {
+    /// <summary>
+    /// Helper extensions for json parser and IOC container
+    /// </summary>
     public static class JsonExtensions
     {
         /// <summary>

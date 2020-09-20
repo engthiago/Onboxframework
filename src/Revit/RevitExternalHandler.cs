@@ -8,11 +8,29 @@ using System.Threading.Tasks;
 
 namespace Onbox.Revit.V7
 {
+    /// <summary>
+    /// Provides a way to run asyncronous taks on Revit's main thread
+    /// </summary>
     public interface IRevitEventHandler : IExternalEventHandler
     {
+        /// <summary>
+        /// The action will run by Revit as soon as its thread is available
+        /// </summary>
         Task RunAsync(Action<UIApplication> action, CancellationTokenSource cancelSource = null);
+
+        /// <summary>
+        /// The action will run by Revit as soon as its thread is available
+        /// </summary>
         Task<T> RunAsync<T>(Func<UIApplication, T> action, CancellationTokenSource cancellationToken = null);
+
+        /// <summary>
+        /// Cancels all queue tasks
+        /// </summary>
         void CancelAll();
+
+        /// <summary>
+        /// Gets the number of queue tasks
+        /// </summary>
         int GetQueueCount();
     }
 
@@ -31,6 +49,9 @@ namespace Onbox.Revit.V7
         internal CancellationTokenSource Cancellation { get; set; }
     }
 
+    /// <summary>
+    /// Provides a way to run asyncronous taks on Revit's main thread
+    /// </summary>
     public class RevitExternalHandler : IRevitEventHandler
     {
         private readonly string name;
@@ -39,7 +60,10 @@ namespace Onbox.Revit.V7
         private readonly IRevitContext revitContext;
         private object contextResult;
 
-        public RevitExternalHandler(RevitEventSettings settings, IRevitContext revitContext)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public RevitExternalHandler(RevitAsyncSettings settings, IRevitContext revitContext)
         {
             this.revitContext = revitContext;
             this.name = settings.Name;
@@ -53,16 +77,25 @@ namespace Onbox.Revit.V7
             }
         }
 
+        /// <summary>
+        /// Cancels all queue tasks
+        /// </summary>
         public void CancelAll()
         {
             this.queue.Clear();
         }
 
+        /// <summary>
+        /// Gets the number of queue tasks
+        /// </summary>
         public int GetQueueCount()
         {
             return this.queue.Count();
         }
 
+        /// <summary>
+        /// This method is called to handle the external event
+        /// </summary>
         public void Execute(UIApplication app)
         {
             if (queue.Any())
@@ -122,11 +155,17 @@ namespace Onbox.Revit.V7
             }
         }
 
+        /// <summary>
+        /// The event's name
+        /// </summary>
         public string GetName()
         {
             return name;
         }
 
+        /// <summary>
+        /// The action will run by Revit as soon as its thread is available
+        /// </summary>
         public async Task RunAsync(Action<UIApplication> action, CancellationTokenSource cancelSource = null)
         {
             if (revitContext.IsInRevitContext())
@@ -157,6 +196,9 @@ namespace Onbox.Revit.V7
             await task;
         }
 
+        /// <summary>
+        /// The action will run by Revit as soon as its thread is available
+        /// </summary>
         public async Task<T> RunAsync<T>(Func<UIApplication, T> action, CancellationTokenSource cancelSource = null)
         {
             if (revitContext.IsInRevitContext())
@@ -200,9 +242,19 @@ namespace Onbox.Revit.V7
         }
     }
 
-    public class RevitEventSettings
+    /// <summary>
+    /// Data class to hold preferences for Revit async tasks
+    /// </summary>
+    public class RevitAsyncSettings
     {
+        /// <summary>
+        /// The name of the handler for Revit async tasks
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// If the handler will be journable
+        /// </summary>
         public bool IsJournalable { get; set; }
     }
 }

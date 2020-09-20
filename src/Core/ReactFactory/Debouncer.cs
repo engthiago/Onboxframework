@@ -10,6 +10,9 @@ namespace Onbox.Core.V7.ReactFactory
     {
         private string taskId;
 
+        /// <summary>
+        /// Debounces an action
+        /// </summary>
         public void Debounce(Action action, int delay = 500)
         {
             var taskId = Guid.NewGuid().ToString();

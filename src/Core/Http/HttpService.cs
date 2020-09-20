@@ -10,6 +10,14 @@ using System.Threading.Tasks;
 
 namespace Onbox.Core.V7.Http
 {
+    /// <summary>
+    /// Onbox's implementation for Http requests.
+    /// <br> 1 - Works with json strings for all serialzable objects</br>
+    /// <br> 2 - <see cref="IJsonService"/> for json serialization</br>
+    /// <br> 3 - Should be a singleton that is meant to be reused during the lifecycle of the application</br>
+    /// <br> 4 - Provides strong typed response objects</br>
+    /// <br> 5 - Provides request and response interception</br>
+    /// </summary>
     public class HttpService : IHttpService
     {
         private readonly HttpClient client;
@@ -21,6 +29,9 @@ namespace Onbox.Core.V7.Http
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public HttpService(IJsonService jsonService, ILoggingService loggingService, IHttpInterceptor httpInterceptor, HttpSettings httpSettings)
         {
             this.client = new HttpClient();
@@ -52,7 +63,9 @@ namespace Onbox.Core.V7.Http
             return request;
         }
 
-
+        /// <summary>
+        /// Send a GET request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task<T> GetAsync<T>(string endpoint, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -72,6 +85,9 @@ namespace Onbox.Core.V7.Http
             return this.ConvertResponseToType<T>(json);
         }
 
+        /// <summary>
+        /// Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.
+        /// </summary>
         public async Task<Stream> GetStreamAsync(string endpoint, string token = null)
         {
             this.EnsureIsConnected();
@@ -89,6 +105,9 @@ namespace Onbox.Core.V7.Http
             return stream;
         }
 
+        /// <summary>
+        /// Send a DELETE request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task<T> DeleteAsync<T>(string endpoint, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -111,6 +130,9 @@ namespace Onbox.Core.V7.Http
             return null;
         }
 
+        /// <summary>
+        /// Send a DELETE request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task DeleteAsync(string endpoint, string token = null)
         {
             this.EnsureIsConnected();
@@ -125,6 +147,9 @@ namespace Onbox.Core.V7.Http
             await EnsureSuccess(response);
         }
 
+        /// <summary>
+        /// Send a PUT request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task<T> PutAsync<T>(string endpoint, object content, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -152,6 +177,9 @@ namespace Onbox.Core.V7.Http
             return null;
         }
 
+        /// <summary>
+        /// Send a PUT request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task PutAsync(string endpoint, object content, string token = null)
         {
             this.EnsureIsConnected();
@@ -170,6 +198,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a PUT stream request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task<T> PutStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -196,6 +227,9 @@ namespace Onbox.Core.V7.Http
 
         }
 
+        /// <summary>
+        /// Send a PUT stream request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task PutStreamAsync(string endpoint, Stream content, string token = null)
         {
             using (var streamContent = new StreamContent(content))
@@ -210,6 +244,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a PUT request to the specified Uri and return the response body as a stream in an asynchronous operation.
+        /// </summary>
         public async Task<Stream> PutRequestStreamAsync(string endpoint, object content, string token = null)
         {
             this.EnsureIsConnected();
@@ -231,6 +268,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a POST request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task<T> PostAsync<T>(string endpoint, object content, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -257,6 +297,9 @@ namespace Onbox.Core.V7.Http
             return null;
         }
 
+        /// <summary>
+        /// Send a POST form request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task PostAsync(string endpoint, object content, string token = null)
         {
             this.EnsureIsConnected();
@@ -275,6 +318,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a POST request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task<T> PostStreamAsync<T>(string endpoint, Stream content, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -300,6 +346,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a POST stream request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task PostStreamAsync(string endpoint, Stream content, string token = null)
         {
             this.EnsureIsConnected();
@@ -317,6 +366,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a POST stream request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task<Stream> PostRequestStreamAsync(string endpoint, object content, string token = null)
         {
             this.EnsureIsConnected();
@@ -338,6 +390,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Send a POST request to the specified Uri and return the response body as a stream in an asynchronous operation.
+        /// </summary>
         public async Task<T> PostFormAsync<T>(string endpoint, IDictionary<string, string> content, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -363,6 +418,9 @@ namespace Onbox.Core.V7.Http
             return null;
         }
 
+        /// <summary>
+        /// Send a PATCH request to the specified Uri and return the response body as an asynchronous operation.
+        /// </summary>
         public async Task<T> PatchAsync<T>(string endpoint, object content, string token = null) where T : class
         {
             this.EnsureIsConnected();
@@ -389,6 +447,9 @@ namespace Onbox.Core.V7.Http
             return null;
         }
 
+        /// <summary>
+        /// Send a PATCH request to the specified Uri as an asynchronous operation.
+        /// </summary>
         public async Task PatchAsync(string endpoint, object content, string token = null)
         {
             this.EnsureIsConnected();
@@ -477,7 +538,7 @@ namespace Onbox.Core.V7.Http
             try
             {
                 var responseJson = await response.RequestMessage?.Content?.ReadAsStringAsync();
-                await loggingService.Error($"{(int)response.StatusCode } {response.StatusCode.ToString()}: {responseJson}");
+                await loggingService.Error($"{(int)response.StatusCode } {response.StatusCode}: {responseJson}");
             }
             catch
             {
@@ -504,6 +565,9 @@ namespace Onbox.Core.V7.Http
             }
         }
 
+        /// <summary>
+        /// Add a header to all subsequent requests
+        /// </summary>
         public IHttpService AddHeader(string name, string value)
         {
             this.SetHeader(name, value);
@@ -527,20 +591,30 @@ namespace Onbox.Core.V7.Http
             }
         }
 
-        public void ClearHeaders()
+        /// <summary>
+        /// Clears all headers for all subsequent requests
+        /// </summary>
+        public IHttpService ClearHeaders()
         {
             this.client.DefaultRequestHeaders.Clear();
             this.Configure(this.httpSettings);
+            return this;
         }
 
+        /// <summary>
+        /// Disposes the client
+        /// </summary>
         public void Dispose()
         {
             client.Dispose();
         }
 
+        /// <summary>
+        /// Disposes the client
+        /// </summary>
         ~HttpService()
         {
-            client.Dispose();
+            this.Dispose();
         }
     }
 }

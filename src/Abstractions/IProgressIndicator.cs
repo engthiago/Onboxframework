@@ -12,7 +12,7 @@ namespace Onbox.Abstractions.V7
     public interface IProgressIndicator
     {
         /// <summary>
-        /// Indicates if the process is already finished and was successful
+        /// Indicates if the process has finished and was successful
         /// </summary>
         /// <returns></returns>
         bool FinishedSuccessfully();
@@ -20,7 +20,6 @@ namespace Onbox.Abstractions.V7
         /// <summary>
         /// Adds one iteration to the process with a given message
         /// </summary>
-        /// <param name="name"></param>
         void Iterate(string name);
 
         /// <summary>

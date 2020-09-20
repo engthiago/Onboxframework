@@ -44,7 +44,7 @@ namespace Onbox.Mvc.V7
             }
         }
 
-        private async void ChangeContent(object newContent)
+        private void ChangeContent(object newContent)
         {
             if (!AreControlsValid())
             {

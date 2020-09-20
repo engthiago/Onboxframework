@@ -17,30 +17,52 @@ namespace Onbox.Revit.V7
 
         private bool hookupViewChanged;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public RevitContext()
         {
         }
 
+        /// <summary>
+        /// Gets the current Revit Document
+        /// </summary>
+        /// <returns></returns>
         public Document GetDocument()
         {
             return this.document;
         }
 
+        /// <summary>
+        /// Gets the current Revit UIDocument
+        /// </summary>
+        /// <returns></returns>
         public UIDocument GetUIDocument()
         {
             return this.uiDocument;
         }
 
+        /// <summary>
+        /// Gets the current Revit Application
+        /// </summary>
+        /// <returns></returns>
         public Application GetApplication()
         {
             return this.application;
         }
 
+        /// <summary>
+        /// Gets the current Revit UI Application
+        /// </summary>
+        /// <returns></returns>
         public UIApplication GetUIApplication()
         {
             return this.uiApplication;
         }
 
+        /// <summary>
+        /// Hooks up Revit Events to the context
+        /// </summary>
         public void HookupRevitEvents(UIControlledApplication application)
         {
             application.ControlledApplication.DocumentCreated += OnDocumentCreated;
@@ -49,6 +71,9 @@ namespace Onbox.Revit.V7
             application.ControlledApplication.DocumentClosed += OnDocumentClosed;
         }
 
+        /// <summary>
+        /// Unhooks Revit Events to the context
+        /// </summary>
         public void UnhookRevitEvents(UIControlledApplication application)
         {
             application.ControlledApplication.DocumentCreated -= this.OnDocumentCreated;
@@ -144,6 +169,9 @@ namespace Onbox.Revit.V7
             return false;
         }
 
+        /// <summary>
+        /// Identifies if Revit is in the current context (Revit API context)
+        /// </summary>
         public bool IsInRevitContext()
         {
             if (this.document == null)

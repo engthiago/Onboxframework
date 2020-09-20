@@ -1,27 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Onbox.Core.V7.Reporting
 {
-    public class ProgressCancelledException : Exception
+    /// <summary>
+    /// Indicates that the running process was cancelled
+    /// </summary>
+    public class ProgressCancelledException : OnboxExceptionBase
     {
-        private bool hasMessage;
 
-        public ProgressCancelledException()
-        {
-        }
-
-        public ProgressCancelledException(string message) : base(message)
-        {
-            this.hasMessage = true;
-        }
-
-        public bool HasMessage()
-        {
-            return this.hasMessage;
-        }
     }
 }

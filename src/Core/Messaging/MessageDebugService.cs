@@ -14,13 +14,18 @@ namespace Onbox.Core.V7.Messaging
     {
         private string title = "Message Log Service";
 
-
+        /// <summary>
+        /// Shows an error message
+        /// </summary>
         public void Error(string message)
         {
             System.Diagnostics.Debug.WriteLine($"****** {title} Error ******");
             System.Diagnostics.Debug.WriteLine(message);
         }
 
+        /// <summary>
+        /// Shows a question message
+        /// </summary>
         public bool Question(string message)
         {
             System.Diagnostics.Debug.WriteLine($"****** {title} Question ******");
@@ -29,6 +34,9 @@ namespace Onbox.Core.V7.Messaging
             return true;
         }
 
+        /// <summary>
+        /// Sets the title of the messages
+        /// </summary>
         public void SetTitle(string newTitle)
         {
             if (string.IsNullOrWhiteSpace(newTitle))
@@ -40,12 +48,18 @@ namespace Onbox.Core.V7.Messaging
             title = newTitle;
         }
 
+        /// <summary>
+        /// Shows a message
+        /// </summary>
         public void Show(string message)
         {
             System.Diagnostics.Debug.WriteLine($"****** {title} Show ******");
             System.Diagnostics.Debug.WriteLine(message);
         }
 
+        /// <summary>
+        /// Shows a warning message
+        /// </summary>
         public void Warning(string message)
         {
             System.Diagnostics.Debug.WriteLine($"****** {title} Warning ******");

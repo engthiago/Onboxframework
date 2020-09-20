@@ -4,6 +4,11 @@ using Onbox.Abstractions.V7;
 
 namespace Onbox.Revit.V7.Commands
 {
+    /// <summary>
+    /// An indepentend Revit Command that will create a new container instance and use it during the command runtime. Use this when an ExternalApplication is not necessary.
+    /// <br>After the command finishes the container will be destroyed / disposed.</br>
+    /// </summary>
+    /// <typeparam name="TContainerFactory"></typeparam>
     public abstract class IndependentRevitCommandBase<TContainerFactory> : IExternalCommand where TContainerFactory : class, IContainerFactory, new()
     {
         /// <summary>
@@ -21,7 +26,7 @@ namespace Onbox.Revit.V7.Commands
             }
             catch
             {
-                // If an exception is thrown on user's code, trows it back to the stack
+                // If an exception is thrown on user's code, throws it back to the stack
                 throw;
             }
             finally

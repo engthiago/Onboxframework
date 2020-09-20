@@ -4,8 +4,14 @@ using System.Net.Http;
 
 namespace Onbox.Core.V7.Http
 {
+    /// <summary>
+    /// Helper extensions for <see cref="HttpService"/> and IOC container
+    /// </summary>
     public static class HttpExtensions
     {
+        /// <summary>
+        /// Adds <see cref="IHttpService"/> as <see cref="HttpService"/> to the container
+        /// </summary>
         public static IContainer AddHttp(this IContainer container)
         {
             AddHttp(container, null);
@@ -13,6 +19,9 @@ namespace Onbox.Core.V7.Http
             return container;
         }
 
+        /// <summary>
+        /// Adds <see cref="IHttpService"/> as <see cref="HttpService"/> to the container with configuration
+        /// </summary>
         public static IContainer AddHttp(this IContainer container, Action<HttpSettings> config = null)
         {
             container.ConfigureHttp(config)
@@ -23,6 +32,9 @@ namespace Onbox.Core.V7.Http
             return container;
         }
 
+        /// <summary>
+        /// Adds <see cref="IHttpService"/> as <see cref="HttpService"/> to the container with interception and configuration
+        /// </summary>
         public static IContainer AddHttp(this IContainer container, IHttpInterceptor httpInterceptor, Action<HttpSettings> config = null)
         {
             container.ConfigureHttp(config)
@@ -33,6 +45,9 @@ namespace Onbox.Core.V7.Http
             return container;
         }
 
+        /// <summary>
+        /// Adds <see cref="IHttpService"/> as <see cref="HttpService"/> to the container with interception and configuration
+        /// </summary>
         public static IContainer AddHttp<TInterceptor>(this IContainer container, Action<HttpSettings> config = null) where TInterceptor : IHttpInterceptor, new ()
         {
             container.ConfigureHttp(config)
@@ -44,6 +59,9 @@ namespace Onbox.Core.V7.Http
             return container;
         }
 
+        /// <summary>
+        /// Adds <see cref="IHttpService"/> as <see cref="HttpService"/> to the container with interception
+        /// </summary>
         public static IContainer AddHttp(this IContainer container, Action<HttpSettings> config = null, Action<HttpRequestMessage> beforeSendingAction = null, Action<HttpResponseMessage> afterSendingAction = null)
         {
             container.ConfigureHttp(config)
@@ -58,6 +76,9 @@ namespace Onbox.Core.V7.Http
             return container;
         }
 
+        /// <summary>
+        /// Adds <see cref="IHttpService"/> as <see cref="HttpService"/> to the container with configuration
+        /// </summary>
         public static IContainer ConfigureHttp(this IContainer container, Action<HttpSettings> config)
         {
             var settings = new HttpSettings

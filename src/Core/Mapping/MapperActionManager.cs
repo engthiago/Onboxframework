@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Onbox.Core.V7.Mapping
 {
     /// <summary>
-    /// A Mapping configurator that will tell <see cref="Mapper"/> how to map objects
+    ///  Hold actions that can be performed after objects are mapped
     /// </summary>
-    public class MapperConfigurator : IMapperConfigurator
+    public class MapperActionManager : IMapperActionManager
     {
         private readonly Dictionary<string, Delegate> keys = new Dictionary<string, Delegate>();
 
@@ -21,7 +19,10 @@ namespace Onbox.Core.V7.Mapping
             keys[mapKey] = action;
         }
 
-        public Delegate GetMapFunction(Type source, Type target)
+        /// <summary>
+        /// Retrieves a mapping post action that was previously defined by <see cref="AddMappingPostAction{TSource, TTaget}(Action{TSource, TTaget})"/>
+        /// </summary>
+        public Delegate GetMapPostAction(Type source, Type target)
         {
             string mapKey = GetMapKey(source, target);
             if (keys.TryGetValue(mapKey, out Delegate result))
