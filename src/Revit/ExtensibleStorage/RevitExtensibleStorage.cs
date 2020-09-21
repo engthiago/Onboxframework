@@ -93,10 +93,27 @@ namespace Onbox.Revit.V7.ExtensibleStorage
         {
             Schema schema;
             SchemaBuilder builder = new SchemaBuilder(schemaSettings.SchemaGuid);
-            builder.SetReadAccessLevel((Autodesk.Revit.DB.ExtensibleStorage.AccessLevel)schemaSettings.ReadAccessLevel.GetHashCode());
-            builder.SetWriteAccessLevel((Autodesk.Revit.DB.ExtensibleStorage.AccessLevel)schemaSettings.WriteAccessLevel.GetHashCode());
-            builder.SetVendorId(schemaSettings.VendorId);
-            builder.SetDocumentation(schemaSettings.SchemaDocumentation);
+
+            if (Enum.IsDefined(typeof(AccessLevel), schemaSettings.ReadAccessLevel))
+            {
+                builder.SetReadAccessLevel((Autodesk.Revit.DB.ExtensibleStorage.AccessLevel)schemaSettings.ReadAccessLevel.GetHashCode());
+            }
+
+            if (Enum.IsDefined(typeof(AccessLevel), schemaSettings.WriteAccessLevel))
+            {
+                builder.SetWriteAccessLevel((Autodesk.Revit.DB.ExtensibleStorage.AccessLevel)schemaSettings.WriteAccessLevel.GetHashCode());
+            }
+           
+            if (!string.IsNullOrWhiteSpace(schemaSettings.VendorId))
+            {
+                builder.SetVendorId(schemaSettings.VendorId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(schemaSettings.SchemaDocumentation))
+            {
+                builder.SetDocumentation(schemaSettings.SchemaDocumentation);
+            }
+            
             builder.SetSchemaName(schemaSettings.SchemaName);
 
             builder.AddSimpleField(this.fieldName, typeof(string));
