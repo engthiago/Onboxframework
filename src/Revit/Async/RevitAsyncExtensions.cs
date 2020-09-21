@@ -1,7 +1,7 @@
 ﻿using Onbox.Abstractions.V7;
 using System;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.V7.Async
 {
     public static class RevitAsyncExtensions
     {
