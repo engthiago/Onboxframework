@@ -33,6 +33,16 @@ namespace Onbox.Analyzers.V7
         {
             public ISymbol Argument { get; set; }
             public ISymbol ArgumentType { get; set; }
+
+            public override string ToString()
+            {
+                if (ArgumentType.Name != null)
+                {
+                    return ArgumentType.Name;
+                }
+
+                return base.ToString();
+            }
         }
 
         private void AnalyzeSymbol(SymbolAnalysisContext context)
@@ -51,12 +61,20 @@ namespace Onbox.Analyzers.V7
                 return;
             }
 
-            foreach (var arg in constructor.Parameters.Select(a => a.OriginalDefinition))
+            try
             {
-                if (ConstructorContains(symbol, arg, context, types))
+                foreach (var arg in constructor.Parameters.Select(a => a.OriginalDefinition))
                 {
-                    ReportError(symbol, context, types);
+                    var nestedTypes = ConstructorContains(symbol, arg, context, types);
+                    if (nestedTypes != null)
+                    {
+                        ReportError(symbol, context, nestedTypes);
+                        return;
+                    }
                 }
+            }
+            catch
+            {
             }
 
         }
@@ -68,42 +86,43 @@ namespace Onbox.Analyzers.V7
             context.ReportDiagnostic(diagnostic);
         }
 
-        private bool ConstructorContains(INamedTypeSymbol target, ISymbol symbol, SymbolAnalysisContext context, List<SymbolData> types)
+        private List<SymbolData> ConstructorContains(INamedTypeSymbol target, ISymbol symbol, SymbolAnalysisContext context, List<SymbolData> types)
         {
             if ((symbol as IParameterSymbol)?.Type.Kind != SymbolKind.NamedType)
             {
-                types.Clear();
-                return false;
+                return null;
             }
 
+            var nestedTypes = types.ToList();
             var namedSymbol = (symbol as IParameterSymbol).Type as INamedTypeSymbol;
-            types.Add(new SymbolData { Argument = symbol, ArgumentType = namedSymbol });
+            nestedTypes.Add(new SymbolData { Argument = symbol, ArgumentType = namedSymbol });
 
-            if (target.ContainingNamespace.Name == namedSymbol.ContainingNamespace.Name)
+            if (types.Select(t => t.ArgumentType).FirstOrDefault(t => SymbolEqualityComparer.Default.Equals(t, namedSymbol)) != null)
             {
-                if (target.Name == namedSymbol.Name)
-                {
-                    return true;
-                }
+                return types;
             }
 
             var constructor = namedSymbol.Constructors.FirstOrDefault();
             if (constructor == null)
             {
-                types.Clear();
-                return false;
+                return null;
+            }
+
+            if (constructor.Parameters.Length == 0)
+            {
+                return null;
             }
 
             foreach (var arg in constructor.Parameters.Select(a => a.OriginalDefinition))
             {
-                if (ConstructorContains(target, arg, context, types))
+                var subNestedTypes = ConstructorContains(target, arg, context, nestedTypes);
+                if (subNestedTypes != null)
                 {
-                    return true;
+                    return subNestedTypes;
                 }
             }
 
-            types.Clear();
-            return false;
+            return null;
         }
     }
 }

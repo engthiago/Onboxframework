@@ -38,7 +38,7 @@ namespace Onbox.Revit.V7.ExtensibleStorage
         }
 
         /// <summary>
-        /// Resets the extensible storage of this type for this element
+        /// Resets the extensible storage of this type for this element. This REQUIRES a transaction
         /// </summary>
         public void Reset(Element element)
         {
@@ -49,7 +49,7 @@ namespace Onbox.Revit.V7.ExtensibleStorage
         }
 
         /// <summary>
-        /// Saves this data to this element's extensible storage
+        /// Saves this data to this element's extensible storage. This REQUIRES a transaction
         /// </summary>
         public void Save(Element element, T data)
         {

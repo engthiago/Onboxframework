@@ -18,7 +18,7 @@ namespace Onbox.Revit.V7.ExtensibleStorage
         T Load(Element element);
 
         /// <summary>
-        /// Resets the extensible storage of this type for this element
+        /// Resets the extensible storage of this type for this element. This REQUIRES a transaction
         /// </summary>
         void Reset(Element element);
     }
