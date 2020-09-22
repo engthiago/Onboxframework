@@ -42,7 +42,7 @@ namespace Onbox.Analyzers.V7
                 return;
             }
 
-            // Check if it inherits from IRevtiExternallApp interface
+            // Check if it inherits from IRevitExternallApp interface
             var revitAppInterface = namedTypeSymbol.AllInterfaces.FirstOrDefault(i => i.Name == "IRevitExternalApp");
             if (revitAppInterface == null)
             {

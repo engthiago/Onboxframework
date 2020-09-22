@@ -90,7 +90,7 @@
     <Compile Include="RevitContainerProviderBase.cs" />
     <Compile Include="RevitContext.cs" />
     <Compile Include="Commands\RevitAppCommand.cs" />
-    <Compile Include="Applications\RevitAppBase.cs" />
+    <Compile Include="Applications\RevitApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IRevitAppData.cs" />
     <Compile Include="Commands\RevitContainerCommand.cs" />

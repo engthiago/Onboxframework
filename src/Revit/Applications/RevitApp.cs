@@ -7,7 +7,7 @@ namespace Onbox.Revit.V7.Applications
     /// <para>This class provides OnStartup, OnCreateRibbon, and OnShutdown lifecycle events.</para>
     /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
     /// </summary>
-    public abstract class RevitAppBase : RevitAppBase<Container>
+    public abstract class RevitApp : RevitAppBase<Container>
     {
     }
 }

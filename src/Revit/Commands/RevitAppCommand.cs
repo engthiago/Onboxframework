@@ -8,7 +8,7 @@ namespace Onbox.Revit.V7.Commands
     /// <summary>
     /// Base class to implement when implementing RevitExternal Commands with containers
     /// </summary>
-    public abstract class RevitAppCommand<TApplication> : IExternalCommand where TApplication : RevitAppBase, new()
+    public abstract class RevitAppCommand<TApplication> : IExternalCommand where TApplication : RevitApp, new()
     {
         /// <summary>
         /// Execution of External Command

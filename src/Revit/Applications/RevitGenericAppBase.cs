@@ -6,7 +6,7 @@ using Onbox.Revit.V7.UI;
 namespace Onbox.Revit.V7.Applications
 {
     /// <summary>
-    /// The implementation of a generic IContainer type, if you like to use <see cref="Container"/>, you can use <see cref="RevitAppBase"/> implementation instead
+    /// The implementation of a generic IContainer type, if you like to use <see cref="Container"/>, you can use <see cref="RevitApp"/> implementation instead
     /// <para>IMPORTANT: Any children of this class should implement <see cref="ContainerProviderAttribute"/> as well</para>
     /// </summary>
     /// <typeparam name="TContainer">The contract for container implementations</typeparam>
