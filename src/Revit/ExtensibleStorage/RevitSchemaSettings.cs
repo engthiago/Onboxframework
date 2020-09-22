@@ -8,7 +8,7 @@ namespace Onbox.Revit.V7.ExtensibleStorage
     public class RevitSchemaSettings
     {
         /// <summary>
-        ///  The identifier of the Schema
+        ///  The identifier of the Schema. This field is REQUIRED
         /// </summary>
         public Guid SchemaGuid { get; set; }
         /// <summary>
@@ -20,7 +20,7 @@ namespace Onbox.Revit.V7.ExtensibleStorage
         /// </summary>
         public string SchemaName { get; set; }
         /// <summary>
-        /// Read access level of the schema
+        /// Read access level of the schema. This field is REQUIRED
         /// </summary>
         public AccessLevel ReadAccessLevel { get; set; }
         /// <summary>
