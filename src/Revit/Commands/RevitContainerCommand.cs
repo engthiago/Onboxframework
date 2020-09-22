@@ -7,9 +7,10 @@ namespace Onbox.Revit.V7.Commands
 {
     /// <summary>
     /// An indepentend Revit Command that will create a new container instance and use it during the command runtime. Use this when an ExternalApplication is not necessary.
-    /// <br>After the command finishes the container will be destroyed / disposed.</br>
+    /// <br>It uses a Container Pipeline to compose the container.</br>
+    /// <br>After the command finishes the container will be disposed.</br>
     /// </summary>
-    public abstract class RevitContainerCommandBase<TContainerFactory, TContainer> : IExternalCommand where TContainerFactory : class, IContainerPipeline, new()
+    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : IExternalCommand where TContainerPipeline : class, IContainerPipeline, new()
         where TContainer : class, IContainer, new()
     {
         /// <summary>
@@ -17,7 +18,7 @@ namespace Onbox.Revit.V7.Commands
         /// </summary>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            var pipeline = new TContainerFactory();
+            var pipeline = new TContainerPipeline();
             var container = new TContainer();
             var newContainer = pipeline.Pipe(container);
 
@@ -43,7 +44,12 @@ namespace Onbox.Revit.V7.Commands
         public abstract Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements);
     }
 
-    public abstract class RevitContainerCommand<TContainerFactory> : RevitContainerCommandBase<TContainerFactory, Container> where TContainerFactory : class, IContainerPipeline, new()
+    /// <summary>
+    /// An indepentend Revit Command that will create a new container instance and use it during the command runtime. Use this when an ExternalApplication is not necessary.
+    /// <br>It uses a Container Pipeline to compose the container.</br>
+    /// <br>After the command finishes the container will be disposed.</br>
+    /// </summary>
+    public abstract class RevitContainerCommand<TContainerPipeline> : RevitContainerCommandBase<TContainerPipeline, Container> where TContainerPipeline : class, IContainerPipeline, new()
     {
     }
 }

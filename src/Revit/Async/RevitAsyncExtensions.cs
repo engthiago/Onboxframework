@@ -3,6 +3,9 @@ using System;
 
 namespace Onbox.Revit.V7.Async
 {
+    /// <summary>
+    /// Extensions methods to adding support for Async calls in Revit
+    /// </summary>
     public static class RevitAsyncExtensions
     {
         /// <summary>

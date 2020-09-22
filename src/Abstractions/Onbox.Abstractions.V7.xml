@@ -54,6 +54,16 @@
             Resets the entire container
             </summary>
         </member>
+        <member name="T:Onbox.Abstractions.V7.IContainerPipeline">
+            <summary>
+            Container pipeline is used to add dependencies and compose a container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerPipeline.Pipe(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds dependencies to the container and returns it
+            </summary>
+        </member>
         <member name="T:Onbox.Abstractions.V7.IContainerResolver">
             <summary>
             Onbox's IOC container read only contract
