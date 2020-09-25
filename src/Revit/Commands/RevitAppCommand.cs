@@ -6,7 +6,8 @@ using Onbox.Revit.V7.Applications;
 namespace Onbox.Revit.V7.Commands
 {
     /// <summary>
-    /// Base class to implement when implementing RevitExternal Commands with containers
+    /// Base class to implement Revit Commands linked to a App Container
+    /// <br>It will use a scope of the container declared on the App</br>
     /// </summary>
     public abstract class RevitAppCommand<TApplication> : IExternalCommand where TApplication : RevitApp, new()
     {

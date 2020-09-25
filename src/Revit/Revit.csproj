@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <DocumentationFile>bin\Debug\Onbox.Revit.V7.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -86,8 +88,8 @@
     <Compile Include="ExtensibleStorage\RevitExtensibleStorageSettings.cs" />
     <Compile Include="ExtensibleStorage\RevitSchemaSettings.cs" />
     <Compile Include="IRevitContext.cs" />
-    <Compile Include="IRevitExternalApp.cs" />
-    <Compile Include="RevitContainerProviderBase.cs" />
+    <Compile Include="Applications\IRevitExternalApp.cs" />
+    <Compile Include="Applications\RevitContainerProviderBase.cs" />
     <Compile Include="RevitContext.cs" />
     <Compile Include="Commands\RevitAppCommand.cs" />
     <Compile Include="Applications\RevitApp.cs" />

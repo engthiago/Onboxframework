@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Onbox.Reference.Revit.V7</RootNamespace>
     <AssemblyName>Onbox.Reference.Revit.V7</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
-      <Project>{5C9FC71D-7306-4450-BA94-C055D36CC9C8}</Project>
+      <Project>{5c9fc71d-7306-4450-ba94-c055d36cc9c8}</Project>
       <Name>Abstractions.Standard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Analyzers\Analyzers.csproj">
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\Core.Standard\Core.Standard.csproj">
       <Project>{e07602ac-d1cc-4def-8290-fe37a89afa79}</Project>
       <Name>Core.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Di.Standard\Di.Standard.csproj">
+      <Project>{b7d238f7-790e-4428-b18a-0dd2905382ca}</Project>
+      <Name>Di.Standard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mvc.Revit\Mvc.Revit.csproj">
       <Project>{1902d3ea-f7f0-4efa-8237-805859e794f5}</Project>
@@ -87,6 +92,7 @@
     <ProjectReference Include="..\Revit\Revit.csproj">
       <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
       <Name>Revit</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\Store.Standard\Store.Standard.csproj">
       <Project>{3258b9eb-7a7c-4f4f-bdde-10e02836b3e9}</Project>
