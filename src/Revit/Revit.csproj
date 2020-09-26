@@ -80,6 +80,7 @@
     <Compile Include="Applications\ContainerPipelineExtensions.cs" />
     <Compile Include="Applications\RevitGenericAppBase.cs" />
     <Compile Include="Async\IRevitEventHandler.cs" />
+    <Compile Include="Commands\IRevitDestroyableCommand.cs" />
     <Compile Include="ContainerProviderAttribute.cs" />
     <Compile Include="ContainerProviderReflector.cs" />
     <Compile Include="ExtensibleStorage\AccessLevel.cs" />

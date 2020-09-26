@@ -9,7 +9,7 @@ namespace Onbox.Revit.V7.Commands
     /// Base class to implement Revit Commands linked to a App Container
     /// <br>It will use a scope of the container declared on the App</br>
     /// </summary>
-    public abstract class RevitAppCommand<TApplication> : IExternalCommand where TApplication : RevitApp, new()
+    public abstract class RevitAppCommand<TApplication> : IExternalCommand, IRevitDestroyableCommand where TApplication : RevitApp, new()
     {
         /// <summary>
         /// Execution of External Command
@@ -34,6 +34,15 @@ namespace Onbox.Revit.V7.Commands
             }
             finally
             {
+                // Safely calls lifecycle hook 
+                try
+                {
+                    this.OnDestroy(scope);
+                }
+                catch
+                {
+                }
+
                 // Cleans up the scoped copy of the container
                 scope.Dispose();
             }
@@ -51,5 +60,10 @@ namespace Onbox.Revit.V7.Commands
         /// Execution of External Command
         /// </summary>
         public abstract Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements);
+
+        /// <summary>
+        /// External Command lifecycle hook which is called just before the scoped container is disposed.
+        /// </summary>
+        public abstract void OnDestroy(IContainerResolver container);
     }
 }

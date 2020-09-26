@@ -10,11 +10,11 @@ namespace Onbox.Revit.V7.Commands
     /// <br>It uses a Container Pipeline to compose the container.</br>
     /// <br>After the command finishes the container will be disposed.</br>
     /// </summary>
-    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : IExternalCommand where TContainerPipeline : class, IContainerPipeline, new()
+    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : IExternalCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
         where TContainer : class, IContainer, new()
     {
         /// <summary>
-        /// Execution of External Command
+        /// Execution of External Command.
         /// </summary>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -34,14 +34,29 @@ namespace Onbox.Revit.V7.Commands
             }
             finally
             {
+                // Safely calls lifecycle hook 
+                try
+                {
+                    this.OnDestroy(newContainer);
+                }
+                catch
+                {
+                }
+
+                // Cleans up the container
                 container.Dispose();
             }
         }
 
         /// <summary>
-        /// Execution of External Command
+        /// Execution of External Command.
         /// </summary>
         public abstract Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements);
+
+        /// <summary>
+        /// External Command lifecycle hook which is called just before the container is disposed.
+        /// </summary>
+        public abstract void OnDestroy(IContainerResolver container);
     }
 
     /// <summary>
