@@ -84,6 +84,16 @@
             Creates a scoped context copy of this container
             </summary>
         </member>
+        <member name="T:Onbox.Abstractions.V7.IContainerResolverPipeline">
+            <summary>
+            Container Resolver pipeline is used to resolve dependencies or cleanup the dependencies of the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerResolverPipeline.Pipe(Onbox.Abstractions.V7.IContainerResolver)">
+            <summary>
+            Pipes the container resolver and its dependencies
+            </summary>
+        </member>
         <member name="T:Onbox.Abstractions.V7.IHttpService">
             <summary>
             Onbox's contract for Http requests.
