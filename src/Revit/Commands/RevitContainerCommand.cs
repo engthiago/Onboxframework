@@ -56,7 +56,9 @@ namespace Onbox.Revit.V7.Commands
         /// <summary>
         /// External Command lifecycle hook which is called just before the container is disposed.
         /// </summary>
-        public abstract void OnDestroy(IContainerResolver container);
+        public virtual void OnDestroy(IContainerResolver container)
+        {
+        }
     }
 
     /// <summary>
