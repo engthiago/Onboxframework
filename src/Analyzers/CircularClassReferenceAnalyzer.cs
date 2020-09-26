@@ -12,9 +12,9 @@ namespace Onbox.Analyzers.V7
     {
         public const string DiagnosticId = "OBX2";
 
-        private const string title = "Circular class reference detected";
+        private const string title = "Circular class reference detected.";
         private const string messageFormat = "Circular class Reference on: {0}{1}";
-        private const string description = "To fix this issue, please remove the argument from the high level class constructor";
+        private const string description = "To fix this issue, please remove the argument from the high level class constructor.";
         private const string category = "Usage";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, title, messageFormat, category, DiagnosticSeverity.Error, isEnabledByDefault: true, description: description);

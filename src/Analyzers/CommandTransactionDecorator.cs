@@ -13,9 +13,9 @@ namespace Onbox.Analyzers.V7
     {
         public const string DiagnosticId = "OBX3";
 
-        private const string title = "Commands should have Transaction Mode Attribute";
-        private const string messageFormat = "{0} does not contain valid transaction attribute";
-        private const string description = "All Revit Commands should be decorated with Transaction Attribute";
+        private const string title = "Commands should have Transaction Mode Attribute.";
+        private const string messageFormat = "{0} does not contain valid transaction attribute.";
+        private const string description = "All Revit Commands should be decorated with Transaction Attribute.";
         private const string category = "Usage";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, title, messageFormat, category, DiagnosticSeverity.Error, isEnabledByDefault: true, description: description);

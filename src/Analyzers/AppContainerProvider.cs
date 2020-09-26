@@ -11,9 +11,9 @@ namespace Onbox.Analyzers.V7
     {
         public const string DiagnosticId = "OBX1";
 
-        private const string title = "Applications must have a Container Provide Attribute";
-        private const string messageFormat = "{0} does not contain valid Container Attribute";
-        private const string description = "All Onbox Applications should be decorated with ContainerProvider Attribute";
+        private const string title = "Applications must have a Container Provide Attribute.";
+        private const string messageFormat = "{0} does not contain valid Container Attribute.";
+        private const string description = "All Onbox Applications should be decorated with ContainerProvider Attribute.";
         private const string category = "Usage";
 
         private static readonly DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, title, messageFormat, category, DiagnosticSeverity.Error, isEnabledByDefault: true, description: description);
