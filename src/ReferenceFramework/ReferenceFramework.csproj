@@ -81,6 +81,14 @@
       <Project>{b7d238f7-790e-4428-b18a-0dd2905382ca}</Project>
       <Name>Di.Standard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mvc.Abstractions.Standard\Mvc.Abstractions.Standard.csproj">
+      <Project>{d27ad17b-f7d8-48a2-aaeb-018591ff1bfb}</Project>
+      <Name>Mvc.Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Revit.Abstractions.Standard\Mvc.Revit.Abstractions.Standard.csproj">
+      <Project>{e657787a-3de1-490e-a576-e9107f1a9b8e}</Project>
+      <Name>Mvc.Revit.Abstractions.Standard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mvc.Revit\Mvc.Revit.csproj">
       <Project>{1902d3ea-f7f0-4efa-8237-805859e794f5}</Project>
       <Name>Mvc.Revit</Name>
@@ -88,6 +96,10 @@
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{06552675-1f55-4c83-a25b-4658ebac2822}</Project>
       <Name>Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit.Abstractions.Standard\Revit.Abstractions.Standard.csproj">
+      <Project>{af845b20-8b03-4905-a4b8-4fd8326312cf}</Project>
+      <Name>Revit.Abstractions.Standard</Name>
     </ProjectReference>
     <ProjectReference Include="..\Revit\Revit.csproj">
       <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>

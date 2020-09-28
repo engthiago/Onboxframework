@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Onbox.Revit.V7;
+using System;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.Abstractions.V7
 {
     /// <summary>
     /// Revit Application version, name, language and window handle

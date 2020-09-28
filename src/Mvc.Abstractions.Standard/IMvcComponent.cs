@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.Abstractions.V7
 {
+    /// <summary>
+    /// A MVC component contract
+    /// </summary>
     public interface IMvcComponent
     {
         string Name { get; set; }

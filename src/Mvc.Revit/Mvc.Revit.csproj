@@ -81,7 +81,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRevitMvcViewBase.cs" />
     <Compile Include="MvcExtensions.cs" />
     <Compile Include="RevitProgressIndicatorView.xaml.cs">
       <DependentUpon>RevitProgressIndicatorView.xaml</DependentUpon>
@@ -123,13 +122,21 @@
       <Project>{e07602ac-d1cc-4def-8290-fe37a89afa79}</Project>
       <Name>Core.Standard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mvc.Abstractions.Standard\Mvc.Abstractions.Standard.csproj">
+      <Project>{D27AD17B-F7D8-48A2-AAEB-018591FF1BFB}</Project>
+      <Name>Mvc.Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Revit.Abstractions.Standard\Mvc.Revit.Abstractions.Standard.csproj">
+      <Project>{E657787A-3DE1-490E-A576-E9107F1A9B8E}</Project>
+      <Name>Mvc.Revit.Abstractions.Standard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mvc\Mvc.csproj">
       <Project>{06552675-1f55-4c83-a25b-4658ebac2822}</Project>
       <Name>Mvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Revit\Revit.csproj">
-      <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
-      <Name>Revit</Name>
+    <ProjectReference Include="..\Revit.Abstractions.Standard\Revit.Abstractions.Standard.csproj">
+      <Project>{AF845B20-8B03-4905-A4B8-4FD8326312CF}</Project>
+      <Name>Revit.Abstractions.Standard</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

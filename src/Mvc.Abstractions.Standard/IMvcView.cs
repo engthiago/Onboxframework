@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.Abstractions.V7
 {
     /// <summary>
     /// Provides base functionality for WPF MVC Pattern

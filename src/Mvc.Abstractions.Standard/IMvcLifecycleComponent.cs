@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.Abstractions.V7
 {
     public interface IMvcLifecycleComponent
     {
@@ -16,10 +16,5 @@ namespace Onbox.Mvc.V7
         void OnInit();
         Task OnInitAsync();
         void OnWarningRetry();
-    }
-
-    public interface IMvcLifecycleView : IMvcLifecycleComponent
-    {
-        void OnAfterInit();
     }
 }

@@ -1,8 +1,5 @@
-﻿using Onbox.Mvc.V7.Animations;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 
 namespace Onbox.Mvc.V7
 {

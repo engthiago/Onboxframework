@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Onbox.Mvc.Abstractions.V7;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -199,13 +200,5 @@ namespace Onbox.Mvc.V7
             this.onInitAsyncError = error;
             this.onInitComplete = complete;
         }
-    }
-
-    public enum TitleVisibility
-    {
-        Default = 0,
-        HideMinimize = 1,
-        HideMinimizeAndMaximize = 2,
-        HideTitleBar = 3
     }
 }
