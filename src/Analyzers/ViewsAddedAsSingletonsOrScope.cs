@@ -23,7 +23,6 @@ namespace Onbox.Analyzers.V7
         {
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
             context.EnableConcurrentExecution();
-
             context.RegisterSyntaxNodeAction(AnalyzeContainer, SyntaxKind.ExpressionStatement);
         }
 
@@ -41,12 +40,12 @@ namespace Onbox.Analyzers.V7
                 {
                     if (symbol is IMethodSymbol methodSymbol)
                     {
-                        if (!methodSymbol.TypeArguments.IsEmpty)
+                        if (methodSymbol != null && methodSymbol.TypeArguments != null && !methodSymbol.TypeArguments.IsEmpty)
                         {
                             foreach (var argumentSymbol in methodSymbol.TypeArguments)
                             {
                                 var currentSymbol = argumentSymbol;
-                                while (currentSymbol.BaseType != null)
+                                while (currentSymbol != null && currentSymbol.BaseType != null)
                                 {
                                     if (currentSymbol.Name == "Window" && currentSymbol.OriginalDefinition.ToString() == "System.Windows.Window")
                                     {

@@ -486,6 +486,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">PushButton AddPushButton&lt;TExternalCommand&gt;(string name, string image = null, string tooltip = null, string description = null)
+
     where TExternalCommand : class, IExternalCommand, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -564,7 +565,9 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">PushButton AddPushButton&lt;TExternalCommand, TAvailability&gt;(string name, string image = null, string tooltip = null, string description = null)
+
     where TExternalCommand : class, IExternalCommand, new()
+
     where TAvailability : class, IExternalCommandAvailability, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -833,6 +836,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">ToggleButton AddToggleButton&lt;TExternalCommand&gt;(string name, string image = null, string tooltip = null, string description = null)
+
     where TExternalCommand : class, IExternalCommand, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -911,7 +915,9 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">ToggleButton AddToggleButton&lt;TExternalCommand, TAvailability&gt;(string name, string image = null, string tooltip = null, string description = null)
+
     where TExternalCommand : class, IExternalCommand, new()
+
     where TAvailability : class, IExternalCommandAvailability, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -994,6 +1000,7 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">PushButtonData CreatePushButtonData&lt;TExternalCommand&gt;(string name, string image = null, string tooltip = null, string description = null)
+
     where TExternalCommand : class, IExternalCommand, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1072,7 +1079,9 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">PushButtonData CreatePushButtonData&lt;TExternalCommand, TAvailability&gt;(string name, string image = null, string tooltip = null, string description = null)
+
     where TExternalCommand : class, IExternalCommand, new()
+
     where TAvailability : class, IExternalCommandAvailability, new()</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
