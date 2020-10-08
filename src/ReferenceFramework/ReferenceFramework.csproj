@@ -113,7 +113,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)*.*" "%25ProgramData%25\Packages\Onbox\V7" /E /Y /I
+    <PostBuildEvent>if not exist %25ProgramData%25\Packages\Onbox\V7 mkdir %25ProgramData%25\Packages\Onbox\V7
+xcopy "$(TargetDir)*.*" "%25ProgramData%25\Packages\Onbox\V7" /E /Y /I
 echo *** FOLDER ***
 echo %25ProgramData%25\Packages\Onbox\V7</PostBuildEvent>
   </PropertyGroup>
