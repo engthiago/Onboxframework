@@ -37,10 +37,5 @@ namespace Onbox.Revit.Abstractions.V7
         /// Revit's window handler pointer
         /// </summary>
         IntPtr GetRevitWindowHandle();
-
-        /// <summary>
-        /// Flag to tell if revit was lanched in Viewer mode
-        /// </summary>
-        bool GetIsViewerMode();
     }
 }

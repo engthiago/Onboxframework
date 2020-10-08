@@ -84,7 +84,6 @@ namespace Onbox.Revit.V7
         {
             var revitUIApp = new RevitAppData
             {
-                isViewerMode = application.IsViewerModeActive,
                 languageType = (RevitLanguage)application.ControlledApplication.Language.GetHashCode(),
                 versionBuild = application.ControlledApplication.VersionBuild,
                 versionNumber = application.ControlledApplication.VersionNumber,

@@ -14,7 +14,6 @@ namespace Onbox.Revit.V7
         internal string versionBuild;
         internal string versionName;
         internal IntPtr revitWindowHandle;
-        internal bool isViewerMode;
 
         /// <summary>
         /// Revit's language
@@ -62,14 +61,6 @@ namespace Onbox.Revit.V7
         public IntPtr GetRevitWindowHandle()
         {
             return revitWindowHandle;
-        }
-
-        /// <summary>
-        /// Flag to tell if revit was lanched in Viewer mode
-        /// </summary>
-        public bool GetIsViewerMode()
-        {
-            return isViewerMode;
         }
     }
 }
