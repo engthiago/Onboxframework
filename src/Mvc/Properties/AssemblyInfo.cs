@@ -11,8 +11,8 @@ using System.Windows;
 [assembly: AssemblyDescription("Onbox WPF MVC Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Onbox")]
-[assembly: AssemblyProduct("Mvc")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyProduct("Onbox.Mvc")]
+[assembly: AssemblyCopyright("Copyright ©  2020 Thiago Almeida")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

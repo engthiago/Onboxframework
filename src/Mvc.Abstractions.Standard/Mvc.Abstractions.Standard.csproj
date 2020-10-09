@@ -5,6 +5,22 @@
     <Version>7.0.0</Version>
     <AssemblyName>Onbox.Mvc.Abstractions.V7</AssemblyName>
     <RootNamespace>Onbox.Mvc.Abstractions.V7</RootNamespace>
+    <PackageId>Onbox.Mvc.Abstractions</PackageId>
+    <Authors>Thiago Almeida</Authors>
+    <Company>Onbox</Company>
+    <Product>Onbox.Mvc.Abstractions</Product>
+    <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>onbox.png</PackageIcon>
+    <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Abstractions\onbox.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

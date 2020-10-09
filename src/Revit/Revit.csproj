@@ -118,6 +118,11 @@
       <Name>Revit.Abstractions.Standard</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="onbox.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Onbox.Revit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Revit")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("Onbox")]
+[assembly: AssemblyProduct("Onbox.Revit")]
+[assembly: AssemblyCopyright("Copyright ©  2020 Thiago Almeida")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

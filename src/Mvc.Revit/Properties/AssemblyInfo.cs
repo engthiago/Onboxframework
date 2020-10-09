@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Onbox.Mvc.Revit")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Onbox.Mvc.Revit.V7")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("Onbox")]
+[assembly: AssemblyProduct("Onbox.Mvc.Revit")]
+[assembly: AssemblyCopyright("Copyright ©  2020 Thiago Almeida")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,3 +53,4 @@ using System.Windows;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("7.0.0.0")]
 [assembly: AssemblyFileVersion("7.0.0.0")]
+[assembly: Guid("E2E8013E-3988-45DA-9975-72FD3BC3DFB5")]
