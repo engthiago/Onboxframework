@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Onbox.Analyzers.V7</PackageId>
+    <PackageVersion>7.0.0.0</PackageVersion>
+    <Authors>Thiago Almeida</Authors>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description></Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
+    <PackageTags>Analyzer, Analyzers, Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
+
+    <Version>7.0.0</Version>
+
+    <Company>Onbox</Company>
+
+    <Product>Onbox.Analyzers</Product>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <PackageIcon>onbox.png</PackageIcon>
+
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Onbox.Analyzers.CodeFixes\Onbox.Analyzers.CodeFixes.csproj" />
+    <ProjectReference Include="..\Onbox.Analyzers\Onbox.Analyzers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
+    <None Include="..\Onbox.Analyzers.CodeFixes\onbox.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="onbox.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="_AddAnalyzersToOutput">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\Onbox.Analyzers.dll" PackagePath="analyzers/dotnet/cs" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\Onbox.Analyzers.CodeFixes.dll" PackagePath="analyzers/dotnet/cs" />
+    </ItemGroup>
+  </Target>
+
+</Project>
