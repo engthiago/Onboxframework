@@ -12,8 +12,8 @@
     <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageLicenseFile></PackageLicenseFile>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
     <PackageIcon>onbox.png</PackageIcon>
     <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
     <Description></Description>

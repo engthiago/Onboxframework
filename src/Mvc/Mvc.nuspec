@@ -9,11 +9,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <description>$description$</description>
-    <releaseNotes>Initial Package</releaseNotes>
-    <copyright>Copyright 2020</copyright>
-    <tags>Onbox Library WPF MVC</tags>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) 2020 Thiago Almeida</copyright>
+    <tags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</tags>
 	<dependencies>
-		<dependency id="Onbox.Core.V6" version="6.0.0" />
+		<dependency id="Onbox.Abstractions" version="7.0.0" />
+		<dependency id="Onbox.Mvc.Abstractions" version="7.0.0" />
 		<dependency id="PropertyChanged.Fody" version="2.5.9" />
 	</dependencies>
   </metadata>

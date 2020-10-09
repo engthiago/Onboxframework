@@ -14,6 +14,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
     <PackageId>Onbox.Core</PackageId>
+    <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

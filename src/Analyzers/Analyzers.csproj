@@ -12,9 +12,9 @@
     <PackageVersion>1.0.0.0</PackageVersion>
     <Authors>Thiago Almeida</Authors>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
     <PackageIconUrl></PackageIconUrl>
-    <RepositoryUrl></RepositoryUrl>
+    <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description></Description>
     <PackageReleaseNotes></PackageReleaseNotes>
@@ -32,8 +32,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.8" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="2.9.8" PrivateAssets="all"/>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup>
