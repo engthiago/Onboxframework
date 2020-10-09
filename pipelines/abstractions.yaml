@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  project: 'src/Abstractions.Standard.csproj'
+  project: 'src/Abstractions/Abstractions.Standard.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
