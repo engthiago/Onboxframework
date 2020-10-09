@@ -1,2 +1,2 @@
 # Onbox.Rvt
-A framework for build Revit Apps Cross-Platform
+A framework for building Cross-Platform Revit Apps
