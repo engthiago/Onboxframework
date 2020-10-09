@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <AssemblyName>Onbox.Abstractions.V7</AssemblyName>
+    <RootNamespace>Onbox.Abstractions.V7</RootNamespace>
+    <Version>7.0.0</Version>
+    <Authors>Thiago Almeida</Authors>
+    <Company>Onbox</Company>
+    <PackageId>Onbox.Abstractions</PackageId>
+    <Product>Onbox.Abstractions</Product>
+    <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseFile></PackageLicenseFile>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageIcon>onbox.png</PackageIcon>
+    <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <Description></Description>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\Onbox.Abstractions.V7.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="LICENSE.md" />
+    <None Remove="LICENSE.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="onbox.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

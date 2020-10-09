@@ -1,0 +1,441 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class RevitExternalHandler
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class RevitExternalHandler
+   ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler">
+  
+  
+  <h1 id="Onbox_Revit_V7_Async_RevitExternalHandler" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler" class="text-break">Class RevitExternalHandler
+  </h1>
+  <div class="markdown level0 summary"><p>Provides a way to run asyncronous taks on Revit's main thread</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">RevitExternalHandler</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Onbox.Revit.V7.Async.IRevitEventHandler.html">IRevitEventHandler</a></div>
+    <div><span class="xref">Autodesk.Revit.UI.IExternalEventHandler</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Onbox.Revit.V7.Async.html">Onbox.Revit.V7.Async</a></h6>
+  <h6><strong>Assembly</strong>: Onbox.Revit.V7.dll</h6>
+  <h5 id="Onbox_Revit_V7_Async_RevitExternalHandler_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class RevitExternalHandler : IRevitEventHandler, IExternalEventHandler</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler__ctor_Onbox_Revit_V7_Async_RevitAsyncSettings_Onbox_Revit_V7_IRevitContext_.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.%23ctor(Onbox.Revit.V7.Async.RevitAsyncSettings%2COnbox.Revit.V7.IRevitContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L40">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler__ctor_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.#ctor*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler__ctor_Onbox_Revit_V7_Async_RevitAsyncSettings_Onbox_Revit_V7_IRevitContext_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.#ctor(Onbox.Revit.V7.Async.RevitAsyncSettings,Onbox.Revit.V7.IRevitContext)">RevitExternalHandler(RevitAsyncSettings, IRevitContext)</h4>
+  <div class="markdown level1 summary"><p>Constructor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RevitExternalHandler(RevitAsyncSettings settings, IRevitContext revitContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Onbox.Revit.V7.Async.RevitAsyncSettings.html">RevitAsyncSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Onbox.Revit.V7.IRevitContext.html">IRevitContext</a></td>
+        <td><span class="parametername">revitContext</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler_CancelAll.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.CancelAll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L57">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler_CancelAll_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.CancelAll*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler_CancelAll" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.CancelAll">CancelAll()</h4>
+  <div class="markdown level1 summary"><p>Cancels all queue tasks</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CancelAll()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler_Execute_Autodesk_Revit_UI_UIApplication_.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.Execute(Autodesk.Revit.UI.UIApplication)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L73">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler_Execute_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.Execute*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler_Execute_Autodesk_Revit_UI_UIApplication_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.Execute(Autodesk.Revit.UI.UIApplication)">Execute(UIApplication)</h4>
+  <div class="markdown level1 summary"><p>This method is called to handle the external event</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Execute(UIApplication app)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Autodesk.Revit.UI.UIApplication</span></td>
+        <td><span class="parametername">app</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler_GetName.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.GetName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L135">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler_GetName_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.GetName*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler_GetName" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.GetName">GetName()</h4>
+  <div class="markdown level1 summary"><p>The event's name</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler_GetQueueCount.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.GetQueueCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L65">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler_GetQueueCount_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.GetQueueCount*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler_GetQueueCount" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.GetQueueCount">GetQueueCount()</h4>
+  <div class="markdown level1 summary"><p>Gets the number of queue tasks</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetQueueCount()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler_RunAsync_System_Action_Autodesk_Revit_UI_UIApplication__System_Threading_CancellationTokenSource_.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync(System.Action%7BAutodesk.Revit.UI.UIApplication%7D%2CSystem.Threading.CancellationTokenSource)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L143">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler_RunAsync_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler_RunAsync_System_Action_Autodesk_Revit_UI_UIApplication__System_Threading_CancellationTokenSource_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync(System.Action{Autodesk.Revit.UI.UIApplication},System.Threading.CancellationTokenSource)">RunAsync(Action&lt;UIApplication&gt;, CancellationTokenSource)</h4>
+  <div class="markdown level1 summary"><p>The action will run by Revit as soon as its thread is available</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task RunAsync(Action&lt;UIApplication&gt; action, CancellationTokenSource cancelSource = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;<span class="xref">Autodesk.Revit.UI.UIApplication</span>&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationTokenSource</span></td>
+        <td><span class="parametername">cancelSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler_RunAsync__1_System_Func_Autodesk_Revit_UI_UIApplication___0__System_Threading_CancellationTokenSource_.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync%60%601(System.Func%7BAutodesk.Revit.UI.UIApplication%2C%60%600%7D%2CSystem.Threading.CancellationTokenSource)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L176">View Source</a>
+  </span>
+  <a id="Onbox_Revit_V7_Async_RevitExternalHandler_RunAsync_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync*"></a>
+  <h4 id="Onbox_Revit_V7_Async_RevitExternalHandler_RunAsync__1_System_Func_Autodesk_Revit_UI_UIApplication___0__System_Threading_CancellationTokenSource_" data-uid="Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync``1(System.Func{Autodesk.Revit.UI.UIApplication,``0},System.Threading.CancellationTokenSource)">RunAsync&lt;T&gt;(Func&lt;UIApplication, T&gt;, CancellationTokenSource)</h4>
+  <div class="markdown level1 summary"><p>The action will run by Revit as soon as its thread is available</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;T&gt; RunAsync&lt;T&gt;(Func&lt;UIApplication, T&gt; action, CancellationTokenSource cancelSource = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">Autodesk.Revit.UI.UIApplication</span>, T&gt;</td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationTokenSource</span></td>
+        <td><span class="parametername">cancelSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Onbox.Revit.V7.Async.IRevitEventHandler.html">IRevitEventHandler</a>
+  </div>
+  <div>
+      <span class="xref">Autodesk.Revit.UI.IExternalEventHandler</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/engthiago/OnboxLibrary/new/dev/apiSpec/new?filename=Onbox_Revit_V7_Async_RevitExternalHandler.md&amp;value=---%0Auid%3A%20Onbox.Revit.V7.Async.RevitExternalHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/engthiago/OnboxLibrary/blob/dev/src/Revit/Async/RevitExternalHandler.cs/#L29" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

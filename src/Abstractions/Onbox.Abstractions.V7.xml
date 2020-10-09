@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Abstractions.V7</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Abstractions.V7.IContainer">
+            <summary>
+            Onbox's IOC container contract
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddSingleton``1">
+            <summary>
+            Adds an implementation as a singleton on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddSingleton``1(``0)">
+            <summary>
+            Adds an instance as a singleton on the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddSingleton``2">
+            <summary>
+            Adds an implementation to a contract as a singleton on the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddSingleton``2(``1)">
+            <summary>
+            Adds an instance as a singleton on the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddScoped``2">
+            <summary>
+            Adds a scoped implementation to a contract on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddScoped``1">
+            <summary>
+            Adds a scoped implementation on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddTransient``1">
+            <summary>
+            Adds an implementation as a transient on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.AddTransient``2">
+            <summary>
+            Adds an implementation to a contract as transient on the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainer.Clear">
+            <summary>
+            Resets the entire container
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IContainerPipeline">
+            <summary>
+            Container pipeline is used to add dependencies and compose a container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerPipeline.Pipe(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds dependencies to the container and returns it
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IContainerResolver">
+            <summary>
+            Onbox's IOC container read only contract
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerResolver.Resolve``1">
+            <summary>
+            Asks the container for a new instance of a type
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerResolver.Resolve(System.Type)">
+            <summary>
+            Asks the container for a new instance of a type
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerResolver.CreateScope">
+            <summary>
+            Creates a scoped context copy of this container
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IContainerResolverPipeline">
+            <summary>
+            Container Resolver pipeline is used to resolve dependencies or cleanup the dependencies of the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IContainerResolverPipeline.Pipe(Onbox.Abstractions.V7.IContainerResolver)">
+            <summary>
+            Pipes the container resolver and its dependencies
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IHttpService">
+            <summary>
+            Onbox's contract for Http requests.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.GetAsync``1(System.String,System.String)">
+            <summary>
+            Send a GET request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.GetStreamAsync(System.String,System.String)">
+            <summary>
+            Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.DeleteAsync``1(System.String,System.String)">
+            <summary>
+            Send a DELETE request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.DeleteAsync(System.String,System.String)">
+            <summary>
+            Send a DELETE request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PutAsync``1(System.String,System.Object,System.String)">
+            <summary>
+            Send a PUT request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PutAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a PUT request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PutStreamAsync``1(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a PUT stream request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PutStreamAsync(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a PUT stream request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PutRequestStreamAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a PUT request to the specified Uri and return the response body as a stream in an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PostAsync``1(System.String,System.Object,System.String)">
+            <summary>
+            Send a POST request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PostFormAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            Send a POST form request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PostAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a POST request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PostStreamAsync``1(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a POST stream request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PostStreamAsync(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a POST stream request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PostRequestStreamAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a POST request to the specified Uri and return the response body as a stream in an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PatchAsync``1(System.String,System.Object,System.String)">
+            <summary>
+            Send a PATCH request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.PatchAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a PATCH request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.AddHeader(System.String,System.String)">
+            <summary>
+            Add a header for all subsequent requests
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IHttpService.ClearHeaders">
+            <summary>
+            Clears all headers for all subsequent requests
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IJsonService">
+            <summary>
+            Default contract for dealing with serialization / deserialization
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IJsonService.Deserialize``1(System.String)">
+            <summary>
+            Deserializes an object
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IJsonService.Serialize(System.Object)">
+            <summary>
+            Serializes an object
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.ILoggingService">
+            <summary>
+            The contract for logging activities
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.ILoggingService.Error(System.String)">
+            <summary>
+            Logs an error
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.ILoggingService.Exception(System.Exception)">
+            <summary>
+            Logs an exception
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.ILoggingService.Log(System.String)">
+            <summary>
+            Logs a message
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.ILoggingService.Warning(System.String)">
+            <summary>
+            Logs a warning
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IMapper">
+            <summary>
+            Onbox Mapper can clone objects and map properties and lists
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMapper.Map``2(``0,``1)">
+            <summary>
+            Clones an object (Maps to a new instance)
+            </summary>
+            <returns>The cloned object with all properties copied</returns>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMapper.Clone``1(``0)">
+            <summary>
+            Clones an object (Maps to a new instance)
+            </summary>
+            <returns>The cloned object with all properties copied</returns>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMapper.Clone``1(System.Object)">
+            <summary>
+            Clones an object (Maps to a new instance)
+            </summary>
+            <returns>The cloned object with all properties copied</returns>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IMessageService">
+            <summary>
+            Contract for messaging activities
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMessageService.Error(System.String)">
+            <summary>
+            Shows an error message
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMessageService.Question(System.String)">
+            <summary>
+            Shows a question message
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMessageService.SetTitle(System.String)">
+            <summary>
+            Sets the title of the messages
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMessageService.Show(System.String)">
+            <summary>
+            Shows a message
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IMessageService.Warning(System.String)">
+            <summary>
+            Shows a warning message
+            </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.V7.IProgressIndicator">
+            <summary>
+            Contract that reports information each iteration
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IProgressIndicator.FinishedSuccessfully">
+            <summary>
+            Indicates if the process has finished and was successful
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IProgressIndicator.Iterate(System.String)">
+            <summary>
+            Adds one iteration to the process with a given message
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IProgressIndicator.Run(System.Int32,System.Boolean,System.Action)">
+            <summary>
+            Runs progress action
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.V7.IProgressIndicator.Reset(System.Int32)">
+            <summary>
+            Resets the progress
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Onbox.Core.V7</AssemblyName>
+    <RootNamespace>Onbox.Core.V7</RootNamespace>
+    <Version>7.0.0</Version>
+    <Authors>Thiago Almeida</Authors>
+    <Company>Onbox</Company>
+    <Product>Onbox.Core</Product>
+    <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>onbox.png</PackageIcon>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <PackageId>Onbox.Core</PackageId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\Onbox.Core.V7.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Abstractions\onbox.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

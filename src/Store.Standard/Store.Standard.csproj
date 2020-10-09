@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Onbox.Store.V7</AssemblyName>
+    <RootNamespace>Onbox.Store.V7</RootNamespace>
+    <PackageId>Onbox.Store</PackageId>
+    <Authors>Thiago Almeida</Authors>
+    <Company>Onbox</Company>
+    <Product>Onbox.Store</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
+    <PackageIcon>onbox.png</PackageIcon>
+    <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\Onbox.Store.V7.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj" />
+    <ProjectReference Include="..\Core.Standard\Core.Standard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="onbox.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

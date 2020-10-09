@@ -1,0 +1,617 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Revit.V7</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Revit.V7.Applications.ContainerPipelineExtensions">
+            <summary>
+            Extension pipe the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.ContainerPipelineExtensions.Pipe``1(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds dependencies specified on the pipeline. It is used to compose the container with these dependencies
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.ContainerPipelineExtensions.Pipe``1(Onbox.Abstractions.V7.IContainerResolver)">
+            <summary>
+            Container Resolver pipeline is used to resolve dependencies or cleanup the dependencies of the container
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Applications.RevitAppBase`1">
+            <summary>
+            The implementation of a generic IContainer type, if you like to use <see cref="T:Onbox.Di.V7.Container"/>, you can use <see cref="T:Onbox.Revit.V7.Applications.RevitApp"/> implementation instead
+            <para>IMPORTANT: Any children of this class should implement <see cref="T:Onbox.Revit.V7.ContainerProviderAttribute"/> as well</para>
+            </summary>
+            <typeparam name="TContainer">The contract for container implementations</typeparam>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.RevitAppBase`1.OnStartup(Onbox.Abstractions.V7.IContainer,Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Implement this method to execute some tasks when Autodesk Revit starts.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.RevitAppBase`1.OnStartup(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Implement this method to execute some tasks when Autodesk Revit starts.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.RevitAppBase`1.OnShutdown(Onbox.Abstractions.V7.IContainerResolver,Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Implement this method to execute some tasks when Autodesk Revit shuts down.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.RevitAppBase`1.OnShutdown(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Implement this method to execute some tasks when Autodesk Revit shuts down.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Applications.RevitAppBase`1.OnCreateRibbon(Onbox.Revit.V7.UI.IRibbonManager)">
+            <summary>
+            Lifecycle hook to create Ribbon UI when Revit starts.
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Applications.RevitApp">
+            <summary>
+            The base class implementation of RevitExternalAppBase using <see cref="T:Onbox.Di.V7.Container"/> implementation for convinience
+            <para>This class provides OnStartup, OnCreateRibbon, and OnShutdown lifecycle events.</para>
+            <para>IMPORTANT: Any children of this class should implement <see cref="T:Onbox.Revit.V7.ContainerProviderAttribute"/> as well</para>
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Async.IRevitEventHandler">
+            <summary>
+            Provides a way to run asyncronous taks on Revit's main thread
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.IRevitEventHandler.RunAsync(System.Action{Autodesk.Revit.UI.UIApplication},System.Threading.CancellationTokenSource)">
+            <summary>
+            The action will run by Revit as soon as its thread is available
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.IRevitEventHandler.RunAsync``1(System.Func{Autodesk.Revit.UI.UIApplication,``0},System.Threading.CancellationTokenSource)">
+            <summary>
+            The action will run by Revit as soon as its thread is available
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.IRevitEventHandler.CancelAll">
+            <summary>
+            Cancels all queue tasks
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.IRevitEventHandler.GetQueueCount">
+            <summary>
+            Gets the number of queue tasks
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Async.RevitAsyncExtensions">
+            <summary>
+            Extensions methods to adding support for Async calls in Revit
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitAsyncExtensions.AddRevitAsync(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Revit.V7.Async.RevitAsyncSettings})">
+            <summary>
+            Adds support for making async calls to Revit 
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Async.RevitExternalHandler">
+            <summary>
+            Provides a way to run asyncronous taks on Revit's main thread
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.#ctor(Onbox.Revit.V7.Async.RevitAsyncSettings,Onbox.Revit.V7.IRevitContext)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.CancelAll">
+            <summary>
+            Cancels all queue tasks
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.GetQueueCount">
+            <summary>
+            Gets the number of queue tasks
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.Execute(Autodesk.Revit.UI.UIApplication)">
+            <summary>
+            This method is called to handle the external event
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.GetName">
+            <summary>
+            The event's name
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync(System.Action{Autodesk.Revit.UI.UIApplication},System.Threading.CancellationTokenSource)">
+            <summary>
+            The action will run by Revit as soon as its thread is available
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Async.RevitExternalHandler.RunAsync``1(System.Func{Autodesk.Revit.UI.UIApplication,``0},System.Threading.CancellationTokenSource)">
+            <summary>
+            The action will run by Revit as soon as its thread is available
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Async.RevitAsyncSettings">
+            <summary>
+            Data class to hold preferences for Revit async tasks
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.Async.RevitAsyncSettings.Name">
+            <summary>
+            The name of the handler for Revit async tasks
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.Async.RevitAsyncSettings.IsJournalable">
+            <summary>
+            If the handler will be journable
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Commands.IRevitDestroyableCommand">
+            <summary>
+            Holds lifecycle hook for Commands to be able to hook up to disposing container
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.IRevitDestroyableCommand.OnDestroy(Onbox.Abstractions.V7.IContainerResolver)">
+            <summary>
+            External Command lifecycle hook which is called just before the container is disposed.
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Commands.RevitAppCommand`1">
+            <summary>
+            Base class to implement Revit Commands linked to a App Container
+            <br>It will use a scope of the container declared on the App</br>
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.RevitAppCommand`1.Execute(Autodesk.Revit.UI.ExternalCommandData,System.String@,Autodesk.Revit.DB.ElementSet)">
+            <summary>
+            Execution of External Command
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.RevitAppCommand`1.Execute(Onbox.Abstractions.V7.IContainerResolver,Autodesk.Revit.UI.ExternalCommandData,System.String@,Autodesk.Revit.DB.ElementSet)">
+            <summary>
+            Execution of External Command
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.RevitAppCommand`1.OnDestroy(Onbox.Abstractions.V7.IContainerResolver)">
+            <summary>
+            External Command lifecycle hook which is called just before the scoped container is disposed.
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Commands.RevitContainerCommandBase`2">
+            <summary>
+            An indepentend Revit Command that will create a new container instance and use it during the command runtime. Use this when an ExternalApplication is not necessary.
+            <br>It uses a Container Pipeline to compose the container.</br>
+            <br>After the command finishes the container will be disposed.</br>
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.RevitContainerCommandBase`2.Execute(Autodesk.Revit.UI.ExternalCommandData,System.String@,Autodesk.Revit.DB.ElementSet)">
+            <summary>
+            Execution of External Command.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.RevitContainerCommandBase`2.Execute(Onbox.Abstractions.V7.IContainerResolver,Autodesk.Revit.UI.ExternalCommandData,System.String@,Autodesk.Revit.DB.ElementSet)">
+            <summary>
+            Execution of External Command.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.Commands.RevitContainerCommandBase`2.OnDestroy(Onbox.Abstractions.V7.IContainerResolver)">
+            <summary>
+            External Command lifecycle hook which is called just before the container is disposed.
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.Commands.RevitContainerCommand`1">
+            <summary>
+            An indepentend Revit Command that will create a new container instance and use it during the command runtime. Use this when an ExternalApplication is not necessary.
+            <br>It uses a Container Pipeline to compose the container.</br>
+            <br>After the command finishes the container will be disposed.</br>
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ContainerProviderAttribute">
+            <summary>
+            Provides a way for the Onbox framework to locate the IOC container for your application
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ContainerProviderAttribute.ContainerGuid">
+            <summary>
+            The GUID to identify your apps container
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ContainerProviderAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ContainerProviderReflector">
+            <summary>
+            Helper class to locate the container Guid belonging to an app
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ContainerProviderReflector.GetContainerGuid(Onbox.Revit.V7.RevitContainerProviderBase)">
+            <summary>
+            Locates the container guid passing in an instance of an app
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ContainerProviderReflector.GetContainerGuid(System.Type)">
+            <summary>
+            Locates the container guid passing in a type of an app
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.AccessLevel">
+            <summary>
+            Defines access levels to objects in the Extensible Storage framework
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.V7.ExtensibleStorage.AccessLevel.Public">
+            <summary>
+             Anybody has access to the object
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.V7.ExtensibleStorage.AccessLevel.Vendor">
+            <summary>
+            Only object vendor has access to it
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.V7.ExtensibleStorage.AccessLevel.Application">
+            <summary>
+             Only application that created the object has access to it
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.IRevitJsonStorage`1">
+            <summary>
+            Onbox's Revit Storage, it uses json to store and retrieve data classes
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.IRevitJsonStorage`1.Save(Autodesk.Revit.DB.Element,`0)">
+            <summary>
+            Saves this data to this element's extensible storage. This REQUIRES a transaction
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.IRevitJsonStorage`1.Load(Autodesk.Revit.DB.Element)">
+            <summary>
+            Retrieves data from this element's extensible storage
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.IRevitJsonStorage`1.Reset(Autodesk.Revit.DB.Element)">
+            <summary>
+            Resets the extensible storage of this type for this element. This REQUIRES a transaction
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.RevitStorageBuilder">
+            <summary>
+            A builder for Revit Extensible Storage Schemas
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitStorageBuilder.ConfigureJsonStorage``1(System.Action{Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings})">
+            <summary>
+            Configure a Json Storage of a specific data class
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitStorageBuilder.Build">
+            <summary>
+            Builds the Storage and adds all the dependencies to the container
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageEntensions">
+            <summary>
+            Extensions for adding Extensible Storage Support
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageEntensions.CreateExtensibleStorageBuilder(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Creates a builder for Revit Extensible Storage Schemas
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageSettings">
+            <summary>
+            Contains definitions and settings for types and their schemas
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageSettings.SchemaSettings">
+            <summary>
+            Type dictionaries for types and their schemas
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings">
+            <summary>
+            Definition of a schema
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.SchemaGuid">
+            <summary>
+             The identifier of the Schema. This field is REQUIRED
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.SchemaDocumentation">
+            <summary>
+            The overall description of the Schema
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.SchemaName">
+            <summary>
+            The user-friendly name of the Schema
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.ReadAccessLevel">
+            <summary>
+            Read access level of the schema. This field is REQUIRED
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.WriteAccessLevel">
+            <summary>
+            Write access level of the schema
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.VendorId">
+            <summary>
+             The id of the third-party vendor that may access entities of this Schema
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage`1">
+            <summary>
+            Onbox's Revit Storage, it uses json to store and retrieve data classes
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage`1.#ctor(Onbox.Abstractions.V7.IJsonService,Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageSettings)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage`1.Load(Autodesk.Revit.DB.Element)">
+            <summary>
+            Retrieves data from this element's extensible storage
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage`1.Reset(Autodesk.Revit.DB.Element)">
+            <summary>
+            Resets the extensible storage of this type for this element. This REQUIRES a transaction
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage`1.Save(Autodesk.Revit.DB.Element,`0)">
+            <summary>
+            Saves this data to this element's extensible storage. This REQUIRES a transaction
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.IRevitContext">
+            <summary>
+            This class will keep track of Revit UI events to always have the current <see cref="T:Autodesk.Revit.DB.Document"/>, <see cref="T:Autodesk.Revit.ApplicationServices.Application"/>, <see cref="T:UIDocument"/>, and <see cref="T:UIApplication"/>
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.GetApplication">
+            <summary>
+            Gets the current Revit Application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.GetDocument">
+            <summary>
+            Gets the current Revit Document
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.GetUIApplication">
+            <summary>
+            Gets the current Revit UI Application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.GetUIDocument">
+            <summary>
+            Gets the current Revit UIDocument
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.HookupRevitEvents(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Hooks up Revit Events to the context
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.UnhookRevitEvents(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Unhooks Revit Events to the context
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitContext.IsInRevitContext">
+            <summary>
+            Identifies if Revit is in the current context (Revit API context)
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.IRevitExternalApp">
+            <summary>
+            Onbox contract that wraps Revit's <see cref="T:Autodesk.Revit.UI.IExternalApplication"/>.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitExternalApp.OnCreateRibbon(Onbox.Revit.V7.UI.IRibbonManager)">
+            <summary>
+            Lifecycle hook to create Ribbon UI when Revit starts.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitExternalApp.OnShutdown(Onbox.Abstractions.V7.IContainerResolver,Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Implement this method to execute some tasks when Autodesk Revit shuts down.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.IRevitExternalApp.OnStartup(Onbox.Abstractions.V7.IContainer,Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Implement this method to execute some tasks when Autodesk Revit starts.
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.RevitContainerProviderBase">
+            <summary>
+            The most base class for a container provider, it will manage containers and events during its lifetime
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.RevitContext">
+            <summary>
+            This class will keep track of Revit UI events to always have the current <see cref="T:Autodesk.Revit.DB.Document"/>, <see cref="T:Autodesk.Revit.ApplicationServices.Application"/>, <see cref="T:UIDocument"/>, and <see cref="T:UIApplication"/>
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.GetDocument">
+            <summary>
+            Gets the current Revit Document
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.GetUIDocument">
+            <summary>
+            Gets the current Revit UIDocument
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.GetApplication">
+            <summary>
+            Gets the current Revit Application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.GetUIApplication">
+            <summary>
+            Gets the current Revit UI Application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.HookupRevitEvents(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Hooks up Revit Events to the context
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.UnhookRevitEvents(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Unhooks Revit Events to the context
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitContext.IsInRevitContext">
+            <summary>
+            Identifies if Revit is in the current context (Revit API context)
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.RevitAppData">
+            <summary>
+            Revit Application version, name, language and window handle
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitAppData.GetLanguage">
+            <summary>
+            Revit's language
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitAppData.GetSubVersionNumber">
+            <summary>
+            Revit's sub version number
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitAppData.GetVersionBuild">
+            <summary>
+            Revit's build version
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitAppData.GetVersionName">
+            <summary>
+            Revit's build version name
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitAppData.GetVersionNumber">
+            <summary>
+            Revit's version number
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.RevitAppData.GetRevitWindowHandle">
+            <summary>
+            Revit's window handler pointer
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.UI.ImageManager">
+            <summary>
+            Deals with image conversions
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.ImageManager.ConvertBitmapSource(System.String,System.Reflection.Assembly)">
+            <summary>
+            Converts an assembly resource to a BitmapImage
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.ImageManager.ConvertToBitmapSource(System.IO.Stream)">
+            <summary>
+            Converts a stream to a BitmapSource
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.ImageManager.ConvertToBitmapSource(System.Drawing.Bitmap,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Converts a Bitmap to a BitmapSource
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.UI.IRibbonManager">
+            <summary>
+            Ribbon Manager will help you create Tabs, Panels and Buttons in Revit
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.IRibbonManager.GetApp">
+            <summary>
+            Get Revit UI Controlled App
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.IRibbonManager.CreatePanel(System.String,System.String)">
+            <summary>
+            Creates a Ribbon Panel
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.IRibbonManager.CreatePanel(System.String)">
+            <summary>
+            Creates a Ribbon Panel on Revit's Addins Tab
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.IRibbonManager.CreateTab(System.String)">
+            <summary>
+            Creates a Ribbon Tab
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.IRibbonManager.GetLineBreak">
+            <summary>
+            Gets Ribbon line break string
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.V7.UI.RibbonManager">
+            <summary>
+            Ribbon Manager will help you create Tabs, Panels and Buttons in Revit
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.RibbonManager.#ctor(Autodesk.Revit.UI.UIControlledApplication,Onbox.Revit.V7.UI.ImageManager)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.RibbonManager.CreateTab(System.String)">
+            <summary>
+            Creates a Ribbon Tab
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.RibbonManager.CreatePanel(System.String)">
+            <summary>
+            Creates a Ribbon Panel on Revit's Addins Tab
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.RibbonManager.CreatePanel(System.String,System.String)">
+            <summary>
+            Creates a Ribbon Panel
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.RibbonManager.GetApp">
+            <summary>
+            Get Revit UI Controlled App
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.V7.UI.RibbonManager.GetLineBreak">
+            <summary>
+            Gets Ribbon line break string
+            </summary>
+        </member>
+    </members>
+</doc>

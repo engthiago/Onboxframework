@@ -1,0 +1,559 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Core.V7</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Core.V7.CoreExtensions">
+            <summary>
+            Core extensions for Onbox's container
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.CoreExtensions.AddOnboxCore(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/>, <see cref="T:Onbox.Abstractions.V7.IJsonService"/>, <see cref="T:Onbox.Abstractions.V7.ILoggingService"/>, and <see cref="T:Onbox.Abstractions.V7.IMapper"/> default implementations to the container
+            </summary>
+            <param name="container">The container in context</param>
+            <returns>The container in context</returns>
+        </member>
+        <member name="M:Onbox.Core.V7.CoreExtensions.AddFileLogging(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Core.V7.Logging.FileLoggingSettings})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.ILoggingService"/> as <see cref="T:Onbox.Core.V7.Logging.FileLoggingService"/> to the container
+            </summary>
+            <param name="container">The container in context</param>
+            <param name="config">If no configuration is specified it will log to the user's temp folder with a maximum size of 200kb</param>
+            <returns>The container in context</returns>
+        </member>
+        <member name="M:Onbox.Core.V7.CoreExtensions.AddMapper(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Core.V7.Mapping.MapperActionManager})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IMapper"/> as <see cref="T:Onbox.Core.V7.Mapping.Mapper"/> to the container
+            </summary>
+            <param name="container">The container in context</param>
+            <param name="config">If no configuration is specified it will add no post mapping actions</param>
+            <returns>The container in context</returns>
+        </member>
+        <member name="T:Onbox.Core.V7.Http.HttpExtensions">
+            <summary>
+            Helper extensions for <see cref="T:Onbox.Core.V7.Http.HttpService"/> and IOC container
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpExtensions.AddHttp(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/> as <see cref="T:Onbox.Core.V7.Http.HttpService"/> to the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpExtensions.AddHttp(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Core.V7.Http.HttpSettings})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/> as <see cref="T:Onbox.Core.V7.Http.HttpService"/> to the container with configuration
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpExtensions.AddHttp(Onbox.Abstractions.V7.IContainer,Onbox.Core.V7.Http.IHttpInterceptor,System.Action{Onbox.Core.V7.Http.HttpSettings})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/> as <see cref="T:Onbox.Core.V7.Http.HttpService"/> to the container with interception and configuration
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpExtensions.AddHttp``1(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Core.V7.Http.HttpSettings})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/> as <see cref="T:Onbox.Core.V7.Http.HttpService"/> to the container with interception and configuration
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpExtensions.AddHttp(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Core.V7.Http.HttpSettings},System.Action{System.Net.Http.HttpRequestMessage},System.Action{System.Net.Http.HttpResponseMessage})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/> as <see cref="T:Onbox.Core.V7.Http.HttpService"/> to the container with interception
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpExtensions.ConfigureHttp(Onbox.Abstractions.V7.IContainer,System.Action{Onbox.Core.V7.Http.HttpSettings})">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.V7.IHttpService"/> as <see cref="T:Onbox.Core.V7.Http.HttpService"/> to the container with configuration
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Http.HttpInterceptor">
+            <summary>
+            Provides the ability to intercept requests made by <see cref="T:Onbox.Core.V7.Http.HttpService"/>
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpInterceptor.BeforeSending(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Right before all requests are sent, this method will be called.
+            <br>You have the ability to modify the request like adding authentication tokens, identification, data modifiers and so on.</br>
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpInterceptor.AfterSending(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Right all responses are processed, this method will be called. You have the ability to modify the response before they are serialized.
+            <br>You can use this to log incoming messages, process errors and so on.</br>
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Http.HttpService">
+            <summary>
+            Onbox's implementation for Http requests.
+            <br> 1 - Works with json strings for all serialzable objects</br>
+            <br> 2 - <see cref="T:Onbox.Abstractions.V7.IJsonService"/> for json serialization</br>
+            <br> 3 - Should be a singleton that is meant to be reused during the lifecycle of the application</br>
+            <br> 4 - Provides strong typed response objects</br>
+            <br> 5 - Provides request and response interception</br>
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.#ctor(Onbox.Abstractions.V7.IJsonService,Onbox.Abstractions.V7.ILoggingService,Onbox.Core.V7.Http.IHttpInterceptor,Onbox.Core.V7.Http.HttpSettings)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.GetAsync``1(System.String,System.String)">
+            <summary>
+            Send a GET request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.GetStreamAsync(System.String,System.String)">
+            <summary>
+            Send a GET request to the specified Uri and return the response body as a stream in an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.DeleteAsync``1(System.String,System.String)">
+            <summary>
+            Send a DELETE request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.DeleteAsync(System.String,System.String)">
+            <summary>
+            Send a DELETE request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PutAsync``1(System.String,System.Object,System.String)">
+            <summary>
+            Send a PUT request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PutAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a PUT request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PutStreamAsync``1(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a PUT stream request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PutStreamAsync(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a PUT stream request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PutRequestStreamAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a PUT request to the specified Uri and return the response body as a stream in an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PostAsync``1(System.String,System.Object,System.String)">
+            <summary>
+            Send a POST request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PostAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a POST form request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PostStreamAsync``1(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a POST request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PostStreamAsync(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Send a POST stream request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PostRequestStreamAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a POST stream request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PostFormAsync``1(System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            Send a POST request to the specified Uri and return the response body as a stream in an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PatchAsync``1(System.String,System.Object,System.String)">
+            <summary>
+            Send a PATCH request to the specified Uri and return the response body as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.PatchAsync(System.String,System.Object,System.String)">
+            <summary>
+            Send a PATCH request to the specified Uri as an asynchronous operation.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.AddHeader(System.String,System.String)">
+            <summary>
+            Add a header to all subsequent requests
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.ClearHeaders">
+            <summary>
+            Clears all headers for all subsequent requests
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.Dispose">
+            <summary>
+            Disposes the client
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.HttpService.Finalize">
+            <summary>
+            Disposes the client
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Http.HttpSettings">
+            <summary>
+            Preferences for the default implementation of <see cref="T:Onbox.Abstractions.V7.IHttpService"/>
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Http.HttpSettings.Timeout">
+            <summary>
+            Timeout in milliseconds
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Http.HttpSettings.AllowCache">
+            <summary>
+            The "cache-control" header will be set to no-cache by default
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Http.IHttpInterceptor">
+            <summary>
+            Holds actions to run before and / or after every http request
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.IHttpInterceptor.BeforeSending(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Before the request is sent, can be used to inject headers, tokens or validation
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Http.IHttpInterceptor.AfterSending(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            When the request gets from remote, can be used to catch exceptions, process failed requests or validate results
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Json.JsonExtensions">
+            <summary>
+            Helper extensions for json parser and IOC container
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Json.JsonExtensions.AddJson(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds JsonService with default settings for Revit: CamelCaseProperties, Ignores nulls, and Ignores Reference loop
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Json.JsonExtensions.AddJson(Onbox.Abstractions.V7.IContainer,System.Action{Newtonsoft.Json.JsonSerializerSettings})">
+            <summary>
+            Adds JsonService with custom settings configuration
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Json.JsonExtensions.ConfigureJson(Onbox.Abstractions.V7.IContainer,System.Action{Newtonsoft.Json.JsonSerializerSettings})">
+            <summary>
+            Runtime configuration for custom Json Settings
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Json.JsonService">
+            <summary>
+            Default implementation for <see cref="T:Onbox.Abstractions.V7.IJsonService"/>, it uses Newtonsoft Json
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Json.JsonService.#ctor(Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Json.JsonService.Deserialize``1(System.String)">
+            <summary>
+            Deserializes an object
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Json.JsonService.Serialize(System.Object)">
+            <summary>
+            Serializes an object
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Logging.FileLoggingService">
+            <summary>
+            Logs to a local file
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Logging.FileLoggingService.#ctor(Onbox.Core.V7.Logging.FileLoggingSettings)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Logging.FileLoggingService.Error(System.String)">
+            <summary>
+            Logs an error to the .log file
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Logging.FileLoggingService.Exception(System.Exception)">
+            <summary>
+            Logs an exception to the .log file
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Logging.FileLoggingService.Log(System.String)">
+            <summary>
+            Logs a message to the .log file
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Logging.FileLoggingService.Warning(System.String)">
+            <summary>
+            Logs a warning to the .log file
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Logging.FileLoggingSettings">
+            <summary>
+            The settings used by <see cref="T:Onbox.Core.V7.Logging.FileLoggingService"/>
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Logging.FileLoggingSettings.CanThrowExceptions">
+            <summary>
+            [Default = false] If set to true, FileLoggingService will throw exceptions if it runs into errors
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Logging.FileLoggingSettings.Path">
+            <summary>
+            [Default = %temp%] The full directory path where the file will be saved, if <see cref="P:Onbox.Core.V7.Logging.FileLoggingSettings.SaveOnCurrentPath"/> = true, this will be ignored
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Logging.FileLoggingSettings.MaxFileSizeInBytes">
+            <summary>
+            [Default = 600000] The maxium size of the logging file, default is 600000 which means 600kb  
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Logging.FileLoggingSettings.FileName">
+            <summary>
+            [Default = Onbox.Logging.log] The name of the file used for logging, it will append .log to the filename if not provided
+            </summary>
+        </member>
+        <member name="P:Onbox.Core.V7.Logging.FileLoggingSettings.SaveOnCurrentPath">
+            <summary>
+            [Default = false] This will ignore the <see cref="P:Onbox.Core.V7.Logging.FileLoggingSettings.Path"/> property and will save the log in the current directory, USEFUL for RevitIO
+            <para>WARNING: Setting it to true on a normal desktop scenario should not work because it will try to save it on Revit's main directory</para>
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Mapping.IMapperActionManager">
+            <summary>
+             Hold actions that can be performed after objects are mapped
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.IMapperActionManager.AddMappingPostAction``2(System.Action{``0,``1})">
+            <summary>
+            Adds a new an action that will be run after the map is complete
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.IMapperActionManager.GetMapPostAction(System.Type,System.Type)">
+            <summary>
+            Retrieves a mapping post action that was previously defined by <see cref="M:Onbox.Core.V7.Mapping.IMapperActionManager.AddMappingPostAction``2(System.Action{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Mapping.IMapperOperator">
+            <summary>
+            Support contract for performing mapping
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.IMapperOperator.Map(System.Object,System.Object)">
+            <summary>
+            Maps properties of one object to another
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.IMapperOperator.Map(System.Object)">
+            <summary>
+            Creates a new object as a deep copy of the input object
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Mapping.Mapper">
+            <summary>
+            Onbox implementation of mapper service. Similar to Automapper
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.Mapper.#ctor(Onbox.Core.V7.Mapping.IMapperOperator)">
+            <summary>
+            Creates a new mapper object
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.Mapper.Clone``1(``0)">
+            <summary>
+            Clones an object (Maps to a new instance)
+            </summary>
+            <returns>The cloned object with all properties copied</returns>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.Mapper.Clone``1(System.Object)">
+            <summary>
+            Clones an object (Maps to a new instance)
+            </summary>
+            <returns>The cloned object with all properties copied</returns>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.Mapper.Map``2(``0,``1)">
+            <summary>
+            Maps one object to another
+            </summary>
+            <param name="source">The source object</param>
+            <param name="target">The target objects that the properties will be copied to</param>
+        </member>
+        <member name="T:Onbox.Core.V7.Mapping.MapperActionManager">
+            <summary>
+             Hold actions that can be performed after objects are mapped
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.MapperActionManager.AddMappingPostAction``2(System.Action{``0,``1})">
+            <summary>
+            Adds a new an action that will be run after the map is complete
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.MapperActionManager.GetMapPostAction(System.Type,System.Type)">
+            <summary>
+            Retrieves a mapping post action that was previously defined by <see cref="M:Onbox.Core.V7.Mapping.MapperActionManager.AddMappingPostAction``2(System.Action{``0,``1})"/>
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Mapping.MapperOperator">
+            <summary>
+            Support contract for performing mapping
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.MapperOperator.#ctor(Onbox.Core.V7.Mapping.IMapperActionManager)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.MapperOperator.Map(System.Object,System.Object)">
+            <summary>
+            Creates a new object as a deep copy of the input object
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Mapping.MapperOperator.Map(System.Object)">
+            <summary>
+            Maps properties of one object to another
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Messaging.MessageDebugService">
+            <summary>
+            Implementation for messages using <see cref="T:System.Diagnostics.Debug"/> console
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Messaging.MessageDebugService.Error(System.String)">
+            <summary>
+            Shows an error message
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Messaging.MessageDebugService.Question(System.String)">
+            <summary>
+            Shows a question message
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Messaging.MessageDebugService.SetTitle(System.String)">
+            <summary>
+            Sets the title of the messages
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Messaging.MessageDebugService.Show(System.String)">
+            <summary>
+            Shows a message
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Messaging.MessageDebugService.Warning(System.String)">
+            <summary>
+            Shows a warning message
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.OnboxExceptionBase">
+            <summary>
+            Onbox's abstract base class
+            </summary>
+        </member>
+        <member name="F:Onbox.Core.V7.OnboxExceptionBase.hasMessage">
+            <summary>
+            Indicates if this exception has message to report
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.OnboxExceptionBase.#ctor">
+            <summary>
+            Contructor
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.OnboxExceptionBase.#ctor(System.String)">
+            <summary>
+            Contructor with a message
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.OnboxExceptionBase.HasMessage">
+            <summary>
+            Checks if the exception has a message to display
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.ReactFactory.Debouncer">
+            <summary>
+            Onbox Debouncer runs an action after a particular time span has passed without another action is fired
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.ReactFactory.Debouncer.Debounce(System.Action,System.Int32)">
+            <summary>
+            Debounces an action
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.ReactFactory.Interval">
+            <summary>
+            Runs an action sequential times every specified interval of time. It is possible to specify maximum runs as well
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.ReactFactory.Interval.Stop">
+            <summary>
+            Stops firing actions and cleans resources
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.ReactFactory.ReactFactory">
+            <summary>
+            Factory used to create reactive classes
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.ReactFactory.ReactFactory.Debouncer">
+            <summary>
+            Onbox Debouncer runs an action after a particular time span has passed without another action is fired
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.ReactFactory.ReactFactory.Interval(System.Action{System.Int32},System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Runs an action sequential times every specified interval of time and shows the number of times ran. It is possible to specify maximum runs as well
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.ReactFactory.ReactFactory.Interval(System.Action,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+            Runs an action sequential times every specified interval of time. It is possible to specify maximum runs as well
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Reporting.ProgressCancelledException">
+            <summary>
+            Indicates that the running process was cancelled
+            </summary>
+        </member>
+        <member name="T:Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator">
+            <summary>
+            Reports progress to the debug console
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator.FinishedSuccessfully">
+            <summary>
+            Indicates if the process has finished and was successful
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator.Iterate(System.String)">
+            <summary>
+            Adds one iteration to the process with a given message
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator.Run(System.Int32,System.Boolean,System.Action)">
+            <summary>
+            Runs progress action
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator.Reset(System.Int32)">
+            <summary>
+            Resets the progress
+            </summary>
+        </member>
+    </members>
+</doc>

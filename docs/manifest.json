@@ -1,0 +1,1314 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/Thiago/source/repos/engthiago/OnboxLibrary/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IContainer.html",
+          "hash": "AnZOX9w5WVXTaiqeaRot8A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IContainerPipeline.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IContainerPipeline.html",
+          "hash": "NjtDu4S3lUl5yYGjCP2Vdw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IContainerResolver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IContainerResolver.html",
+          "hash": "h6bG6Z0lc7XaxqEcrFYu9A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IContainerResolverPipeline.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IContainerResolverPipeline.html",
+          "hash": "datUJshSuniwSryjPptuwQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IHttpService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IHttpService.html",
+          "hash": "rlUOTdhbs0voxtJzeYhg9Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IJsonService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IJsonService.html",
+          "hash": "SflmNlt2AMDSEHefTITdhg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.ILoggingService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.ILoggingService.html",
+          "hash": "MG5KIItgkwD79VjI3Jx2Zg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IMapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IMapper.html",
+          "hash": "D2rGyKJkQcrCNoGmlyKvIQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IMessageService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IMessageService.html",
+          "hash": "yIpbWf7ZKMFMXkBvxp16dw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.IProgressIndicator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.IProgressIndicator.html",
+          "hash": "DAdGpFVyNBCvhVfLosWWXA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Abstractions.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Abstractions.V7.html",
+          "hash": "2XQete/5XZFQZuPodUTu2A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.CoreExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.CoreExtensions.html",
+          "hash": "NGGw3S5QBm2fkc5IeZt0lg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Http.HttpExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Http.HttpExtensions.html",
+          "hash": "IsX68cU5GHtCOfZC9Ubiqw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Http.HttpInterceptor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Http.HttpInterceptor.html",
+          "hash": "KnGe7DE4+6WIJU4i6OIJqg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Http.HttpService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Http.HttpService.html",
+          "hash": "0Co5CpmxRWATyJjz1RmmmQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Http.HttpSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Http.HttpSettings.html",
+          "hash": "M0Onz3qqZZxd9qzjQu9iOQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Http.IHttpInterceptor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Http.IHttpInterceptor.html",
+          "hash": "cb+HJd05PD/gzHgPPRMSUQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Http.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Http.html",
+          "hash": "dNfczYEIJ0ezSfIOvTbXkQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Json.JsonExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Json.JsonExtensions.html",
+          "hash": "qCHL/3/72wq8iN6CnH/HXA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Json.JsonService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Json.JsonService.html",
+          "hash": "3NodJws+xrTgcbvldxkWeg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Json.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Json.html",
+          "hash": "PHrKm4LoYV8Lblt1ANlDNQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Logging.FileLoggingService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Logging.FileLoggingService.html",
+          "hash": "s3Etx7ByjuGMqWap9vNn9A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Logging.FileLoggingSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Logging.FileLoggingSettings.html",
+          "hash": "3JuQBpBhX1yDnHELxrw1ZA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Logging.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Logging.html",
+          "hash": "DdKsat0YKGakIXFCT4QNfw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Mapping.IMapperActionManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Mapping.IMapperActionManager.html",
+          "hash": "3oMj6HV663gydoSr+qIu0g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Mapping.IMapperOperator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Mapping.IMapperOperator.html",
+          "hash": "jeK7cfg2lJWcQ5hC1+41Jw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Mapping.Mapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Mapping.Mapper.html",
+          "hash": "k/jUCToblxHPnX3nC+Ln0Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Mapping.MapperActionManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Mapping.MapperActionManager.html",
+          "hash": "PnzTUm86lyW+UqYM1y2Qsg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Mapping.MapperOperator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Mapping.MapperOperator.html",
+          "hash": "6GehJxrJnuJDFxjeL1FWVg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Mapping.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Mapping.html",
+          "hash": "SwsZIfWbC9VHJs1sWeafFw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Messaging.MessageDebugService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Messaging.MessageDebugService.html",
+          "hash": "/LgWgrnOY9xKjAPKBgBPjw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Messaging.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Messaging.html",
+          "hash": "pBvEv3PPkh2h/9F4tjWAUQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.OnboxExceptionBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.OnboxExceptionBase.html",
+          "hash": "EsSXs0qWF7uqA6eXrZ/OTw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.ReactFactory.Debouncer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.ReactFactory.Debouncer.html",
+          "hash": "pt/j84DShkKocRnWGUs2ng=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.ReactFactory.Interval.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.ReactFactory.Interval.html",
+          "hash": "mw2Fm9RwhNNHEKiYacu13A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.ReactFactory.ReactFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.ReactFactory.ReactFactory.html",
+          "hash": "VUDamutHaMXJGkpjlqg0iQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.ReactFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.ReactFactory.html",
+          "hash": "JZqXQ/gtaKLdtcv7EmswMA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Reporting.ProgressCancelledException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Reporting.ProgressCancelledException.html",
+          "hash": "VNrnfKto9FpTIZMHKi0QLQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Reporting.ProgressConsoleDebugIndicator.html",
+          "hash": "MiJBmYMWVPJDTUsSRBIAhg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.Reporting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.Reporting.html",
+          "hash": "N8rKXE/WqvmM+EVU41+7/g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Core.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Core.V7.html",
+          "hash": "q4p/ShGgKFaNh8r3eT06qw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Di.V7.Container.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Di.V7.Container.html",
+          "hash": "qwcpMURnxyfyCe4dnc+wvg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Di.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Di.V7.html",
+          "hash": "m1mTG0M//dAyyqjm/Y1dLA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcComponent.html",
+          "hash": "JtYle/5SWBnjEhGN3clNEg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcLifecycleComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcLifecycleComponent.html",
+          "hash": "XNBWXWM61Q+EVHsykPbGwQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcLifecycleView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcLifecycleView.html",
+          "hash": "hv8xUN6cIVOCpbVmeHE6YA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcView.html",
+          "hash": "94ZzsVO0VnkthkFEfVtb7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcViewModal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcViewModal.html",
+          "hash": "KSoz7JWuf12q1gRNJWP5fw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcViewModeless.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.IMvcViewModeless.html",
+          "hash": "Yyn7z6rVn2LfRpnlinpgaQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Abstractions.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Abstractions.V7.html",
+          "hash": "SIdFt6atCo6IWEZqP9hl7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Revit.Abstractions.V7.IRevitMvcViewBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Revit.Abstractions.V7.IRevitMvcViewBase.html",
+          "hash": "gkvLXTezNmg6PDeo7CW+0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.Revit.Abstractions.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.Revit.Abstractions.V7.html",
+          "hash": "GodSRQgf7IrOcDrIUwNmJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.V7.TitleVisibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.V7.TitleVisibility.html",
+          "hash": "QyHgZQzrX33K7nkxDo8hwQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Mvc.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Mvc.V7.html",
+          "hash": "X0awoPJOVWS45LDwykHwnQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.Abstractions.V7.IRevitAppData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.Abstractions.V7.IRevitAppData.html",
+          "hash": "GV6JOnxBhs1kKOCPE2Xxlg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.Abstractions.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.Abstractions.V7.html",
+          "hash": "Ppfb0TzLnhdBvQKAuS7Sew=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Applications.ContainerPipelineExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Applications.ContainerPipelineExtensions.html",
+          "hash": "eHj4NCgEBniOFGX+DpABOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Applications.RevitApp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Applications.RevitApp.html",
+          "hash": "4g3OmsrOOvueOxvHEgyn3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Applications.RevitAppBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Applications.RevitAppBase-1.html",
+          "hash": "/cre2WQbHwYCkondYCrZuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Applications.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Applications.html",
+          "hash": "efmdiDfO+yXr6HfCpdCVdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Async.IRevitEventHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Async.IRevitEventHandler.html",
+          "hash": "iE2fPGppNVE0TZq3E3VOQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Async.RevitAsyncExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Async.RevitAsyncExtensions.html",
+          "hash": "uNI3E3GJmvMU7XaCMW1Scg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Async.RevitAsyncSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Async.RevitAsyncSettings.html",
+          "hash": "KlNb2A0OdjxeNpZ/5l8fYg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Async.RevitExternalHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Async.RevitExternalHandler.html",
+          "hash": "FkNL6nczR32jY8BRRBkiSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Async.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Async.html",
+          "hash": "HFMFvVIVjdExLeSfzrlAUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Commands.IRevitDestroyableCommand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Commands.IRevitDestroyableCommand.html",
+          "hash": "s9neGSHohSw4b40p7J7LSw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Commands.RevitAppCommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Commands.RevitAppCommand-1.html",
+          "hash": "lHHBz0xFx0UUvgMALacygQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Commands.RevitContainerCommand-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Commands.RevitContainerCommand-1.html",
+          "hash": "JxVCj6awbIyclZuaIRqYVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Commands.RevitContainerCommandBase-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Commands.RevitContainerCommandBase-2.html",
+          "hash": "VCG70dSGxcJTdNY/LR0fpQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.Commands.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.Commands.html",
+          "hash": "AJRqwQLVBgwMIGSYWTrlxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ContainerProviderAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ContainerProviderAttribute.html",
+          "hash": "LWx/O4sHeX1IC8PUh52zDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.AccessLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.AccessLevel.html",
+          "hash": "ph4WhWmHL4+5ZV1DrLMI5Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.IRevitJsonStorage-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.IRevitJsonStorage-1.html",
+          "hash": "frwjlx/c5hr199ypO3vxBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageEntensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageEntensions.html",
+          "hash": "7ofy2ic3djHhWs44LcHzOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitExtensibleStorageSettings.html",
+          "hash": "YOuWZwufx2WHbc8HiZYMYg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitJsonStorage-1.html",
+          "hash": "Gj+15xX5a/6oFlRbMs+DuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitSchemaSettings.html",
+          "hash": "zEByMvUdu/FOpMc7s/K7Hg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitStorageBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.RevitStorageBuilder.html",
+          "hash": "5pqXY287X8FdNJUtAqFpaw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.ExtensibleStorage.html",
+          "hash": "cbDYx4xT0hRa8SedUWf3fQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.IRevitContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.IRevitContext.html",
+          "hash": "ALdbqJLPjK66/5ZEsfsPfw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.IRevitExternalApp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.IRevitExternalApp.html",
+          "hash": "derfkb/q75galHpRXRVCgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.RevitAppData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.RevitAppData.html",
+          "hash": "ejHumRxmDmvNhQXyxr8y7A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.RevitContainerProviderBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.RevitContainerProviderBase.html",
+          "hash": "FHbsbIVBKO44HUZO7M2AFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.RevitLanguage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.RevitLanguage.html",
+          "hash": "bhjgWRIoAaRc56D71BnzGQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.IRibbonManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.IRibbonManager.html",
+          "hash": "GWxQTELOJ6upQRVtXL3V0Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.IRibbonPanelManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.IRibbonPanelManager.html",
+          "hash": "GmF4R42gNBz7kLpWJKockw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.IRibbonTabManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.IRibbonTabManager.html",
+          "hash": "gyrKqYAtHdJsdQ25tbGlZQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.ImageManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.ImageManager.html",
+          "hash": "06TJzVQCF3TD+JMSB2/sYA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.RibbonHelpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.RibbonHelpers.html",
+          "hash": "cn/XzXOJKnH1fLrMHd1UXw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.RibbonManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.RibbonManager.html",
+          "hash": "P81h/ibVDAevT8ku0HBvRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.RibbonPanelManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.RibbonPanelManager.html",
+          "hash": "pvxjDFC1akT686Z16D3ELg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.RibbonTabManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.RibbonTabManager.html",
+          "hash": "y1pVrolPobQxkLGhh4prUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.UI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.UI.html",
+          "hash": "I2erW6nQg8+cmsikJcRvdw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Revit.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Revit.V7.html",
+          "hash": "XsjlmHzP+j1ICsBC4XkZPg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.IStorageSubscription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.IStorageSubscription.html",
+          "hash": "YGuyiq+7SGc7OPdSuTGiVA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.IStore-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.IStore-1.html",
+          "hash": "5UhrLtY74gZkAJjvccUnXw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.IStoreAction-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.IStoreAction-2.html",
+          "hash": "9T/a0KZNQJykTrn774bCXw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.StateEntry-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.StateEntry-1.html",
+          "hash": "Rtx2Xrd6dRT29PUHvs9NHA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.StorageSubscription.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.StorageSubscription.html",
+          "hash": "lMD7OkILHm0Ydrwy+yGScQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.Store-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.Store-1.html",
+          "hash": "nH64NFlJ/xl8FoEtxBRnJg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.StoreExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.StoreExtensions.html",
+          "hash": "KJ7MQ159XwuV2387+q6LRA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Onbox.Store.V7.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Onbox.Store.V7.html",
+          "hash": "/Kn6uqRTeEf/rejXsVBPAw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "m6my+wxkDCzElvwCP3ZS9g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "VN3YjXvOC701h5fogM3VMg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "Nrd/URhol4JNW5yYUnFhGA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 102,
+          "skipped_file_count": 81
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D35B3334-EB2E-4587-BA1E-BB71FED3881E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Onbox.Revit.V7</RootNamespace>
+    <AssemblyName>Onbox.Revit.V7</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <DocumentationFile>bin\Debug\Onbox.Revit.V7.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>Onbox.Revit.V7.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x64\Release\Onbox.Revit.V7.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="RevitAPI">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2019\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Applications\ContainerPipelineExtensions.cs" />
+    <Compile Include="Applications\RevitGenericAppBase.cs" />
+    <Compile Include="Async\IRevitEventHandler.cs" />
+    <Compile Include="Commands\IRevitDestroyableCommand.cs" />
+    <Compile Include="ContainerProviderAttribute.cs" />
+    <Compile Include="ContainerProviderReflector.cs" />
+    <Compile Include="ExtensibleStorage\AccessLevel.cs" />
+    <Compile Include="ExtensibleStorage\IRevitJsonStorage.cs" />
+    <Compile Include="ExtensibleStorage\RevitExtensibleStorageEntensions.cs" />
+    <Compile Include="ExtensibleStorage\RevitExtensibleStorageSettings.cs" />
+    <Compile Include="ExtensibleStorage\RevitSchemaSettings.cs" />
+    <Compile Include="IRevitContext.cs" />
+    <Compile Include="Applications\IRevitExternalApp.cs" />
+    <Compile Include="Applications\RevitContainerProviderBase.cs" />
+    <Compile Include="RevitContext.cs" />
+    <Compile Include="Commands\RevitAppCommand.cs" />
+    <Compile Include="Applications\RevitApp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\RevitContainerCommand.cs" />
+    <Compile Include="ExtensibleStorage\RevitExtensibleStorage.cs" />
+    <Compile Include="Async\RevitAsyncExtensions.cs" />
+    <Compile Include="RevitAppData.cs" />
+    <Compile Include="Async\RevitExternalHandler.cs" />
+    <Compile Include="UI\ImageManager.cs" />
+    <Compile Include="UI\RibbonTabManager.cs" />
+    <Compile Include="UI\RibbonHelpers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
+      <Project>{5C9FC71D-7306-4450-BA94-C055D36CC9C8}</Project>
+      <Name>Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Di.Standard\Di.Standard.csproj">
+      <Project>{b7d238f7-790e-4428-b18a-0dd2905382ca}</Project>
+      <Name>Di.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit.Abstractions.Standard\Revit.Abstractions.Standard.csproj">
+      <Project>{AF845B20-8B03-4905-A4B8-4FD8326312CF}</Project>
+      <Name>Revit.Abstractions.Standard</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="onbox.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

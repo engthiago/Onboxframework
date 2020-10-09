@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F7B5A7F3-30CA-4EF6-B63A-602692F4E8A5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Onbox.Reference.Revit.V7</RootNamespace>
+    <AssemblyName>Onbox.Reference.Revit.V7</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
+      <Project>{5c9fc71d-7306-4450-ba94-c055d36cc9c8}</Project>
+      <Name>Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Analyzers\Analyzers.csproj">
+      <Project>{8d01db50-a991-46fe-98c3-ebcf325f8e63}</Project>
+      <Name>Analyzers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Standard\Core.Standard.csproj">
+      <Project>{e07602ac-d1cc-4def-8290-fe37a89afa79}</Project>
+      <Name>Core.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Di.Standard\Di.Standard.csproj">
+      <Project>{b7d238f7-790e-4428-b18a-0dd2905382ca}</Project>
+      <Name>Di.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Abstractions.Standard\Mvc.Abstractions.Standard.csproj">
+      <Project>{d27ad17b-f7d8-48a2-aaeb-018591ff1bfb}</Project>
+      <Name>Mvc.Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Revit.Abstractions.Standard\Mvc.Revit.Abstractions.Standard.csproj">
+      <Project>{e657787a-3de1-490e-a576-e9107f1a9b8e}</Project>
+      <Name>Mvc.Revit.Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc.Revit\Mvc.Revit.csproj">
+      <Project>{1902d3ea-f7f0-4efa-8237-805859e794f5}</Project>
+      <Name>Mvc.Revit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mvc\Mvc.csproj">
+      <Project>{06552675-1f55-4c83-a25b-4658ebac2822}</Project>
+      <Name>Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit.Abstractions.Standard\Revit.Abstractions.Standard.csproj">
+      <Project>{af845b20-8b03-4905-a4b8-4fd8326312cf}</Project>
+      <Name>Revit.Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit\Revit.csproj">
+      <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
+      <Name>Revit</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+    <ProjectReference Include="..\Store.Standard\Store.Standard.csproj">
+      <Project>{3258b9eb-7a7c-4f4f-bdde-10e02836b3e9}</Project>
+      <Name>Store.Standard</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist %25ProgramData%25\Packages\Onbox\V7 mkdir %25ProgramData%25\Packages\Onbox\V7
+xcopy "$(TargetDir)*.*" "%25ProgramData%25\Packages\Onbox\V7" /E /Y /I
+echo *** FOLDER ***
+echo %25ProgramData%25\Packages\Onbox\V7</PostBuildEvent>
+  </PropertyGroup>
+</Project>
