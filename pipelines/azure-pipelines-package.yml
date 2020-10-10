@@ -63,7 +63,7 @@ steps:
 - task: CopyFiles@2
   displayName: Copy Analyzers Nuget to Staging Artifacts
   inputs:
-    SourceFolder: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/bin/**'
+    SourceFolder: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/bin/Release/'
     Contents: '*.nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
