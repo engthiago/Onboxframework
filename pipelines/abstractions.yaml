@@ -36,16 +36,14 @@ steps:
   displayName: Nuget Pack
   inputs:
     command: 'pack'
-    packagesToPack: '$(project)'
-    configuration: '$(buildConfiguration)'
-    basePath: 'src/Abstractions/bin/$(buildConfiguration)/Release/netstandard1.0'
+    packagesToPack: 'src/Abstractions/bin/Release'
+    configuration: 
     versioningScheme: 'off'
-    includeSymbols: true
 
 - task: NuGetCommand@2
-  displayName: Nuget Pack
+  displayName: Nuget Publish
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'e6317222-4cf6-45e7-aeeb-ed6b8c480b6b'
