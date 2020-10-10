@@ -8,8 +8,8 @@ pool:
 
 variables:
   solution: 'Onbox.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  buildPlatform: 'x64'
+  buildConfiguration: 'R2019'
   buildPath: 'src/Abstractions/bin/'
 
 steps:
