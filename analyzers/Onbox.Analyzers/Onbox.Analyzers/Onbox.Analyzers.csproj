@@ -6,7 +6,7 @@
 
     <!-- Avoid ID conflicts with the package project. -->
     <PackageId>Onbox.Analyzers</PackageId>
-    <AssemblyName>Onbox.Analyzers.V7</AssemblyName>
+    <AssemblyName>Onbox.Analyzers</AssemblyName>
     <RootNamespace>Onbox.Analyzers.V7</RootNamespace>
     <Version>7.0.0</Version>
     <Authors>Thiago Almeida</Authors>
