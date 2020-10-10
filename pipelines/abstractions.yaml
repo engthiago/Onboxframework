@@ -3,9 +3,6 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
 
-#trigger:
-#- master
-
 pool:
   vmImage: 'windows-latest'
 
@@ -32,18 +29,8 @@ steps:
     configuration: '$(buildConfiguration)'
     clean: true
 
-- task: NuGetCommand@2
-  displayName: Nuget Pack
+- task: PublishBuildArtifacts@1
   inputs:
-    command: 'pack'
-    packagesToPack: 'src/Abstractions/bin/Release'
-    configuration: 
-    versioningScheme: 'off'
-
-- task: NuGetCommand@2
-  displayName: Nuget Publish
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'e6317222-4cf6-45e7-aeeb-ed6b8c480b6b'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
