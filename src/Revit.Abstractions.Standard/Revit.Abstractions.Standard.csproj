@@ -13,6 +13,7 @@
     <PackageIcon>onbox.png</PackageIcon>
     <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
     <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
