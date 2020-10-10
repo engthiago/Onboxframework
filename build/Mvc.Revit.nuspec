@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
   <metadata>
-    <id>Onbox.Revit</id>
+    <id>Onbox.Mvc.Revit</id>
     <version>7.0.0</version>
-    <title>Onbox.Revit</title>
+    <title>Onbox.Mvc.Revit</title>
     <authors>Thiago Almeida</authors>
     <owners>Thiago Almeida</owners>
 	<projectUrl>https://github.com/engthiago/Onbox.Rvt</projectUrl>
@@ -16,11 +16,19 @@
     <tags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</tags>
 	<dependencies>
 		<dependency id="Onbox.Abstractions" version="7.0.0" />
-		<dependency id="Onbox.Di" version="7.0.0" />
+		<dependency id="Onbox.Core" version="7.0.0" />
+		<dependency id="Onbox.Mvc" version="7.0.0" />
+		<dependency id="Onbox.Mvc.Abstractions" version="7.0.0" />
+		<dependency id="Onbox.Mvc.Revit.Abstractions" version="7.0.0" />
 		<dependency id="Onbox.Revit.Abstractions" version="7.0.0" />
+		<dependency id="PropertyChanged.Fody" version="2.5.9" />
 	</dependencies>
+	<references>
+		<reference file="Onbox.Mvc.Revit.V7.dll"/>
+	</references>
   </metadata>
   <files>
 	<file src="onbox.png" />
+	<file src="Onbox.Mvc.Revit.V7.dll" target="lib\" />
   </files>
 </package>
