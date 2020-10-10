@@ -34,19 +34,12 @@ steps:
   displayName: Package .NetFramework Projects
   inputs:
     command: 'pack'
-    packagesToPack: 'src/Mvc/Mvc.nuspec;src/Mvc.Revit/Mvc.Revit.nuspec;src/Revit/Revit.nuspec'
+    packagesToPack: 'build/Mvc.nuspec;build/Mvc.Revit.nuspec;build/Revit.nuspec'
     versioningScheme: 'off'
     includeSymbols: true
 
 - task: CopyFiles@2
-  displayName: Copy .NetFramework Nuget to Staging Artifacts
-  inputs:
-    SourceFolder: 'src/'
-    Contents: '*.nupkg'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: CopyFiles@2
-  displayName: Copy .NetStandard Nuget to Staging Artifacts
+  displayName: Copy Nuget to Staging Artifacts
   inputs:
     SourceFolder: 'build/'
     Contents: '*.nupkg'
