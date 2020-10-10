@@ -8,6 +8,7 @@ pool:
 
 variables:
   solution: 'Onbox.sln'
+  analyzers: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/Onbox.Analyzers.Package.csproj'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
   buildPath: 'src/Abstractions/bin/'
@@ -22,7 +23,7 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
-  displayName: Visual Studio 2019 Build
+  displayName: Visual Studio 2019 Build Projects
   inputs:
     solution: '$(solution)'
     vsVersion: '16.0'
@@ -42,6 +43,22 @@ steps:
   displayName: Copy Nuget to Staging Artifacts
   inputs:
     SourceFolder: 'build/'
+    Contents: '*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: VSBuild@1
+  displayName: Visual Studio 2019 Build Analyzers
+  inputs:
+    solution: '$(analyzers)'
+    vsVersion: '16.0'
+    platform: 'Any CPU'
+    configuration: 'Release'
+    clean: true
+
+- task: CopyFiles@2
+  displayName: Copy Analyzers Nuget to Staging Artifacts
+  inputs:
+    SourceFolder: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/bin/**/*.nupkg'
     Contents: '*.nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
