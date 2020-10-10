@@ -30,7 +30,17 @@ steps:
     configuration: '$(buildConfiguration)'
     clean: true
 
+- task: CopyFiles@2
+  displayName: Copy Artifacts
+  inputs:
+    SourceFolder: '$(buildPath)'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
+
 - task: PublishBuildArtifacts@1
   inputs:
-    TargetPath: '$(buildPath)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'build'
+    publishLocation: 'Container'
