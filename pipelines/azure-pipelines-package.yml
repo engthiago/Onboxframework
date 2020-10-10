@@ -8,7 +8,7 @@ pool:
 
 variables:
   solution: 'Onbox.sln'
-  analyzers: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/Onbox.Analyzers.Package.csproj'
+  analyzers: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Build.sln'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
   buildPath: 'src/Abstractions/bin/'
