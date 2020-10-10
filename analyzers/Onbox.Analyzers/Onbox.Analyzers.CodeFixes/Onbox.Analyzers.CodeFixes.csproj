@@ -14,6 +14,7 @@
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
     <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
     <RepositoryType>git</RepositoryType>
+    <PackageId>Onbox.Analyzers.CodeFixes.V7</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
