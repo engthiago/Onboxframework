@@ -33,17 +33,17 @@ steps:
     clean: true
 
 - task: NuGetCommand@2
-  displayName: Pack Nuget
+  displayName: Nuget Pack
   inputs:
     command: 'pack'
     packagesToPack: '$(project)'
     configuration: '$(buildConfiguration)'
-    basePath: 'src/Abstractions/bin/Debug/netstandard1.0'
+    basePath: 'src/Abstractions/bin/$(buildConfiguration)/Release/netstandard1.0'
     versioningScheme: 'off'
     includeSymbols: true
 
 - task: NuGetCommand@2
-  displayName: Publish Nuget
+  displayName: Nuget Pack
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
