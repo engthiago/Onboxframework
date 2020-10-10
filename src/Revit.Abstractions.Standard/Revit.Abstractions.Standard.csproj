@@ -15,6 +15,10 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\Abstractions\onbox.png">
       <Pack>True</Pack>

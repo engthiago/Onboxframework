@@ -25,6 +25,11 @@
     <DocumentationFile>.\Onbox.Abstractions.V7.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <OutputPath>../../build</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="LICENSE.md" />
     <None Remove="LICENSE.md" />

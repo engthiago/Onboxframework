@@ -22,6 +22,10 @@
     <DocumentationFile>.\Onbox.Di.V7.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj" />
   </ItemGroup>

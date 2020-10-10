@@ -18,6 +18,10 @@
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\Abstractions\onbox.png">
       <Pack>True</Pack>

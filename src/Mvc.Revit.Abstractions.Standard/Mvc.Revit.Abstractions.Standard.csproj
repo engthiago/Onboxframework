@@ -16,6 +16,10 @@
     <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Mvc.Abstractions.Standard\Mvc.Abstractions.Standard.csproj" />
   </ItemGroup>
