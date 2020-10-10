@@ -18,7 +18,7 @@ steps:
   displayName: Nuget Install
 
 - task: NuGetCommand@2
-  displayName: Nuget Restore
+  displayName: Nuget Restore Build Projects
   inputs:
     restoreSolution: '$(solution)'
 
@@ -45,6 +45,11 @@ steps:
     SourceFolder: 'build/'
     Contents: '*.nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: NuGetCommand@2
+  displayName: Nuget Restore Analyzers
+  inputs:
+    restoreSolution: '$(analyzers)'
 
 - task: VSBuild@1
   displayName: Visual Studio 2019 Build Analyzers
