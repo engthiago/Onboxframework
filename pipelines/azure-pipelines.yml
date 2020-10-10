@@ -56,4 +56,4 @@ steps:
   displayName: Artifacts Publish
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'build'
+    ArtifactName: 'packages'
