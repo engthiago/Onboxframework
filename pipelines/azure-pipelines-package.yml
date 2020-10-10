@@ -1,0 +1,59 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Onbox.sln'
+  buildPlatform: 'x64'
+  buildConfiguration: 'R2019'
+  buildPath: 'src/Abstractions/bin/'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: Nuget Install
+
+- task: NuGetCommand@2
+  displayName: Nuget Restore
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  displayName: Visual Studio 2019 Build
+  inputs:
+    solution: '$(solution)'
+    vsVersion: '16.0'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    clean: true
+
+- task: NuGetCommand@2
+  displayName: Package .NetFramework Projects
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/Mvc/Mvc.nuspec;src/Mvc.Revit/Mvc.Revit.nuspec;src/Revit/Revit.nuspec'
+    versioningScheme: 'off'
+    includeSymbols: true
+
+- task: CopyFiles@2
+  displayName: Copy .NetFramework Nuget to Staging Artifacts
+  inputs:
+    SourceFolder: 'src/'
+    Contents: '*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: Copy .NetStandard Nuget to Staging Artifacts
+  inputs:
+    SourceFolder: 'build/'
+    Contents: '*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: Artifacts Publish
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'packages'
