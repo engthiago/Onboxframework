@@ -24,8 +24,10 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(project)'
+    vsVersion: '16.0'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    clean: true
 
 - task: NuGetCommand@2
   inputs:
