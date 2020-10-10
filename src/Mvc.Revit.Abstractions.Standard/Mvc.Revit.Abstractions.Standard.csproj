@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
-    <AssemblyName>Onbox.Mvc.Revit.Abstractions.V7</AssemblyName>
+    <AssemblyName>Onbox.Mvc.Revit.Abstractions</AssemblyName>
     <RootNamespace>Onbox.Mvc.Revit.Abstractions.V7</RootNamespace>
     <PackageId>Onbox.Mvc.Revit.Abstractions</PackageId>
     <Version>7.0.0</Version>

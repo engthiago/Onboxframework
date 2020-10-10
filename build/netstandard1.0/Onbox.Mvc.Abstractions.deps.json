@@ -7,12 +7,12 @@
   "targets": {
     ".NETStandard,Version=v1.0": {},
     ".NETStandard,Version=v1.0/": {
-      "Onbox.Abstractions.V7/7.0.0": {
+      "Onbox.Mvc.Abstractions/7.0.0": {
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "runtime": {
-          "Onbox.Abstractions.V7.dll": {}
+          "Onbox.Mvc.Abstractions.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -202,7 +202,7 @@
     }
   },
   "libraries": {
-    "Onbox.Abstractions.V7/7.0.0": {
+    "Onbox.Mvc.Abstractions/7.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -20,11 +20,11 @@
 		<dependency id="PropertyChanged.Fody" version="2.5.9" />
 	</dependencies>
 	<references>
-		<reference file="Onbox.Mvc.V7.dll"/>
+		<reference file="Onbox.Mvc.dll"/>
 	</references>
   </metadata>
   <files>
 	  <file src="onbox.png" />
-	  <file src="Onbox.Mvc.V7.dll" target="lib\" />
+	  <file src="Onbox.Mvc.dll" target="lib\" />
   </files>
 </package>

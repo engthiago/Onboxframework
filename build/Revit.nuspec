@@ -20,11 +20,11 @@
 		<dependency id="Onbox.Revit.Abstractions" version="7.0.0" />
 	</dependencies>
 	<references>
-		<reference file="Onbox.Revit.V7.dll"/>
+		<reference file="Onbox.Revit.dll"/>
 	</references>
   </metadata>
   <files>
 	<file src="onbox.png" />
-	<file src="Onbox.Revit.V7.dll" target="lib\" />
+	<file src="Onbox.Revit.dll" target="lib\" />
   </files>
 </package>

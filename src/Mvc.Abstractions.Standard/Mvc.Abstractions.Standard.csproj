@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
     <Version>7.0.0</Version>
-    <AssemblyName>Onbox.Mvc.Abstractions.V7</AssemblyName>
+    <AssemblyName>Onbox.Mvc.Abstractions</AssemblyName>
     <RootNamespace>Onbox.Mvc.Abstractions.V7</RootNamespace>
     <PackageId>Onbox.Mvc.Abstractions</PackageId>
     <Authors>Thiago Almeida</Authors>
