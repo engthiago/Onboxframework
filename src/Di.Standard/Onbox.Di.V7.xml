@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Onbox.Di.V7</name>
+        <name>Onbox.Di</name>
     </assembly>
     <members>
         <member name="T:Onbox.Di.V7.Container">

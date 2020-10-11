@@ -15,10 +15,11 @@
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
     <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
     <PackageIcon>onbox.png</PackageIcon>
-    <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
-    <Description></Description>
+    <PackageTags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</PackageTags>
+    <Description>Part of Onbox Framework</Description>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

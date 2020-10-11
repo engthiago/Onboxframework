@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Onbox.Store/1.0.0": {
+      "Onbox.Store/7.0.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.3",
           "Onbox.Abstractions": "7.0.0",
@@ -483,7 +483,7 @@
     }
   },
   "libraries": {
-    "Onbox.Store/1.0.0": {
+    "Onbox.Store/7.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

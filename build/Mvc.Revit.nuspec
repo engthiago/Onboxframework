@@ -13,7 +13,7 @@
     <description>Part of Onbox Framework</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright (c) 2020 Thiago Almeida</copyright>
-    <tags>Revit Autodesk Revit Onbox AEC</tags>
+    <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</tags>
 	<dependencies>
 		<dependency id="Onbox.Abstractions" version="7.0.0" />
 		<dependency id="Onbox.Core" version="7.0.0" />

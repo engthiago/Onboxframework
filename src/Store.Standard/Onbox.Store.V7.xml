@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Onbox.Store.V7</name>
+        <name>Onbox.Store</name>
     </assembly>
     <members>
         <member name="T:Onbox.Store.V7.StateEntry`1">

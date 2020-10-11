@@ -13,10 +13,11 @@
     <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
     <PackageIcon>onbox.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <PackageTags>Revit Autodesk Revit Revit API Onbox AEC Forge</PackageTags>
     <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Part of Onbox Framework</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

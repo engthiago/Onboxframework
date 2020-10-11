@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Onbox.Mvc.Revit.V7</name>
+        <name>Onbox.Mvc.Revit</name>
     </assembly>
     <members>
         <member name="T:Onbox.Mvc.Revit.V7.MvcExtensions">
