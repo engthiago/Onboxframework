@@ -37,11 +37,24 @@ namespace Onbox.Analyzers.V7
                 }
                 var symbolInfo = context.SemanticModel.GetSymbolInfo(syntax.Expression);
                 var symbol = symbolInfo.Symbol;
-                if (symbol != null
-                    && symbol.Kind == SymbolKind.Method
-                    && symbol.ContainingNamespace != null
+
+                if (symbol == null)
+                {
+                    return;
+                }
+
+                if (symbol.ContainingNamespace == null)
+                {
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(symbol.Name))
+                {
+                    return;
+                }
+
+                if (   symbol.Kind == SymbolKind.Method
                     && symbol.ContainingNamespace.ToString().Contains("Onbox.Abstractions.")
-                    && symbol.Name != null
                     && symbol.Name.ToString() == "AddSingleton" || symbol.Name.ToString() == "AddScoped")
                 {
                     if (symbol is IMethodSymbol methodSymbol)
