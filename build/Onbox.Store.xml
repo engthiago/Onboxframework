@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Store</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Store.V7.StateEntry`1">
+            <summary>
+            A snapshot of the state in a give point in time
+            </summary>
+            <typeparam name="TState"></typeparam>
+        </member>
+        <member name="P:Onbox.Store.V7.StateEntry`1.UpdatedAt">
+            <summary>
+            When the state was updated
+            </summary>
+        </member>
+        <member name="P:Onbox.Store.V7.StateEntry`1.OldState">
+            <summary>
+            The state before this modification
+            </summary>
+        </member>
+        <member name="P:Onbox.Store.V7.StateEntry`1.NewState">
+            <summary>
+            The state after this modification
+            </summary>
+        </member>
+        <member name="P:Onbox.Store.V7.StateEntry`1.ActionName">
+            <summary>
+            The action responsible for this modification
+            </summary>
+        </member>
+        <member name="P:Onbox.Store.V7.StateEntry`1.ActionPath">
+            <summary>
+            The action path responsible this modification
+            </summary>
+        </member>
+        <member name="T:Onbox.Store.V7.IStorageSubscription">
+            <summary>
+            A copy of the subscription for Store Actions
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.IStorageSubscription.Unsubscribe">
+            <summary>
+            Unsubscribe and cleanup
+            </summary>
+        </member>
+        <member name="T:Onbox.Store.V7.StorageSubscription">
+            <summary>
+            A copy of the subscription for Store Actions
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.StorageSubscription.Unsubscribe">
+            <summary>
+            Unsubscribe and cleanup
+            </summary>
+        </member>
+        <member name="T:Onbox.Store.V7.IStoreAction`2">
+            <summary>
+            An action responsible for dispatching events and accessing a particular slice of the store
+            </summary>
+            <typeparam name="TState">The type of the global state</typeparam>
+            <typeparam name="TSlice">The type of slice</typeparam>
+        </member>
+        <member name="M:Onbox.Store.V7.IStoreAction`2.GetActionName">
+            <summary>
+            The name that will be shown on the state history
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Store.V7.IStoreAction`2.GetActionPath">
+            <summary>
+            The expression responsible for accessing the slice of the state
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Onbox.Store.V7.IStore`1">
+            <summary>
+            The global state management
+            </summary>
+            <typeparam name="TState">The type of the global state</typeparam>
+        </member>
+        <member name="M:Onbox.Store.V7.IStore`1.EnableLogging">
+            <summary>
+            Enable logging of the state when actions are dispatched
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.IStore`1.DisableLogging">
+            <summary>
+            Disables logging of the state when actions are dispatched
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.IStore`1.SetState``1(Onbox.Store.V7.IStoreAction{`0,``0},``0)">
+            <summary>
+            Sets a specific slice of the global state
+            </summary>
+            <typeparam name="TSlice">The type of the slice that will be changed</typeparam>
+            <param name="action">The action responsible for the slice</param>
+            <param name="state">The new state to be dispatched</param>
+        </member>
+        <member name="M:Onbox.Store.V7.IStore`1.Select``1(Onbox.Store.V7.IStoreAction{`0,``0})">
+            <summary>
+            Selects a specific slice of the global state
+            </summary>
+            <typeparam name="TSlice">The type of the slice</typeparam>
+            <param name="action">The action responsible for the slice</param>
+        </member>
+        <member name="M:Onbox.Store.V7.IStore`1.Subscribe``1(Onbox.Store.V7.IStoreAction{`0,``0},System.Action{``0})">
+            <summary>
+            Subscribe to a specifc slice of the global state
+            </summary>
+            <typeparam name="TSlice">The type of the slice</typeparam>
+            <param name="action">The action responsible for the slice</param>
+            <param name="callback">The callback perfomerd when the slice is changed</param>
+        </member>
+        <member name="M:Onbox.Store.V7.IStore`1.GetHistory">
+            <summary>
+            Gets the complete history of the global state
+            </summary>
+        </member>
+        <member name="T:Onbox.Store.V7.Store`1">
+            <summary>
+            The global state management
+            </summary>
+            <typeparam name="TState">The type of the global state</typeparam>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.#ctor(Onbox.Abstractions.V7.IMapper,Onbox.Abstractions.V7.ILoggingService,Onbox.Abstractions.V7.IJsonService)">
+            <summary>
+            The constructor for this implementation of state management
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.EnableLogging">
+            <summary>
+            Enable logging of the state when actions are dispatched
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.DisableLogging">
+            <summary>
+            Disables logging of the state when actions are dispatched
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.SetState``1(Onbox.Store.V7.IStoreAction{`0,``0},``0)">
+            <summary>
+            Sets a specific slice of the global state
+            </summary>
+            <typeparam name="TSlice">The type of the slice that will be changed</typeparam>
+            <param name="action">The action responsible for the slice</param>
+            <param name="slice">The new state to be dispatched</param>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.Select``1(Onbox.Store.V7.IStoreAction{`0,``0})">
+            <summary>
+            Selects a specific slice of the global state
+            </summary>
+            <typeparam name="TSlice">The type of the slice</typeparam>
+            <param name="action">The action responsible for the slice</param>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.Subscribe``1(Onbox.Store.V7.IStoreAction{`0,``0},System.Action{``0})">
+            <summary>
+            Subscribe to a specifc slice of the global state
+            </summary>
+            <typeparam name="TSlice">The type of the slice</typeparam>
+            <param name="action">The action responsible for the slice</param>
+            <param name="callback">The callback perfomerd when the slice is changed</param>
+        </member>
+        <member name="M:Onbox.Store.V7.Store`1.GetHistory">
+            <summary>
+            Gets the complete history of the global state
+            </summary>
+        </member>
+        <member name="M:Onbox.Store.V7.StoreExtensions.AddStore``1(Onbox.Abstractions.V7.IContainer)">
+            <summary>
+            Adds a Store of <typeparamref name="T"/> which can be injected as IStore of <typeparamref name="T"/> in services
+            </summary>
+        </member>
+    </members>
+</doc>

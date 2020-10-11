@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
@@ -29,6 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <OutputPath>../../build</OutputPath>
+    <DocumentationFile>../../build\Onbox.Abstractions.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

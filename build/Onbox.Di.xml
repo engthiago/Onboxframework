@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Di</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Di.V7.Container">
+            <summary>
+            Onbox's IOC container implementation
+            </summary>d
+        </member>
+        <member name="F:Onbox.Di.V7.Container.transientTypes">
+            <summary>
+            The list of current transient types currently registered
+            </summary>
+        </member>
+        <member name="F:Onbox.Di.V7.Container.scopedTypes">
+            <summary>
+            The list of current scoped types currently registered
+            </summary>
+        </member>
+        <member name="F:Onbox.Di.V7.Container.singletonInstances">
+            <summary>
+            The list of current singleton instances currently registered
+            </summary>
+        </member>
+        <member name="F:Onbox.Di.V7.Container.singletonTypes">
+            <summary>
+            The list of current singleton types currently registered
+            </summary>
+        </member>
+        <member name="F:Onbox.Di.V7.Container.scopedInstances">
+            <summary>
+            The list of current scoped instances currently registered
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddSingleton``1">
+            <summary>
+            Adds an implementation as a singleton on the container.
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <typeparam name="TImplementation"></typeparam>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddSingleton``1(``0)">
+            <summary>
+            Adds an instance as a singleton on the container
+            </summary>
+            <typeparam name="TImplementation"></typeparam>
+            <param name="instance"></param>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddSingleton``2">
+            <summary>
+            Adds an implementation to a contract as a singleton on the container
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <typeparam name="TContract"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddSingleton``2(``1)">
+            <summary>
+            Adds an instance as a singleton on the container
+            </summary>
+            <typeparam name="TContract"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddTransient``1">
+            <summary>
+            Adds an implementation as a transient on the container.
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <typeparam name="TImplementation"></typeparam>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddTransient``2">
+            <summary>
+            Adds an implementation to a contract as transient on the container
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <typeparam name="TContract"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddScoped``2">
+            <summary>
+            Adds a scoped implementation to a contract on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.AddScoped``1">
+            <summary>
+            Adds a scoped implementation on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.Resolve``1">
+            <summary>
+            Asks the container for a new instance of a type
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.Resolve(System.Type)">
+            <summary>
+            Asks the container for a new instance of a type
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.Clear">
+            <summary>
+            Clears and releases resources from the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.Dispose">
+            <summary>
+            Clears and releases resources from the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.V7.Container.CreateScope">
+            <summary>
+            Creates a scoped context copy of this container
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -21,6 +21,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>../../build</OutputPath>
+    <DocumentationFile>../../build\Onbox.Revit.Abstractions.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

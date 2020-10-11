@@ -30,5 +30,6 @@
   <files>
 	<file src="onbox.png" />
 	<file src="Onbox.Mvc.Revit.dll" target="lib\" />
+	<file src="Onbox.Mvc.Revit.xml" target="lib\" />
   </files>
 </package>

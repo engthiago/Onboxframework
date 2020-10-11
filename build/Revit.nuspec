@@ -26,5 +26,6 @@
   <files>
 	<file src="onbox.png" />
 	<file src="Onbox.Revit.dll" target="lib\" />
+	<file src="Onbox.Revit.xml" target="lib\" />
   </files>
 </package>
