@@ -31,11 +31,17 @@ namespace Onbox.Analyzers.V7
             var syntax = context.Node as ExpressionStatementSyntax;
             if (syntax != null)
             {
+                if (context.SemanticModel == null)
+                {
+                    return;
+                }
                 var symbolInfo = context.SemanticModel.GetSymbolInfo(syntax.Expression);
                 var symbol = symbolInfo.Symbol;
                 if (symbol != null
                     && symbol.Kind == SymbolKind.Method
+                    && symbol.ContainingNamespace != null
                     && symbol.ContainingNamespace.ToString().Contains("Onbox.Abstractions.")
+                    && symbol.Name != null
                     && symbol.Name.ToString() == "AddSingleton" || symbol.Name.ToString() == "AddScoped")
                 {
                     if (symbol is IMethodSymbol methodSymbol)
@@ -47,7 +53,7 @@ namespace Onbox.Analyzers.V7
                                 var currentSymbol = argumentSymbol;
                                 while (currentSymbol != null && currentSymbol.BaseType != null)
                                 {
-                                    if (currentSymbol.Name == "Window" && currentSymbol.OriginalDefinition.ToString() == "System.Windows.Window")
+                                    if (currentSymbol.Name == "Window" && currentSymbol.OriginalDefinition?.ToString() == "System.Windows.Window")
                                     {
                                         var diagnostic = Diagnostic.Create(Rule, syntax.GetLocation());
                                         context.ReportDiagnostic(diagnostic);

@@ -16,10 +16,10 @@
     <PackageIconUrl></PackageIconUrl>
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description></Description>
+    <Description>Part of Onbox Framework</Description>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Copyright>Copyright (c) 2020 Thiago Almeida</Copyright>
-    <PackageTags>Analyzer, Analyzers, Revit, Autodesk, Revit, Revit API, Onbox, AEC</PackageTags>
+    <PackageTags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
 
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
