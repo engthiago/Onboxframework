@@ -1,0 +1,19 @@
+﻿<rmvc:RevitMvcViewBase x:Class="$rootnamespace$.$safeitemname$"
+					DataContext="{Binding RelativeSource={RelativeSource Self}}"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:mvc="clr-namespace:Onbox.Mvc.V7;assembly=Onbox.Mvc.V7"
+					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.V7;assembly=Onbox.Mvc.Revit.V7"
+					mc:Ignorable="d"
+					Title="$safeitemname$"
+					MinWidth="500"
+					MinHeight="450"
+					Width="500"
+					Height="450">
+
+	<Grid>
+	</Grid>
+
+</rmvc:RevitMvcViewBase>

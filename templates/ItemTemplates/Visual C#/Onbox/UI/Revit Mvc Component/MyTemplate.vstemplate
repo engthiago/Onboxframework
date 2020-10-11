@@ -1,0 +1,15 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Component.xaml</DefaultName>
+    <Name>Revit Mvc Component</Name>
+    <Description>A Revit Mvc oriented component</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="Designer" TargetFileName="$fileinputname$.xaml" ReplaceParameters="true">Page2.xaml</ProjectItem>
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.xaml.cs" ReplaceParameters="true">Page2.xaml.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

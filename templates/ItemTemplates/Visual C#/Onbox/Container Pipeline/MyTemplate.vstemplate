@@ -1,0 +1,14 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>ContainerPipeline.cs</DefaultName>
+    <Name>Container Pipeline</Name>
+    <Description>Container pipeline is used to add dependencies and compose a container</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">ContainerPipeline.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

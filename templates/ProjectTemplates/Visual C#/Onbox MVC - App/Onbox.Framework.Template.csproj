@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2019|x64'">
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Revit2019</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2019|x64'">
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Revit2019</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2019|x64'">
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;Revit2019</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2020|x64'">
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Revit2020</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2020|x64'">
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;Revit2020</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2021|x64'">
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Revit2021</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2021|x64'">
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <OutputPath>bin\x64\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;Revit2021</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+    <TargetFrameworkProfile />
+    <ProjectGuid>{$guid1$}</ProjectGuid>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2019|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2019|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Autodesk\Revit 2019\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2020|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Autodesk\Revit 2020\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2020|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Autodesk\Revit 2020\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2021|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2021|x64'">
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'D2019' OR '$(Configuration)' == 'R2019'">
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2019\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'D2020' OR '$(Configuration)' == 'R2020'">
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2020\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2020\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'D2021' OR '$(Configuration)' == 'R2021'">
+    <Reference Include="RevitAPI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2021\RevitAPI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RevitAPIUI">
+      <HintPath>C:\Program Files\Autodesk\Revit 2021\RevitAPIUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Onbox.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Onbox.Core, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Core.7.0.0\lib\netstandard2.0\Onbox.Core.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Di, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Di.7.0.0\lib\netstandard2.0\Onbox.Di.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Mvc, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.7.0.0\lib\Onbox.Mvc.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Mvc.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Mvc.Revit, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Revit.7.0.0\lib\Onbox.Mvc.Revit.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Mvc.Revit.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Revit, Version=7.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Onbox.Revit.7.0.0\lib\Onbox.Revit.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Revit.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Revit.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Revit.Abstractions.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Store, Version=7.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Onbox.Store.7.0.0\lib\netstandard2.0\Onbox.Store.dll</HintPath>
+    </Reference>
+	<Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+	  <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Revit\App.cs" />
+    <Compile Include="Revit\Commands\Availability\AvailableAlways.cs" />
+    <Compile Include="Revit\Commands\Availability\AvailableOnAnyDocument.cs" />
+    <Compile Include="Revit\Commands\Availability\AvailableOnFamily.cs" />
+    <Compile Include="Revit\Commands\Availability\AvailableOnProject.cs" />
+    <Compile Include="Revit\Commands\HelloCommand.cs" />
+    <Compile Include="Revit\Commands\WPFViewCommand.cs" />
+    <Compile Include="Views\HelloWPFView.xaml.cs">
+      <DependentUpon>HelloWPFView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="$safeprojectname$.addin" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+    <EmbeddedResource Include="Resources\RibbonImages\autodesk_logo16.png" />
+    <EmbeddedResource Include="Resources\RibbonImages\autodesk_logo32.png" />
+    <EmbeddedResource Include="Resources\RibbonImages\onbox_logo16.png" />
+    <EmbeddedResource Include="Resources\RibbonImages\onbox_logo32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\HelloWPFView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(ProgramData)\Packages\Fody.3.1.3\build\Fody.targets" Condition="Exists('$(ProgramData)\Packages\Fody.3.1.3\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Couldn't find Dependencies need to build: Please make sure to have all Onbox Dependencies and Fody.PropertyChanged on Programdata/Packages before continuing...</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(ProgramData)\Packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(ProgramData)\Packages\Fody.3.1.3\build\Fody.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>echo ####### Configuration: $(Configuration) #######
+
+if $(Configuration) == D2019 goto 2019
+if $(Configuration) == D2020 goto 2020
+if $(Configuration) == D2021 goto 2021
+
+if $(Configuration) == R2019 goto 2019
+if $(Configuration) == R2020 goto 2020
+if $(Configuration) == R2021 goto 2021
+
+echo ####### INVALID CONFIGURATION #########
+goto exit
+
+:2019
+echo ####### Copying results to 2019 #######
+if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2019\$safeprojectname$\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2019\$safeprojectname$\"
+XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2019\$safeprojectname$\" /Y /R /F /I /S
+copy "$(ProjectDir)\$safeprojectname$.addin" "%25ProgramData%25\Autodesk\Revit\Addins\2019\"
+goto exit
+
+:2020
+echo ####### Copying results to 2020 #######
+if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2020\$safeprojectname$\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2020\$safeprojectname$\"
+XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2020\$safeprojectname$\" /Y /R /F /I /S
+copy "$(ProjectDir)\$safeprojectname$.addin" "%25ProgramData%25\Autodesk\Revit\Addins\2020\"
+goto exit
+
+:2021
+echo ####### Copying results to 2021 #######
+if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2021\$safeprojectname$\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2021\$safeprojectname$\"
+XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2021\$safeprojectname$\" /Y /R /F /I /S
+copy "$(ProjectDir)\$safeprojectname$.addin" "%25ProgramData%25\Autodesk\Revit\Addins\2021\"
+goto exit
+
+:exit</PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>$safeprojectname$ App</Name>
+    <Assembly>$safeprojectname$/$projectname$.dll</Assembly>
+    <AddInId>$guid1$</AddInId>
+    <FullClassName>$safeprojectname$.Revit.App</FullClassName>
+    <VendorId>$safeprojectname$</VendorId>
+    <VendorDescription>$safeprojectname$</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>

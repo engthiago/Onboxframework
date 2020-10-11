@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>$safeprojectname$</Name>
+    <Assembly>$safeprojectname$/$projectname$.dll</Assembly>
+	<FullClassName>$safeprojectname$.Revit.Commands.MainCommand</FullClassName>
+    <ClientId>$guid1$</ClientId>
+	<Text>$projectname$</Text>
+	<VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>$safeprojectname$</VendorId>
+    <VendorDescription>$safeprojectname$</VendorDescription>
+  </AddIn>
+</RevitAddIns>

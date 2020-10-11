@@ -1,0 +1,14 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>ContainerResolverPipeline.cs</DefaultName>
+    <Name>Container Resolver Pipeline</Name>
+    <Description>Container Resolver pipeline is used to resolve dependencies or cleanup the dependencies of the container</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">ContainerResolverPipeline.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

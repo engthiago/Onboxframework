@@ -1,0 +1,15 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>View.xaml</DefaultName>
+    <Name>Revit Mvc View</Name>
+    <Description>A Revit oriented WPF MVC View</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>1</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="Designer" TargetFileName="$fileinputname$.xaml" ReplaceParameters="true">MainWindow.xaml</ProjectItem>
+    <ProjectItem SubType="Code" TargetFileName="$fileinputname$.xaml.cs" ReplaceParameters="true">MainWindow.xaml.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

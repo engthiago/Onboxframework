@@ -1,0 +1,14 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>AvailableOnAnyDocument.cs</DefaultName>
+    <Name>AvailableOnAnyDocument</Name>
+    <Description>The Command will be available on Project and Family environment</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">AvailableOnAnyDocument.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

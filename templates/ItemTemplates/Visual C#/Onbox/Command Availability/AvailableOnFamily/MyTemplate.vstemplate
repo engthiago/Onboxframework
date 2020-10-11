@@ -1,0 +1,14 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>AvailableOnFamily.cs</DefaultName>
+    <Name>AvailableOnFamily</Name>
+    <Description>The Command will only be available on Family environment</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">AvailableOnFamily.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

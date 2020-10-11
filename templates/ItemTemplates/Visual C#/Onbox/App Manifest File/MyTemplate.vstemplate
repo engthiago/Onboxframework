@@ -1,0 +1,14 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>Manifest.addin</DefaultName>
+    <Name>App Manifest File</Name>
+    <Description>A .addin manifest file for a Revit App</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>200</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="" TargetFileName="$fileinputname$.addin" ReplaceParameters="true">Manifest.addin</ProjectItem>
+  </TemplateContent>
+</VSTemplate>
