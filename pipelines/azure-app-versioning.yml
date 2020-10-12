@@ -18,7 +18,7 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'ren.ps1'
-    arguments: '-oldNs .ObxDev -newNs .V62 -oldV 0.99.99.99 -newV 6.2.0.0'
+    arguments: '-oldNs .ObxDev -newNs .V8 -oldV 0.99.99.99 -newV 8.0.0.0'
     workingDirectory: '$(Build.SourcesDirectory)'
 
 - task: NuGetToolInstaller@1
