@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2019\NewtonSoft.Json.dll</HintPath>
+      <HintPath>..\..\revit\NewtonSoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
