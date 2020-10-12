@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Fody.3.1.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.1.3\build\Fody.targets')" />
+  <Import Project="..\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,6 +61,10 @@
 	<Reference Include="Onbox.Mvc.Revit, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Mvc.Revit.7.0.0\lib\Onbox.Mvc.Revit.dll</HintPath>
     </Reference>
+    <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
+	  <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
@@ -109,4 +115,16 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Packages\Fody.3.1.3\build\Fody.targets'))" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Couldn't find Dependencies need to build: Please make sure to have all Onbox Dependencies and Fody.PropertyChanged before continuing...</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Packages\Fody.3.1.3\build\Fody.targets'))" />
+  </Target>
 </Project>

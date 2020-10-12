@@ -41,7 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2019\NewtonSoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
