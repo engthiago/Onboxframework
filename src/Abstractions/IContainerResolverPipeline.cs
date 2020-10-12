@@ -1,5 +1,5 @@
 ﻿
-namespace Onbox.Abstractions.V7
+namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// Container Resolver pipeline is used to resolve dependencies or cleanup the dependencies of the container

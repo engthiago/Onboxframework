@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Core.V7
+namespace Onbox.Core.VDev
 {
     /// <summary>
     /// Onbox's abstract base class

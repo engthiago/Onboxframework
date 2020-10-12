@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Onbox.Core.V7.Mapping
+namespace Onbox.Core.VDev.Mapping
 {
     /// <summary>
     /// Support contract for performing mapping

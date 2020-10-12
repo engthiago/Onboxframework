@@ -1,6 +1,6 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 
-namespace Onbox.Core.V7.Mapping
+namespace Onbox.Core.VDev.Mapping
 {
     /// <summary>
     /// Onbox implementation of mapper service. Similar to Automapper

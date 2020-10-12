@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Onbox.Mvc.Abstractions.V7
+namespace Onbox.Mvc.Abstractions.VDev
 {
     public interface IMvcLifecycleComponent
     {

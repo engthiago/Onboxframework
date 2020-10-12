@@ -1,4 +1,4 @@
-﻿namespace Onbox.Abstractions.V7
+﻿namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// Default contract for dealing with serialization / deserialization

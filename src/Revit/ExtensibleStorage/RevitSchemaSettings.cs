@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Revit.V7.ExtensibleStorage
+namespace Onbox.Revit.VDev.ExtensibleStorage
 {
     /// <summary>
     /// Definition of a schema

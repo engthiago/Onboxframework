@@ -1,8 +1,8 @@
 ﻿using Autodesk.Revit.UI;
-using Onbox.Abstractions.V7;
-using Onbox.Revit.V7.UI;
+using Onbox.Abstractions.VDev;
+using Onbox.Revit.VDev.UI;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.VDev
 {
     /// <summary>
     /// Onbox contract that wraps Revit's <see cref="IExternalApplication"/>.

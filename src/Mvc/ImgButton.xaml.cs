@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     /// <summary>
     /// Interaction logic for ImgButton.xaml
@@ -25,7 +25,7 @@ namespace Onbox.Mvc.V7
             if (d is ImgButton imgButton)
             {
                 var newType = e.NewValue.ToString();
-                imgButton.Image = new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.V7;component/Resources/imgButton/{newType}.png"));
+                imgButton.Image = new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.VDev;component/Resources/imgButton/{newType}.png"));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Onbox.Mvc.V7
 
         public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(BitmapSource), typeof(ImgButton), 
-                new PropertyMetadata(new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.V7;component/Resources/imgButton/Add.png"))));
+                new PropertyMetadata(new BitmapImage(new Uri($@"pack://application:,,,/Onbox.Mvc.VDev;component/Resources/imgButton/Add.png"))));
 
 
         public ImgButton()

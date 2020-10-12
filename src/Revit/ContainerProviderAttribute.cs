@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.VDev
 {   
     /// <summary>
     /// Provides a way for the Onbox framework to locate the IOC container for your application

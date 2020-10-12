@@ -1,4 +1,4 @@
-﻿namespace Onbox.Abstractions.V7
+﻿namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// Container pipeline is used to add dependencies and compose a container

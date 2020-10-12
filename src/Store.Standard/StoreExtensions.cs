@@ -1,11 +1,11 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Store.V7
+namespace Onbox.Store.VDev
 {
     public static class StoreExtensions
     {

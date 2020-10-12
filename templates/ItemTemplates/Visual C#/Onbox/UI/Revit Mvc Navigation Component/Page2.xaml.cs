@@ -1,4 +1,4 @@
-﻿using Onbox.Mvc.V7;
+﻿using Onbox.Mvc.VDev;
 using System;
 
 namespace $rootnamespace$

@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using Microsoft.CodeAnalysis.Formatting;
 
-namespace Onbox.Analyzers.V7.CodeFixers
+namespace Onbox.Analyzers.VDev.CodeFixers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(AddAppContainerProviderAttribute)), Shared]
     public class AddAppContainerProviderAttribute : CodeFixProvider

@@ -1,4 +1,4 @@
-﻿namespace Onbox.Mvc.V7
+﻿namespace Onbox.Mvc.VDev
 {
     public enum TitleVisibility
     {

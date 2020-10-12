@@ -1,4 +1,4 @@
-﻿namespace Onbox.Abstractions.V7
+﻿namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// Contract for messaging activities

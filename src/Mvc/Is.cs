@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     public static class Is
     {

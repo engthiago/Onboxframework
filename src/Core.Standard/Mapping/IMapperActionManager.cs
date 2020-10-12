@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Core.V7.Mapping
+namespace Onbox.Core.VDev.Mapping
 {
     /// <summary>
     ///  Hold actions that can be performed after objects are mapped

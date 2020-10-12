@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 
-namespace Onbox.Core.V7.Http
+namespace Onbox.Core.VDev.Http
 {
     /// <summary>
     /// Provides the ability to intercept requests made by <see cref="HttpService"/>

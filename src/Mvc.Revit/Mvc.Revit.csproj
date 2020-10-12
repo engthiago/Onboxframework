@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1902D3EA-F7F0-4EFA-8237-805859E794F5}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Onbox.Mvc.Revit.V7</RootNamespace>
+    <RootNamespace>Onbox.Mvc.Revit.VDev</RootNamespace>
     <AssemblyName>Onbox.Mvc.Revit</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
-    <DocumentationFile>bin\Debug\Onbox.Mvc.Revit.V7.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Onbox.Mvc.Revit.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,7 +46,7 @@
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Onbox.Mvc.Revit.V7.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Onbox.Mvc.Revit.VDev.xml</DocumentationFile>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>

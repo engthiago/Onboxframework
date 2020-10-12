@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Onbox.Mvc.Revit.V7.Properties {
+namespace Onbox.Mvc.Revit.VDev.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

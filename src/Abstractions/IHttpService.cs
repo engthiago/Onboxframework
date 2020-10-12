@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Onbox.Abstractions.V7
+namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// Onbox's contract for Http requests.

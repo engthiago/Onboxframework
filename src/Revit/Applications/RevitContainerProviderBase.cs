@@ -1,10 +1,10 @@
 ﻿using Autodesk.Revit.UI;
-using Onbox.Abstractions.V7;
-using Onbox.Revit.Abstractions.V7;
+using Onbox.Abstractions.VDev;
+using Onbox.Revit.Abstractions.VDev;
 using System;
 using System.Collections.Concurrent;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.VDev
 {
     /// <summary>
     /// The most base class for a container provider, it will manage containers and events during its lifetime

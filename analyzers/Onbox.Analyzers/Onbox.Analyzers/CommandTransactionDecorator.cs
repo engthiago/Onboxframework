@@ -6,7 +6,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 
-namespace Onbox.Analyzers.V7
+namespace Onbox.Analyzers.VDev
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class CommandTransactionDecorator : DiagnosticAnalyzer

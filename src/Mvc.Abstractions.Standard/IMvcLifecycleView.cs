@@ -1,4 +1,4 @@
-﻿namespace Onbox.Mvc.Abstractions.V7
+﻿namespace Onbox.Mvc.Abstractions.VDev
 {
     /// <summary>
     /// A base contract for a view

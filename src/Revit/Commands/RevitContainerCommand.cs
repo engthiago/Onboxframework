@@ -1,9 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Onbox.Abstractions.V7;
-using Onbox.Di.V7;
+using Onbox.Abstractions.VDev;
+using Onbox.Di.VDev;
 
-namespace Onbox.Revit.V7.Commands
+namespace Onbox.Revit.VDev.Commands
 {
     /// <summary>
     /// An indepentend Revit Command that will create a new container instance and use it during the command runtime. Use this when an ExternalApplication is not necessary.

@@ -1,9 +1,9 @@
 ﻿using Autodesk.Revit.UI;
-using Onbox.Abstractions.V7;
-using Onbox.Di.V7;
-using Onbox.Revit.V7.UI;
+using Onbox.Abstractions.VDev;
+using Onbox.Di.VDev;
+using Onbox.Revit.VDev.UI;
 
-namespace Onbox.Revit.V7.Applications
+namespace Onbox.Revit.VDev.Applications
 {
     /// <summary>
     /// The implementation of a generic IContainer type, if you like to use <see cref="Container"/>, you can use <see cref="RevitApp"/> implementation instead

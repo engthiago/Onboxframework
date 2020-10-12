@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 
-namespace Onbox.Revit.V7.ExtensibleStorage
+namespace Onbox.Revit.VDev.ExtensibleStorage
 {
     /// <summary>
     /// Onbox's Revit Storage, it uses json to store and retrieve data classes

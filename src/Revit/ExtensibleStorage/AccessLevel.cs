@@ -1,4 +1,4 @@
-﻿namespace Onbox.Revit.V7.ExtensibleStorage
+﻿namespace Onbox.Revit.VDev.ExtensibleStorage
 {
     /// <summary>
     /// Defines access levels to objects in the Extensible Storage framework

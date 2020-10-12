@@ -1,4 +1,4 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V7.Http
+namespace Onbox.Core.VDev.Http
 {
     /// <summary>
     /// Preferences for the default implementation of <see cref="IHttpService"/>

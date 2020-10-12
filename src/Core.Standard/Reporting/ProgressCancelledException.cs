@@ -1,5 +1,5 @@
 ﻿
-namespace Onbox.Core.V7.Reporting
+namespace Onbox.Core.VDev.Reporting
 {
     /// <summary>
     /// Indicates that the running process was cancelled

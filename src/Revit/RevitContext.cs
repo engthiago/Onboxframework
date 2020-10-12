@@ -3,7 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System;
 
-namespace Onbox.Revit.V7
+namespace Onbox.Revit.VDev
 {
     /// <summary>
     /// This class will keep track of Revit UI events to always have the current <see cref="Document"/>, <see cref="Application"/>, <see cref="UIDocument"/>, and <see cref="UIApplication"/>

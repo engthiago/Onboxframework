@@ -1,6 +1,6 @@
-﻿using Onbox.Abstractions.V7;
-using Onbox.Mvc.Revit.V7;
-using Onbox.Mvc.V7.Messaging;
+﻿using Onbox.Abstractions.VDev;
+using Onbox.Mvc.Revit.VDev;
+using Onbox.Mvc.VDev.Messaging;
 
 namespace $safeprojectname$
 {

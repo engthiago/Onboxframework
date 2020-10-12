@@ -1,4 +1,4 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V7.Http
+namespace Onbox.Core.VDev.Http
 {
     /// <summary>
     /// Onbox's implementation for Http requests.

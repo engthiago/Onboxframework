@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Onbox.Abstractions.V7;
+using Onbox.Abstractions.VDev;
 using System.Linq.Expressions;
 using System.Linq;
 
-namespace Onbox.Store.V7
+namespace Onbox.Store.VDev
 {
     /// <summary>
     /// A snapshot of the state in a give point in time

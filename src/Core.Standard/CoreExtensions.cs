@@ -1,13 +1,13 @@
-﻿using Onbox.Abstractions.V7;
-using Onbox.Core.V7.Http;
-using Onbox.Core.V7.Json;
-using Onbox.Core.V7.Logging;
-using Onbox.Core.V7.Mapping;
+﻿using Onbox.Abstractions.VDev;
+using Onbox.Core.VDev.Http;
+using Onbox.Core.VDev.Json;
+using Onbox.Core.VDev.Logging;
+using Onbox.Core.VDev.Mapping;
 using System;
 using System.IO;
 
 
-namespace Onbox.Core.V7
+namespace Onbox.Core.VDev
 {
     /// <summary>
     /// Core extensions for Onbox's container

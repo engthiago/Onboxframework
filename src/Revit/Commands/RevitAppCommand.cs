@@ -1,9 +1,9 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Onbox.Abstractions.V7;
-using Onbox.Revit.V7.Applications;
+using Onbox.Abstractions.VDev;
+using Onbox.Revit.VDev.Applications;
 
-namespace Onbox.Revit.V7.Commands
+namespace Onbox.Revit.VDev.Commands
 {
     /// <summary>
     /// Base class to implement Revit Commands linked to a App Container

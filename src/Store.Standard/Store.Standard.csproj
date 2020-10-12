@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Onbox.Store</AssemblyName>
-    <RootNamespace>Onbox.Store.V7</RootNamespace>
+    <RootNamespace>Onbox.Store.VDev</RootNamespace>
     <PackageId>Onbox.Store</PackageId>
     <Authors>Thiago Almeida</Authors>
     <Company>Onbox</Company>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>.\Onbox.Store.V7.xml</DocumentationFile>
+    <DocumentationFile>.\Onbox.Store.VDev.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

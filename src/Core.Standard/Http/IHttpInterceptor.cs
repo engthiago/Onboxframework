@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 
-namespace Onbox.Core.V7.Http
+namespace Onbox.Core.VDev.Http
 {
     /// <summary>
     /// Holds actions to run before and / or after every http request

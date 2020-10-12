@@ -7,7 +7,7 @@
     <ProjectGuid>{D35B3334-EB2E-4587-BA1E-BB71FED3881E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Revit.V7</RootNamespace>
+    <RootNamespace>Onbox.Revit.VDev</RootNamespace>
     <AssemblyName>Onbox.Revit</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -42,7 +42,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>Onbox.Revit.V7.xml</DocumentationFile>
+    <DocumentationFile>Onbox.Revit.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\build\</OutputPath>

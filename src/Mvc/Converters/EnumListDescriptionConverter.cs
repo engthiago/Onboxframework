@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V7.Converters
+namespace Onbox.Mvc.VDev.Converters
 {
     public class EnumListDescriptionConverter : MarkupExtension, IValueConverter
     {

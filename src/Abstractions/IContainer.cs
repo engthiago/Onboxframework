@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Abstractions.V7
+namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// Onbox's IOC container contract

@@ -1,6 +1,6 @@
-﻿using Onbox.Di.V7;
+﻿using Onbox.Di.VDev;
 
-namespace Onbox.Revit.V7.Applications
+namespace Onbox.Revit.VDev.Applications
 {
     /// <summary>
     /// The base class implementation of RevitExternalAppBase using <see cref="Container"/> implementation for convinience

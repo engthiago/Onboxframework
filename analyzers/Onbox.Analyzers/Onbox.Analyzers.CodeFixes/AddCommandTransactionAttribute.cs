@@ -9,7 +9,7 @@ using System.Composition;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Onbox.Analyzers.V7.CodeFixers
+namespace Onbox.Analyzers.VDev.CodeFixers
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(AddAppContainerProviderAttribute)), Shared]
     public class AddCommandTransactionAttribute : CodeFixProvider

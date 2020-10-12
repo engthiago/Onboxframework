@@ -1,7 +1,7 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 
-namespace Onbox.Revit.V7.Async
+namespace Onbox.Revit.VDev.Async
 {
     /// <summary>
     /// Extensions methods to adding support for Async calls in Revit

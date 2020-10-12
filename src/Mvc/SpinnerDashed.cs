@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     public class SpinnerDashed : Spinner
     {

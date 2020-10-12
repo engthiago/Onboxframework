@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Onbox.Abstractions.V7
+namespace Onbox.Abstractions.VDev
 {
     /// <summary>
     /// The contract for logging activities

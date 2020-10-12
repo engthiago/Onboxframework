@@ -1,8 +1,8 @@
-﻿using Onbox.Abstractions.V7;
-using Onbox.Core.V7;
-using Onbox.Revit.V7;
-using Onbox.Revit.V7.Applications;
-using Onbox.Revit.V7.UI;
+﻿using Onbox.Abstractions.VDev;
+using Onbox.Core.VDev;
+using Onbox.Revit.VDev;
+using Onbox.Revit.VDev.Applications;
+using Onbox.Revit.VDev.UI;
 using Autodesk.Revit.UI;
 using $safeprojectname$.Revit.Commands.Availability;
 using $safeprojectname$.Revit.Commands;

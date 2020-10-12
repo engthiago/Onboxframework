@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     /// <summary>
     /// Interaction logic for WarningIcon.xaml

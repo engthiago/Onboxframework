@@ -1,11 +1,11 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V7.Reporting
+namespace Onbox.Core.VDev.Reporting
 {
     /// <summary>
     /// Reports progress to the debug console

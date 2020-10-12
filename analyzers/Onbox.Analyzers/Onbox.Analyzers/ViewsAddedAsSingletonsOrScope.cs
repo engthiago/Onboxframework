@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 
-namespace Onbox.Analyzers.V7
+namespace Onbox.Analyzers.VDev
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ViewsAddedAsSingletonsOrScope : DiagnosticAnalyzer

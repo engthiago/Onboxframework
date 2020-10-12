@@ -1,10 +1,10 @@
-﻿using Onbox.Mvc.Abstractions.V7;
+﻿using Onbox.Mvc.Abstractions.VDev;
 using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     public static class If
     {

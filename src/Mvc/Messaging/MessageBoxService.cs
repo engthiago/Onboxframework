@@ -1,6 +1,6 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 
-namespace Onbox.Mvc.V7.Messaging
+namespace Onbox.Mvc.VDev.Messaging
 {
     public class MessageBoxService : IMessageService
     {

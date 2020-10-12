@@ -1,5 +1,5 @@
-using Onbox.Abstractions.V7;
-using Onbox.Core.V7;
+﻿using Onbox.Abstractions.VDev;
+using Onbox.Core.VDev;
 using $safeprojectname$.Services;
 
 namespace $safeprojectname$.Revit

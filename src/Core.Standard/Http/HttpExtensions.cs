@@ -1,8 +1,8 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Net.Http;
 
-namespace Onbox.Core.V7.Http
+namespace Onbox.Core.VDev.Http
 {
     /// <summary>
     /// Helper extensions for <see cref="HttpService"/> and IOC container

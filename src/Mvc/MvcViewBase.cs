@@ -1,10 +1,10 @@
-﻿using Onbox.Mvc.Abstractions.V7;
+﻿using Onbox.Mvc.Abstractions.VDev;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     /// <summary>
     /// Provides base functionality for WPF MVC Pattern

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     public class Spinner : Control
     {

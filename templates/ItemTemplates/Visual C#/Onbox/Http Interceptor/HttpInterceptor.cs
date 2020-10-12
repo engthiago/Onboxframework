@@ -1,4 +1,4 @@
-﻿using Onbox.Core.V7.Http;
+﻿using Onbox.Core.VDev.Http;
 using System.Net.Http;
 
 namespace $rootnamespace$

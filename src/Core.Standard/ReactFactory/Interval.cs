@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace Onbox.Core.V7.ReactFactory
+namespace Onbox.Core.VDev.ReactFactory
 {
     /// <summary>
     /// Runs an action sequential times every specified interval of time. It is possible to specify maximum runs as well

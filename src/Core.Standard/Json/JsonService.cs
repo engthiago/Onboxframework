@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Onbox.Abstractions.V7;
+using Onbox.Abstractions.VDev;
 
-namespace Onbox.Core.V7.Json
+namespace Onbox.Core.VDev.Json
 {
     /// <summary>
     /// Default implementation for <see cref="IJsonService"/>, it uses Newtonsoft Json

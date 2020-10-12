@@ -1,4 +1,4 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V7.Logging
+namespace Onbox.Core.VDev.Logging
 {
     /// <summary>
     /// Logs to a local file

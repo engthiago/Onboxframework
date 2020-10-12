@@ -1,11 +1,11 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Onbox.Core.V7.Messaging
+namespace Onbox.Core.VDev.Messaging
 {
     /// <summary>
     /// Implementation for messages using <see cref="System.Diagnostics.Debug"/> console

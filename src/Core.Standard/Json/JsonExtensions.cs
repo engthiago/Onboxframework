@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Onbox.Abstractions.V7;
+using Onbox.Abstractions.VDev;
 using System;
 
-namespace Onbox.Core.V7.Json
+namespace Onbox.Core.VDev.Json
 {
     /// <summary>
     /// Helper extensions for json parser and IOC container

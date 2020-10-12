@@ -1,8 +1,8 @@
-﻿using Onbox.Abstractions.V7;
-using Onbox.Mvc.V7;
-using Onbox.Mvc.V7.Messaging;
+﻿using Onbox.Abstractions.VDev;
+using Onbox.Mvc.VDev;
+using Onbox.Mvc.VDev.Messaging;
 
-namespace Onbox.Mvc.Revit.V7
+namespace Onbox.Mvc.Revit.VDev
 {
     /// <summary>
     /// Adds Mvc Services to the Container

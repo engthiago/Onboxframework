@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{06552675-1F55-4C83-A25B-4658EBAC2822}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Onbox.Mvc.V7</RootNamespace>
+    <RootNamespace>Onbox.Mvc.VDev</RootNamespace>
     <AssemblyName>Onbox.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

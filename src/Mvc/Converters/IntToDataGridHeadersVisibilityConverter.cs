@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Onbox.Mvc.V7.Converters
+namespace Onbox.Mvc.VDev.Converters
 {
     public class IntToDataGridHeadersVisibilityConverter : MarkupExtension, IValueConverter
     {

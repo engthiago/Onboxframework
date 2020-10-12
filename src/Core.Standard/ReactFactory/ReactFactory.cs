@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Core.V7.ReactFactory
+namespace Onbox.Core.VDev.ReactFactory
 {
     /// <summary>
     /// Factory used to create reactive classes

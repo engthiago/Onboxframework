@@ -1,7 +1,7 @@
-﻿using Onbox.Mvc.Abstractions.V7;
-using Onbox.Mvc.V7;
+﻿using Onbox.Mvc.Abstractions.VDev;
+using Onbox.Mvc.VDev;
 
-namespace Onbox.Mvc.Revit.Abstractions.V7
+namespace Onbox.Mvc.Revit.Abstractions.VDev
 {
     /// <summary>
     /// Provides specific Revit functionaliy to <see cref="IMvcView"/> like set Revit as parent window and Title Bar visibility

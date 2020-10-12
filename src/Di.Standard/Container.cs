@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Onbox.Abstractions.V7;
+using Onbox.Abstractions.VDev;
 using System.Collections.Generic;
 
-namespace Onbox.Di.V7
+namespace Onbox.Di.VDev
 {
     /// <summary>
     /// Onbox's IOC container implementation

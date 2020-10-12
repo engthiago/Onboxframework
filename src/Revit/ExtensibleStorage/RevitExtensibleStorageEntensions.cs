@@ -1,8 +1,8 @@
-﻿using Onbox.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 
-namespace Onbox.Revit.V7.ExtensibleStorage
+namespace Onbox.Revit.VDev.ExtensibleStorage
 {
     /// <summary>
     /// A builder for Revit Extensible Storage Schemas

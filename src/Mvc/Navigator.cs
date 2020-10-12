@@ -1,11 +1,11 @@
-﻿using Onbox.Abstractions.V7;
-using Onbox.Mvc.Abstractions.V7;
+﻿using Onbox.Abstractions.VDev;
+using Onbox.Mvc.Abstractions.VDev;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace Onbox.Mvc.V7
+namespace Onbox.Mvc.VDev
 {
     /// <summary>
     /// Provides ways to Navigate between components and get notified when a <see cref="NavigatorComponent"/> recieves a new component to navigate to

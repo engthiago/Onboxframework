@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Onbox.Mvc.Revit.Abstractions</AssemblyName>
-    <RootNamespace>Onbox.Mvc.Revit.Abstractions.V7</RootNamespace>
+    <RootNamespace>Onbox.Mvc.Revit.Abstractions.VDev</RootNamespace>
     <PackageId>Onbox.Mvc.Revit.Abstractions</PackageId>
     <Version>7.0.0</Version>
     <Authors>Thiago Almeida</Authors>
