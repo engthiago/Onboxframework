@@ -9,7 +9,6 @@
 
   <PropertyGroup>
     <PackageId>Onbox.Analyzers</PackageId>
-    <PackageVersion>0.99.99.99</PackageVersion>
     <Authors>Thiago Almeida</Authors>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
