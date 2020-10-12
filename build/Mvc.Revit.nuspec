@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Onbox.Mvc.Revit</id>
-    <version>7.0.0</version>
+    <version>0.99.99.99</version>
     <title>Onbox.Mvc.Revit</title>
     <authors>Thiago Almeida</authors>
     <owners>Thiago Almeida</owners>
@@ -15,12 +15,12 @@
     <copyright>Copyright (c) 2020 Thiago Almeida</copyright>
     <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</tags>
 	<dependencies>
-		<dependency id="Onbox.Abstractions" version="7.0.0" />
-		<dependency id="Onbox.Core" version="7.0.0" />
-		<dependency id="Onbox.Mvc" version="7.0.0" />
-		<dependency id="Onbox.Mvc.Abstractions" version="7.0.0" />
-		<dependency id="Onbox.Mvc.Revit.Abstractions" version="7.0.0" />
-		<dependency id="Onbox.Revit.Abstractions" version="7.0.0" />
+		<dependency id="Onbox.Abstractions" version="0.99.99.99" />
+		<dependency id="Onbox.Core" version="0.99.99.99" />
+		<dependency id="Onbox.Mvc" version="0.99.99.99" />
+		<dependency id="Onbox.Mvc.Abstractions" version="0.99.99.99" />
+		<dependency id="Onbox.Mvc.Revit.Abstractions" version="0.99.99.99" />
+		<dependency id="Onbox.Revit.Abstractions" version="0.99.99.99" />
 		<dependency id="PropertyChanged.Fody" version="2.5.9" />
 	</dependencies>
 	<references>

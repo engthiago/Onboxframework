@@ -24,7 +24,7 @@
 
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);_AddAnalyzersToOutput</TargetsForTfmSpecificContentInPackage>
 
-    <Version>7.0.0</Version>
+    <Version>0.99.99.99</Version>
 
     <Company>Onbox</Company>
 
