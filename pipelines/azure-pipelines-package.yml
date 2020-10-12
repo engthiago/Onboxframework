@@ -14,6 +14,14 @@ variables:
   buildPath: 'src/Abstractions/bin/'
 
 steps:
+
+- task: PowerShell@2
+  displayName: Versioning
+  inputs:
+    filePath: 'ren.ps1'
+    arguments: '-oldNs .ObxDev -newNs $env:NEWNAMESPACE -oldV 0.99.99.99 -newV $env:NEWVERSION'
+    workingDirectory: '$(Build.SourcesDirectory)'
+
 - task: NuGetToolInstaller@1
   displayName: Nuget Install
 
