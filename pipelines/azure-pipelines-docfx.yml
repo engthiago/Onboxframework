@@ -18,18 +18,21 @@ steps:
     script: 'choco install docfx -y'
 
 - task: PowerShell@2
+  displayName: Run Docfx
   inputs:
     targetType: 'inline'
     script: 'docfx "docfx/docfx.json"'
 
 - task: CopyFiles@2
+  displayName: Copy to Artifacts
   inputs:
-    SourceFolder: './doc'
+    SourceFolder: 'doc'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     OverWrite: true
 
 - task: PublishBuildArtifacts@1
+  displayName: Publish to Artifacts
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'docs'
