@@ -20,6 +20,7 @@ Get-ChildItem * -Include *.nuspec -recurse |
     Foreach-Object {
         $c = ($_ | Get-Content) 
         $c = $c -replace "$oldV", "$newV"
+        $c = $c -replace $oldV, $newV
         [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"), $Utf8Encoding)
 
     }
