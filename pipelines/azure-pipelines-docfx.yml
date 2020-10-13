@@ -20,7 +20,7 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: 'docfx "./docfx"'
+    script: 'docfx "docfx/docfx.json"'
 
 - task: CopyFiles@2
   inputs:
