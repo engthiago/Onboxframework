@@ -6,6 +6,7 @@
 	<LanguageTag>C#</LanguageTag>
 	<PlatformTag>Revit</PlatformTag>
     <ProjectTypeTag>Revit Command</ProjectTypeTag>
+	<ProjectTypeTag>.VDev</ProjectTypeTag>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>Onbox - Command</DefaultName>

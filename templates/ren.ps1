@@ -1,7 +1,10 @@
 param ($oldNs, $newNs, $oldV, $newV)
 $Utf8Encoding = New-Object System.Text.UTF8Encoding $True
 
-Get-ChildItem * -Include *.cs, *.xaml, *csproj -recurse |
+Rename-Item "./ItemTemplates/Visual C#/$oldV" "./ItemTemplates/Visual C#/$newV"
+Rename-Item "./ProjectTemplates/Visual C#/$oldV" "./ProjectTemplates/Visual C#/$newV"
+
+Get-ChildItem * -Include *.cs, *.xaml, *.csproj, *.vstemplate -recurse |
     Foreach-Object {
         $c = ($_ | Get-Content) 
         $c = $c -replace $oldNs, $newNs

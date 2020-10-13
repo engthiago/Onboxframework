@@ -1,14 +1,15 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Onbox - Logic Core</Name>
-    <Description>Logic core to be used across platforms</Description>
+    <Name>Onbox Revit DB</Name>
+    <Description>An Onbox Logic for interacting with Revit DB API</Description>
     <ProjectType>CSharp</ProjectType>
 	<LanguageTag>C#</LanguageTag>
 	<PlatformTag>Revit</PlatformTag>
     <ProjectTypeTag>Revit Library</ProjectTypeTag>
+	<ProjectTypeTag>.VDev</ProjectTypeTag>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>Onbox - Logic Core</DefaultName>
+    <DefaultName>Onbox Revit DB</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>

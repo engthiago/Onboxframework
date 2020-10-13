@@ -1,22 +1,25 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Onbox Revit DB</Name>
-    <Description>An Onbox Logic for interacting with Revit DB API</Description>
+    <Name>Onbox MVC - WPF View Library</Name>
+    <Description>A WPF library for Onbox MVC</Description>
     <ProjectType>CSharp</ProjectType>
 	<LanguageTag>C#</LanguageTag>
 	<PlatformTag>Revit</PlatformTag>
     <ProjectTypeTag>Revit Library</ProjectTypeTag>
+	<ProjectTypeTag>.VDev</ProjectTypeTag>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
-    <DefaultName>Onbox Revit DB</DefaultName>
+    <DefaultName>Onbox MVC - WPF View Library</DefaultName>
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <Icon>__TemplateIcon.ico</Icon>
   </TemplateData>
   <TemplateContent>
-    <Project TargetFileName="Onbox.Framework.Template.csproj" File="Onbox.Framework.Template.csproj" ReplaceParameters="true">
-      <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
+    <Project TargetFileName="WpfControlLibrary1.csproj" File="WpfControlLibrary1.csproj" ReplaceParameters="true">
+	  <ProjectItem ReplaceParameters="true" TargetFileName="FodyWeavers.xml">FodyWeavers.xml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="MvcContainerPipeline.cs">MvcContainerPipeline.cs</ProjectItem>
+	  <ProjectItem ReplaceParameters="true" TargetFileName="packages.config">packages.config</ProjectItem>
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Resources.resx">Resources.resx</ProjectItem>
