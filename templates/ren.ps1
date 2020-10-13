@@ -8,15 +8,16 @@ Get-ChildItem * -Include *.cs, *.xaml, *csproj -recurse |
         [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"), $Utf8Encoding)
     }
 
-Get-ChildItem * -Include *.csproj, AssemblyInfo.cs -recurse |
+Get-ChildItem * -Include *.csproj -recurse |
     Foreach-Object {
         $c = ($_ | Get-Content) 
 		$c = $c -replace $oldV, $newV
+        $c = $c -replace "<Version>$oldV</Version>", "<Version>$newV</Version>"
         [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"), $Utf8Encoding)
 
     }
 
-Get-ChildItem * -Include *.nuspec -recurse |
+Get-ChildItem * -Include AssemblyInfo.cs -recurse |
     Foreach-Object {
         $c = ($_ | Get-Content) 
         $c = $c -replace "$oldV", "$newV"

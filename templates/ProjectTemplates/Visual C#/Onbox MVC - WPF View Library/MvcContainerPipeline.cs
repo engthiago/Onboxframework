@@ -10,9 +10,6 @@ namespace $safeprojectname$
         {
 			// Adds Support for Revit Mvc
 			container.AddRevitMvc();
-			
-            // Adds MessageBoxService to the container
-            container.AddSingleton<IMessageService, MessageBoxService>();
 
             return container;
         }

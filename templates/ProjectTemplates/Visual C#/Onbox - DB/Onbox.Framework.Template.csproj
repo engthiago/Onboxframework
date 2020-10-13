@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Fody.3.1.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.1.3\build\Fody.targets')" />
-  <Import Project="..\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'D2019|x64'">
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -122,33 +120,9 @@
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files\Autodesk\Revit 2021\Revit.exe</StartProgram>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-	<Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-	  <Private>False</Private>
-    </Reference>
-  </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'D2019' OR '$(Configuration)' == 'R2019'">
     <Reference Include="RevitAPI">
       <HintPath>C:\Program Files\Autodesk\Revit 2019\RevitAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="RevitAPIUI">
-      <HintPath>C:\Program Files\Autodesk\Revit 2019\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -157,18 +131,10 @@
       <HintPath>C:\Program Files\Autodesk\Revit 2020\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RevitAPIUI">
-      <HintPath>C:\Program Files\Autodesk\Revit 2020\RevitAPIUI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'D2021' OR '$(Configuration)' == 'R2021'">
     <Reference Include="RevitAPI">
       <HintPath>C:\Program Files\Autodesk\Revit 2021\RevitAPI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="RevitAPIUI">
-      <HintPath>C:\Program Files\Autodesk\Revit 2021\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -182,24 +148,23 @@
 	<Reference Include="Onbox.Di, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Di.0.99.99.99\lib\netstandard2.0\Onbox.Di.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Store, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Store.0.99.99.99\lib\netstandard2.0\Onbox.Store.dll</HintPath>
-    </Reference>
-	<Reference Include="Onbox.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Onbox.Revit.0.99.99.99\lib\Onbox.Revit.dll</HintPath>
-    </Reference>
 	<Reference Include="Onbox.Mvc.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Mvc.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+	<Reference Include="Onbox.Mvc.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Revit.0.99.99.99\lib\Onbox.Mvc.Revit.dll</HintPath>
     </Reference>
 	<Reference Include="Onbox.Mvc.Revit.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
     </Reference>
+	<Reference Include="Onbox.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Onbox.Revit.0.99.99.99\lib\Onbox.Revit.dll</HintPath>
+    </Reference>
 	<Reference Include="Onbox.Revit.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Revit.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
-	  <Private>False</Private>
+	<Reference Include="Onbox.Store, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Onbox.Store.0.99.99.99\lib\netstandard2.0\Onbox.Store.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +172,15 @@
     <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Revit\Commands\MainCommand.cs" />
-	<Compile Include="Revit\ContainerPipeline.cs" />
-	<Compile Include="Services\TaskMessageService.cs" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -229,52 +200,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="$safeprojectname$.addin" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="FodyWeavers.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>echo ####### Configuration: $(Configuration) #######
-
-if $(Configuration) == D2019 goto 2019
-if $(Configuration) == D2020 goto 2020
-if $(Configuration) == D2021 goto 2021
-
-if $(Configuration) == R2019 goto 2019
-if $(Configuration) == R2020 goto 2020
-if $(Configuration) == R2021 goto 2021
-
-echo ####### INVALID CONFIGURATION #########
-goto exit
-
-:2019
-echo ####### Copying results to 2019 #######
-if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2019\$safeprojectname$\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2019\$safeprojectname$\"
-XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2019\$safeprojectname$\" /Y /R /F /I /S
-copy "$(ProjectDir)\$safeprojectname$.addin" "%25ProgramData%25\Autodesk\Revit\Addins\2019\"
-goto exit
-
-:2020
-echo ####### Copying results to 2020 #######
-if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2020\$safeprojectname$\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2020\$safeprojectname$\"
-XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2020\$safeprojectname$\" /Y /R /F /I /S
-copy "$(ProjectDir)\$safeprojectname$.addin" "%25ProgramData%25\Autodesk\Revit\Addins\2020\"
-goto exit
-
-:2021
-echo ####### Copying results to 2021 #######
-if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2021\$safeprojectname$\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2021\$safeprojectname$\"
-XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2021\$safeprojectname$\" /Y /R /F /I /S
-copy "$(ProjectDir)\$safeprojectname$.addin" "%25ProgramData%25\Autodesk\Revit\Addins\2021\"
-goto exit
-
-:exit</PostBuildEvent>
-  </PropertyGroup>
 </Project>

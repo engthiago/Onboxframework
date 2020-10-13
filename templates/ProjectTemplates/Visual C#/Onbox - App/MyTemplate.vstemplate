@@ -5,8 +5,7 @@
     <ProjectType>CSharp</ProjectType>
 	<LanguageTag>C#</LanguageTag>
 	<PlatformTag>Revit</PlatformTag>
-    <ProjectTypeTag>Revit</ProjectTypeTag>
-    <ProjectSubType>Revit</ProjectSubType>
+    <ProjectTypeTag>Revit App</ProjectTypeTag>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>Onbox - App</DefaultName>

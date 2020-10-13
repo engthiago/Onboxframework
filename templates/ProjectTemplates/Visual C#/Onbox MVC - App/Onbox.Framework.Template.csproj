@@ -153,35 +153,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Onbox.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Abstractions.dll</HintPath>
+    <Reference Include="Onbox.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Onbox.Core, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Core.7.0.0\lib\netstandard2.0\Onbox.Core.dll</HintPath>
+    <Reference Include="Onbox.Core, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Core.0.99.99.99\lib\netstandard2.0\Onbox.Core.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Di, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Di.7.0.0\lib\netstandard2.0\Onbox.Di.dll</HintPath>
+	<Reference Include="Onbox.Di, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Di.0.99.99.99\lib\netstandard2.0\Onbox.Di.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.7.0.0\lib\Onbox.Mvc.dll</HintPath>
+	<Reference Include="Onbox.Mvc, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.0.99.99.99\lib\Onbox.Mvc.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Mvc.Abstractions.dll</HintPath>
+	<Reference Include="Onbox.Mvc.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Revit, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Revit.7.0.0\lib\Onbox.Mvc.Revit.dll</HintPath>
+	<Reference Include="Onbox.Mvc.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Revit.0.99.99.99\lib\Onbox.Mvc.Revit.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Revit.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
+	<Reference Include="Onbox.Mvc.Revit.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Revit, Version=7.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Onbox.Revit.7.0.0\lib\Onbox.Revit.dll</HintPath>
+	<Reference Include="Onbox.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Onbox.Revit.0.99.99.99\lib\Onbox.Revit.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Revit.Abstractions, Version=7.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Revit.Abstractions.7.0.0\lib\netstandard1.0\Onbox.Revit.Abstractions.dll</HintPath>
+	<Reference Include="Onbox.Revit.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Onbox.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Revit.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Store, Version=7.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Onbox.Store.7.0.0\lib\netstandard2.0\Onbox.Store.dll</HintPath>
+	<Reference Include="Onbox.Store, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Onbox.Store.0.99.99.99\lib\netstandard2.0\Onbox.Store.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
@@ -189,8 +189,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
+    <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

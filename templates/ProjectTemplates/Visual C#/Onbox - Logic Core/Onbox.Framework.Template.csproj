@@ -127,8 +127,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\Onbox.Analyzers.7.0.0\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
+    <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
