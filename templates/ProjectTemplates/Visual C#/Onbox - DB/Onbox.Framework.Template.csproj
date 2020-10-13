@@ -139,31 +139,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Onbox.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Onbox.Abstractions, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Onbox.Core, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Onbox.Core, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Core.0.99.99.99\lib\netstandard2.0\Onbox.Core.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Di, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+	<Reference Include="Onbox.Di, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Di.0.99.99.99\lib\netstandard2.0\Onbox.Di.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+	<Reference Include="Onbox.Mvc.Abstractions, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Mvc.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+	<Reference Include="Onbox.Mvc.Revit, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Mvc.Revit.0.99.99.99\lib\Onbox.Mvc.Revit.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Revit.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+	<Reference Include="Onbox.Mvc.Revit.Abstractions, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Revit, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
+	<Reference Include="Onbox.Revit, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\Onbox.Revit.0.99.99.99\lib\Onbox.Revit.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Revit.Abstractions, Version=0.99.99.99, Culture=neutral, processorArchitecture=MSIL">
+	<Reference Include="Onbox.Revit.Abstractions, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Onbox.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Revit.Abstractions.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Store, Version=0.99.99.99, Culture=neutral, processorArchitecture=AMD64">
+	<Reference Include="Onbox.Store, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\Onbox.Store.0.99.99.99\lib\netstandard2.0\Onbox.Store.dll</HintPath>
     </Reference>
   </ItemGroup>
