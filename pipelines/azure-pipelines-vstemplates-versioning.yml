@@ -1,0 +1,38 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+pool:
+  vmImage: 'windows-latest'
+
+
+steps:
+
+- task: PowerShell@2
+  displayName: Versioning
+  inputs:
+    filePath: 'templates/ren.ps1'
+    arguments: '-oldNs .VDev -newNs $env:NEWNAMESPACE -oldV 0.99.99.99 -newV $env:NEWVERSION'
+    workingDirectory: '$(Build.SourcesDirectory)/templates'
+
+- task: DeleteFiles@1
+  displayName: Delete powershell script
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/templates'
+    Contents: 'ren.ps1'
+
+- task: ArchiveFiles@2
+  displayName: Zip Templates
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/templates'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/vs-templates.zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  displayName: Artifacts Publish
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'vstemplates'
