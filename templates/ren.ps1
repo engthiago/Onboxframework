@@ -8,7 +8,7 @@ Get-ChildItem * -Include *.cs, *.xaml, *csproj -recurse |
         [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"), $Utf8Encoding)
     }
 
-Get-ChildItem * -Include *.csproj -recurse |
+Get-ChildItem * -Include *.csproj, packages.config -recurse |
     Foreach-Object {
         $c = ($_ | Get-Content) 
 		$c = $c -replace $oldV, $newV
@@ -16,6 +16,7 @@ Get-ChildItem * -Include *.csproj -recurse |
         [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"), $Utf8Encoding)
 
     }
+
 
 Get-ChildItem * -Include AssemblyInfo.cs -recurse |
     Foreach-Object {
