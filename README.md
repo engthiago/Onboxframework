@@ -5,7 +5,7 @@
 
 Onbox is a **free and open source** framework to help you build modern cross platform [Revit](https://www.autodesk.com.au/products/revit/overview?plc=RVT&term=1-YEAR&support=ADVANCED&quantity=1) applications in a similar fashion of [Angular](https://angular.io/) and [ASP.Net core](https://dotnet.microsoft.com/apps/aspnet).
 
-The framework and its libraries are designed focusing on modularity, testability and code reuse, it is heavly inspired in modern front end and back end web development, to help you transition from platform to platform without major workflow disruption.
+The framework and its libraries are designed focusing on modularity, testability and code reuse, it is heavly inspired in modern front end and back end web development, to help you transition from platform to platform without major workflow disruptions.
 
 ## Documentation
 
