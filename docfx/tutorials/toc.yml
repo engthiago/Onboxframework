@@ -1,4 +1,5 @@
 - name: Introduction
   href: index.md
+  items:
     - name: Getting Started
       href: guetstart.md

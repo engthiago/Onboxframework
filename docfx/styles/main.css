@@ -1,0 +1,26 @@
+.navbar-inverse {
+    color: #000000 !important;
+    background-color: #f1f1f1;
+    border-color: #afafaf;
+}
+
+.navbar-nav>li>a {
+    color: #000000 !important;
+}
+
+.navbar-inverse .navbar-toggle, .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    border-width: 0 !important;
+    background-color: teal !important;
+}
+
+.navbar-toggle:focus, .navbar-toggle:hover {
+    background-color: teal !important;
+}
+
+.navbar-inverse :hover {
+    color: #337ab7 !important;
+}
+
+footer>div.footer>div.container>span:last-of-type {
+    display: none;
+}

@@ -1,11 +1,10 @@
 # Getting Started
 
-> *This guide assumes that you have installed:*
-> - *Revit >= 2019*
-> - *.NetStandard >= 2.0*
-> - *.Net Framework >= 4.7.2*
-> - *Visual Studio 2019*
-
+This guide assumes that you have installed:
+ - Revit >= 2019
+ - .NetStandard >= 2.0
+ - .Net Framework >= 4.7.2
+ - Visual Studio 2019
 
 ## Download Visual Studio Templates
 
