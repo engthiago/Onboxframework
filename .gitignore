@@ -22,6 +22,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 build/**/*.dll
+docs/
 
 # Visual Studio 2015 cache/options directory
 .vs/
