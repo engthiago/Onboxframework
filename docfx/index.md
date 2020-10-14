@@ -1,6 +1,6 @@
 # Articles, guides and tutorials
 
-Click [here](articles/index.md) to go to tutorials.
+Click [here](tutorials/index.md) to go to tutorials.
 
 # Api Documentation
 

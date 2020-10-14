@@ -43,7 +43,8 @@
           "images/**",
           "logo.svg",
           "favicon.ico",
-          "styles/main.css"
+          "styles/main.css",
+		  "../../templates**"
         ]
       }
     ],

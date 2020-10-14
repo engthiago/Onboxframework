@@ -8,7 +8,7 @@ This guide assumes that you have installed:
 
 ## Download Visual Studio Templates
 
-Click here to download the templates
+Click [here](https://github.com/engthiago/Onboxframework.docs/releases) to download the templates for the version you are using
 
 ## Install the Templates
 
