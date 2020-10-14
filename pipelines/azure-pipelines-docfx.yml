@@ -1,0 +1,67 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Onbox.sln'
+  analyzers: 'analyzers/Onbox.Analyzers.Build.sln'
+  buildPlatform: 'x64'
+  buildConfiguration: 'R2019'
+  buildPath: 'src/Abstractions/bin/'
+
+steps:
+
+- task: PowerShell@2
+  displayName: Versioning
+  inputs:
+    filePath: 'ren.ps1'
+    arguments: '-oldNs .VDev -newNs $env:NEWNAMESPACE -oldV 0.99.99.99 -newV $env:NEWVERSION'
+    workingDirectory: '$(Build.SourcesDirectory)'
+
+- task: NuGetToolInstaller@1
+  displayName: Nuget Install
+
+- task: NuGetCommand@2
+  displayName: Nuget Restore Build Projects
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  displayName: Visual Studio 2019 Build Projects
+  inputs:
+    solution: '$(solution)'
+    vsVersion: '16.0'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    clean: true
+
+- task: PowerShell@2
+  displayName: Install Docfx
+  inputs:
+    targetType: 'inline'
+    script: 'choco install docfx -y'
+
+- task: PowerShell@2
+  displayName: Run Docfx
+  inputs:
+    targetType: 'inline'
+    script: 'docfx "docfx/docfx.json"'
+
+- task: CopyFiles@2
+  displayName: Copy to Artifacts
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/docs'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish to Artifacts
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'docs'
+    publishLocation: 'Container'
