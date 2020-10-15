@@ -1,4 +1,4 @@
-[![Build Status](https://onbox.visualstudio.com/Onbox%20Framework/_apis/build/status/Package%20Framework?branchName=master)](https://onbox.visualstudio.com/Onbox%20Framework/_build/latest?definitionId=4&branchName=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 # Welcome to Onbox Framework
