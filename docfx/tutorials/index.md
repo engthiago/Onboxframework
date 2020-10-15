@@ -69,4 +69,4 @@ using Onbox.Revit.V8.Commands;
 
 ## How to Contribute
 
-Since the framwork is open source, feel free to fork the code, create log issues and make pull-requests. Constructive feedback is also highly appreciated.
+Since the framework is open source, feel free to fork the code, create log issues, report bugs, and make pull-requests. Documentation and step by step tutorials is where it mostly need contributions at this point, so if you are a specialist, please join in!!! 😃

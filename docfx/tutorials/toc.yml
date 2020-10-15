@@ -2,4 +2,7 @@
   href: index.md
   items:
     - name: Getting Started
-      href: guetstart.md
+      href: 1_guetstart.md
+      items:
+        - name: Application
+          href: 1_1_application.md
