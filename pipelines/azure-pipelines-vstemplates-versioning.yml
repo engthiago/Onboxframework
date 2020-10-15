@@ -22,14 +22,12 @@ steps:
     SourceFolder: '$(Build.SourcesDirectory)/templates'
     Contents: 'ren.ps1'
 
-- task: ArchiveFiles@2
-  displayName: Zip Templates
+- task: CopyFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/templates'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/vs-templates.zip'
-    replaceExistingArchive: true
+    SourceFolder: '$(Build.SourcesDirectory)/templates'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    OverWrite: true
 
 - task: PublishBuildArtifacts@1
   displayName: Artifacts Publish
