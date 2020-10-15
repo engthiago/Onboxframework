@@ -6,3 +6,7 @@
       items:
         - name: Application
           href: 1_1_application.md
+        - name: Commands
+          href: 1_2_commands.md
+        - name: Views and MVC
+          href: 1_3_views_mvc.md

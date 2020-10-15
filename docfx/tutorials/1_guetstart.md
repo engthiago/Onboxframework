@@ -1,5 +1,7 @@
 # Getting Started - Creating your first app
 
+On this getting started guide we will help you explore how to create a simple Revit Application using Onbox framework, we will launch the app and explore its main components while showing you some the main concepts and how it differs from regular Revit API programming.
+
 This guide assumes that you have installed:
  - Revit >= 2019
  - .NetStandard >= 2.0
@@ -8,7 +10,7 @@ This guide assumes that you have installed:
 
 ## Download Visual Studio Templates
 
-Click [here](https://github.com/engthiago/Onboxframework.docs/releases) to download the templates for the framework version you are using.
+Click [here](https://github.com/engthiago/Onboxframework.docs/releases) to download the templates for the version of the framwork you are using.
 
 ## Install the Templates
 

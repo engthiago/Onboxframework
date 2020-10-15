@@ -2,13 +2,19 @@
 
 Congratulations! You have finished building your [first app](1_guetstart.md) using Onbox Framework, it may not seem like much but there are a lot of things happening in the background; Ribbon UI built, IOC Container being built and resolving references, Some wiring happening to get the WPF hooked to Revit and much more! Let's have a closer look:
 
+## Exploring Solution Explorer Files
+
 1. Back to Visual Studio, and expanding **"Solution Explorer"** we will find a bunch of files created by the Project Template that we have selected.
 
 ![alt text](../images/GettingStarted_10.jpg "Visual Studio Templates Folder")
 
-2. Double click on App.cs to open the code file.
+📢 The App and Command templates include a post build script to copy the app manifest and build results directly to the targeted Revit version, ProgramData folder. If you don't like this behavior, simply delete the script by right clicking your **Project -> Properties -> Post Build Events** and delete the entire **Post-build event command line** text.
 
-App.cs is the entry point of our application, here you will also define the lifecycle hooks for creating the app and integrating it with Revit. If you are used to Revit API programming this will look somewhat familiar to you, but some changes are evident. Notice that we derive from `RevitApp` base class, not `IExternalApplication`, this adds functionality to our application and uses the `ContainerProvider` class to unique identify the container context from other running applications.
+## Exploring the App Class
+
+1. Double click on **App.cs** to open the code file.
+
+App.cs is the entry point of our application, here you will also define the lifecycle hooks for creating the app and integrating it with Revit. If you are used to Revit API programming this will look somewhat familiar to you, but some changes are evident. Notice that we derive from `RevitApp` base class, not `IExternalApplication`. This adds functionality to our application and uses the `ContainerProvider` class to unique identify the container context from other applications.
 
 The implementations are ommited to better fit this documentation.
 
@@ -98,7 +104,7 @@ The image below shows the Analyzer complaining about registering a View as Scope
 
 `container.AddSingleton<IMessageService, MessageBoxService>` is overwriting the previous registration that happened on the call to `container.AddOnboxCore`. It is adding the implementation of `IMessagedService`, now, as an actual dialog box using `MessageBoxService` as opose to debug logs using `MessageDebugService`. Onbox container will work as last-one-wins, so registering the later class implementations will overwrite previous ones.
 
-# Conclusion
+## Conclusion
 
 The flow shown above is nothing really new, the ideas of application lifecycle, dependency inversion, and separation of concerns are things that have been used and improved for a long time in software engineering, Onbox brings these concepts to the Revit API, applies Industry Standards and makes it similar to successful framework implementations Angular, ASP.Net, and several others.
 
