@@ -7,6 +7,7 @@
 	<PlatformTag>Revit</PlatformTag>
     <ProjectTypeTag>Revit App</ProjectTypeTag>
 	<ProjectTypeTag>.VDev</ProjectTypeTag>
+	<ProjectTypeTag>MVC</ProjectTypeTag>
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <DefaultName>Onbox MVC - App</DefaultName>
