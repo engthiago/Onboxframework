@@ -11,18 +11,17 @@ Onbox have two main Revit Command implementations:
 Again we find some similarities between regular Revit API programming, this looks almost exactly like a `IRevitExternalCommand`:
 
 ``` C#
-    [Transaction(TransactionMode.Manual)]
-    public class HelloCommand : RevitAppCommand<App>
+[Transaction(TransactionMode.Manual)]
+public class HelloCommand : RevitAppCommand<App>
+{
+    public override Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements)
     {
-        public override Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            // Asks the container for a new instance a message service
-            var messageService = container.Resolve<IMessageService>();
-            messageService.Show("Hello Onbox Framework!");
-
-            return Result.Succeeded;
-        }
+        // Asks the container for a new instance a message service
+        var messageService = container.Resolve<IMessageService>();
+        messageService.Show("Hello Onbox Framework!");
+        return Result.Succeeded;
     }
+}
 ```
 Notice that it derives from RevitAppCommand passing in our app type as its parent application. As stated before, this hooks IOC Container from the app to the command and any type registered on `App.Startup` will be available here through the injected `IContainerResolver` argument.
 

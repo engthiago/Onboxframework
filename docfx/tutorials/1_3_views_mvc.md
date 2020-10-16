@@ -18,41 +18,44 @@ The main `Onbox.MVC` library is designed with Revit in mind but it can actually 
 1. Going back to Visual Studio, open **WPFViewCommand.cs** under **Revit->Commands** folder. This command is very similar to the one we explored before, it is just showing a WPF abstracted window instead:
 
 ``` C#
-    [Transaction(TransactionMode.Manual)]
-    public class WPFViewCommand : RevitAppCommand<App>
-    {
-        public override Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements)
-        {
-            // Asks the container for a new instance of a view
-            var wpfView = container.Resolve<IHelloWpfView>();
-            wpfView.ShowDialog();
 
-            return Result.Succeeded;
-        }
+[Transaction(TransactionMode.Manual)]
+public class WPFViewCommand : RevitAppCommand<App>
+{
+    public override Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements)
+    {
+        // Asks the container for a new instance of a view
+        var wpfView = container.Resolve<IHelloWpfView>();
+        wpfView.ShowDialog();
+        return Result.Succeeded;
     }
+}
+
 ```
 
 2. Now go to **Views** folder and open **HellopWPFView.xaml**. This view is very similar to a regular WPF view but instead of deriving from ``Window`` it derives from ``RevitMvcViewBase``.
 
 ``` C#
-<rmvc:RevitMvcViewBase x:Class="MyFirstOnboxRevitApp.Views.HelloWpfView"
-					   DataContext="{Binding RelativeSource={RelativeSource Self}}"
-					   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-                       //... Omitted to fit in this documentation
+<rmvc:RevitMvcViewBase x:Class="MyFirstOnboxRevitApp.Views.HelloWpfView"
+	DataContext="{Binding RelativeSource={RelativeSource Self}}"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    //... Omitted to fit in this documentation
+
 ```
 
 3. Hit **F7** on your keyboard to access this view`s code behind. Notice that we have an interface to define the abstraction for HellopWpfView:
 
 ``` C#
 
-    /// <summary>
-    /// A contract a view designed to have Revit as parent window
-    /// </summary>
-    public interface IHelloWpfView : IRevitMvcViewBase, IMvcViewModal
-    {
-    }
+/// <summary>
+/// A contract a view designed to have Revit as parent window
+/// </summary>
+public interface IHelloWpfView : IRevitMvcViewBase, IMvcViewModal
+{
+}
 
 ```
 
@@ -62,20 +65,19 @@ Idealy this interface should be moved to another project where you will maintain
 
 ``` C#
 
-    /// <summary>
-    /// A view designed to have Revit as parent window
-    /// </summary>
-    public partial class HelloWpfView : RevitMvcViewBase, IHelloWpfView
+/// <summary>
+/// A view designed to have Revit as parent window
+/// </summary>
+public partial class HelloWpfView : RevitMvcViewBase, IHelloWpfView
+{
+    public string AppName { get; set; }
+    // You can inject any service that you have added to the container in constructors
+    public HelloWpfView(IRevitAppData revitAppData) : base(revitAppData)
     {
-        public string AppName { get; set; }
-
-        // You can inject any service that you have added to the container in constructors
-        public HelloWpfView(IRevitAppData revitAppData) : base(revitAppData)
-        {
-            InitializeComponent();
-            AppName = Assembly.GetExecutingAssembly().GetName().Name;
-        }
+        InitializeComponent();
+        AppName = Assembly.GetExecutingAssembly().GetName().Name;
     }
+}
 
 ```
 

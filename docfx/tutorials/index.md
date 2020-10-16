@@ -40,7 +40,7 @@ The MVC libraries also require [PropertyChanged.Fody](https://github.com/Fody/Pr
 
 For the UI design pattern, Onbox ships with **WPF MVC** libraries, this choice was made because of the powerful and ease to use WPF's [Data Binding System](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/data-binding-overview?view=netdesktop-5.0) and the popularity of MVC in modern web frameworks. This approach modernizes Revit API programming and makes it easier for developers to switch from/to [Angular](https://angular.io/) / [ASP.Net core](https://dotnet.microsoft.com/apps/aspnet) / [Laravel](https://laravel.com/) / [Spring](https://spring.io/) when building apps that communicate with the cloud.
 
-With that being said, if you are using any other type of UI design pattern or layering e.g. WPF MVVM or even Windows Forms and like to keep it that way, you can absolutely do so by handling the UI interactions yourself, and consuming `Onbox.Revit`, `Onbox.Core`, and `Onbox.Di` with no reference to any Onbox's MVC libraries.
+With that being said, if you are using any other type of pattern or layering e.g. WPF MVVM or even Windows Forms, and like to keep it that way, you absolutely can, just need to handle the UI interactions yourself. Developers can consume `Onbox.Revit`, `Onbox.Core`, and `Onbox.Di` with no reference to any MVC libraries.
 
 ## Testing
 

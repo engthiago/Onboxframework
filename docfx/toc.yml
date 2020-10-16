@@ -1,3 +1,6 @@
+- name: Getting Started
+  href: tutorials/1_guetstart.md
+
 - name: Tutorials
   href: tutorials/
 

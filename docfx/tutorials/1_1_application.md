@@ -19,49 +19,45 @@ App.cs is the entry point of our application, here you will also define the life
 The implementations are ommited to better fit this documentation.
 
    ``` C#
-    [ContainerProvider("12566691-949c-4ab8-a64d-a67991adbe93")] // This is generated when you create the VS project
-    public class App : RevitApp
+[ContainerProvider("12566691-949c-4ab8-a64d-a67991adbe93")] / This is generated when you create the VS project
+public class App : RevitApp
+{
+    public override void OnCreateRibbon(IRibbonManager  ribbonManager)
     {
-        public override void OnCreateRibbon(IRibbonManager ribbonManager)
-        {
-            // Here you can create Ribbon tabs, panels and buttons
-            ...Rest of method implementation
-        }
-
-        public override Result OnStartup(IContainer container, UIControlledApplication application)
-        {
-            // Here you can add all necessary dependencies to the container
-            ...Rest of method implementation
-        }
-
-        public override Result OnShutdown(IContainerResolver container, UIControlledApplication application)
-        {
-            // No Need to cleanup the Container, the framework will do it for you
-            return Result.Succeeded;
-        }
+        // Here you can create Ribbon tabs, panels and buttons
+        ...Rest of method implementation
     }
+    public override Result OnStartup(IContainer container,  UIControlledApplication application)
+    {
+        // Here you can add all necessary dependencies to the container
+        ...Rest of method implementation
+    }
+    public override Result OnShutdown(IContainerResolver    container, UIControlledApplication application)
+    {
+        // No Need to cleanup the Container, the framework will do it for you
+        return Result.Succeeded;
+    }
+}
    ```
 
 `OnCreateRibbon` passes in a `IRibbonManager` interface. This manager is used to, as the name suggest, create Ribbon tabs, panels, buttons, etc. The method itself is used to separate the logic of UI than actually doing container logic.
 
-The biggest benefic here is to use cleaner code (less code too) to compose the Ribbon, most of the code is self explanatory, and you can hover over the method calls to see exactly what they are passing on. Also notice that `"onbox_logo"` and `"autodesk_logo"` refer to the Rescoures/RibbonImages folder on our project. Onbox uses convention base image size to button backgrounds, when you pass in `"autodesk_logo"` as an argument, the `IRibbonManager` implementation will try to find a resource called *autodesk_logo16.png"* and *"autodesk_logo32.png"* as background resources images for that button.
+The biggest benefic here is to use cleaner code (less code too) to compose the Ribbon. Most of the code is self explanatory, and you can hover over the method calls to see exactly what they are passing on. Also notice that `"onbox_logo"` and `"autodesk_logo"` refer to the Rescoures/RibbonImages folder on our project. Onbox uses convention base image size to button backgrounds, when you pass in `"autodesk_logo"` as an argument, the `IRibbonManager` implementation will try to find a resource called *autodesk_logo16.png"* and *"autodesk_logo32.png"* as background resources images for that button.
 
 
 ``` C#
-        public override void OnCreateRibbon(IRibbonManager ribbonManager)
-        {
-            // Here you can create Ribbon tabs, panels and buttons
-            var br = ribbonManager.GetLineBreak();
-
-            // Adds a Ribbon Panel to the Addins tab
-            var addinPanelManager = ribbonManager.CreatePanel("MyFirstOnboxRevitApp");
-            addinPanelManager.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
-
-            // Adds a new Ribbon Tab with a new Panel
-            var panelManager = ribbonManager.CreatePanel("MyFirstOnboxRevitApp", "Hello Panel");
-            panelManager.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
-            panelManager.AddPushButton<WPFViewCommand, AvailableOnProject>($"Hello{br}WPF", "autodesk_logo");
-        }
+public override void OnCreateRibbon(IRibbonManagerribbonManager)
+{
+    // Here you can create Ribbon tabs, panels and buttons
+    var br = ribbonManager.GetLineBreak();
+    // Adds a Ribbon Panel to the Addins tab
+    var addinPanelManager = ribbonManager.CreatePanel("MyFirstOnboxRevitApp");
+    addinPanelManager.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
+    // Adds a new Ribbon Tab with a new Panel
+    var panelManager = ribbonManager.CreatePanel("MyFirstOnboxRevitApp", "Hello Panel");
+    panelManager.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
+    panelManager.AddPushButton<WPFViewCommand, AvailableOnProject>($"Hello{br}WPF", "autodesk_logo");
+}
 ```
 
 ✔️ Having the ability to strong type Command and CommandAvailability is also very cool. Visual Studio will help you rename and navigate from Commands to their respective App!
@@ -70,24 +66,21 @@ The biggest benefic here is to use cleaner code (less code too) to compose the R
 `OnStartup` is where the framework injects its IOC container for the first time, here you have the ability to add all the necessary container logic.
 
 ``` C#
-        public override Result OnStartup(IContainer container, UIControlledApplication application)
-        {
-            // Here you can add all necessary dependencies to the container
-            container.AddOnboxCore();
-            container.AddRevitMvc();
-
-            // Registers IWPFView to the container
-            // Views should ALWAYS be added as Transients
-            container.AddTransient<IHelloWpfView, HelloWpfView>();
-
-            // Adds MessageBoxService to the container
-            container.AddSingleton<IMessageService, MessageBoxService>();
-
-            return Result.Succeeded;
-        }
+public override Result OnStartup(IContainer container,UIControlledApplication application)
+{
+    // Here you can add all necessary dependencies to the container
+    container.AddOnboxCore();
+    container.AddRevitMvc();
+    // Registers IWPFView to the container
+    // Views should ALWAYS be added as Transients
+    container.AddTransient<IHelloWpfView, HelloWpfView>();
+    // Adds MessageBoxService to the container
+    container.AddSingleton<IMessageService, MessageBoxService>();
+    return Result.Succeeded;
+}
 ```
 
-If you are not familiar with the Inversion of control principle or IOC Containers, please have a look on this [article](https://martinfowler.com/articles/injection.html) or this [video](https://www.youtube.com/watch?v=QtDTfn8YxXg&), this is a very important concept for Onbox, it extensively uses this container throughout its libraries. Most of the work is done by the framework in the background, but it is good to know the advantages as it also changes the way you architecture you application and classes.
+If you are not familiar with the Inversion of control principle or IOC Containers, please have a look on this [article](https://martinfowler.com/articles/injection.html) or this [video](https://www.youtube.com/watch?v=QtDTfn8YxXg&), this is a very important concept for Onbox, it extensively uses this container throughout its libraries. Most of the work is done by the framework in the background, but it is good to know the advantages as it also changes the way you architecture your application and classes.
 
 `container.AddOnboxCore` method call will add important core classes for dealing with Http requests, serialization, logging, mapping, and cloning of objects.
 

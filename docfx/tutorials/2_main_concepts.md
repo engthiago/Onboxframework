@@ -1,0 +1,9 @@
+# Main Concepts
+
+Onbox is a framework specifically designed to help Revit API developers to leverage modern web paradigms to build consistent multi-platform applications, from Addins, to Dynamo nodes, Forge Design Automation. It is also possible to use Onbox to facilitate the use of architectural patterns to achieve code reusability with ASP.Net and even leveraging usage of scripts to convert data models to other programming languages!
+
+With that being said, the framework doesn't try to wrap every Revit API functionality, nor to use every feature of dotnet or C#, there is no "complexity-as-a-feature", the libraries are designed to solve problems in the simplest way possible. They are, however, trying to be flexible and extensible.
+
+Most of services provide a abstracted interface that can be used to wrap implementations and potentially replaced when it makes sense, developers can swap the default ``HttpService`` to [RestSharp](https://restsharp.dev/), ``Mapper`` to something like [AutoMapper](https://automapper.org/) or anything along those lines. Onbox's internal libraries are also not trying to be the replacement or direct competitor for any of these libraries, the goal is to provide a safe basic implementation, avoiding dll conflicts at the same time provinding flexibility to your specific needs.
+
+New functionality are extremely welcome, specially by adding new libraries that can plugged into the depency injection system without the need to change the default implementations, in fact the MVC libraries are built with this concept in mind, they can be easly removed and replace without any diruption on the other parts of the framework.

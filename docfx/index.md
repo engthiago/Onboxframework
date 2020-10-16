@@ -1,4 +1,8 @@
-# Articles, guides and tutorials
+# Getting Started
+
+Click [here](tutorials/1_guetstart.md) to get started.
+
+# Articles, Guides and Tutorials
 
 Click [here](tutorials/index.md) to go to tutorials.
 
