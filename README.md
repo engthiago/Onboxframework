@@ -21,13 +21,13 @@ As stated above, Onbox is all about modularity, so the framework itself is compo
 
 | Assembly                           | Short Description                                | Target Framework       |
 | -----------------------------------|-------------------------------------------------:|-----------------------:|
-| **Onbox.Abstractions**             | Interfaces of all generic usage on the framework | .Net Standard 2.0      |
-| **Onbox.Core**                     | Core implementations for all generic services    | .Net Standard 2.0      |
-| **Onbox.Di**                       | IOC container system                             | .Net Standard 2.0      |
-| **Onbox.Mvc.Abstractions**         | Interfaces for interacting with Views            | .Net Standard 2.0      |
-| **Onbox.Mvc**                      | Implementation of WPF MVC Views and Components   | .Net Framework 4.7.2   |
-| **Onbox.Mvc.Revit.Abstractions**   | Interfaces for interacting with Revit and Views  | .Net Standard 2.0      |
-| **Onbox.Mvc.Revit**                | Implementation of WPF MVC specific to Revit      | .Net Framework 4.7.2   |
-| **Onbox.Revit.Abstractions**       | Interfaces for interacting with Revit            | .Net Standard 2.0      |
-| **Onbox.Revit**                    | Revit External Applications and Commands         | .Net Framework 4.7.2   |
-| **Onbox.Store**                    | State management for Revit MVC / WPF             | .Net Standard 2.0      |
+| [Onbox.Abstractions](https://www.nuget.org/packages/Onbox.Abstractions/)             | Interfaces of all generic usage on the framework | .Net Standard 2.0      |
+| [Onbox.Core](https://www.nuget.org/packages/Onbox.Core/)                     | Core implementations for all generic services    | .Net Standard 2.0      |
+| [Onbox.Di](https://www.nuget.org/packages/Onbox.Core/)                       | IOC container system                             | .Net Standard 2.0      |
+| [Onbox.Mvc.Abstractions](https://www.nuget.org/packages/Onbox.Abstractions/)        | Interfaces for interacting with Views            | .Net Standard 2.0      |
+| [Onbox.Mvc](https://www.nuget.org/packages/Onbox.Mvc/)                      | Implementation of WPF MVC Views and Components   | .Net Framework 4.7.2   |
+| [Onbox.Mvc.Revit.Abstractions](https://www.nuget.org/packages/Onbox.Mvc.Revit.Abstractions/)   | Interfaces for interacting with Revit and Views  | .Net Standard 2.0      |
+| [Onbox.Mvc.Revit](https://www.nuget.org/packages/Onbox.Mvc.Revit/)                | Implementation of WPF MVC specific to Revit      | .Net Framework 4.7.2   |
+| [Onbox.Revit.Abstractions](https://www.nuget.org/packages/Onbox.Revit.Abstractions/)       | Interfaces for interacting with Revit            | .Net Standard 2.0      |
+| [Onbox.Revit](https://www.nuget.org/packages/Onbox.Revit/)                    | Revit External Applications and Commands         | .Net Framework 4.7.2   |
+| [Onbox.Store](https://www.nuget.org/packages/Onbox.Store/)                    | State management for Revit MVC / WPF             | .Net Standard 2.0      |
