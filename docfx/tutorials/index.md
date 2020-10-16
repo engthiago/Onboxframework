@@ -10,7 +10,7 @@ Revit 2019, .NetStandard 2.0, and .Net Framework 4.7.2 or later.
 
 ## Getting Started
 
-Click [here](./guetstart.md) to go to the getting started guide.
+Click [here](1_guetstart.md) to go to the getting started guide.
 
 
 ## Libraries

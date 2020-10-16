@@ -85,6 +85,6 @@ You can see that the constructor for this class takes an ``IRevitAppData`` that 
 
 ## Conclusion
 
-Congratulations! Now you have the basic knowlodge of how Onbox works, you have explored some of its functionalities and hopefuly are starting to grasp some of its benefits. If you are a seasoned Web Developer, all these must be very familiar to you, if you only surfed the waters of Revit API or is fairly new to programming, you might be a bit lost, but don't give up, there are indeed lots of great things comming for you. 
+Congratulations! Now you have the basic knowlodge of how Onbox works, you have explored some of its functionalities and hopefuly are starting to grasp some of its benefits. If you are a seasoned Web Developer, all these must be very familiar to you, if you only surfed the waters of Revit API or is fairly new to programming you might be a bit lost, but don't give up, there are indeed lots of great things coming next. 
 
 And... our journey doesn't end here, let's build something new now!
