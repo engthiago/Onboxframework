@@ -10,3 +10,8 @@
           href: 1_2_commands.md
         - name: Views and MVC
           href: 1_3_views_mvc.md
+    - name: Main Concepts
+      href: 2_main_concepts.md
+      items:
+        - name: Inversion of Control
+          href: 2_1_inversion_of_control.md
