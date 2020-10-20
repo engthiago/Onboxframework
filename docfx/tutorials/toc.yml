@@ -15,3 +15,43 @@
       items:
         - name: Inversion of Control
           href: 2_1_inversion_of_control.md
+        - name: Separation of Concerns
+          href: 2_2_separation_concerns.md
+        - name: Modularity
+          href: 2_3_modularity.md
+        - name: Immutability
+          href: 2_4_immutability.md
+        - name: Testability
+          href: 2_5_testability.md
+        - name: Versioning
+          href: 2_6_versioning.md
+    - name: IOC Container
+      href: 3_ioc_container.md
+      items:
+        - name: Container Registration
+          href: 3_1_container_registration.md
+        - name: Container Resolve
+          href: 3_2_container_resolve.md
+        - name: Container Scopes
+          href: 3_3_container_scopes.md
+        - name: Container Scopes
+          href: 3_4_pipeline.md
+    - name: Mapping and Cloning
+      href: 4_mapping_cloning.md
+    - name: Http Client
+      href: 5_httpclient.md
+    - name: Logging
+      href: 6_logging.md
+    - name: Messaging
+      href: 7_messaging.md
+    - name: Json Serialization
+      href: 8_json_serialization.md
+    - name: Progress Indication
+      href: 9_progress.md
+    - name: MVC
+      href: 10_mvc.md
+    - name: State Management
+      href: 11_store.md
+    - name: Extensible Storage
+      href: 12_storage.md
+
