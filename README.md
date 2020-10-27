@@ -1,4 +1,4 @@
-| Project | Status |
+|  | Status |
 | ------- | ------ |
 | License | [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) |
 | Build Framework and Generate Nuget Packages| [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Framework%20and%20Generate%20Nuget%20Packages?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=10&branchName=master) |
