@@ -35,7 +35,7 @@ As stated above, Onbox is all about modularity, so the framework itself is compo
 | [Onbox.Store](https://www.nuget.org/packages/Onbox.Store/)                    | State management for Revit MVC / WPF             | .Net Standard 2.0      |
 
 
-We have built parts of several applications using some of these libraries, our current working project, [Shedmate app]("https://construction.autodesk.com/integrations/shedmate") is the one that relies on it the most. I would say parts of it because only some libraries existed when we started coding the app. Shedmate is a web-based 3d configurator that needs to process the same data models in different places: Revit, our ASPNet Cloud server, and our front end Angular app. The cool thing here is that we can share services between the Revit and ASP and even run a script to generate our data models in typescript for Angular!
+We have built parts of several applications using some of these libraries, our current working project, [Shedmate app](https://construction.autodesk.com/integrations/shedmate) is the one that relies on it the most. I would say parts of it because only some libraries existed when we started coding the app. Shedmate is a web-based 3d configurator that needs to process the same data models in different places: Revit, our ASPNet Cloud server, and our front end Angular app. The cool thing here is that we can share services between the Revit and ASP and even run a script to generate our data models in typescript for Angular!
 
 ## Simplicity
 
@@ -51,7 +51,7 @@ The framework also aims to be flexible, if you have an existing Revit plugin and
 
 ## Testability
 
-With the loosely coupled architecture that the framework helps you to build, you can then use any testing frameworks like [Dynamo's Revit Tester Framework]("https://github.com/DynamoDS/RevitTestFramework") or [Geberit's Revit Test Runner]("https://github.com/geberit/Revit.TestRunner"). We are even using [Design Automation on Forge]("https://forge.autodesk.com/en/docs/design-automation/v3/developers_guide/overview/?_ga=2.215688401.7327333.1603131319-920645407.1589401464") to unit test our Revit Apps, that way, everything can be integrated into a CI/CD pipeline.
+With the loosely coupled architecture that the framework helps you to build, you can then use any testing frameworks like [Dynamo's Revit Tester Framework](https://github.com/DynamoDS/RevitTestFramework) or [Geberit's Revit Test Runner](https://github.com/geberit/Revit.TestRunner). We are even using [Design Automation on Forge](https://forge.autodesk.com/en/docs/design-automation/v3/developers_guide/overview/?_ga=2.215688401.7327333.1603131319-920645407.1589401464) to unit test our Revit Apps, that way, everything can be integrated into a CI/CD pipeline.
 
 ## Usage and Collaboration
 
