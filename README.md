@@ -1,5 +1,6 @@
-[![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+License: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Build Nuget Packages: [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master)
+Unit Tests: [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Unit%20Tests?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=13&branchName=master)
 
 # Welcome to Onbox Framework
 
