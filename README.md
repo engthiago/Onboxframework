@@ -1,7 +1,9 @@
 | Project | Status |
 | ------- | ------ |
 | License | [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) |
-| Build Nuget Packages | [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master) |
+| Build Framework and Generate Nuget Packages| [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Framework%20and%20Generate%20Nuget%20Packages?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=10&branchName=master) |
+| Build Docfx | [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master) |
+| Package VS Templates | [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Package%20Vs%20Templates?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=11&branchName=master) |
 | Unit Tests | [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Unit%20Tests?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=13&branchName=master) |
 
 # Welcome to Onbox Framework
