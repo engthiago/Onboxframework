@@ -1,6 +1,6 @@
-License: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-Build Nuget Packages: [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master)
-Unit Tests: [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Unit%20Tests?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=13&branchName=master)
+License: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br/>
+Build Nuget Packages: [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Build%20Docfx?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=12&branchName=master)<br/>
+Unit Tests: [![Build Status](https://dev.azure.com/onbox/Onbox%20Framework/_apis/build/status/Unit%20Tests?branchName=master)](https://dev.azure.com/onbox/Onbox%20Framework/_build/latest?definitionId=13&branchName=master)<br/>
 
 # Welcome to Onbox Framework
 
@@ -10,8 +10,7 @@ The framework and its libraries are designed focusing on modularity, testability
 
 ## Documentation
 
-Documentation is in its early stages, (yeah I know.. documentation is important). We have a simple Getting Started Guide here and the complete API documentation here. The written tutorials explaining the main concepts are still of the libraries are still in the works, and we will be doing constant updates on it.
-
+Documentation is in its early stages, (yeah I know.. documentation is important).
 Checkout the documentation [here](https://engthiago.github.io/Onboxframework.docs/).
 
 ## API Documentation
