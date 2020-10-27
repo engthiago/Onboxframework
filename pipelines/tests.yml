@@ -33,7 +33,7 @@ steps:
     clean: true
 
 - task: VSTest@2
-  displayName: Run Tests
+  displayName: Run Unit Tests
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
