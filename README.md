@@ -21,6 +21,10 @@ Checkout the documentation [here](https://engthiago.github.io/Onboxframework.doc
 
 Checkout the API Docs [here](https://engthiago.github.io/Onboxframework.docs/api/index.html).
 
+## Visual Studio Templates
+
+Templates can be found [here](https://github.com/engthiago/Onboxframework.docs/releases). And [here](https://engthiago.github.io/Onboxframework.docs/tutorials/1_guetstart.html) is how you install them.
+
 ## Libraries
 
 As stated above, Onbox is all about modularity, so the framework itself is composed of several libraries that focuses in a specific scope and can be easly extendend or replaced:
