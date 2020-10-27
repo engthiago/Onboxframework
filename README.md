@@ -21,6 +21,10 @@ Checkout the documentation [here](https://engthiago.github.io/Onboxframework.doc
 
 Checkout the API Docs [here](https://engthiago.github.io/Onboxframework.docs/api/index.html).
 
+## Guetting Started
+
+Checkout how you can get started [here](https://engthiago.github.io/Onboxframework.docs/tutorials/1_guetstart.html).
+
 ## Visual Studio Templates
 
 Templates can be found [here](https://github.com/engthiago/Onboxframework.docs/releases). And [here](https://engthiago.github.io/Onboxframework.docs/tutorials/1_guetstart.html) is how you install them.
