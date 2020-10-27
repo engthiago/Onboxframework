@@ -14,6 +14,18 @@ namespace Onbox.Revit.Tests.Di
     {
     }
 
+    public class DependentService
+    {
+        public DependentService(DummyService dummyService)
+        {
+        }
+    }
+
+    public class DummyHiddenConstructor
+    {
+        private DummyHiddenConstructor() { }
+    }
+
     public class CircularService1
     {
         public CircularService1(CircularService1 circularService1)
@@ -34,5 +46,9 @@ namespace Onbox.Revit.Tests.Di
         public CircularService3(CircularService2 circularService2)
         {
         }
+    }
+
+    public abstract class AbstractDummyService
+    {
     }
 }

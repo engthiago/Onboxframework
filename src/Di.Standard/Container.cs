@@ -39,6 +39,8 @@ namespace Onbox.Di.VDev
         private readonly List<Type> currentTypes = new List<Type>();
         private Type currentType;
 
+        private bool isScope = false;
+
         /// <summary>
         /// Adds an implementation as a singleton on the container.
         /// </summary>
@@ -195,27 +197,8 @@ namespace Onbox.Di.VDev
         private object ResolveObject(Type contract, IDictionary<Type, Type> dic)
         {
             // Check for Ciruclar dependencies
-            if (this.currentTypes.Contains(contract))
-            {
-                string error;
-                if (currentType == contract)
-                {
-                    error = $"Onbox Container found circular dependency on {currentType.Name} trying to inject itself.";
-                    Console.WriteLine(error);
-                    throw new InvalidOperationException(error);
-                }
+            CheckForCircularDependencies(contract);
 
-                if (currentType != null)
-                {
-                    error = $"Onbox Container found circular dependency between {currentType.Name} and {contract.Name}.";
-                    Console.WriteLine(error);
-                    throw new InvalidOperationException(error);
-                }
-
-                error = $"Onbox Container found circular dependency on: {contract.Name}.";
-                Console.WriteLine(error);
-                throw new InvalidOperationException(error);
-            }
             this.currentTypes.Add(contract);
 
             // If this is a concrete type just instantiate it, if not, get the concrete type on the dictionary
@@ -254,18 +237,48 @@ namespace Onbox.Di.VDev
             return constructor.Invoke(parameters.ToArray());
         }
 
+        private void CheckForCircularDependencies(Type contract)
+        {
+            if (this.currentTypes.Contains(contract))
+            {
+                string error;
+                if (currentType == contract)
+                {
+                    error = $"Onbox Container found circular dependency on {currentType.Name} trying to inject itself.";
+                    Console.WriteLine(error);
+                    throw new InvalidOperationException(error);
+                }
+
+                if (currentType != null)
+                {
+                    error = $"Onbox Container found circular dependency between {currentType.Name} and {contract.Name}.";
+                    Console.WriteLine(error);
+                    throw new InvalidOperationException(error);
+                }
+
+                error = $"Onbox Container found circular dependency on: {contract.Name}.";
+                Console.WriteLine(error);
+                throw new InvalidOperationException(error);
+            }
+        }
+
         /// <summary>
         /// Clears and releases resources from the container
         /// </summary>
         public void Clear()
         {
             this.transientTypes?.Clear();
-            this.singletonInstances?.Clear();
-            this.singletonTypes?.Clear();
             this.scopedInstances?.Clear();
             this.scopedTypes?.Clear();
             this.currentTypes?.Clear();
             this.currentType = null;
+
+            // If this is a scope we can not clean the singletons as they have the same reference as the main container
+            if (!isScope)
+            {
+                this.singletonTypes?.Clear();
+                this.singletonInstances?.Clear();
+            }
         }
 
         private static void EnsureNonAbstractClass(Type type)
@@ -296,10 +309,14 @@ namespace Onbox.Di.VDev
         {
             // Creates a copy of the Container with the relevant types and instances
             var container = new Container();
+            container.isScope = true;
+
             container.transientTypes = this.transientTypes.ToDictionary(k => k.Key, v => v.Value);
-            container.singletonInstances = this.singletonInstances.ToDictionary(k => k.Key, v => v.Value);
-            container.singletonTypes = this.singletonTypes.ToDictionary(k => k.Key, v => v.Value);
             container.scopedTypes = this.scopedTypes.ToDictionary(k => k.Key, v => v.Value);
+
+            // References the same singletons as the main container
+            container.singletonInstances = this.singletonInstances;
+            container.singletonTypes = this.singletonTypes;
 
             // This will override the singleton instances for the scoped ones
             container.AddSingleton<IContainerResolver>(container);

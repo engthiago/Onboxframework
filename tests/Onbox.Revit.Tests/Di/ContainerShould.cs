@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Internal;
 using Onbox.Di.VDev;
 using System;
+using System.Collections.Generic;
 
 namespace Onbox.Revit.Tests.Di
 {
@@ -12,7 +14,7 @@ namespace Onbox.Revit.Tests.Di
             return new Container();
         }
 
-        [TestCase]
+        [Test]
         public void HaveOnlyDefaultConstructor()
         {
             var type = typeof(Container);
@@ -22,49 +24,96 @@ namespace Onbox.Revit.Tests.Di
             Assert.AreEqual(constructor.GetParameters().Length, 0);
         }
 
-        [TestCase]
+        [Test]
+        public void ResolveATypeDirectly()
+        {
+            using (var sut = CreateContainer())
+            {
+                var dummyInstance = sut.Resolve(typeof(DummyService));
+                Assert.That(dummyInstance, Is.Not.Null);
+            }
+        }
+
+        [Test]
         public void RegisterSingletonInstanceImplementations()
         {
-            var dummyInstance0 = new DummyService();
-            var sut = CreateContainer();
-            sut.AddSingleton(dummyInstance0);
+            using (var sut = CreateContainer())
+            {
+                var dummyInstance0 = new DummyService();
+                sut.AddSingleton(dummyInstance0);
 
-            var dummyInstance1 = sut.Resolve<DummyService>();
-            var dummyInstance2 = sut.Resolve<DummyService>();
+                var dummyInstance1 = sut.Resolve<DummyService>();
+                var dummyInstance2 = sut.Resolve<DummyService>();
 
-            Assert.AreSame(dummyInstance0, dummyInstance1);
-            Assert.AreSame(dummyInstance0, dummyInstance2);
-            Assert.AreSame(dummyInstance1, dummyInstance2);
+                Assert.AreSame(dummyInstance0, dummyInstance1);
+                Assert.AreSame(dummyInstance0, dummyInstance2);
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+            }
         }
 
-        [TestCase]
+        [Test]
         public void RegisterSingletonTypeImplementations()
         {
-            var sut = CreateContainer();
-            sut.AddSingleton<DummyService>();
+            using (var sut = CreateContainer())
+            {
+                sut.AddSingleton<DummyService>();
 
-            var dummyInstance1 = sut.Resolve<DummyService>();
-            var dummyInstance2 = sut.Resolve<DummyService>();
+                var dummyInstance1 = sut.Resolve<DummyService>();
+                var dummyInstance2 = sut.Resolve<DummyService>();
 
-            Assert.AreSame(dummyInstance1, dummyInstance2);
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+            }
         }
 
-        [TestCase]
+        [Test]
         public void RegisterSingletonInstanceAbstractions()
         {
-            var dummyInstance0 = new DummyService();
-            var sut = CreateContainer();
-            sut.AddSingleton<IDummyService>(dummyInstance0);
+            using (var sut = CreateContainer())
+            {
+                var dummyInstance0 = new DummyService();
+                sut.AddSingleton<IDummyService>(dummyInstance0);
 
-            var dummyInstance1 = sut.Resolve<IDummyService>();
-            var dummyInstance2 = sut.Resolve<IDummyService>();
+                var dummyInstance1 = sut.Resolve<IDummyService>();
+                var dummyInstance2 = sut.Resolve<IDummyService>();
 
-            Assert.AreSame(dummyInstance0, dummyInstance1);
-            Assert.AreSame(dummyInstance0, dummyInstance2);
-            Assert.AreSame(dummyInstance1, dummyInstance2);
+                Assert.AreSame(dummyInstance0, dummyInstance1);
+                Assert.AreSame(dummyInstance0, dummyInstance2);
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+            }
         }
 
-        [TestCase]
+        [Test]
+        public void RegisterSingletonInstanceAbstractionWithConcreteType()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.AddSingleton<IDummyService, DummyService>();
+
+                var dummyInstance1 = sut.Resolve<IDummyService>();
+                var dummyInstance2 = sut.Resolve<IDummyService>();
+
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+            }
+        }
+
+        [Test]
+        public void RegisterSingletonInstanceAbstractionWithConcreteTypeInstance()
+        {
+            using (var sut = CreateContainer())
+            {
+                var dummyInstance0 = new DummyService();
+                sut.AddSingleton<IDummyService, DummyService>(dummyInstance0);
+
+                var dummyInstance1 = sut.Resolve<IDummyService>();
+                var dummyInstance2 = sut.Resolve<IDummyService>();
+
+                Assert.AreSame(dummyInstance0, dummyInstance1);
+                Assert.AreSame(dummyInstance0, dummyInstance2);
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+            }
+        }
+
+        [Test]
         public void CreateScopes()
         {
             var sut = CreateContainer();
@@ -74,137 +123,262 @@ namespace Onbox.Revit.Tests.Di
             }
         }
 
-        [TestCase]
+        [Test]
+        public void ResolveSameSingletonTypesEvenOutsideOfScope()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.AddSingleton<DummyService>();
+
+                DummyService dummyService0;
+                using (var scope = sut.CreateScope())
+                {
+                    dummyService0 = scope.Resolve<DummyService>();
+                }
+
+                var dummyService1 = sut.Resolve<DummyService>();
+                Assert.That(dummyService0, Is.EqualTo(dummyService1));
+            }
+        }
+
+        [Test]
+        public void ResolveSameSingleInstanceEvenOutsideOfScope()
+        {
+            using (var sut = CreateContainer())
+            {
+                var dummyService0 = new DummyService();
+                sut.AddSingleton(dummyService0);
+
+                DummyService dummyService1;
+                using (var scope = sut.CreateScope())
+                {
+                    dummyService1 = scope.Resolve<DummyService>();
+                    Assert.That(dummyService0, Is.EqualTo(dummyService1));
+                }
+
+                // Just to confirm after disposing the scope
+                Assert.That(dummyService0, Is.EqualTo(dummyService1));
+
+                var dummyService2 = sut.Resolve<DummyService>();
+                Assert.That(dummyService0, Is.EqualTo(dummyService2));
+                Assert.That(dummyService1, Is.EqualTo(dummyService2));
+            }
+        }
+
+
+        [Test]
         public void RegisterScopedImplementations()
         {
-            var sut = CreateContainer();
-            sut.AddScoped<DummyService>();
-
-            var dummyInstance1 = sut.Resolve<DummyService>();
-            var dummyInstance2 = sut.Resolve<DummyService>();
-
-            Assert.AreSame(dummyInstance1, dummyInstance2);
-
-            using (var scope = sut.CreateScope())
+            using (var sut = CreateContainer())
             {
-                var dummyInstance3 = scope.Resolve<DummyService>();
-                Assert.AreNotSame(dummyInstance1, dummyInstance3);
+                sut.AddScoped<DummyService>();
+
+                var dummyInstance1 = sut.Resolve<DummyService>();
+                var dummyInstance2 = sut.Resolve<DummyService>();
+
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+
+                using (var scope = sut.CreateScope())
+                {
+                    var dummyInstance3 = scope.Resolve<DummyService>();
+                    Assert.AreNotSame(dummyInstance1, dummyInstance3);
+                }
             }
         }
 
-        [TestCase]
+        [Test]
         public void RegisterScopedAbstractions()
         {
-            var sut = CreateContainer();
-            sut.AddScoped<IDummyService, DummyService>();
-
-            var dummyInstance1 = sut.Resolve<IDummyService>();
-            var dummyInstance2 = sut.Resolve<IDummyService>();
-
-            Assert.AreSame(dummyInstance1, dummyInstance2);
-
-            using (var scope = sut.CreateScope())
+            using (var sut = CreateContainer())
             {
-                var dummyInstance3 = scope.Resolve<DummyService>();
-                Assert.AreNotSame(dummyInstance1, dummyInstance3);
+                sut.AddScoped<IDummyService, DummyService>();
+
+                var dummyInstance1 = sut.Resolve<IDummyService>();
+                var dummyInstance2 = sut.Resolve<IDummyService>();
+
+                Assert.AreSame(dummyInstance1, dummyInstance2);
+
+                using (var scope = sut.CreateScope())
+                {
+                    var dummyInstance3 = scope.Resolve<DummyService>();
+                    Assert.AreNotSame(dummyInstance1, dummyInstance3);
+                }
             }
         }
 
-        [TestCase]
+        [Test]
         public void RegisterTransientImplementations()
         {
-            var sut = CreateContainer();
-            sut.AddTransient<DummyService>();
+            using (var sut = CreateContainer())
+            {
+                sut.AddTransient<DummyService>();
 
-            var dummyInstance1 = sut.Resolve<DummyService>();
-            var dummyInstance2 = sut.Resolve<DummyService>();
+                var dummyInstance1 = sut.Resolve<DummyService>();
+                var dummyInstance2 = sut.Resolve<DummyService>();
 
-            Assert.AreNotSame(dummyInstance1, dummyInstance2);
+                Assert.AreNotSame(dummyInstance1, dummyInstance2);
+            }
         }
 
-        [TestCase]
+        [Test]
         public void RegisterTransientAbstractions()
         {
-            var sut = CreateContainer();
-            sut.AddTransient<IDummyService, DummyService>();
+            using (var sut = CreateContainer())
+            {
+                sut.AddTransient<IDummyService, DummyService>();
 
-            var dummyInstance1 = sut.Resolve<IDummyService>();
-            var dummyInstance2 = sut.Resolve<IDummyService>();
+                var dummyInstance1 = sut.Resolve<IDummyService>();
+                var dummyInstance2 = sut.Resolve<IDummyService>();
 
-            Assert.AreNotSame(dummyInstance1, dummyInstance2);
+                Assert.AreNotSame(dummyInstance1, dummyInstance2);
+            }
         }
 
-        [TestCase]
+        [Test]
         public void ResolveTransientsEvenWhenNotRegistered()
         {
-            var sut = CreateContainer();
-            var dummyInstance = sut.Resolve<DummyService>();
-            Assert.NotNull(dummyInstance);
+            using (var sut = CreateContainer())
+            {
+                var dummyInstance = sut.Resolve<DummyService>();
+                Assert.NotNull(dummyInstance);
+            }
         }
 
-        [TestCase]
+        [Test]
+        public void ResolveDifferentTransientSpeciallyOnDifferentScopes()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.AddTransient<IDummyService, DummyService>();
+
+                var dummyInstance1 = sut.Resolve<IDummyService>();
+                using (var scope = sut.CreateScope())
+                {
+                    var dummyInstance2 = scope.Resolve<IDummyService>();
+                    Assert.AreNotSame(dummyInstance1, dummyInstance2);
+                }
+            }
+        }
+
+        [Test]
+        public void ResolveDependentTypes()
+        {
+            using (var sut = CreateContainer())
+            {
+                var dependentType = sut.Resolve<DependentService>();
+                Assert.NotNull(dependentType);
+            }
+        }
+
+        [Test]
         public void NotRegisterAbstractionsWithNoImplementationsAsSingletons()
         {
-            var sut = CreateContainer();
-            Assert.Throws(
-                typeof(InvalidOperationException),
-                () => sut.AddSingleton<IDummyService>()
-            );
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(InvalidOperationException),
+                    () => sut.AddSingleton<IDummyService>()
+                    );
+            }
         }
 
-        [TestCase]
+        [Test]
         public void NotRegisterAbstractionsWithNoImplementationsAsScoped()
         {
-            var sut = CreateContainer();
-            Assert.Throws(
-                typeof(InvalidOperationException),
-                () => sut.AddScoped<IDummyService>()
-            );
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(InvalidOperationException),
+                    () => sut.AddScoped<IDummyService>()
+                    );
+            }
         }
 
-        [TestCase]
+        [Test]
         public void NotRegisterAbstractionsWithNoImplementationsAsTransients()
         {
-            var sut = CreateContainer();
-            Assert.Throws(
-                typeof(InvalidOperationException),
-                () => sut.AddTransient<IDummyService>()
-            );
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                     typeof(InvalidOperationException),
+                     () => sut.AddTransient<IDummyService>()
+                    );
+            }
         }
 
-        [TestCase]
-        public void NotResolveCircularServices()
+        [Test]
+        public void NotDirectlyResolveAbstractTypes()
         {
-            var sut = CreateContainer();
-            Assert.Throws(
-                typeof(InvalidOperationException),
-                () => sut.Resolve<CircularService1>()
-            );
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(KeyNotFoundException),
+                    () => sut.Resolve<AbstractDummyService>()
+                    );
+            }
         }
 
-        [TestCase]
-        public void NotResolveRelatedCircularServices()
+        [Test]
+        public void NotRegisterAbstractTypes()
         {
-            var sut = CreateContainer();
-            Assert.Throws(
-                typeof(InvalidOperationException),
-                () => sut.Resolve<CircularService2>()
-           );
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(InvalidOperationException),
+                    () => sut.AddSingleton<AbstractDummyService>()
+                    );
+            }
         }
 
-        [TestCase]
+        [Test]
+        public void NotResolveCircularTypes()
+        {
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(InvalidOperationException),
+                    () => sut.Resolve<CircularService1>()
+                    );
+            }
+        }
+
+        [Test]
+        public void NotResolveRelatedCircularTypes()
+        {
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(InvalidOperationException),
+                    () => sut.Resolve<CircularService2>()
+                    );
+            }
+        }
+
+        [Test]
+        public void NotResolveHiddenContructorTypes()
+        {
+            using (var sut = CreateContainer())
+            {
+                Assert.Throws(
+                    typeof(InvalidOperationException),
+                    () => sut.Resolve<DummyHiddenConstructor>()
+                    );
+            }
+        }
+
+        [Test]
         public void CleanItself()
         {
-            var sut = CreateContainer();
-            sut.AddSingleton<DummyService>();
+            using (var sut = CreateContainer())
+            {
+                sut.AddSingleton<DummyService>();
+                var dummyService1 = sut.Resolve<DummyService>();
 
-            var dummyService1 = sut.Resolve<DummyService>();
+                sut.Clear();
 
-            sut.Clear();
-
-            var dummyService2 = sut.Resolve<DummyService>();
-
-            Assert.AreNotSame(dummyService1, dummyService2);
+                var dummyService2 = sut.Resolve<DummyService>();
+                Assert.AreNotSame(dummyService1, dummyService2);
+            }
         }
     }
 }
