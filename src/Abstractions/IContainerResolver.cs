@@ -21,5 +21,10 @@ namespace Onbox.Abstractions.VDev
         /// Creates a scoped context copy of this container
         /// </summary>
         IContainerResolver CreateScope();
+
+        /// <summary>
+        /// Reports if this container is a scope of a container
+        /// </summary>
+        bool IsScope();
     }
 }

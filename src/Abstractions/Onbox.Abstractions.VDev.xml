@@ -84,6 +84,11 @@
             Creates a scoped context copy of this container
             </summary>
         </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainerResolver.IsScope">
+            <summary>
+            Reports if this container is a scope of a container
+            </summary>
+        </member>
         <member name="T:Onbox.Abstractions.VDev.IContainerResolverPipeline">
             <summary>
             Container Resolver pipeline is used to resolve dependencies or cleanup the dependencies of the container

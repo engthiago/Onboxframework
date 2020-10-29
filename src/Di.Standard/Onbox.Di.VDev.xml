@@ -117,5 +117,10 @@
             Creates a scoped context copy of this container
             </summary>
         </member>
+        <member name="M:Onbox.Di.VDev.Container.IsScope">
+            <summary>
+            Reports if this container is a scope of a container
+            </summary>
+        </member>
     </members>
 </doc>

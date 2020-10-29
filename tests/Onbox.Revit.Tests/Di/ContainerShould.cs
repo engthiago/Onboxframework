@@ -116,10 +116,38 @@ namespace Onbox.Revit.Tests.Di
         [Test]
         public void CreateScopes()
         {
-            var sut = CreateContainer();
-            using (var scope = sut.CreateScope())
+            using (var sut = CreateContainer())
             {
-                Assert.AreNotSame(sut, scope);
+                using (var scope = sut.CreateScope())
+                {
+                    Assert.AreNotSame(sut, scope);
+                }
+            }
+        }
+
+        [Test]
+        public void ReportIsInScope()
+        {
+            using (var sut = CreateContainer())
+            {
+                using (var scope = sut.CreateScope())
+                {
+                    Assert.That(scope.IsScope(), Is.True);
+                }
+            }
+        }
+
+        [Test]
+        public void ReportIsNotInScope()
+        {
+            using (var sut = CreateContainer())
+            {
+                Assert.That(sut.IsScope(), Is.False);
+
+                using (var scope = sut.CreateScope())
+                {
+                    Assert.That(sut.IsScope(), Is.False);
+                }
             }
         }
 

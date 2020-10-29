@@ -249,14 +249,7 @@ namespace Onbox.Di.VDev
                     throw new InvalidOperationException(error);
                 }
 
-                if (currentType != null)
-                {
-                    error = $"Onbox Container found circular dependency between {currentType.Name} and {contract.Name}.";
-                    Console.WriteLine(error);
-                    throw new InvalidOperationException(error);
-                }
-
-                error = $"Onbox Container found circular dependency on: {contract.Name}.";
+                error = $"Onbox Container found circular dependency between {currentType.Name} and {contract.Name}.";
                 Console.WriteLine(error);
                 throw new InvalidOperationException(error);
             }
@@ -267,17 +260,17 @@ namespace Onbox.Di.VDev
         /// </summary>
         public void Clear()
         {
-            this.transientTypes?.Clear();
-            this.scopedInstances?.Clear();
-            this.scopedTypes?.Clear();
-            this.currentTypes?.Clear();
+            this.transientTypes.Clear();
+            this.scopedInstances.Clear();
+            this.scopedTypes.Clear();
+            this.currentTypes.Clear();
             this.currentType = null;
 
             // If this is a scope we can not clean the singletons as they have the same reference as the main container
             if (!isScope)
             {
-                this.singletonTypes?.Clear();
-                this.singletonInstances?.Clear();
+                this.singletonTypes.Clear();
+                this.singletonInstances.Clear();
             }
         }
 
@@ -322,6 +315,14 @@ namespace Onbox.Di.VDev
             container.AddSingleton<IContainerResolver>(container);
             container.AddSingleton<IContainer>(container);
             return container;
+        }
+
+        /// <summary>
+        /// Reports if this container is a scope of a container
+        /// </summary>
+        public bool IsScope()
+        {
+            return this.isScope;
         }
     }
 }
