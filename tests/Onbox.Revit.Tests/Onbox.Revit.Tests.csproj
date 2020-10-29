@@ -63,9 +63,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Di\Dummies\AbstractDummyService.cs" />
+    <Compile Include="Di\Dummies\CircularService1.cs" />
+    <Compile Include="Di\Dummies\CircularService2.cs" />
+    <Compile Include="Di\Dummies\CircularService3.cs" />
     <Compile Include="Di\ContainerShould.cs" />
-    <Compile Include="Di\DummyService.cs" />
-    <Compile Include="JsonSerializer\DummySerialization.cs" />
+    <Compile Include="Di\Dummies\DependentService.cs" />
+    <Compile Include="Di\Dummies\DummyHiddenConstructor.cs" />
+    <Compile Include="Di\Dummies\DummyService.cs" />
+    <Compile Include="Di\Dummies\IDummyService.cs" />
+    <Compile Include="JsonSerializer\Dummies\DummySerializationAddress.cs" />
+    <Compile Include="JsonSerializer\Dummies\DummySerializationPerson.cs" />
+    <Compile Include="JsonSerializer\JsonExtensionsShould.cs" />
     <Compile Include="JsonSerializer\JsonServiceShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

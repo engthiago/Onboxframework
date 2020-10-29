@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Onbox.Di.VDev;
+using Onbox.Revit.Tests.Di.Dummies;
 using System;
 using System.Collections.Generic;
 

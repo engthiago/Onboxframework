@@ -2,10 +2,12 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Onbox.Core.VDev.Json;
+using Onbox.Revit.Tests.JsonSerializer.Dummies;
 using System.Collections.Generic;
 
 namespace Onbox.Revit.Tests.JsonSerializer
 {
+    [Category("Json Serializer")]
     public class JsonServiceShould
     {
         private string SerializeDummyPersonDirectlyWithNewtonsoft()
