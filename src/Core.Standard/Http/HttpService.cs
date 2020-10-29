@@ -15,7 +15,7 @@ namespace Onbox.Core.VDev.Http
     /// <br> 1 - Works with json strings for all serialzable objects</br>
     /// <br> 2 - <see cref="IJsonService"/> for json serialization</br>
     /// <br> 3 - Should be a singleton that is meant to be reused during the lifecycle of the application</br>
-    /// <br> 4 - Provides strong typed response objects</br>
+    /// <br> 4 - Provides strongly typed response objects</br>
     /// <br> 5 - Provides request and response interception</br>
     /// </summary>
     public class HttpService : IHttpService
