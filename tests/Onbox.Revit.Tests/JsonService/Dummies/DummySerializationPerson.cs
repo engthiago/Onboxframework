@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Onbox.Revit.Tests.JsonSerializer.Dummies
+namespace Onbox.Revit.Tests.JsonService.Dummies
 {
     public class DummySerializationPerson
     {

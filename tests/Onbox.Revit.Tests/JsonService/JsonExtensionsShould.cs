@@ -5,9 +5,9 @@ using Onbox.Abstractions.VDev;
 using Onbox.Core.VDev.Json;
 using Onbox.Di.VDev;
 
-namespace Onbox.Revit.Tests.JsonSerializer
+namespace Onbox.Revit.Tests.JsonService
 {
-    [Category("Json Serializer Extensions")]
+    [Category("Json Service Extensions")]
     public class JsonExtensionsShould
     {
         private Container CreateContainer()

@@ -1,13 +1,12 @@
 ﻿using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using Onbox.Core.VDev.Json;
-using Onbox.Revit.Tests.JsonSerializer.Dummies;
+using Onbox.Revit.Tests.JsonService.Dummies;
 using System.Collections.Generic;
 
-namespace Onbox.Revit.Tests.JsonSerializer
+namespace Onbox.Revit.Tests.JsonService
 {
-    [Category("Json Serializer")]
+    [Category("Json Service")]
     public class JsonServiceShould
     {
         private string SerializeDummyPersonDirectlyWithNewtonsoft()
@@ -44,7 +43,7 @@ namespace Onbox.Revit.Tests.JsonSerializer
         {
             var mockSettings = new Mock<JsonSerializerSettings>();
 
-            var sut = new JsonService(mockSettings.Object);
+            var sut = new Core.VDev.Json.JsonService(mockSettings.Object);
             var dummyPerson = CreateDummyPerson();
 
             var json = sut.Serialize(dummyPerson);
@@ -60,7 +59,7 @@ namespace Onbox.Revit.Tests.JsonSerializer
         public void DeserializeJson()
         {
             var mockSettings = new Mock<JsonSerializerSettings>();
-            var sut = new JsonService(mockSettings.Object);
+            var sut = new Core.VDev.Json.JsonService(mockSettings.Object);
 
             var json = SerializeDummyPersonDirectlyWithNewtonsoft();
 
