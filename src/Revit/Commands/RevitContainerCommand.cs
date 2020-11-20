@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Di.VDev;
+using Onbox.Revit.Abstractions.VDev;
 
 namespace Onbox.Revit.VDev.Commands
 {
@@ -20,6 +21,11 @@ namespace Onbox.Revit.VDev.Commands
         {
             var pipeline = new TContainerPipeline();
             var container = new TContainer();
+            var application = commandData.Application;
+
+            this.HookupRevitContext(application, container);
+            this.AddRevitUI(container, application);
+
             var newContainer = pipeline.Pipe(container);
 
             try
@@ -34,6 +40,7 @@ namespace Onbox.Revit.VDev.Commands
             }
             finally
             {
+                this.UnhookRevitContext(application, container);
                 // Safely calls lifecycle hook 
                 try
                 {
@@ -45,6 +52,44 @@ namespace Onbox.Revit.VDev.Commands
 
                 // Cleans up the container
                 container.Dispose();
+            }
+        }
+
+        internal IContainer AddRevitUI(IContainer container, UIApplication application)
+        {
+            var revitUIApp = new RevitAppData
+            {
+                languageType = (RevitLanguage)application.Application.Language.GetHashCode(),
+                versionBuild = application.Application.VersionBuild,
+                versionNumber = application.Application.VersionNumber,
+                subVersionNumber = application.Application.SubVersionNumber,
+                versionName = application.Application.VersionName,
+                revitWindowHandle = application.MainWindowHandle
+            };
+
+            container.AddSingleton<IRevitAppData>(revitUIApp);
+            return container;
+        }
+
+        internal IContainer HookupRevitContext(UIApplication application, IContainer container)
+        {
+            var revitContext = new RevitContext();
+            revitContext.HookupRevitEvents(application);
+            container.AddSingleton<IRevitContext>(revitContext);
+            return container;
+        }
+
+        internal IContainer UnhookRevitContext(UIApplication application, IContainer container)
+        {
+            try
+            {
+                var revitContext = container.Resolve<IRevitContext>();
+                revitContext.UnhookRevitEvents(application);
+                return container;
+            }
+            catch
+            {
+                return null;
             }
         }
 
