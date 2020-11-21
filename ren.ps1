@@ -21,6 +21,7 @@ Get-ChildItem * -Include *.nuspec -recurse |
         $c = ($_ | Get-Content) 
         $c = $c -replace "$oldV", "$newV"
         $c = $c -replace $oldV, $newV
+		$c = $c -replace $oldNs, $newNs
         [IO.File]::WriteAllText($_.FullName, ($c -join "`r`n"), $Utf8Encoding)
 
     }
