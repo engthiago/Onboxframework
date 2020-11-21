@@ -16,7 +16,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Part of Onbox Framework</Description>
   </PropertyGroup>
 

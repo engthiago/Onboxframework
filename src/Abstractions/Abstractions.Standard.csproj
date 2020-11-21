@@ -18,7 +18,7 @@
     <PackageTags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</PackageTags>
     <Description>Part of Onbox Framework</Description>
     <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
 

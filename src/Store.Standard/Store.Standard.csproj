@@ -13,7 +13,7 @@
     <PackageIcon>onbox.png</PackageIcon>
     <PackageTags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Version>0.99.99.99</Version>
     <PackageProjectUrl>https://github.com/engthiago/Onbox.Rvt</PackageProjectUrl>
     <RepositoryUrl>https://github.com/engthiago/Onbox.Rvt.git</RepositoryUrl>

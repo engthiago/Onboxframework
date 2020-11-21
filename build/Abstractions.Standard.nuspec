@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Onbox.Abstractions</id>
+    <version>0.99.99.99</version>
+    <title>Onbox.Abstractions</title>
+    <authors>Thiago Almeida</authors>
+    <owners>Thiago Almeida</owners>
+	<projectUrl>https://github.com/engthiago/Onbox.Rvt</projectUrl>
+    <icon>onbox.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>Part of Onbox Framework</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) 2020 Thiago Almeida</copyright>
+    <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</tags>
+	<repository type="git" url="https://github.com/engthiago/Onbox.Rvt.git" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+	  <file src="onbox.png" />
+  </files>
+</package>
