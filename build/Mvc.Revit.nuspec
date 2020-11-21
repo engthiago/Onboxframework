@@ -24,12 +24,12 @@
 		<dependency id="PropertyChanged.Fody" version="2.5.9" />
 	</dependencies>
 	<references>
-		<reference file="Onbox.Mvc.Revit.dll"/>
+		<reference file="Onbox.Mvc.Revit.VDev.dll"/>
 	</references>
   </metadata>
   <files>
 	<file src="onbox.png" />
-	<file src="Onbox.Mvc.Revit.dll" target="lib\" />
-	<file src="Onbox.Mvc.Revit.xml" target="lib\" />
+	<file src="Onbox.Mvc.Revit.VDev.dll" target="lib\" />
+	<file src="Onbox.Mvc.Revit.VDev.xml" target="lib\" />
   </files>
 </package>
