@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Onbox.Abstractions</AssemblyName>
+    <AssemblyName>Onbox.Abstractions.VDev</AssemblyName>
     <RootNamespace>Onbox.Abstractions.VDev</RootNamespace>
     <Version>0.99.99.99</Version>
     <Authors>Thiago Almeida</Authors>

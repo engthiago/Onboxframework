@@ -153,27 +153,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Onbox.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Abstractions.8.0.0\lib\netstandard2.0\Onbox.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Core, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Core.8.0.0\lib\netstandard2.0\Onbox.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Di, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Di.8.0.0\lib\netstandard2.0\Onbox.Di.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Mvc.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Abstractions.8.0.0\lib\netstandard2.0\Onbox.Mvc.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Mvc.Revit.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.8.0.0\lib\netstandard2.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Revit.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Revit.Abstractions.8.0.0\lib\netstandard2.0\Onbox.Revit.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Store, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\Onbox.Store.8.0.0\lib\netstandard2.0\Onbox.Store.dll</HintPath>
-    </Reference>
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
       <Private>False</Private>
@@ -286,18 +265,8 @@
       <Project>{3258b9eb-7a7c-4f4f-bdde-10e02836b3e9}</Project>
       <Name>Store.Standard</Name>
     </ProjectReference>
-    <ProjectReference Include="..\tests\Onbox.Revit.Tests\Onbox.Revit.Tests.csproj">
-      <Project>{dd33e241-28f7-4633-b1f3-cfcf3eac342f}</Project>
-      <Name>Onbox.Revit.Tests</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\Packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Packages\Fody.3.1.3\build\Fody.targets'))" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>echo ####### Configuration: $(Configuration) #######
 

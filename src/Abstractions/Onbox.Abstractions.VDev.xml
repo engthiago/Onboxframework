@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Onbox.Abstractions</name>
+        <name>Onbox.Abstractions.VDev</name>
     </assembly>
     <members>
         <member name="T:Onbox.Abstractions.VDev.IContainer">

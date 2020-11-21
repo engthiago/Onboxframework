@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>Full</DebugType>
-    <AssemblyName>Onbox.Di</AssemblyName>
+    <AssemblyName>Onbox.Di.VDev</AssemblyName>
     <RootNamespace>Onbox.Di.VDev</RootNamespace>
     <Version>0.99.99.99</Version>
     <PackageId>Onbox.Di</PackageId>

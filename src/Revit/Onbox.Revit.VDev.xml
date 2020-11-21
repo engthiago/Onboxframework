@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Onbox.Revit</name>
+        <name>Onbox.Revit.VDev</name>
     </assembly>
     <members>
         <member name="T:Onbox.Revit.VDev.Applications.ContainerPipelineExtensions">

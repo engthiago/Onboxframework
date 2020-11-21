@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Onbox.Core</name>
+        <name>Onbox.Core.VDev</name>
     </assembly>
     <members>
         <member name="T:Onbox.Core.VDev.CoreExtensions">

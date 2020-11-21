@@ -7,7 +7,7 @@
     <ProjectGuid>{1902D3EA-F7F0-4EFA-8237-805859E794F5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Onbox.Mvc.Revit.VDev</RootNamespace>
-    <AssemblyName>Onbox.Mvc.Revit</AssemblyName>
+    <AssemblyName>Onbox.Mvc.Revit.VDev</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -37,7 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Onbox.Mvc.Revit.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Onbox.Mvc.Revit.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -62,7 +62,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\build\Onbox.Mvc.Revit.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Onbox.Mvc.Revit.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
