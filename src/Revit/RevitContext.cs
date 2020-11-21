@@ -84,6 +84,36 @@ namespace Onbox.Revit.VDev
             // Makes sure to unhook the ViewChanged event and get rid of reference to uiApplication
             UnhookViewChanged();
         }
+
+        /// <summary>
+        /// Hooks up Revit Events to the context
+        /// </summary>
+        public void HookupRevitEvents(UIApplication application)
+        {
+            if (application?.ActiveUIDocument is UIDocument uIDocument)
+            {
+                UpdateContext(uIDocument.Document);
+            }
+            application.Application.DocumentCreated += OnDocumentCreated;
+            application.Application.DocumentChanged += OnDocumentChanged;
+            application.Application.DocumentOpened += OnDocumentOpened;
+            application.Application.DocumentClosed += OnDocumentClosed;
+        }
+
+        /// <summary>
+        /// Unhooks Revit Events to the context
+        /// </summary>
+        public void UnhookRevitEvents(UIApplication application)
+        {
+            application.Application.DocumentCreated -= this.OnDocumentCreated;
+            application.Application.DocumentChanged -= this.OnDocumentChanged;
+            application.Application.DocumentOpened -= this.OnDocumentOpened;
+            application.Application.DocumentClosed -= this.OnDocumentClosed;
+
+            // Makes sure to unhook the ViewChanged event and get rid of reference to uiApplication
+            UnhookViewChanged();
+        }
+
         private void OnDocumentCreated(object sender, Autodesk.Revit.DB.Events.DocumentCreatedEventArgs e)
         {
             var doc = e.Document;

@@ -38,6 +38,14 @@ namespace Onbox.Revit.VDev
         /// </summary>
         void UnhookRevitEvents(UIControlledApplication application);
         /// <summary>
+        /// Hooks up Revit Events to the context
+        /// </summary>
+        void HookupRevitEvents(UIApplication application);
+        /// <summary>
+        /// Unhooks Revit Events to the context
+        /// </summary>
+        void UnhookRevitEvents(UIApplication application);
+        /// <summary>
         /// Identifies if Revit is in the current context (Revit API context)
         /// </summary>
         bool IsInRevitContext();
