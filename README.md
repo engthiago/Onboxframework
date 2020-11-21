@@ -21,7 +21,7 @@ Checkout the documentation [here](https://engthiago.github.io/Onboxframework.doc
 
 Checkout the API Docs [here](https://engthiago.github.io/Onboxframework.docs/api/index.html).
 
-## Guetting Started
+## Getting Started
 
 Checkout how you can get started [here](https://engthiago.github.io/Onboxframework.docs/tutorials/1_guetstart.html).
 
