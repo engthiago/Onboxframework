@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Onbox.Revit.References</id>
+    <version>2021</version>
+    <title>Onbox.Revit.References</title>
+    <authors>Thiago Almeida</authors>
+    <owners>Thiago Almeida</owners>
+	<projectUrl>https://github.com/engthiago/Onbox.Rvt</projectUrl>
+    <icon>onbox.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>References to Revit 2019 to 2021 assemblies</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) 2020 Thiago Almeida</copyright>
+    <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</tags>
+  </metadata>
+  <files>
+  	  <file src="onbox.png" />
+	  <file src="Revit 2019\**" target="lib\Revit 2019"/>
+	  <file src="Revit 2020\**" target="lib\Revit 2020" />
+	  <file src="Revit 2021\**" target="lib\Revit 2021" />
+  </files>
+</package>
