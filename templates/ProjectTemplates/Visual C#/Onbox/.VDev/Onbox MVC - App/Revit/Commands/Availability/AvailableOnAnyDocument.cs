@@ -13,7 +13,7 @@ namespace $safeprojectname$.Revit.Commands.Availability
             if (applicationData.ActiveUIDocument == null) return false;
             if (applicationData.ActiveUIDocument.Document == null) return false;
 
-            return false;
+            return true;
         }
     }
 }
