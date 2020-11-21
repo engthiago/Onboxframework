@@ -61,6 +61,16 @@ namespace Onbox.Revit.VDev
         {
             var revitContext = new RevitContext();
             revitContext.HookupRevitEvents(application);
+            container.AddSingleton<IRevitContextProvider>(revitContext);
+            container.AddSingleton<IRevitContext>(revitContext);
+            return container;
+        }
+
+        internal IContainer HookupRevitContext(UIApplication application, IContainer container)
+        {
+            var revitContext = new RevitContext();
+            revitContext.HookupRevitEvents(application);
+            container.AddSingleton<IRevitContextProvider>(revitContext);
             container.AddSingleton<IRevitContext>(revitContext);
             return container;
         }
@@ -70,14 +80,44 @@ namespace Onbox.Revit.VDev
             try
             {
                 var container = GetContainer(containerGuid);
-                var revitContext = container.Resolve<IRevitContext>();
+                var revitContext = container.Resolve<IRevitContextProvider>();
                 revitContext.UnhookRevitEvents(application);
                 return container;
-            } 
+            }
             catch
             {
                 return null;
             }
+        }
+
+        internal IContainer UnhookRevitContext(UIApplication application, IContainer container)
+        {
+            try
+            {
+                var revitContext = container.Resolve<IRevitContextProvider>();
+                revitContext.UnhookRevitEvents(application);
+                return container;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        internal IContainer AddRevitUI(IContainer container, UIApplication application)
+        {
+            var revitUIApp = new RevitAppData
+            {
+                languageType = (RevitLanguage)application.Application.Language.GetHashCode(),
+                versionBuild = application.Application.VersionBuild,
+                versionNumber = application.Application.VersionNumber,
+                subVersionNumber = application.Application.SubVersionNumber,
+                versionName = application.Application.VersionName,
+                revitWindowHandle = application.MainWindowHandle
+            };
+
+            container.AddSingleton<IRevitAppData>(revitUIApp);
+            return container;
         }
 
         internal IContainer AddRevitUI(IContainer container, UIControlledApplication application)

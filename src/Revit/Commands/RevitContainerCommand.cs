@@ -2,7 +2,6 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Di.VDev;
-using Onbox.Revit.Abstractions.VDev;
 
 namespace Onbox.Revit.VDev.Commands
 {
@@ -11,7 +10,7 @@ namespace Onbox.Revit.VDev.Commands
     /// <br>It uses a Container Pipeline to compose the container.</br>
     /// <br>After the command finishes the container will be disposed.</br>
     /// </summary>
-    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : IExternalCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
+    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : RevitContainerProviderBase, IExternalCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
         where TContainer : class, IContainer, new()
     {
         /// <summary>
@@ -22,6 +21,8 @@ namespace Onbox.Revit.VDev.Commands
             var pipeline = new TContainerPipeline();
             var container = new TContainer();
             var application = commandData.Application;
+
+            this.InjectContainerToItself(container);
 
             this.HookupRevitContext(application, container);
             this.AddRevitUI(container, application);
@@ -55,43 +56,6 @@ namespace Onbox.Revit.VDev.Commands
             }
         }
 
-        internal IContainer AddRevitUI(IContainer container, UIApplication application)
-        {
-            var revitUIApp = new RevitAppData
-            {
-                languageType = (RevitLanguage)application.Application.Language.GetHashCode(),
-                versionBuild = application.Application.VersionBuild,
-                versionNumber = application.Application.VersionNumber,
-                subVersionNumber = application.Application.SubVersionNumber,
-                versionName = application.Application.VersionName,
-                revitWindowHandle = application.MainWindowHandle
-            };
-
-            container.AddSingleton<IRevitAppData>(revitUIApp);
-            return container;
-        }
-
-        internal IContainer HookupRevitContext(UIApplication application, IContainer container)
-        {
-            var revitContext = new RevitContext();
-            revitContext.HookupRevitEvents(application);
-            container.AddSingleton<IRevitContext>(revitContext);
-            return container;
-        }
-
-        internal IContainer UnhookRevitContext(UIApplication application, IContainer container)
-        {
-            try
-            {
-                var revitContext = container.Resolve<IRevitContext>();
-                revitContext.UnhookRevitEvents(application);
-                return container;
-            }
-            catch
-            {
-                return null;
-            }
-        }
 
         /// <summary>
         /// Execution of External Command.

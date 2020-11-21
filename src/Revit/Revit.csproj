@@ -91,6 +91,7 @@
     <Compile Include="IRevitContext.cs" />
     <Compile Include="Applications\IRevitExternalApp.cs" />
     <Compile Include="Applications\RevitContainerProviderBase.cs" />
+    <Compile Include="IRevitContextProvider.cs" />
     <Compile Include="RevitContext.cs" />
     <Compile Include="Commands\RevitAppCommand.cs" />
     <Compile Include="Applications\RevitApp.cs" />
