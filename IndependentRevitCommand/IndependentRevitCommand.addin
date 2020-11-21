@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>IndependentRevitCommand</Name>
+    <Assembly>IndependentRevitCommand/IndependentRevitCommand.dll</Assembly>
+	<FullClassName>IndependentRevitCommand.Revit.Commands.MainCommand</FullClassName>
+    <ClientId>29ebdd96-dba4-437b-8c00-dcd7accf7db3</ClientId>
+	<Text>IndependentRevitCommand</Text>
+	<VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>IndependentRevitCommand</VendorId>
+    <VendorDescription>IndependentRevitCommand</VendorDescription>
+  </AddIn>
+</RevitAddIns>
