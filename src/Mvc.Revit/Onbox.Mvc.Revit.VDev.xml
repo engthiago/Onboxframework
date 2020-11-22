@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Mvc.Revit.VDev</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Mvc.Revit.VDev.MvcExtensions">
+            <summary>
+            Adds Mvc Services to the Container
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.MvcExtensions.AddRevitMvc(Onbox.Abstractions.VDev.IContainer)">
+            <summary>
+            Adds <see cref="T:Onbox.Abstractions.VDev.IProgressIndicator"/> as <see cref="T:Onbox.Mvc.Revit.VDev.RevitProgressIndicatorView"/>, <see cref="T:Onbox.Abstractions.VDev.IMessageService"/> as <see cref="T:Onbox.Mvc.VDev.Messaging.MessageBoxService"/>, and <see cref="T:Onbox.Mvc.VDev.INavigator"/> as <see cref="T:Onbox.Mvc.VDev.Navigator"/>
+            </summary>
+        </member>
+        <member name="T:Onbox.Mvc.Revit.VDev.RevitProgressIndicatorView">
+            <summary>
+            Reports progress via a WPF Window
+            </summary>
+            <summary>
+            RevitProgressIndicatorView
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitProgressIndicatorView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Onbox.Mvc.Revit.VDev.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Onbox.Mvc.Revit.VDev.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Onbox.Mvc.Revit.VDev.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Onbox.Mvc.Revit.VDev.RevitMvcViewBase">
+            <summary>
+            Provides specific Revit functionaliy to <see cref="T:Onbox.Mvc.VDev.MvcViewBase"/> like set Revit as parent window and Title Bar visibility
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitMvcViewBase.#ctor(Onbox.Revit.Abstractions.VDev.IRevitAppData)">
+            <summary>
+            Provides specific Revit functionaliy to <see cref="T:Onbox.Mvc.VDev.MvcViewBase"/> like set Revit as parent window and Title Bar visibility
+            </summary>
+            <param name="revitUIApp">Some information of the current instance of Revit UI App</param>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitViewAttacher.HideMinimizeMaximizeButton(System.Windows.Window)">
+            <summary>
+            Hides both Maximize and Minimize button from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitViewAttacher.HideMinimizeButton(System.Windows.Window)">
+            <summary>
+            Hides both Minimize button from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitViewAttacher.HideTitleBar(System.Windows.Window)">
+            <summary>
+            Hides the Title bat from this WPF Window. This should be placed on Loaded event OR Rendered event, NOT ON THE CONSTRUCTOR
+            </summary>
+        </member>
+    </members>
+</doc>

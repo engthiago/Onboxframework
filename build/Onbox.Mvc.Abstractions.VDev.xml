@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Mvc.Abstractions.VDev</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Mvc.Abstractions.VDev.IMvcComponent">
+            <summary>
+            A MVC component contract
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Abstractions.VDev.IMvcComponent.RunOnInitFunc(System.Func{System.Threading.Tasks.Task},System.Action{System.String},System.Action)">
+            <summary>
+            Runs an async method on View Initialization
+            </summary>
+            <param name="func">The method to run</param>
+            <param name="error">If an exception is raised</param>
+            <param name="complete">After completing the method</param>
+        </member>
+        <member name="T:Onbox.Mvc.Abstractions.VDev.IMvcLifecycleView">
+            <summary>
+            A base contract for a view
+            </summary>
+        </member>
+        <member name="T:Onbox.Mvc.Abstractions.VDev.IMvcView">
+            <summary>
+            Provides base functionality for WPF MVC Pattern
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Abstractions.VDev.IMvcView.SetOwner(System.Object)">
+            <summary>
+            Set another window as the Owner of this Window
+            </summary>
+            <param name="owner">The parent Window</param>
+        </member>
+        <member name="M:Onbox.Mvc.Abstractions.VDev.IMvcView.SetTitle(System.String)">
+            <summary>
+            Sets the Title of this Window
+            </summary>
+            <param name="title"></param>
+        </member>
+        <member name="T:Onbox.Mvc.Abstractions.VDev.IMvcViewModal">
+            <summary>
+            Provides Modal dialog feature
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Abstractions.VDev.IMvcViewModal.ShowDialog">
+            <summary>
+            Opens a window and returns only when the newly opened window is closed
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Onbox.Mvc.Abstractions.VDev.IMvcViewModeless">
+            <summary>
+            Provides Modeless dialog feature
+            </summary>
+        </member>
+        <member name="M:Onbox.Mvc.Abstractions.VDev.IMvcViewModeless.Show">
+            <summary>
+            Opens the window and returns without waiting for the newly opened window to close
+            </summary>
+        </member>
+    </members>
+</doc>

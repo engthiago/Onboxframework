@@ -37,7 +37,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Onbox.Mvc.Revit.VDev.xml</DocumentationFile>
+    <DocumentationFile>Onbox.Mvc.Revit.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />

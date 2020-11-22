@@ -38,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Onbox.Mvc.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />

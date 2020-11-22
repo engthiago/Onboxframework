@@ -29,7 +29,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <OutputPath>../../build</OutputPath>
-    <DocumentationFile>../../build\Onbox.Abstractions.xml</DocumentationFile>
+    <DocumentationFile>Onbox.Abstractions.VDev.xml</DocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

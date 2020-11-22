@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Revit.Abstractions.VDev</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Revit.Abstractions.VDev.IRevitAppData">
+            <summary>
+            Revit Application version, name, language and window handle
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.Abstractions.VDev.IRevitAppData.GetVersionBuild">
+            <summary>
+            Revit's build version
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.Abstractions.VDev.IRevitAppData.GetVersionName">
+            <summary>
+            Revit's version name
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.Abstractions.VDev.IRevitAppData.GetVersionNumber">
+            <summary>
+            Revit's version number
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.Abstractions.VDev.IRevitAppData.GetSubVersionNumber">
+            <summary>
+            Revit's build version name
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.Abstractions.VDev.IRevitAppData.GetLanguage">
+            <summary>
+            Revit's language
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.Abstractions.VDev.IRevitAppData.GetRevitWindowHandle">
+            <summary>
+            Revit's window handler pointer
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.VDev.RevitLanguage">
+            <summary>
+            An enumerated type containing the supported Revit product languages.
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Unknown">
+            <summary>
+            Unknown
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.English_USA">
+            <summary>
+            English USA
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.German">
+            <summary>
+            German
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Spanish">
+            <summary>
+            Spanish
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.French">
+            <summary>
+            French
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Italian">
+            <summary>
+            Italian
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Dutch">
+            <summary>
+            Dutch
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Chinese_Simplified">
+            <summary>
+            Chinese Simplified
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Chinese_Traditional">
+            <summary>
+            Chinese Traditional
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Japanese">
+            <summary>
+            Japanese
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Korean">
+            <summary>
+            Korean
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Russian">
+            <summary>
+            Russian
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Czech">
+            <summary>
+            Czech
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Polish">
+            <summary>
+            Polish
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Hungarian">
+            <summary>
+            Hungarian
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.Brazilian_Portuguese">
+            <summary>
+            Brazilian Portuguese
+            </summary>
+        </member>
+        <member name="F:Onbox.Revit.VDev.RevitLanguage.English_GB">
+            <summary>
+            English - United Kingdom
+            </summary>
+        </member>
+    </members>
+</doc>

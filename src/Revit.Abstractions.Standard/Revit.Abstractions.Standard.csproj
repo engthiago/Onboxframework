@@ -21,7 +21,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>../../build</OutputPath>
-    <DocumentationFile>../../build\Onbox.Revit.Abstractions.xml</DocumentationFile>
+    <DocumentationFile>Onbox.Revit.Abstractions.VDev.xml</DocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

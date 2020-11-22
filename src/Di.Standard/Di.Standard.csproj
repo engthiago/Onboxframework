@@ -27,7 +27,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>../../build</OutputPath>
-    <DocumentationFile>../../build\Onbox.Di.xml</DocumentationFile>
+    <DocumentationFile>Onbox.Di.VDev.xml</DocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
