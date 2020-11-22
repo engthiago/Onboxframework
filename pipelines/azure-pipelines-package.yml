@@ -40,10 +40,10 @@ steps:
     clean: true
 
 - task: NuGetCommand@2
-  displayName: Package .NetFramework Projects
+  displayName: Package Nuget
   inputs:
     command: 'pack'
-    packagesToPack: 'build/Mvc.nuspec;build/Mvc.Revit.nuspec;build/Revit.nuspec'
+    packagesToPack: 'build/*.nuspec'
     versioningScheme: 'off'
     includeSymbols: true
 
