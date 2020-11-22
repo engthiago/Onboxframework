@@ -19,5 +19,7 @@
   </metadata>
   <files>
 	  <file src="onbox.png" />
+	  <file src="Onbox.Mvc.Abstractions.VDev.dll" target="lib\" />
+	  <file src="Onbox.Mvc.Abstractions.VDev.xml" target="lib\" />
   </files>
 </package>

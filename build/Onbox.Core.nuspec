@@ -21,5 +21,7 @@
   </metadata>
   <files>
 	  <file src="onbox.png" />
+	  <file src="Onbox.Core.VDev.dll" target="lib\" />
+	  <file src="Onbox.Core.VDev.xml" target="lib\" />
   </files>
 </package>
