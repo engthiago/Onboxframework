@@ -11,7 +11,7 @@ namespace Onbox.Revit.VDev.Commands
     /// <br>It uses a Container Pipeline to compose the container.</br>
     /// <br>After the command finishes the container will be disposed.</br>
     /// </summary>
-    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : RevitContainerProviderBase, IExternalCommand, IRevitCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
+    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : RevitContainerProviderBase, IExternalCommand, ICanBeGuardedRevitCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
         where TContainer : class, IContainer, new()
     {
         /// <summary>
@@ -28,16 +28,16 @@ namespace Onbox.Revit.VDev.Commands
             this.HookupRevitContext(application, container);
             this.AddRevitUI(container, application);
 
-            container.AddRevitCommandGuard();
+            container.AddRevitCommandGuardConditions();
 
             var newContainer = pipeline.Pipe(container);
 
             try
             {
                 // Needs to resolve Command Guard because the pipeline could have changed it
-                var commandguard = newContainer.Resolve<IRevitCommandGuard>();
+                var commandGuardChecker = newContainer.Resolve<IRevitCommandGuardChecker>();
 
-                if (commandguard.CanExecute(this.GetType(), commandData))
+                if (commandGuardChecker.CanExecute(this.GetType(), newContainer, commandData))
                 {
                     // Runs the users Execute command
                     return this.Execute(newContainer, commandData, ref message, elements);

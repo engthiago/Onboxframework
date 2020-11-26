@@ -158,14 +158,9 @@
             External Command lifecycle hook which is called just before the container is disposed.
             </summary>
         </member>
-        <member name="T:Onbox.Revit.VDev.Commands.IRevitCommand">
+        <member name="T:Onbox.Revit.VDev.Commands.ICanBeGuardedRevitCommand">
             <summary>
-            A Revit External Command
-            </summary>
-        </member>
-        <member name="M:Onbox.Revit.VDev.Commands.IRevitCommand.Execute(Autodesk.Revit.UI.ExternalCommandData,System.String@,Autodesk.Revit.DB.ElementSet)">
-            <summary>
-            Overload this method to implement and external command within Revit.
+            A Revit External Command that can be Guarded by Onbox Framework
             </summary>
         </member>
         <member name="T:Onbox.Revit.VDev.Commands.RevitAppCommand`1">

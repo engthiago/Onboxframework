@@ -10,7 +10,7 @@ namespace Onbox.Revit.VDev.Commands
     /// Base class to implement Revit Commands linked to a App Container
     /// <br>It will use a scope of the container declared on the App</br>
     /// </summary>
-    public abstract class RevitAppCommand<TApplication> : IExternalCommand, IRevitCommand, IRevitDestroyableCommand where TApplication : RevitApp, new()
+    public abstract class RevitAppCommand<TApplication> : IExternalCommand, ICanBeGuardedRevitCommand, IRevitDestroyableCommand where TApplication : RevitApp, new()
     {
         /// <summary>
         /// Execution of External Command
@@ -25,9 +25,9 @@ namespace Onbox.Revit.VDev.Commands
 
             try
             {
-                var commandguard = scope.Resolve<IRevitCommandGuard>();
+                var commandGuardChecker = scope.Resolve<IRevitCommandGuardChecker>();
 
-                if (commandguard.CanExecute(this.GetType(), commandData))
+                if (commandGuardChecker.CanExecute(this.GetType(), scope, commandData))
                 {
                     // Runs the users Execute command
                     return this.Execute(scope, commandData, ref message, elements);

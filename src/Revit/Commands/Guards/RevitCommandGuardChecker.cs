@@ -1,4 +1,6 @@
 ﻿using Autodesk.Revit.UI;
+using Onbox.Abstractions.VDev;
+using Onbox.Revit.VDev.Commands.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,28 +10,66 @@ using System.Threading.Tasks;
 
 namespace Onbox.Revit.VDev.Commands.Guards
 {
-    public interface IRevitCommandGuard
+    public interface IRevitCommandGuardChecker
     {
-        bool CanExecute(Type commandType, ExternalCommandData commandData);
+        bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData);
     }
 
-    public class RevitCommandGuard : IRevitCommandGuard
+    public class RevitCommandGuardChecker : IRevitCommandGuardChecker
     {
         private readonly Dictionary<Type, List<Predicate<ICommandInfo>>> commandConditions;
 
-        public RevitCommandGuard()
+        public RevitCommandGuardChecker()
         {
             commandConditions = new Dictionary<Type, List<Predicate<ICommandInfo>>>();
         }
 
-        public bool CanExecute(Type commandType, ExternalCommandData commandData)
+        public bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData)
         {
+            var dotnotGuardAttrType = typeof(DoNotGuardCommandAttribute);
+            var attributeData = commandType.CustomAttributes;
+
+            // If DoNotGuardAttribute is added to the command, we wont check anything else, just allow the command to run
+            if (attributeData.Any(a => a.AttributeType == dotnotGuardAttrType))
+            {
+                return true;
+            }
+
+            // Loop through all RevitCommandGuardAttributes to see if we can run the command
+            var guardAttrType = typeof(RevitCommandGuardAttribute);
+            var attributes = commandType.GetCustomAttributes().Where(a => a.GetType() == guardAttrType);
+            var methodInfo = guardAttrType.GetMethod(nameof(RevitCommandGuardAttribute.GetCommandGuardType));
+            foreach (var attribute in attributes)
+            {
+                var guardType = methodInfo.Invoke(attribute, null) as Type;
+
+                if (guardType != null)
+                {
+                    var guard = Activator.CreateInstance(guardType) as IRevitCommandGuard;
+                    if (guard != null)
+                    {
+                        if (!guard.CanExecute(commandType, container, commandData))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            var dotnotUseGuardConditionsAttrType = typeof(DoNotUseGuardConditionsAttribute);
+            // If DoNotUseGuardConditionsAttribute is added to the command, we wont check contions, just allow the command to run
+            if (attributeData.Any(a => a.AttributeType == dotnotUseGuardConditionsAttrType))
+            {
+                return true;
+            }
+
+            // Loop through all conditions to see if we can run the command
             if (commandConditions.ContainsKey(commandType))
             {
                 var conditions = commandConditions[commandType];
                 foreach (var condition in conditions)
                 {
-                    var commandInfo = new CommandInfo(commandType, commandData);
+                    var commandInfo = new CommandInfo(commandType, container, commandData);
                     var canExecute = condition.Invoke(commandInfo);
                     if (!canExecute)
                     {
@@ -38,10 +78,8 @@ namespace Onbox.Revit.VDev.Commands.Guards
                 }
                 return true;
             }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
 
         internal void AddCommandTypeCondition(Type commandType, Predicate<ICommandInfo> predicate)
@@ -67,8 +105,8 @@ namespace Onbox.Revit.VDev.Commands.Guards
     public interface IConditionBuilder
     {
         IConditionBuilder ForCommandsInAssembly(Assembly assembly);
-        IConditionBuilder ForCommand<TCommand>() where TCommand : IRevitCommand;
-        IConditionBuilder ExceptCommand<TCommand>() where TCommand : IRevitCommand;
+        IConditionBuilder ForCommand<TCommand>() where TCommand : ICanBeGuardedRevitCommand;
+        IConditionBuilder ExceptCommand<TCommand>() where TCommand : ICanBeGuardedRevitCommand;
         IConditionBuilder WhereCommandType(Func<Type, bool> commandTypeFilter);
         void CanExecute(Predicate<ICommandInfo> predicate);
     }
@@ -94,7 +132,7 @@ namespace Onbox.Revit.VDev.Commands.Guards
             this.predicate = predicate;
         }
 
-        public IConditionBuilder ExceptCommand<TCommand>() where TCommand : IRevitCommand
+        public IConditionBuilder ExceptCommand<TCommand>() where TCommand : ICanBeGuardedRevitCommand
         {
             var type = typeof(TCommand);
             this.removedCommands.Add(type);
@@ -107,7 +145,7 @@ namespace Onbox.Revit.VDev.Commands.Guards
         }
 
 
-        public IConditionBuilder ForCommand<TCommand>() where TCommand : IRevitCommand
+        public IConditionBuilder ForCommand<TCommand>() where TCommand : ICanBeGuardedRevitCommand
         {
             var type = typeof(TCommand);
             this.addedCommands.Add(type);
@@ -116,7 +154,7 @@ namespace Onbox.Revit.VDev.Commands.Guards
 
         public IConditionBuilder ForCommandsInAssembly(Assembly assembly)
         {
-            var interFacetype = typeof(IRevitCommand);
+            var interFacetype = typeof(ICanBeGuardedRevitCommand);
             var types = assembly.GetTypes().Where(t => t.GetInterfaces().FirstOrDefault(i => i == interFacetype) != null);
             this.addedCommands.AddRange(types);
             return this;
@@ -178,12 +216,19 @@ namespace Onbox.Revit.VDev.Commands.Guards
     public class CommandInfo : ICommandInfo
     {
         private readonly Type commandType;
+        private readonly IContainerResolver container;
         private readonly ExternalCommandData commandData;
 
-        internal CommandInfo(Type commandType, ExternalCommandData CommandData)
+        internal CommandInfo(Type commandType, IContainerResolver container, ExternalCommandData CommandData)
         {
             this.commandType = commandType;
+            this.container = container;
             this.commandData = CommandData;
+        }
+
+        public IContainerResolver GetContainer()
+        {
+            return this.container;
         }
 
         public Type GetCommandType()

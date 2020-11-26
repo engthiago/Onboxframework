@@ -32,7 +32,7 @@ namespace Onbox.Revit.VDev.Applications
             this.HookupRevitContext(application, container);
             this.AddRevitUI(container, application);
 
-            container.AddRevitCommandGuard();
+            container.AddRevitCommandGuardConditions();
 
             try
             {

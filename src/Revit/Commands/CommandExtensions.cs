@@ -6,20 +6,20 @@ namespace Onbox.Revit.VDev.Commands
 {
     public static class CommandExtensions
     {
-        static internal IContainer AddRevitCommandGuard(this IContainer container)
+        static internal IContainer AddRevitCommandGuardConditions(this IContainer container)
         {
-            var revitCommandGuard = new RevitCommandGuard();
-            container.AddSingleton(revitCommandGuard);
-            container.AddSingleton<IRevitCommandGuard>(revitCommandGuard);
+            var commandGuardChecker = new RevitCommandGuardChecker();
+            container.AddSingleton(commandGuardChecker);
+            container.AddSingleton<IRevitCommandGuardChecker>(commandGuardChecker);
 
             return container;
         }
 
-        static public IContainer AddRevitCommandGuard(this IContainer container, Action<ConditionCollection> configuration)
+        static public IContainer AddRevitCommandGuardConditions(this IContainer container, Action<ConditionCollection> configuration)
         {
-            var revitCommandGuard = new RevitCommandGuard();
-            container.AddSingleton(revitCommandGuard);
-            container.AddSingleton<IRevitCommandGuard>(revitCommandGuard);
+            var commandGuardChecker = new RevitCommandGuardChecker();
+            container.AddSingleton(commandGuardChecker);
+            container.AddSingleton<IRevitCommandGuardChecker>(commandGuardChecker);
 
             var collection = new ConditionCollection();
             configuration?.Invoke(collection);
@@ -33,7 +33,7 @@ namespace Onbox.Revit.VDev.Commands
 
                 foreach (var commandType in commandTypes)
                 {
-                    revitCommandGuard.AddCommandTypeCondition(commandType, predicate);
+                    commandGuardChecker.AddCommandTypeCondition(commandType, predicate);
                 }
             }
 

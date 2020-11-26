@@ -10,17 +10,17 @@ namespace CommandGuardSample
         {
             var currentAssembly = this.GetType().Assembly;
 
-            container.AddRevitCommandGuard(config =>
+            container.AddRevitCommandGuardConditions(config =>
             {
                 config.AddCondition()
                     .ForCommandsInAssembly(currentAssembly)
                     //.ForCommand<IndependentCommand>()
                     //.ExceptCommand<IndependentCommand>()
-                    .WhereCommandType(commandType => commandType.Name.Contains(""))
+                    //.WhereCommandType(commandType => commandType.Name.Contains("Independent"))
                     .CanExecute(info =>
                     {
                         var result = MessageBox.Show("Can run?", "Command Guard", MessageBoxButtons.YesNo);
-                        
+
                         if (result == DialogResult.Yes)
                         {
                             return true;
