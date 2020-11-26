@@ -15,7 +15,7 @@ namespace Onbox.Revit.VDev.Commands
             return container;
         }
 
-        static public IContainer AddRevitCommandGuardConditions(this IContainer container, Action<ConditionCollection> configuration)
+        static public IContainer AddRevitCommandGuardConditions(this IContainer container, Action<IConditionCollection> configuration)
         {
             var commandGuardChecker = new RevitCommandGuardChecker();
             container.AddSingleton(commandGuardChecker);

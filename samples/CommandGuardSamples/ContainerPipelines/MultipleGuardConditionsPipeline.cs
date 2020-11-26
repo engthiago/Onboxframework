@@ -2,27 +2,22 @@
 using Onbox.Revit.VDev.Commands;
 using System.Windows.Forms;
 
-namespace CommandGuardSample
+namespace CommandGuardSamples.ContainerPipelines
 {
-    public class CommandGuardPipeline : IContainerPipeline
+    public class MultipleGuardConditionsPipeline : IContainerPipeline
     {
         public IContainer Pipe(IContainer container)
         {
+            // Gets the assembly reference
             var currentAssembly = this.GetType().Assembly;
 
             container.AddRevitCommandGuardConditions(config =>
             {
                 config.AddCondition()
                       .ForCommandsInAssembly(currentAssembly)
-                      //.ForCommand<IndependentCommand>()
-                      //.ExceptCommand<IndependentCommand>()
-                      //.WhereCommandType(commandType => commandType.Name.Contains("Independent"))
                       .CanExecute(info =>
                       {
-                          var commandData = info.GetCommandData();
-                          var doc = commandData.Application.ActiveUIDocument.Document;
-
-                          var result = MessageBox.Show($"Can run on {doc.Title}?", "Command Guard Conditon 1", MessageBoxButtons.YesNo);
+                          var result = MessageBox.Show($"Can run Guard Condition 1?", "Guard Condition", MessageBoxButtons.YesNo);
 
                           if (result == DialogResult.Yes)
                           {
@@ -33,12 +28,9 @@ namespace CommandGuardSample
 
                 config.AddCondition()
                       .ForCommandsInAssembly(currentAssembly)
-                      //.ForCommand<IndependentCommand>()
-                      //.ExceptCommand<IndependentCommand>()
-                      //.WhereCommandType(commandType => commandType.Name.Contains("Independent"))
                       .CanExecute(info =>
                       {
-                          var result = MessageBox.Show("Can run?", "Command Guard Conditon 2", MessageBoxButtons.YesNo);
+                          var result = MessageBox.Show($"Can run Guard Condition 2?", "Guard Condition", MessageBoxButtons.YesNo);
 
                           if (result == DialogResult.Yes)
                           {
@@ -51,4 +43,5 @@ namespace CommandGuardSample
             return container;
         }
     }
+
 }

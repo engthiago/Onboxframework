@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>CommandGuardSamples</Name>
+    <Assembly>CommandGuardSamples/CommandGuardSamples.dll</Assembly>
+    <AddInId>ac0c8282-d92f-4cdd-af35-d25fc69185c0</AddInId>
+    <FullClassName>CommandGuardSamples.Revit.App</FullClassName>
+    <VendorId>CommandGuardSamples</VendorId>
+    <VendorDescription>CommandGuardSamples</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>

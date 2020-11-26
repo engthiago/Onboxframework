@@ -181,7 +181,7 @@ namespace Onbox.Revit.VDev.Commands.Guards
         IConditionBuilder AddCondition();
     }
 
-    public class ConditionCollection
+    public class ConditionCollection : IConditionCollection
     {
         readonly List<IConditionBuilderProvider> builders;
 
@@ -190,7 +190,7 @@ namespace Onbox.Revit.VDev.Commands.Guards
             this.builders = new List<IConditionBuilderProvider>();
         }
 
-        public ConditionBuilder AddCondition()
+        public IConditionBuilder AddCondition()
         {
             var conditionBuilder = new ConditionBuilder();
             this.builders.Add(conditionBuilder);

@@ -7,8 +7,8 @@
     <ProjectGuid>{087ECADF-0B3A-4C95-8D51-EC7481988087}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommandGuardSample</RootNamespace>
-    <AssemblyName>CommandGuardSample</AssemblyName>
+    <RootNamespace>CommandGuardSamples</RootNamespace>
+    <AssemblyName>CommandGuardSamples</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -66,9 +66,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IndependentCommand.cs" />
-    <Compile Include="CommandGuardPipeline.cs" />
+    <Compile Include="Revit\App.cs" />
+    <Compile Include="Revit\Commands\Guards\CommandGuard1.cs" />
+    <Compile Include="Revit\Commands\Guards\CommandGuard2.cs" />
+    <Compile Include="Revit\Commands\IgnoreGuardConditionCommand.cs" />
+    <Compile Include="Revit\Commands\SingleGuardConditionCommand.cs" />
+    <Compile Include="Revit\Commands\MultipleGuardConditionsCommand.cs" />
+    <Compile Include="Revit\Commands\SingleGuardCommand.cs" />
+    <Compile Include="Revit\Commands\MultipleGuardsCommand.cs" />
+    <Compile Include="ContainerPipelines\EmptyPipeline.cs" />
+    <Compile Include="ContainerPipelines\MultipleGuardConditionsPipeline.cs" />
+    <Compile Include="ContainerPipelines\SingleGuardConditionPipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Revit\Commands\SingleGuardOnAppCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Abstractions\Abstractions.Standard.csproj">
@@ -94,7 +104,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CommandGuardSamples.addin" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onbox.Revit.Tests", "tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E39CC7D7-26C4-468F-B126-7B9F0D0D5668}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandGuardSample", "samples\CommandGuardSample\CommandGuardSample.csproj", "{087ECADF-0B3A-4C95-8D51-EC7481988087}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandGuardSamples", "samples\CommandGuardSamples\CommandGuardSamples.csproj", "{087ECADF-0B3A-4C95-8D51-EC7481988087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
