@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Di.VDev;
+using Onbox.Revit.VDev.Commands.Guards;
 
 namespace Onbox.Revit.VDev.Commands
 {
@@ -10,7 +11,7 @@ namespace Onbox.Revit.VDev.Commands
     /// <br>It uses a Container Pipeline to compose the container.</br>
     /// <br>After the command finishes the container will be disposed.</br>
     /// </summary>
-    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : RevitContainerProviderBase, IExternalCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
+    public abstract class RevitContainerCommandBase<TContainerPipeline, TContainer> : RevitContainerProviderBase, IExternalCommand, IRevitCommand, IRevitDestroyableCommand where TContainerPipeline : class, IContainerPipeline, new()
         where TContainer : class, IContainer, new()
     {
         /// <summary>
@@ -27,12 +28,25 @@ namespace Onbox.Revit.VDev.Commands
             this.HookupRevitContext(application, container);
             this.AddRevitUI(container, application);
 
+            container.AddRevitCommandGuard();
+
             var newContainer = pipeline.Pipe(container);
 
             try
             {
-                // Runs the users Execute command
-                return Execute(newContainer, commandData, ref message, elements);
+                // Needs to resolve Command Guard because the pipeline could have changed it
+                var commandguard = newContainer.Resolve<IRevitCommandGuard>();
+
+                if (commandguard.CanExecute(this.GetType(), commandData))
+                {
+                    // Runs the users Execute command
+                    return this.Execute(newContainer, commandData, ref message, elements);
+                }
+                else
+                {
+                    return Result.Cancelled;
+                }
+
             }
             catch
             {

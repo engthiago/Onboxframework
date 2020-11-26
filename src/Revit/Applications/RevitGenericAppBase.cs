@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Di.VDev;
+using Onbox.Revit.VDev.Commands;
 using Onbox.Revit.VDev.UI;
 
 namespace Onbox.Revit.VDev.Applications
@@ -29,13 +30,14 @@ namespace Onbox.Revit.VDev.Applications
 
             this.HookUpContainer(container, containerGuid);
             this.HookupRevitContext(application, container);
-
             this.AddRevitUI(container, application);
+
+            container.AddRevitCommandGuard();
 
             try
             {
                 // Calls the client's Startup
-                var result = OnStartup(container, application);
+                var result = this.OnStartup(container, application);
                 if (result != Result.Succeeded)
                 {
                     return result;
@@ -44,7 +46,7 @@ namespace Onbox.Revit.VDev.Applications
                 // Calls the client's CreateRibbon
                 var imageManager = new ImageManager();
                 var ribbonManager = new RibbonManager(application, imageManager);
-                OnCreateRibbon(ribbonManager);
+                this.OnCreateRibbon(ribbonManager);
 
                 return result;
             }
@@ -71,9 +73,9 @@ namespace Onbox.Revit.VDev.Applications
             try
             {
                 // Unhooks the events
-                UnhookRevitContext(application, containerGuid);
+                this.UnhookRevitContext(application, containerGuid);
                 // Calls the client's Shotdown
-                return OnShutdown(container, application);
+                return this.OnShutdown(container, application);
             }
             catch
             {
@@ -83,7 +85,7 @@ namespace Onbox.Revit.VDev.Applications
             finally
             {
                 // Unhooks and cleans the container even if an exception is thrown
-                UnhookContainer(containerGuid, container);
+                this.UnhookContainer(containerGuid, container);
             }
         }
 

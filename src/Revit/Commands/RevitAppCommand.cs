@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Revit.VDev.Applications;
+using Onbox.Revit.VDev.Commands.Guards;
 
 namespace Onbox.Revit.VDev.Commands
 {
@@ -9,7 +10,7 @@ namespace Onbox.Revit.VDev.Commands
     /// Base class to implement Revit Commands linked to a App Container
     /// <br>It will use a scope of the container declared on the App</br>
     /// </summary>
-    public abstract class RevitAppCommand<TApplication> : IExternalCommand, IRevitDestroyableCommand where TApplication : RevitApp, new()
+    public abstract class RevitAppCommand<TApplication> : IExternalCommand, IRevitCommand, IRevitDestroyableCommand where TApplication : RevitApp, new()
     {
         /// <summary>
         /// Execution of External Command
@@ -24,8 +25,17 @@ namespace Onbox.Revit.VDev.Commands
 
             try
             {
-                // Runs the users Execute command
-                return Execute(scope, commandData, ref message, elements);
+                var commandguard = scope.Resolve<IRevitCommandGuard>();
+
+                if (commandguard.CanExecute(this.GetType(), commandData))
+                {
+                    // Runs the users Execute command
+                    return this.Execute(scope, commandData, ref message, elements);
+                }
+                else
+                {
+                    return Result.Cancelled;
+                }
             }
             catch
             {
