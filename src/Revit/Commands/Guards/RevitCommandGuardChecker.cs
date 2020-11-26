@@ -26,37 +26,33 @@ namespace Onbox.Revit.VDev.Commands.Guards
 
         public bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData)
         {
-            var ignoreGuardsType = typeof(IgnoreCommandGuardsAttribute);
-            var attributeData = commandType.CustomAttributes;
-
-            // If IgnoreGuards is added to the command, we wont check anything else, just allow the command to run
-            if (attributeData.Any(a => a.AttributeType == ignoreGuardsType))
-            {
-                return true;
-            }
-
             // Loop through all RevitCommandGuardAttributes to see if we can run the command
             var guardAttrType = typeof(CommandGuardAttribute);
             var attributes = commandType.GetCustomAttributes().Where(a => a.GetType() == guardAttrType);
-            var methodInfo = guardAttrType.GetMethod(nameof(CommandGuardAttribute.GetCommandGuardType));
-            foreach (var attribute in attributes)
+            if (attributes.Any())
             {
-                var guardType = methodInfo.Invoke(attribute, null) as Type;
-
-                if (guardType != null)
+                var methodInfo = guardAttrType.GetMethod(nameof(CommandGuardAttribute.GetCommandGuardType));
+                foreach (var attribute in attributes)
                 {
-                    var guard = Activator.CreateInstance(guardType) as IRevitCommandGuard;
-                    if (guard != null)
+                    var guardType = methodInfo.Invoke(attribute, null) as Type;
+
+                    if (guardType != null)
                     {
-                        if (!guard.CanExecute(commandType, container, commandData))
+                        var guard = Activator.CreateInstance(guardType) as IRevitCommandGuard;
+                        if (guard != null)
                         {
-                            return false;
+                            if (!guard.CanExecute(commandType, container, commandData))
+                            {
+                                return false;
+                            }
                         }
                     }
                 }
             }
 
             var ignoreConditionsType = typeof(IgnoreCommandGuardConditionsAttribute);
+            var attributeData = commandType.CustomAttributes;
+
             // If IgnoreConditions is added to the command, we wont check contions, just allow the command to run
             if (attributeData.Any(a => a.AttributeType == ignoreConditionsType))
             {

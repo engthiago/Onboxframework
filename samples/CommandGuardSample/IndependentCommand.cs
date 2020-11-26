@@ -6,12 +6,12 @@ using Onbox.Revit.VDev.Commands;
 using Onbox.Revit.VDev.Commands.Attributes;
 using Onbox.Revit.VDev.Commands.Guards;
 using System;
+using System.Windows.Forms;
 
 namespace CommandGuardSample
 {
     [CommandGuard(typeof(CommandGuardSample))]
     //[RevitCommandGuard(typeof(CommandGuardSample2))]
-    //[IgnoreCommandGuards]
     [IgnoreCommandGuardConditions]
     [Transaction(TransactionMode.Manual)]
     public class IndependentCommand : RevitContainerCommand<CommandGuardPipeline>
@@ -29,9 +29,13 @@ namespace CommandGuardSample
     {
         public bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData)
         {
-            TaskDialog.Show("Command", "Guard 1");
+            var result = MessageBox.Show("Can run?", "Command Guard 1", MessageBoxButtons.YesNo);
 
-            return true;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
     }
 
@@ -39,9 +43,13 @@ namespace CommandGuardSample
     {
         public bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData)
         {
-            TaskDialog.Show("Command", "Guard 2");
+            var result = MessageBox.Show("Can run?", "Command Guard 2", MessageBoxButtons.YesNo);
 
-            return true;
+            if (result == DialogResult.Yes)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
