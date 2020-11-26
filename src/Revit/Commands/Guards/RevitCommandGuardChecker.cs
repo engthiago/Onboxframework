@@ -98,12 +98,39 @@ namespace Onbox.Revit.VDev.Commands.Guards
         List<Type> GetCommandTypes();
     }
 
+    /// <summary>
+    /// Adds or Removes Commands from CommandGuard Conditions. The order doesnt matter.
+    /// </summary>
     public interface IConditionBuilder
     {
+        /// <summary>
+        /// Adds all commands in the target Assembly.
+        /// </summary>
+        /// <param name="assembly">The targeted assembly</param>
+        /// <returns>The condition builder.</returns>
         IConditionBuilder ForCommandsInAssembly(Assembly assembly);
+        /// <summary>
+        /// Adds a specific command to the condition guard.
+        /// </summary>
+        /// <typeparam name="TCommand"></typeparam>
+        /// <returns>The condition builder.</returns>
         IConditionBuilder ForCommand<TCommand>() where TCommand : ICanBeGuardedRevitCommand;
+        /// <summary>
+        /// Explicit removes a specific command to the condition guard. Once a command is explicit removed, it can not be added back to the condition.
+        /// </summary>
+        /// <typeparam name="TCommand"></typeparam>
+        /// <returns>The condition builder.</returns>
         IConditionBuilder ExceptCommand<TCommand>() where TCommand : ICanBeGuardedRevitCommand;
+        /// <summary>
+        /// Filters commands from the condition guard.
+        /// </summary>
+        /// <param name="commandTypeFilter">The filter predicate</param>
+        /// <returns>The condition builder.</returns>
         IConditionBuilder WhereCommandType(Func<Type, bool> commandTypeFilter);
+        /// <summary>
+        /// Creates the condition guard.
+        /// </summary>
+        /// <param name="predicate">The condition for the command to run.</param>
         void CanExecute(Predicate<ICommandInfo> predicate);
     }
 
@@ -176,8 +203,15 @@ namespace Onbox.Revit.VDev.Commands.Guards
 
     }
 
+    /// <summary>
+    /// The Command Guard Conditions that will be applied to Revit Commands.
+    /// </summary>
     public interface IConditionCollection
     {
+        /// <summary>
+        /// Creates a condition builder that has the ability to add Commands to guard.
+        /// </summary>
+        /// <returns>The condition builder.</returns>
         IConditionBuilder AddCondition();
     }
 
@@ -203,10 +237,26 @@ namespace Onbox.Revit.VDev.Commands.Guards
         }
     }
 
+    /// <summary>
+    /// Contains Information about the current running Revit Command.
+    /// </summary>
     public interface ICommandInfo
     {
+        /// <summary>
+        /// Gets the type of the Revit Command.
+        /// </summary>
+        /// <returns>The type of the command.</returns>
         Type GetCommandType();
+        /// <summary>
+        /// Gets the command data from the Revit Command.
+        /// </summary>
+        /// <returns>The external command data.</returns>
         ExternalCommandData GetCommandData();
+        /// <summary>
+        /// Gets the current container from the Revit Command.
+        /// </summary>
+        /// <returns>Current Container.</returns>
+        IContainerResolver GetContainer();
     }
 
     public class CommandInfo : ICommandInfo

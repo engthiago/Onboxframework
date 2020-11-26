@@ -17,6 +17,7 @@ namespace CommandGuardSamples.ContainerPipelines
                       .ForCommandsInAssembly(currentAssembly)
                       .CanExecute(info =>
                       {
+                          var currentContainer = info.GetContainer();
                           var result = MessageBox.Show($"Can run Guard Condition 1?", "Guard Condition", MessageBoxButtons.YesNo);
 
                           if (result == DialogResult.Yes)

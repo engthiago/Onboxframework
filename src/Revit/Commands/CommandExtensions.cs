@@ -4,6 +4,9 @@ using System;
 
 namespace Onbox.Revit.VDev.Commands
 {
+    /// <summary>
+    /// Command Extensions for Onbox's DI system.
+    /// </summary>
     public static class CommandExtensions
     {
         static internal IContainer AddRevitCommandGuardConditions(this IContainer container)
@@ -15,6 +18,12 @@ namespace Onbox.Revit.VDev.Commands
             return container;
         }
 
+        /// <summary>
+        /// Adds support for guarding Revit Commands with Guard Conditions.
+        /// </summary>
+        /// <param name="container">The current container.</param>
+        /// <param name="configuration">The configuration to add guard conditions.</param>
+        /// <returns>The container.</returns>
         static public IContainer AddRevitCommandGuardConditions(this IContainer container, Action<IConditionCollection> configuration)
         {
             var commandGuardChecker = new RevitCommandGuardChecker();
