@@ -5,11 +5,11 @@ using System.Linq;
 namespace Onbox.Revit.VDev.Commands.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-    public class RevitCommandGuardAttribute : Attribute
+    public class CommandGuardAttribute : Attribute
     {
         private readonly Type revitCommandGuardType;
 
-        public RevitCommandGuardAttribute(Type revitCommandGuardType)
+        public CommandGuardAttribute(Type revitCommandGuardType)
         {
             this.revitCommandGuardType = revitCommandGuardType;
         }

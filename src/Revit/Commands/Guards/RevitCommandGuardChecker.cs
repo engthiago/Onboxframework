@@ -26,19 +26,19 @@ namespace Onbox.Revit.VDev.Commands.Guards
 
         public bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData)
         {
-            var dotnotGuardAttrType = typeof(DoNotGuardCommandAttribute);
+            var ignoreGuardsType = typeof(IgnoreCommandGuardsAttribute);
             var attributeData = commandType.CustomAttributes;
 
-            // If DoNotGuardAttribute is added to the command, we wont check anything else, just allow the command to run
-            if (attributeData.Any(a => a.AttributeType == dotnotGuardAttrType))
+            // If IgnoreGuards is added to the command, we wont check anything else, just allow the command to run
+            if (attributeData.Any(a => a.AttributeType == ignoreGuardsType))
             {
                 return true;
             }
 
             // Loop through all RevitCommandGuardAttributes to see if we can run the command
-            var guardAttrType = typeof(RevitCommandGuardAttribute);
+            var guardAttrType = typeof(CommandGuardAttribute);
             var attributes = commandType.GetCustomAttributes().Where(a => a.GetType() == guardAttrType);
-            var methodInfo = guardAttrType.GetMethod(nameof(RevitCommandGuardAttribute.GetCommandGuardType));
+            var methodInfo = guardAttrType.GetMethod(nameof(CommandGuardAttribute.GetCommandGuardType));
             foreach (var attribute in attributes)
             {
                 var guardType = methodInfo.Invoke(attribute, null) as Type;
@@ -56,9 +56,9 @@ namespace Onbox.Revit.VDev.Commands.Guards
                 }
             }
 
-            var dotnotUseGuardConditionsAttrType = typeof(DoNotUseGuardConditionsAttribute);
-            // If DoNotUseGuardConditionsAttribute is added to the command, we wont check contions, just allow the command to run
-            if (attributeData.Any(a => a.AttributeType == dotnotUseGuardConditionsAttrType))
+            var ignoreConditionsType = typeof(IgnoreCommandGuardConditionsAttribute);
+            // If IgnoreConditions is added to the command, we wont check contions, just allow the command to run
+            if (attributeData.Any(a => a.AttributeType == ignoreConditionsType))
             {
                 return true;
             }

@@ -81,11 +81,11 @@
     <Compile Include="Applications\ContainerPipelineExtensions.cs" />
     <Compile Include="Applications\RevitGenericAppBase.cs" />
     <Compile Include="Async\IRevitEventHandler.cs" />
-    <Compile Include="Commands\Attributes\DoNotUseGuardConditionsAttribute.cs" />
+    <Compile Include="Commands\Attributes\IgnoreCommandGuardConditionsAttribute.cs" />
     <Compile Include="Commands\CommandExtensions.cs" />
-    <Compile Include="Commands\Attributes\DoNotGuardCommandAttribute.cs" />
+    <Compile Include="Commands\Attributes\IgnoreCommandGuardsAttribute.cs" />
     <Compile Include="Commands\Guards\IRevitCommandGuard.cs" />
-    <Compile Include="Commands\Attributes\RevitCommandGuardAttribute.cs" />
+    <Compile Include="Commands\Attributes\CommandGuardAttribute.cs" />
     <Compile Include="Commands\IRevitDestroyableCommand.cs" />
     <Compile Include="Commands\ICanBeGuardedRevitCommand.cs" />
     <Compile Include="Commands\Guards\RevitCommandGuardChecker.cs" />

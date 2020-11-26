@@ -9,10 +9,10 @@ using System;
 
 namespace CommandGuardSample
 {
-    [RevitCommandGuard(typeof(CommandGuardSample))]
+    [CommandGuard(typeof(CommandGuardSample))]
     //[RevitCommandGuard(typeof(CommandGuardSample2))]
-    //[DoNotGuardCommand]
-    [DoNotUseGuardConditions]
+    //[IgnoreCommandGuards]
+    [IgnoreCommandGuardConditions]
     [Transaction(TransactionMode.Manual)]
     public class IndependentCommand : RevitContainerCommand<CommandGuardPipeline>
     {
