@@ -83,8 +83,16 @@
     <Compile Include="Async\IRevitEventHandler.cs" />
     <Compile Include="Commands\Attributes\IgnoreCommandGuardConditionsAttribute.cs" />
     <Compile Include="Commands\CommandExtensions.cs" />
+    <Compile Include="Commands\CommandInfo.cs" />
+    <Compile Include="Commands\Guards\ConditionBuilder.cs" />
+    <Compile Include="Commands\Guards\ConditionCollection.cs" />
+    <Compile Include="Commands\ICommandInfo.cs" />
+    <Compile Include="Commands\Guards\IConditionBuilder.cs" />
+    <Compile Include="Commands\Guards\IConditionBuilderProvider.cs" />
+    <Compile Include="Commands\Guards\IConditionCollection.cs" />
     <Compile Include="Commands\Guards\IRevitCommandGuard.cs" />
     <Compile Include="Commands\Attributes\CommandGuardAttribute.cs" />
+    <Compile Include="Commands\Guards\IRevitCommandGuardChecker.cs" />
     <Compile Include="Commands\IRevitDestroyableCommand.cs" />
     <Compile Include="Commands\ICanBeGuardedRevitCommand.cs" />
     <Compile Include="Commands\Guards\RevitCommandGuardChecker.cs" />

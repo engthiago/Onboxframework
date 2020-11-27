@@ -148,6 +148,92 @@
             If the handler will be journable
             </summary>
         </member>
+        <member name="T:Onbox.Revit.VDev.Commands.CommandExtensions">
+            <summary>
+            Command Extensions for Onbox's DI system.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.CommandExtensions.AddRevitCommandGuardConditions(Onbox.Abstractions.VDev.IContainer,System.Action{Onbox.Revit.VDev.Commands.Guards.IConditionCollection})">
+            <summary>
+            Adds support for guarding Revit Commands with Guard Conditions.
+            </summary>
+            <param name="container">The current container.</param>
+            <param name="configuration">The configuration to add guard conditions.</param>
+            <returns>The container.</returns>
+        </member>
+        <member name="T:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder">
+            <summary>
+            Adds or Removes Commands from CommandGuard Conditions. The order doesnt matter.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder.ForCommandsInAssembly(System.Reflection.Assembly)">
+            <summary>
+            Adds all commands in the target Assembly.
+            </summary>
+            <param name="assembly">The targeted assembly</param>
+            <returns>The condition builder.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder.ForCommand``1">
+            <summary>
+            Adds a specific command to the condition guard.
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <returns>The condition builder.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder.ExceptCommand``1">
+            <summary>
+            Explicit removes a specific command to the condition guard. Once a command is explicit removed, it can not be added back to the condition.
+            </summary>
+            <typeparam name="TCommand"></typeparam>
+            <returns>The condition builder.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder.WhereCommandType(System.Func{System.Type,System.Boolean})">
+            <summary>
+            Filters commands from the condition guard.
+            </summary>
+            <param name="commandTypeFilter">The filter predicate</param>
+            <returns>The condition builder.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder.CanExecute(System.Predicate{Onbox.Revit.VDev.Commands.ICommandInfo})">
+            <summary>
+            Creates the condition guard.
+            </summary>
+            <param name="predicate">The condition for the command to run.</param>
+        </member>
+        <member name="T:Onbox.Revit.VDev.Commands.Guards.IConditionCollection">
+            <summary>
+            The Command Guard Conditions that will be applied to Revit Commands.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Guards.IConditionCollection.AddCondition">
+            <summary>
+            Creates a condition builder that has the ability to add Commands to guard.
+            </summary>
+            <returns>The condition builder.</returns>
+        </member>
+        <member name="T:Onbox.Revit.VDev.Commands.ICommandInfo">
+            <summary>
+            Contains Information about the current running Revit Command.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.ICommandInfo.GetCommandType">
+            <summary>
+            Gets the type of the Revit Command.
+            </summary>
+            <returns>The type of the command.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.ICommandInfo.GetCommandData">
+            <summary>
+            Gets the command data from the Revit Command.
+            </summary>
+            <returns>The external command data.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.ICommandInfo.GetContainer">
+            <summary>
+            Gets the current container from the Revit Command.
+            </summary>
+            <returns>Current Container.</returns>
+        </member>
         <member name="T:Onbox.Revit.VDev.Commands.IRevitDestroyableCommand">
             <summary>
             Holds lifecycle hook for Commands to be able to hook up to disposing container
