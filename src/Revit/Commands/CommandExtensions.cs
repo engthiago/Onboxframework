@@ -50,7 +50,12 @@ namespace Onbox.Revit.VDev.Commands
             return container;
         }
 
-
+        /// <summary>
+        /// Adds support for handling exceptions globally in Revit Commands.
+        /// </summary>
+        /// <typeparam name="THandler">A class that inherits from <see cref="IRevitCommandErrorHandler"/> to handle the exceptions.</typeparam>
+        /// <param name="container">The current container.</param>
+        /// <returns>The Container.</returns>
         static public IContainer AddRevitCommandErrorHandling<THandler>(this IContainer container) where THandler : class, IRevitCommandErrorHandler, new()
         {
             var hanlder = new THandler();

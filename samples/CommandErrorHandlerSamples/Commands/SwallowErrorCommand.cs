@@ -8,7 +8,7 @@ using Onbox.Revit.VDev.Commands;
 namespace CommandErrorHandlerSamples.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    public class ThingThatWillResultInErrorCommand : RevitContainerCommand<SampleCommandErrorHandlingPipeline>
+    public class SwallowErrorCommand : RevitContainerCommand<SwallowErrorPipeline>
     {
         public override Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements)
         {

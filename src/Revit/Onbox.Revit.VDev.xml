@@ -161,6 +161,27 @@
             <param name="configuration">The configuration to add guard conditions.</param>
             <returns>The container.</returns>
         </member>
+        <member name="M:Onbox.Revit.VDev.Commands.CommandExtensions.AddRevitCommandErrorHandling``1(Onbox.Abstractions.VDev.IContainer)">
+            <summary>
+            Adds support for handling exceptions globally in Revit Commands.
+            </summary>
+            <typeparam name="THandler">A class that inherits from <see cref="T:Onbox.Revit.VDev.Commands.ErrorHandlers.IRevitCommandErrorHandler"/> to handle the exceptions.</typeparam>
+            <param name="container">The current container.</param>
+            <returns>The Container.</returns>
+        </member>
+        <member name="T:Onbox.Revit.VDev.Commands.ErrorHandlers.IRevitCommandErrorHandler">
+            <summary>
+            Provides functionality to allow Revit Command Exception Handling
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.ErrorHandlers.IRevitCommandErrorHandler.Handle(Onbox.Revit.VDev.Commands.ICommandInfo,System.Exception)">
+            <summary>
+            Ability to handle the exception. If returned false, the exception will be thrown anyways.
+            </summary>
+            <param name="commandInfo">The information about the current command.</param>
+            <param name="exception">The exception that is about to be thrown.</param>
+            <returns>Either the exception will be thrown or be handle by this handler.</returns>
+        </member>
         <member name="T:Onbox.Revit.VDev.Commands.Guards.IConditionBuilder">
             <summary>
             Adds or Removes Commands from CommandGuard Conditions. The order doesnt matter.

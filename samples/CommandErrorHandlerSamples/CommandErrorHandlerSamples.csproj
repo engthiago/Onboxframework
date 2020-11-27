@@ -66,9 +66,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ThingThatWillResultInErrorCommand.cs" />
-    <Compile Include="Commands\ErrorHandling\SampleCommandErrorHandler.cs" />
-    <Compile Include="ContainerPipelines\SampleCommandErrorHandlingPipeline.cs" />
+    <Compile Include="Commands\ErrorHandling\SwallowErrorHandler.cs" />
+    <Compile Include="Commands\ErrorHandling\ThrowErrorAnywaysHandler.cs" />
+    <Compile Include="Commands\ThrowErrorAnywaysCommand.cs" />
+    <Compile Include="Commands\SwallowErrorCommand.cs" />
+    <Compile Include="Commands\ShowErrorMessageCommand.cs" />
+    <Compile Include="Commands\ErrorHandling\ShowErrorMessageHandler.cs" />
+    <Compile Include="ContainerPipelines\ThrowErrorAnywaysPipeline.cs" />
+    <Compile Include="ContainerPipelines\SwallowErrorPipeline.cs" />
+    <Compile Include="ContainerPipelines\ShowErrorMessagePipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

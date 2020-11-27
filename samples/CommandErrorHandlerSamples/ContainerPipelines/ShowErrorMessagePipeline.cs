@@ -4,11 +4,11 @@ using Onbox.Revit.VDev.Commands;
 
 namespace CommandErrorHandlerSamples.ContainerPipelines
 {
-    public class SampleCommandErrorHandlingPipeline : IContainerPipeline
+    public class ShowErrorMessagePipeline : IContainerPipeline
     {
         public IContainer Pipe(IContainer container)
         {
-            container.AddRevitCommandErrorHandling<SampleCommandErrorHandler>();
+            container.AddRevitCommandErrorHandling<ShowErrorMessageHandler>();
 
             return container;
         }
