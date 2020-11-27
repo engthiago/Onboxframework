@@ -2,6 +2,7 @@
 using Onbox.Abstractions.VDev;
 using Onbox.Di.VDev;
 using Onbox.Revit.VDev.Commands;
+using Onbox.Revit.VDev.Commands.ErrorHandlers;
 using Onbox.Revit.VDev.UI;
 
 namespace Onbox.Revit.VDev.Applications
@@ -33,6 +34,7 @@ namespace Onbox.Revit.VDev.Applications
             this.AddRevitUI(container, application);
 
             container.AddRevitCommandGuardConditions();
+            container.AddRevitCommandErrorHandling<EmptyRevitCommandErrorHandler>();
 
             try
             {

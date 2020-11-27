@@ -79,11 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Applications\ContainerPipelineExtensions.cs" />
-    <Compile Include="Applications\RevitGenericAppBase.cs" />
+    <Compile Include="Applications\RevitAppBase.cs" />
     <Compile Include="Async\IRevitEventHandler.cs" />
     <Compile Include="Commands\Attributes\IgnoreCommandGuardConditionsAttribute.cs" />
     <Compile Include="Commands\CommandExtensions.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
+    <Compile Include="Commands\ErrorHandlers\RevitCommandErrorHandlerProvider.cs" />
     <Compile Include="Commands\Guards\ConditionBuilder.cs" />
     <Compile Include="Commands\Guards\ConditionCollection.cs" />
     <Compile Include="Commands\ICommandInfo.cs" />

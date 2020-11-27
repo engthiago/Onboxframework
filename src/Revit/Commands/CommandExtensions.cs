@@ -1,4 +1,5 @@
 ﻿using Onbox.Abstractions.VDev;
+using Onbox.Revit.VDev.Commands.ErrorHandlers;
 using Onbox.Revit.VDev.Commands.Guards;
 using System;
 
@@ -45,6 +46,16 @@ namespace Onbox.Revit.VDev.Commands
                     commandGuardChecker.AddCommandTypeCondition(commandType, predicate);
                 }
             }
+
+            return container;
+        }
+
+
+        static public IContainer AddRevitCommandErrorHandling<THandler>(this IContainer container) where THandler : class, IRevitCommandErrorHandler, new()
+        {
+            var hanlder = new THandler();
+            container.AddSingleton(hanlder);
+            container.AddSingleton<IRevitCommandErrorHandler, THandler>();
 
             return container;
         }

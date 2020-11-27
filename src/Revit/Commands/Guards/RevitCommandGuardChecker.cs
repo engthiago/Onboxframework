@@ -17,8 +17,12 @@ namespace Onbox.Revit.VDev.Commands.Guards
             commandConditions = new Dictionary<Type, List<Predicate<ICommandInfo>>>();
         }
 
-        public bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData)
+        public bool CanExecute(ICommandInfo commandInfo)
         {
+            var commandType = commandInfo.GetCommandType();
+            var container = commandInfo.GetContainer();
+            var commandData = commandInfo.GetCommandData();
+
             // Loop through all RevitCommandGuardAttributes to see if we can run the command
             var guardAttrType = typeof(CommandGuardAttribute);
             var attributes = commandType.GetCustomAttributes().Where(a => a.GetType() == guardAttrType);
@@ -34,7 +38,7 @@ namespace Onbox.Revit.VDev.Commands.Guards
                         var guard = Activator.CreateInstance(guardType) as IRevitCommandGuard;
                         if (guard != null)
                         {
-                            if (!guard.CanExecute(commandType, container, commandData))
+                            if (!guard.CanExecute(commandInfo))
                             {
                                 return false;
                             }
@@ -58,7 +62,6 @@ namespace Onbox.Revit.VDev.Commands.Guards
                 var conditions = commandConditions[commandType];
                 foreach (var condition in conditions)
                 {
-                    var commandInfo = new CommandInfo(commandType, container, commandData);
                     var canExecute = condition.Invoke(commandInfo);
                     if (!canExecute)
                     {

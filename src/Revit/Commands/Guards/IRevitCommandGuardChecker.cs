@@ -6,6 +6,6 @@ namespace Onbox.Revit.VDev.Commands.Guards
 {
     public interface IRevitCommandGuardChecker
     {
-        bool CanExecute(Type commandType, IContainerResolver container, ExternalCommandData commandData);
+        bool CanExecute(ICommandInfo commandInfo);
     }
 }

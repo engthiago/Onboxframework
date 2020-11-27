@@ -2,7 +2,9 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Revit.VDev.Applications;
+using Onbox.Revit.VDev.Commands.ErrorHandlers;
 using Onbox.Revit.VDev.Commands.Guards;
+using System;
 
 namespace Onbox.Revit.VDev.Commands
 {
@@ -17,17 +19,21 @@ namespace Onbox.Revit.VDev.Commands
         /// </summary>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            var commandType = this.GetType();
+
             // Gets the original container
             IContainer container = GetContainer();
 
             // Creates an scoped copy of the container
             var scope = container.CreateScope();
 
+            var commandInfo = new CommandInfo(commandType, scope, commandData);
+
             try
             {
                 var commandGuardChecker = scope.Resolve<IRevitCommandGuardChecker>();
 
-                if (commandGuardChecker.CanExecute(this.GetType(), scope, commandData))
+                if (commandGuardChecker.CanExecute(commandInfo))
                 {
                     // Runs the users Execute command
                     return this.Execute(scope, commandData, ref message, elements);
@@ -37,10 +43,19 @@ namespace Onbox.Revit.VDev.Commands
                     return Result.Cancelled;
                 }
             }
-            catch
+            catch (Exception exception)
             {
-                // If an exception is thrown on user's code, trows it back to the stack
-                throw;
+                var errorHandler = scope.Resolve<IRevitCommandErrorHandler>();
+                // If an exception is thrown on user's code, and the handler doesnt handle it, throw the except it back to the stack
+                if (!errorHandler.GetHandle(commandInfo, exception))
+                {
+                    throw;
+                }
+                else
+                {
+                    // If the hanlder handles the exception, the command will return succeeded
+                    return Result.Succeeded;
+                }
             }
             finally
             {

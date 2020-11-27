@@ -2,7 +2,9 @@
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Di.VDev;
+using Onbox.Revit.VDev.Commands.ErrorHandlers;
 using Onbox.Revit.VDev.Commands.Guards;
+using System;
 
 namespace Onbox.Revit.VDev.Commands
 {
@@ -19,6 +21,8 @@ namespace Onbox.Revit.VDev.Commands
         /// </summary>
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            var commandType = this.GetType();
+
             var pipeline = new TContainerPipeline();
             var container = new TContainer();
             var application = commandData.Application;
@@ -28,16 +32,20 @@ namespace Onbox.Revit.VDev.Commands
             this.HookupRevitContext(application, container);
             this.AddRevitUI(container, application);
 
+            // Add Default Guard Conditions and Error Handling before piping
             container.AddRevitCommandGuardConditions();
+            container.AddRevitCommandErrorHandling<EmptyRevitCommandErrorHandler>();
 
             var newContainer = pipeline.Pipe(container);
+
+            var commandInfo = new CommandInfo(commandType, newContainer, commandData);
 
             try
             {
                 // Needs to resolve Command Guard because the pipeline could have changed it
                 var commandGuardChecker = newContainer.Resolve<IRevitCommandGuardChecker>();
 
-                if (commandGuardChecker.CanExecute(this.GetType(), newContainer, commandData))
+                if (commandGuardChecker.CanExecute(commandInfo))
                 {
                     // Runs the users Execute command
                     return this.Execute(newContainer, commandData, ref message, elements);
@@ -48,10 +56,21 @@ namespace Onbox.Revit.VDev.Commands
                 }
 
             }
-            catch
+            catch (Exception exception)
             {
-                // If an exception is thrown on user's code, throws it back to the stack
-                throw;
+                // Needs to resolve Command handler because the pipeline could have changed it
+                var errorHandler = newContainer.Resolve<IRevitCommandErrorHandler>();
+
+                // If an exception is thrown on user's code, and the handler doesnt handle it, throw the except it back to the stack
+                if (!errorHandler.GetHandle(commandInfo, exception))
+                {
+                    throw;
+                }
+                else
+                {
+                    // If the hanlder handles the exception, the command will return succeeded
+                    return Result.Succeeded;
+                }
             }
             finally
             {
@@ -68,6 +87,8 @@ namespace Onbox.Revit.VDev.Commands
                 // Cleans up the container
                 container.Dispose();
             }
+
+
         }
 
 
