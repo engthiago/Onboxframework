@@ -5,13 +5,13 @@ namespace Onbox.Revit.VDev.Commands.ErrorHandlers
 {
     public interface IRevitCommandErrorHandler
     {
-        bool GetHandle(ICommandInfo commandInfo, Exception exception);
+        bool Handle(ICommandInfo commandInfo, Exception exception);
     }
 
 
     public class EmptyRevitCommandErrorHandler : IRevitCommandErrorHandler
     {
-        public bool GetHandle(ICommandInfo commandInfo, Exception exception)
+        public bool Handle(ICommandInfo commandInfo, Exception exception)
         {
             return false;
         }

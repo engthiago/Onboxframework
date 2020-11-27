@@ -47,7 +47,7 @@ namespace Onbox.Revit.VDev.Commands
             {
                 var errorHandler = scope.Resolve<IRevitCommandErrorHandler>();
                 // If an exception is thrown on user's code, and the handler doesnt handle it, throw the except it back to the stack
-                if (!errorHandler.GetHandle(commandInfo, exception))
+                if (!errorHandler.Handle(commandInfo, exception))
                 {
                     throw;
                 }
