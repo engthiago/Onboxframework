@@ -764,5 +764,278 @@
             Gets Ribbon line break string
             </summary>
         </member>
+        <member name="T:Onbox.Revit.VDev.UI.RibbonTabManager">
+            <summary>
+            Ribbon Manager will help you create Tabs, Panels and Buttons in Revit
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonTabManager.#ctor(Autodesk.Revit.UI.UIControlledApplication,System.String,Onbox.Revit.VDev.UI.ImageManager)">
+            <summary>
+            Ribbon Manager will help you create Tabs, Panels and Buttons in Revit
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonTabManager.GetTabName">
+            <summary>
+            Gets the current tab name.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonTabManager.CreatePanel(System.String)">
+            <summary>
+            Creates a Ribbon Panel
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.VDev.UI.IRibbonTabManager">
+            <summary>
+            The resulting of adding a new tab in Revit
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonTabManager.GetTabName">
+            <summary>
+            Returns the tab name
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.VDev.UI.IRibbonPanelManager">
+            <summary>
+            The responsible for adding UI Elements in the Ribbon, e.g. Buttons and Separators.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddSeparator">
+            <summary>
+            Adds a separator in the current panel.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddSlideOut">
+            <summary>
+            Adds a slide out in the current panel.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddStackedItems(Autodesk.Revit.UI.RibbonItemData,Autodesk.Revit.UI.RibbonItemData)">
+            <summary>
+            Adds a stacked containing 2 UI Elements in the current panel.
+            </summary>
+            <param name="item1">Top UI Element.</param>
+            <param name="item2">Bottom UI Element.</param>
+            <returns>The list of elements added</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddStackedItems(Autodesk.Revit.UI.RibbonItemData,Autodesk.Revit.UI.RibbonItemData,Autodesk.Revit.UI.RibbonItemData)">
+            <summary>
+            Adds a stacked containing 3 UI Elements in the current panel.
+            </summary>
+            <param name="item1">Top UI Element.</param>
+            <param name="item2">Middle UI Element.</param>
+            <param name="item3">Bottom UI Element.</param>
+            <returns>The list of elements added</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddPushButton``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new PushButton for a Command in the Revit UI with the default CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddPushButton``2(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new PushButton for a Command in the Revit UI with a custom CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <typeparam name="TAvailability">The type of the Command Availability.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.CreatePushButtonData``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new PushbuttonData for a Command with the default CommandAvailability, to be later added to another UI Element.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButtonData.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.CreatePushButtonData``2(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new PushbuttonData for a Command with a custom CommandAvailability, to be later added to another UI Element.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <typeparam name="TAvailability">The type of the Command Availability.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButtonData.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddSplitButton(System.Collections.Generic.List{Autodesk.Revit.UI.PushButtonData})">
+            <summary>
+            Adds a Splitbutton in the Revit UI.
+            </summary>
+            <param name="pushButtonDataList">The list of PushButtons to add.</param>
+            <returns>The created SplitButton</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddToggleButton``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new ToggleButton for a Command in the Revit UI with the default CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created ToggleButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.AddToggleButton``2(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new ToggleButton for a Command in the Revit UI with a custom CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <typeparam name="TAvailability">The type of the Command Availability.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created ToggleButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.GetPanel">
+            <summary>
+            Gets the current panel name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.IRibbonPanelManager.GetTabName">
+            <summary>
+            Gets the current tab name.
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.VDev.UI.RibbonPanelManager">
+            <summary>
+            The responsible for adding UI Elements in the Ribbon, e.g. Buttons and Separators.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.#ctor(System.String,Autodesk.Revit.UI.RibbonPanel,Onbox.Revit.VDev.UI.ImageManager)">
+            <summary>
+            The responsible for adding UI Elements in the Ribbon, e.g. Buttons and Separators.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.GetTabName">
+            <summary>
+            Gets the current tab name.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.GetPanel">
+            <summary>
+            Gets the current panel name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddPushButton``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new PushButton for a Command in the Revit UI with the default CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddPushButton``2(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new PushButton for a Command in the Revit UI with a custom CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <typeparam name="TAvailability">The type of the Command Availability.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.CreatePushButtonData``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new PushbuttonData for a Command with the default CommandAvailability, to be later added to another UI Element.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButtonData.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.CreatePushButtonData``2(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a new PushbuttonData for a Command with a custom CommandAvailability, to be later added to another UI Element.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <typeparam name="TAvailability">The type of the Command Availability.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created PushButtonData.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddToggleButton``1(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new ToggleButton for a Command in the Revit UI with the default CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created ToggleButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddToggleButton``2(System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a new ToggleButton for a Command in the Revit UI with a custom CommandAvailability.
+            </summary>
+            <typeparam name="TExternalCommand">The type of the External Command.</typeparam>
+            <typeparam name="TAvailability">The type of the Command Availability.</typeparam>
+            <param name="name">The name of the Command as it appears in Revit UI.</param>
+            <param name="image">The button image name, no path. The image should be a resource in the current project.</param>
+            <param name="tooltip">The tooltip that Revit wil show for this button.</param>
+            <param name="description">The description that Revit wil show for this button.</param>
+            <returns>The created ToggleButton.</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddSplitButton(System.Collections.Generic.List{Autodesk.Revit.UI.PushButtonData})">
+            <summary>
+            Adds a Splitbutton in the Revit UI.
+            </summary>
+            <param name="pushButtonDataList">The list of PushButtons to add.</param>
+            <returns>The created SplitButton</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddStackedItems(Autodesk.Revit.UI.RibbonItemData,Autodesk.Revit.UI.RibbonItemData)">
+            <summary>
+            Adds a stacked containing 2 UI Elements in the current panel.
+            </summary>
+            <param name="item1">Top UI Element.</param>
+            <param name="item2">Bottom UI Element.</param>
+            <returns>The list of elements added</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddStackedItems(Autodesk.Revit.UI.RibbonItemData,Autodesk.Revit.UI.RibbonItemData,Autodesk.Revit.UI.RibbonItemData)">
+            <summary>
+            Adds a stacked containing 3 UI Elements in the current panel.
+            </summary>
+            <param name="item1">Top UI Element.</param>
+            <param name="item2">Middle UI Element.</param>
+            <param name="item3">Bottom UI Element.</param>
+            <returns>The list of elements added</returns>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddSeparator">
+            <summary>
+            Adds a separator in the current panel.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.UI.RibbonPanelManager.AddSlideOut">
+            <summary>
+            Adds a slide out in the current panel.
+            </summary>
+        </member>
     </members>
 </doc>

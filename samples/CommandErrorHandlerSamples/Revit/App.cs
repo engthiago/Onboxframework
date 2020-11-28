@@ -14,6 +14,7 @@ namespace CommandErrorHandlerSamples.Revit
         public override void OnCreateRibbon(IRibbonManager ribbonManager)
         {
             var br = ribbonManager.GetLineBreak();
+
             var panelManager = ribbonManager.CreatePanel("CommandErrorHandlerSamples");
             panelManager.AddPushButton<ExceptionControlledByAppCommand>($"Error{br}Handling");
         }
@@ -21,7 +22,7 @@ namespace CommandErrorHandlerSamples.Revit
         public override Result OnStartup(IContainer container, UIControlledApplication application)
         {
             container.Pipe<ShowErrorMessagePipeline>();
-            
+
             return Result.Succeeded;
         }
 

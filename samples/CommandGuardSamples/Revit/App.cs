@@ -14,6 +14,7 @@ namespace CommandGuardSamples.Revit
         public override void OnCreateRibbon(IRibbonManager ribbonManager)
         {
             var br = ribbonManager.GetLineBreak();
+
             var panelManager = ribbonManager.CreatePanel("App Command Panel");
             panelManager.AddPushButton<SingleGuardOnAppCommand>($"Single Guard{br}on App");
         }
