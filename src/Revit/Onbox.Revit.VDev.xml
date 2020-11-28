@@ -148,6 +148,24 @@
             If the handler will be journable
             </summary>
         </member>
+        <member name="T:Onbox.Revit.VDev.Commands.Attributes.CommandGuardAttribute">
+            <summary>
+            Adds a CommandGuard to to a Revit Command.
+            <br>The type MUST implement <see cref="T:Onbox.Revit.VDev.Commands.Guards.IRevitCommandGuard"/> interface!</br>
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Attributes.CommandGuardAttribute.#ctor(System.Type)">
+            <summary>
+             Adds a CommandGuard to to a Revit Command.
+            </summary>
+            <param name="revitCommandGuardType">The type mus implement <see cref="T:Onbox.Revit.VDev.Commands.Guards.IRevitCommandGuard"/> interface</param>
+        </member>
+        <member name="M:Onbox.Revit.VDev.Commands.Attributes.CommandGuardAttribute.GetCommandGuardType">
+            <summary>
+            Gets the CommandGuard Type
+            </summary>
+            <returns>The type of the Command Guard</returns>
+        </member>
         <member name="T:Onbox.Revit.VDev.Commands.CommandExtensions">
             <summary>
             Command Extensions for Onbox's DI system.
@@ -171,7 +189,8 @@
         </member>
         <member name="T:Onbox.Revit.VDev.Commands.ErrorHandlers.IRevitCommandErrorHandler">
             <summary>
-            Provides functionality to allow Revit Command Exception Handling
+            Provides functionality to allow Revit Command Exception Handling.
+            <br>A common use case would be logging errors.</br>
             </summary>
         </member>
         <member name="M:Onbox.Revit.VDev.Commands.ErrorHandlers.IRevitCommandErrorHandler.Handle(Onbox.Revit.VDev.Commands.ICommandInfo,System.Exception)">

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommandErrorHandlerSamples.Commands.ErrorHandling
+namespace CommandErrorHandlerSamples.Revit.Commands.ErrorHandling
 {
     class ThrowErrorAnywaysHandler : IRevitCommandErrorHandler
     {

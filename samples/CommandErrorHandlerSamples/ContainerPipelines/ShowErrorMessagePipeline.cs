@@ -1,4 +1,4 @@
-﻿using CommandErrorHandlerSamples.Commands.ErrorHandling;
+﻿using CommandErrorHandlerSamples.Revit.Commands.ErrorHandling;
 using Onbox.Abstractions.VDev;
 using Onbox.Revit.VDev.Commands;
 

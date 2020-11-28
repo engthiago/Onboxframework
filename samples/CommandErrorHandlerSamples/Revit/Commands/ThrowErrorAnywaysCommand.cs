@@ -5,10 +5,10 @@ using CommandErrorHandlerSamples.ContainerPipelines;
 using Onbox.Abstractions.VDev;
 using Onbox.Revit.VDev.Commands;
 
-namespace CommandErrorHandlerSamples.Commands
+namespace CommandErrorHandlerSamples.Revit.Commands
 {
     [Transaction(TransactionMode.Manual)]
-    public class ShowErrorMessageCommand : RevitContainerCommand<ShowErrorMessagePipeline>
+    public class ThrowErrorAnywaysCommand : RevitContainerCommand<ThrowErrorAnywaysPipeline>
     {
         public override Result Execute(IContainerResolver container, ExternalCommandData commandData, ref string message, ElementSet elements)
         {

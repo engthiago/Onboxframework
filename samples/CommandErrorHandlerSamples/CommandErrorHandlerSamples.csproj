@@ -66,18 +66,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\ErrorHandling\SwallowErrorHandler.cs" />
-    <Compile Include="Commands\ErrorHandling\ThrowErrorAnywaysHandler.cs" />
-    <Compile Include="Commands\ThrowErrorAnywaysCommand.cs" />
-    <Compile Include="Commands\SwallowErrorCommand.cs" />
-    <Compile Include="Commands\ShowErrorMessageCommand.cs" />
-    <Compile Include="Commands\ErrorHandling\ShowErrorMessageHandler.cs" />
+    <Compile Include="Revit\App.cs" />
+    <Compile Include="Revit\Commands\ErrorHandling\SwallowErrorHandler.cs" />
+    <Compile Include="Revit\Commands\ErrorHandling\ThrowErrorAnywaysHandler.cs" />
+    <Compile Include="Revit\Commands\ExceptionControlledByAppCommand.cs" />
+    <Compile Include="Revit\Commands\ThrowErrorAnywaysCommand.cs" />
+    <Compile Include="Revit\Commands\SwallowErrorCommand.cs" />
+    <Compile Include="Revit\Commands\ShowErrorMessageCommand.cs" />
+    <Compile Include="Revit\Commands\ErrorHandling\ShowErrorMessageHandler.cs" />
     <Compile Include="ContainerPipelines\ThrowErrorAnywaysPipeline.cs" />
     <Compile Include="ContainerPipelines\SwallowErrorPipeline.cs" />
     <Compile Include="ContainerPipelines\ShowErrorMessagePipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CommandErrorHandlerSamples.addin" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

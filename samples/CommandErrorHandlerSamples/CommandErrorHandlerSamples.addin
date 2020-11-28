@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>CommandErrorHandlerSamples</Name>
+    <Assembly>CommandErrorHandlerSamples/CommandErrorHandlerSamples.dll</Assembly>
+    <AddInId>7a83ee6f-05dd-4f46-849e-80445042700d</AddInId>
+    <FullClassName>CommandErrorHandlerSamples.Revit.App</FullClassName>
+    <VendorId>CommandErrorHandlerSamples</VendorId>
+    <VendorDescription>CommandErrorHandlerSamples</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
