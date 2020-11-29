@@ -68,7 +68,7 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
-            Assert.AreNotEqual(clone, person1);
+            Assert.AreNotSame(clone, person1);
         }
 
         [TestCase]
@@ -203,10 +203,11 @@ namespace Onbox.Revit.Tests.Mapping
         public class PersonS
         {
             public int[] Array { get; set; }
+            public PersonS[] ChildrenArray { get; set; }
         }
 
         [TestCase]
-        public void CloneArrays()
+        public void CloneArrayOfPrimitives()
         {
             var sut = this.SetupMapper();
 
@@ -221,6 +222,68 @@ namespace Onbox.Revit.Tests.Mapping
 
             Assert.IsNotNull(clone.Array);
             Assert.AreNotSame(persons.Array, clone.Array);
+        }
+
+        [TestCase]
+        public void CloneArrayOfClasses()
+        {
+            var sut = this.SetupMapper();
+            var persons = new PersonS()
+            {
+                ChildrenArray = new PersonS[]
+                {
+                    new PersonS(), new PersonS()
+                }
+            };
+
+            var clone = sut.Clone(persons);
+
+            Assert.IsNotNull(clone.ChildrenArray);
+            Assert.AreNotSame(persons.ChildrenArray, clone.ChildrenArray);
+        }
+
+        [TestCase]
+        public void CloneArrayOfClassesAndTheirClasses()
+        {
+            var sut = this.SetupMapper();
+            var persons = new PersonS();
+
+            persons.ChildrenArray = new PersonS[]
+            {
+                new PersonS(), new PersonS()
+            };
+
+            var clone = sut.Clone(persons);
+
+            for (int i = 0; i < persons.ChildrenArray.Length; i++)
+            {
+                var n1 = persons.ChildrenArray[i];
+                var n2 = clone.ChildrenArray[i];
+
+                Assert.AreNotSame(n1, n2);
+            }
+        }
+
+        [TestCase]
+        public void CloneArrayOfClassesAndTheirClasses2()
+        {
+            //var sut = this.SetupMapper();
+            //var persons = new PersonS();
+
+            //persons.ChildrenArray = new PersonS[]
+            //{
+            //    new PersonS(), new PersonS(), persons
+            //};
+
+            //var clone = sut.Clone(persons);
+
+            //for (int i = 0; i < persons.ChildrenArray.Length; i++)
+            //{
+            //    var n1 = persons.ChildrenArray[i];
+            //    var n2 = clone.ChildrenArray[i];
+
+            //    Assert.AreNotSame(n1, n2);
+            //}
         }
 
         [TestCase]

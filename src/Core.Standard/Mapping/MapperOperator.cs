@@ -203,7 +203,28 @@ namespace Onbox.Core.VDev.Mapping
                     var constructorInfo = targetProp.PropertyType.GetConstructor(Type.EmptyTypes);
                     if (constructorInfo == null)
                     {
-                        targetProp.SetValue(target, sourceValue);
+                        if (targetProp.PropertyType.IsArray)
+                        {
+                            var array = sourceValue as Array;
+                            if (array == null || array.Length < 1)
+                            {
+                                continue;
+                            }
+
+                            var list = array as IList;
+                            var clone = array.Clone() as IList;
+
+                            for (int i = 0; i < list.Count; i++)
+                            {
+                                clone[i] = this.Map(clone[i]);
+                            }
+
+                            targetProp.SetValue(target, clone);
+                        }
+                        else
+                        {
+                            targetProp.SetValue(target, sourceValue);
+                        }
                     }
                     else
                     {
