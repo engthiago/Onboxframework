@@ -78,6 +78,7 @@
     <Compile Include="JsonService\JsonServiceShould.cs" />
     <Compile Include="Mapping\Dummies\Person.cs" />
     <Compile Include="Mapping\MapperShould.cs" />
+    <Compile Include="Mapping\Dummies\ArrayObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
