@@ -99,7 +99,7 @@ namespace Onbox.Core.VDev.Mapping
                     var listTaget = target as IList;
                     foreach (var item in listSource)
                     {
-                        listTaget.Add(Map(item));
+                        listTaget.Add(this.Map(item));
                     }
                 }
                 else

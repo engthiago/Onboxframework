@@ -43,7 +43,7 @@ namespace Onbox.Core.VDev.Mapping
             var mainObjPropCache = this.mapperOperator.GetMainObjectPropertyCache();
             foreach (var item in mainObjPropCache)
             {
-                item.TargetProp.SetValue(item.TargetObject, result);
+                item.TargetProp.SetValue(item.TargetObject, target);
             }
 
             this.mapperOperator.ClearCache();
