@@ -272,7 +272,7 @@ namespace Onbox.Revit.Tests.Mapping
 
             //persons.ChildrenArray = new PersonS[]
             //{
-            //    new PersonS(), new PersonS(), persons
+            //    persons
             //};
 
             //var clone = sut.Clone(persons);

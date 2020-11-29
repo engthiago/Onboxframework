@@ -97,68 +97,61 @@ namespace Onbox.Core.VDev.Mapping
 
             //try
             //{
-            if (sourceType.IsGenericType)
+
+            if (source is IList && target is IList)
             {
-                if (sourceType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)) &&
-                    targetType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)))
+                var sourceList = source as IList;
+                var targetList = target as IList;
+
+                ConstructorInfo constructorInfo = null;
+                for (int i = 0; i < sourceList.Count; i++)
                 {
-                    var sourceList = source as IList;
-                    var targetList = target as IList;
-
-                    ConstructorInfo constructorInfo = null;
-                    for (int i = 0; i < sourceList.Count; i++)
+                    var sourceItem = sourceList[i];
+                    if (i == 0)
                     {
-                        var sourceItem = sourceList[i];
-                        if (i == 0) 
-                        {
-                            constructorInfo = sourceItem.GetType().GetConstructor(Type.EmptyTypes);
-                        }
+                        constructorInfo = sourceItem.GetType().GetConstructor(Type.EmptyTypes);
+                    }
 
-                        if (constructorInfo == null)
+                    if (constructorInfo == null)
+                    {
+                        targetList.Add(sourceItem);
+                    }
+                    else
+                    {
+                        var data = new PropertyData
                         {
-                            targetList.Add(sourceItem);
+                            IsList = true,
+                            ListIndex = i,
+                            TargetProp = null,
+                            TargetObject = target,
+                            TargetList = targetList,
+                        };
+
+                        if (sourceItem == this.mainObject)
+                        {
+                            this.mainObjectPropertyCache.Add(data);
+                            targetList.Add(null);
+                        }
+                        else if (this.propertyCache.ContainsKey(sourceItem))
+                        {
+                            var properties = this.propertyCache[sourceItem];
+                            properties.TargetDataList.Add(data);
+                            targetList.Add(null);
                         }
                         else
                         {
-                            var data = new PropertyData
+                            var propertyMap = new PropertyMap
                             {
-                                IsList = true,
-                                ListIndex = i,
-                                TargetProp = null,
-                                TargetObject = target,
-                                TargetList = targetList,
+                                TargetDataList = new List<PropertyData> { data }
                             };
 
-                            if (sourceItem == this.mainObject)
-                            {
-                                this.mainObjectPropertyCache.Add(data);
-                                targetList.Add(null);
-                            }
-                            else if (this.propertyCache.ContainsKey(sourceItem))
-                            {
-                                var properties = this.propertyCache[sourceItem];
-                                properties.TargetDataList.Add(data);
-                                targetList.Add(null);
-                            }
-                            else
-                            {
-                                var propertyMap = new PropertyMap
-                                {
-                                    TargetDataList = new List<PropertyData> { data }
-                                };
+                            this.propertyCache.Add(sourceItem, propertyMap);
+                            var targetValue = this.Map(sourceItem);
+                            propertyMap.TargetValue = targetValue;
 
-                                this.propertyCache.Add(sourceItem, propertyMap);
-                                var targetValue = this.Map(sourceItem);
-                                propertyMap.TargetValue = targetValue;
-
-                                targetList.Add(null);
-                            }
+                            targetList.Add(null);
                         }
                     }
-                }
-                else
-                {
-                    CopyProperties(source, target, sourceType, targetType);
                 }
             }
             else
@@ -216,7 +209,7 @@ namespace Onbox.Core.VDev.Mapping
 
                             for (int i = 0; i < list.Count; i++)
                             {
-                                clone[i] = this.Map(clone[i]);
+                                clone[i] = this.Map(list[i]);
                             }
 
                             targetProp.SetValue(target, clone);
@@ -251,7 +244,7 @@ namespace Onbox.Core.VDev.Mapping
                         {
                             var propertyMap = new PropertyMap
                             {
-                                TargetDataList = new List<PropertyData> {  data }
+                                TargetDataList = new List<PropertyData> { data }
                             };
                             this.propertyCache.Add(sourceValue, propertyMap);
                             var targetValue = this.Map(sourceValue);
