@@ -25,6 +25,8 @@ namespace Onbox.Core.VDev.Mapping
         {
             var target = new TSource();
             this.mapperOperator.Map(source, target);
+            this.mapperOperator.Clear();
+
             return target;
         }
 

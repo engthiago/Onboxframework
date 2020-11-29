@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Onbox.Core.VDev.Mapping
 {
@@ -11,6 +12,7 @@ namespace Onbox.Core.VDev.Mapping
     public class MapperOperator : IMapperOperator
     {
         private readonly IMapperActionManager mapperConfigurator;
+        private readonly Dictionary<object, object> keys;
 
         /// <summary>
         /// Constructor
@@ -18,6 +20,12 @@ namespace Onbox.Core.VDev.Mapping
         public MapperOperator(IMapperActionManager mapperConfigurator)
         {
             this.mapperConfigurator = mapperConfigurator;
+            this.keys = new Dictionary<object, object>();
+        }
+
+        public void Clear()
+        {
+            this.keys.Clear();
         }
 
         /// <summary>
@@ -33,8 +41,8 @@ namespace Onbox.Core.VDev.Mapping
             var sourceType = source.GetType();
             var targetType = target.GetType();
 
-            try
-            {
+            //try
+            //{
                 if (sourceType.IsGenericType)
                 {
                     if (sourceType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)) &&
@@ -56,11 +64,11 @@ namespace Onbox.Core.VDev.Mapping
                 {
                     CopyProperties(source, target, sourceType, targetType);
                 }
-            }
-            catch
-            {
-                throw new InvalidCastException($"Can not map between {sourceType.FullName} and {targetType.FullName}");
-            }
+            //}
+            //catch
+            //{
+            //    throw new InvalidCastException($"Can not map between {sourceType.FullName} and {targetType.FullName}");
+            //}
 
             var mapingFunction = this.mapperConfigurator.GetMapPostAction(sourceType, targetType);
             if (mapingFunction != null)
@@ -98,6 +106,10 @@ namespace Onbox.Core.VDev.Mapping
                 }
 
                 var value = prop.GetValue(source);
+                if (value == null)
+                {
+                    return;
+                }
 
                 var targetProp = targetProps.FirstOrDefault(p => p.CanWrite && p.Name == prop.Name && p.PropertyType == prop.PropertyType);
                 if (targetProp != null)
@@ -109,8 +121,12 @@ namespace Onbox.Core.VDev.Mapping
                     }
                     else
                     {
-                        var propValue = Map(value);
-                        targetProp.SetValue(target, propValue);
+                        if (!this.keys.ContainsKey(value))
+                        {
+                            this.keys.Add(value, null);
+                            var propValue = Map(value);
+                            targetProp.SetValue(target, propValue);
+                        }
                     }
                 }
             }

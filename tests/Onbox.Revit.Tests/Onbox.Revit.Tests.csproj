@@ -76,6 +76,8 @@
     <Compile Include="JsonService\Dummies\DummySerializationPerson.cs" />
     <Compile Include="JsonService\JsonExtensionsShould.cs" />
     <Compile Include="JsonService\JsonServiceShould.cs" />
+    <Compile Include="Mapping\Dummies\Person.cs" />
+    <Compile Include="Mapping\MapperShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

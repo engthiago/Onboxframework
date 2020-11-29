@@ -1,4 +1,6 @@
-﻿namespace Onbox.Core.VDev.Mapping
+﻿using System.Collections.Generic;
+
+namespace Onbox.Core.VDev.Mapping
 {
     /// <summary>
     /// Support contract for performing mapping
@@ -14,5 +16,7 @@
         /// Creates a new object as a deep copy of the input object
         /// </summary>
         object Map(object source);
+
+        void Clear();
     }
 }
