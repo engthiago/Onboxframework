@@ -108,7 +108,7 @@ namespace Onbox.Core.VDev.Mapping
                 var sourceValue = sourceProp.GetValue(source);
                 if (sourceValue == null)
                 {
-                    return;
+                    continue;
                 }
 
                 var targetProp = targetProps.FirstOrDefault(p => p.CanWrite && p.Name == sourceProp.Name && p.PropertyType == sourceProp.PropertyType);
