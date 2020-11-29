@@ -6,13 +6,27 @@ using System.Reflection;
 
 namespace Onbox.Core.VDev.Mapping
 {
+    public class PropertyMap
+    {
+        public object TargetValue { get; set; }
+        public List<PropertyData> TargetDataList { get; set; }
+    }
+
+    public class PropertyData
+    {
+        public PropertyInfo TargetProp { get; set; }
+        public object TargetObject { get; set; }
+    }
+
     /// <summary>
     /// Support contract for performing mapping
     /// </summary>
     public class MapperOperator : IMapperOperator
     {
         private readonly IMapperActionManager mapperConfigurator;
-        private readonly Dictionary<object, object> keys;
+        private readonly Dictionary<object, PropertyMap> cache;
+        private readonly List<PropertyData> propertyCache;
+        private object mainObject;
 
         /// <summary>
         /// Constructor
@@ -20,12 +34,24 @@ namespace Onbox.Core.VDev.Mapping
         public MapperOperator(IMapperActionManager mapperConfigurator)
         {
             this.mapperConfigurator = mapperConfigurator;
-            this.keys = new Dictionary<object, object>();
+            this.cache = new Dictionary<object, PropertyMap>();
+            this.propertyCache = new List<PropertyData>();
         }
 
-        public void Clear()
+        public void SetMain(object mainObject)
         {
-            this.keys.Clear();
+            this.mainObject = mainObject;
+        }
+
+        public void ClearCache()
+        {
+            this.mainObject = null;
+            this.cache.Clear();
+        }
+
+        public Dictionary<object, PropertyMap> GetMappingCache()
+        {
+            return this.cache;
         }
 
         /// <summary>
@@ -43,27 +69,27 @@ namespace Onbox.Core.VDev.Mapping
 
             //try
             //{
-                if (sourceType.IsGenericType)
+            if (sourceType.IsGenericType)
+            {
+                if (sourceType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)) &&
+                    targetType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)))
                 {
-                    if (sourceType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)) &&
-                        targetType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)))
+                    var listSource = source as IList;
+                    var listTaget = target as IList;
+                    foreach (var item in listSource)
                     {
-                        var listSource = source as IList;
-                        var listTaget = target as IList;
-                        foreach (var item in listSource)
-                        {
-                            listTaget.Add(Map(item));
-                        }
-                    }
-                    else
-                    {
-                        CopyProperties(source, target, sourceType, targetType);
+                        listTaget.Add(Map(item));
                     }
                 }
                 else
                 {
                     CopyProperties(source, target, sourceType, targetType);
                 }
+            }
+            else
+            {
+                CopyProperties(source, target, sourceType, targetType);
+            }
             //}
             //catch
             //{
@@ -105,8 +131,8 @@ namespace Onbox.Core.VDev.Mapping
                     continue;
                 }
 
-                var value = prop.GetValue(source);
-                if (value == null)
+                var sourceValue = prop.GetValue(source);
+                if (sourceValue == null)
                 {
                     return;
                 }
@@ -117,19 +143,55 @@ namespace Onbox.Core.VDev.Mapping
                     var constructorInfo = targetProp.PropertyType.GetConstructor(Type.EmptyTypes);
                     if (constructorInfo == null)
                     {
-                        targetProp.SetValue(target, value);
+                        targetProp.SetValue(target, sourceValue);
                     }
                     else
                     {
-                        if (!this.keys.ContainsKey(value))
+                        if (sourceValue == this.mainObject)
                         {
-                            this.keys.Add(value, null);
-                            var propValue = Map(value);
-                            targetProp.SetValue(target, propValue);
+                            var data = new PropertyData
+                            {
+                                TargetProp = targetProp,
+                                TargetObject = target
+                            };
+                            this.propertyCache.Add(data);
+                        }
+                        else if (!this.cache.ContainsKey(sourceValue))
+                        {
+                            var propertyMap = new PropertyMap
+                            {
+                                TargetDataList = new List<PropertyData>
+                                {
+                                    new PropertyData
+                                    {
+                                        TargetProp = targetProp,
+                                        TargetObject = target
+                                    }
+                                }
+                            };
+                            this.cache.Add(sourceValue, propertyMap);
+                            var targetValue = this.Map(sourceValue);
+                            propertyMap.TargetValue = targetValue;
+                            targetProp.SetValue(target, targetValue);
+                        }
+                        else
+                        {
+                            var data = new PropertyData
+                            {
+                                TargetProp = targetProp,
+                                TargetObject = target
+                            };
+                            var properties = this.cache[sourceValue];
+                            properties.TargetDataList.Add(data);
                         }
                     }
                 }
             }
+        }
+
+        public List<PropertyData> GetPropertyCache()
+        {
+            return this.propertyCache;
         }
     }
 }

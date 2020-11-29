@@ -1,4 +1,5 @@
 ﻿using Onbox.Abstractions.VDev;
+using System.Collections.Generic;
 
 namespace Onbox.Core.VDev.Mapping
 {
@@ -24,8 +25,27 @@ namespace Onbox.Core.VDev.Mapping
         public TSource Clone<TSource>(TSource source) where TSource : new()
         {
             var target = new TSource();
-            this.mapperOperator.Map(source, target);
-            this.mapperOperator.Clear();
+
+            this.mapperOperator.SetMain(source);
+
+            var result = this.mapperOperator.Map(source, target);
+
+            var cache = this.mapperOperator.GetMappingCache();
+            foreach (var item in cache)
+            {
+                foreach (var target2 in item.Value.TargetDataList)
+                {
+                    target2.TargetProp.SetValue(target2.TargetObject, item.Value.TargetValue);
+                }
+            }
+
+            var propCache = this.mapperOperator.GetPropertyCache();
+            foreach (var item in propCache)
+            {
+                item.TargetProp.SetValue(item.TargetObject, result);
+            }
+
+            this.mapperOperator.ClearCache();
 
             return target;
         }
