@@ -114,7 +114,14 @@ namespace Onbox.Core.VDev.Mapping
 
                     if (constructorInfo == null)
                     {
-                        targetList.Add(sourceItem);
+                        if (targetType.IsArray)
+                        {
+                            targetList[i] = sourceItem;
+                        }
+                        else
+                        {
+                            targetList.Add(sourceItem);
+                        }
                     }
                     else
                     {
@@ -130,13 +137,28 @@ namespace Onbox.Core.VDev.Mapping
                         if (sourceItem == this.mainObject)
                         {
                             this.mainObjectPropertyCache.Add(data);
-                            targetList.Add(null);
+                            if (targetType.IsArray)
+                            {
+                                targetList[i] = null;
+                            }
+                            else
+                            {
+                                targetList.Add(null);
+                            }
+
                         }
                         else if (this.propertyCache.ContainsKey(sourceItem))
                         {
                             var properties = this.propertyCache[sourceItem];
                             properties.TargetDataList.Add(data);
-                            targetList.Add(null);
+                            if (targetType.IsArray)
+                            {
+                                targetList[i] = null;
+                            }
+                            else
+                            {
+                                targetList.Add(null);
+                            }
                         }
                         else
                         {
@@ -149,7 +171,14 @@ namespace Onbox.Core.VDev.Mapping
                             var targetValue = this.Map(sourceItem);
                             propertyMap.TargetValue = targetValue;
 
-                            targetList.Add(null);
+                            if (targetType.IsArray)
+                            {
+                                targetList[i] = null;
+                            }
+                            else
+                            {
+                                targetList.Add(null);
+                            }
                         }
                     }
                 }
@@ -207,10 +236,7 @@ namespace Onbox.Core.VDev.Mapping
                             var list = array as IList;
                             var clone = array.Clone() as IList;
 
-                            for (int i = 0; i < list.Count; i++)
-                            {
-                                clone[i] = this.Map(list[i]);
-                            }
+                            clone = this.Map(list, clone) as IList;
 
                             targetProp.SetValue(target, clone);
                         }

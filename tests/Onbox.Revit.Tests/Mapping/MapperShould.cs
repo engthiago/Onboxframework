@@ -267,23 +267,25 @@ namespace Onbox.Revit.Tests.Mapping
         [TestCase]
         public void CloneArrayOfClassesAndTheirClasses2()
         {
-            //var sut = this.SetupMapper();
-            //var persons = new PersonS();
+            var sut = this.SetupMapper();
+            var persons = new PersonS();
 
-            //persons.ChildrenArray = new PersonS[]
-            //{
-            //    persons
-            //};
+            persons.ChildrenArray = new PersonS[]
+            {
+                persons
+            };
 
-            //var clone = sut.Clone(persons);
+            var clone = sut.Clone(persons);
 
-            //for (int i = 0; i < persons.ChildrenArray.Length; i++)
-            //{
-            //    var n1 = persons.ChildrenArray[i];
-            //    var n2 = clone.ChildrenArray[i];
+            Assert.AreSame(clone, clone.ChildrenArray[0]);
 
-            //    Assert.AreNotSame(n1, n2);
-            //}
+            for (int i = 0; i < persons.ChildrenArray.Length; i++)
+            {
+                var n1 = persons.ChildrenArray[i];
+                var n2 = clone.ChildrenArray[i];
+
+                Assert.AreNotSame(n1, n2);
+            }
         }
 
         [TestCase]
