@@ -54,11 +54,16 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = CreatePerson();
             var person2 = sut.Clone(person1);
 
-            Assert.That(person2.Age == person2.Age);
-            Assert.That(person2.FirstName == person2.FirstName);
+            Assert.AreNotEqual(person2, person1);
+
+            Assert.That(person2.Age == person1.Age);
+            Assert.That(person2.FirstName == person1.FirstName);
+            Assert.That(person2.Children != null);
+            Assert.That(person2.Children.Count == person1.Children.Count);
+
             Assert.That(person2.Father != null);
             Assert.That(person2.Father.Children != null);
-            Assert.That(person2.Father.Children.Count == 1);
+            Assert.That(person2.Father.Children.Count == person1.Father.Children.Count);
         }
     }
 }

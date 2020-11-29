@@ -17,9 +17,9 @@ namespace Onbox.Core.VDev.Mapping
         /// </summary>
         object Map(object source);
 
-        Dictionary<object, PropertyMap> GetMappingCache();
-        List<PropertyData> GetPropertyCache();
-        void SetMain(object mainObject);
+        Dictionary<object, PropertyMap> GetPropertyCache();
+        List<PropertyData> GetMainObjectPropertyCache();
+        void SetMainObject(object mainObject);
 
         void ClearCache();
     }

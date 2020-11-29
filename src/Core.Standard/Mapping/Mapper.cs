@@ -26,21 +26,22 @@ namespace Onbox.Core.VDev.Mapping
         {
             var target = new TSource();
 
-            this.mapperOperator.SetMain(source);
+            this.mapperOperator.SetMainObject(source);
 
             var result = this.mapperOperator.Map(source, target);
 
-            var cache = this.mapperOperator.GetMappingCache();
-            foreach (var item in cache)
+            var propCache = this.mapperOperator.GetPropertyCache();
+            foreach (var item in propCache)
             {
-                foreach (var target2 in item.Value.TargetDataList)
+                var targetValue = item.Value.TargetValue;
+                foreach (var propData in item.Value.TargetDataList)
                 {
-                    target2.TargetProp.SetValue(target2.TargetObject, item.Value.TargetValue);
+                    propData.TargetProp.SetValue(propData.TargetObject, targetValue);
                 }
             }
 
-            var propCache = this.mapperOperator.GetPropertyCache();
-            foreach (var item in propCache)
+            var mainObjPropCache = this.mapperOperator.GetMainObjectPropertyCache();
+            foreach (var item in mainObjPropCache)
             {
                 item.TargetProp.SetValue(item.TargetObject, result);
             }

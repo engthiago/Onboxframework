@@ -24,8 +24,8 @@ namespace Onbox.Core.VDev.Mapping
     public class MapperOperator : IMapperOperator
     {
         private readonly IMapperActionManager mapperConfigurator;
-        private readonly Dictionary<object, PropertyMap> cache;
-        private readonly List<PropertyData> propertyCache;
+        private readonly Dictionary<object, PropertyMap> propertyCache;
+        private readonly List<PropertyData> mainObjectPropertyCache;
         private object mainObject;
 
         /// <summary>
@@ -34,11 +34,11 @@ namespace Onbox.Core.VDev.Mapping
         public MapperOperator(IMapperActionManager mapperConfigurator)
         {
             this.mapperConfigurator = mapperConfigurator;
-            this.cache = new Dictionary<object, PropertyMap>();
-            this.propertyCache = new List<PropertyData>();
+            this.propertyCache = new Dictionary<object, PropertyMap>();
+            this.mainObjectPropertyCache = new List<PropertyData>();
         }
 
-        public void SetMain(object mainObject)
+        public void SetMainObject(object mainObject)
         {
             this.mainObject = mainObject;
         }
@@ -46,12 +46,18 @@ namespace Onbox.Core.VDev.Mapping
         public void ClearCache()
         {
             this.mainObject = null;
-            this.cache.Clear();
+            this.mainObjectPropertyCache.Clear();
+            this.propertyCache.Clear();
         }
 
-        public Dictionary<object, PropertyMap> GetMappingCache()
+        public List<PropertyData> GetMainObjectPropertyCache()
         {
-            return this.cache;
+            return this.mainObjectPropertyCache;
+        }
+
+        public Dictionary<object, PropertyMap> GetPropertyCache()
+        {
+            return this.propertyCache;
         }
 
         /// <summary>
@@ -147,6 +153,8 @@ namespace Onbox.Core.VDev.Mapping
                     }
                     else
                     {
+                        // If the sourceValue is equal to the mainObject, it ALSO means that we are on a Refence loop,
+                        // we should cache this property to apply when the mapping is done.
                         if (sourceValue == this.mainObject)
                         {
                             var data = new PropertyData
@@ -154,9 +162,21 @@ namespace Onbox.Core.VDev.Mapping
                                 TargetProp = targetProp,
                                 TargetObject = target
                             };
-                            this.propertyCache.Add(data);
+                            this.mainObjectPropertyCache.Add(data);
                         }
-                        else if (!this.cache.ContainsKey(sourceValue))
+                        else if (this.propertyCache.ContainsKey(sourceValue))
+                        {
+                            // If sourceValue was already mapped, it ALSO means that we are on a Reference loop
+                            // we should cache this property to apply when the mapping is done.
+                            var data = new PropertyData
+                            {
+                                TargetProp = targetProp,
+                                TargetObject = target
+                            };
+                            var properties = this.propertyCache[sourceValue];
+                            properties.TargetDataList.Add(data);
+                        }
+                        else
                         {
                             var propertyMap = new PropertyMap
                             {
@@ -169,29 +189,14 @@ namespace Onbox.Core.VDev.Mapping
                                     }
                                 }
                             };
-                            this.cache.Add(sourceValue, propertyMap);
+                            this.propertyCache.Add(sourceValue, propertyMap);
                             var targetValue = this.Map(sourceValue);
                             propertyMap.TargetValue = targetValue;
-                            targetProp.SetValue(target, targetValue);
-                        }
-                        else
-                        {
-                            var data = new PropertyData
-                            {
-                                TargetProp = targetProp,
-                                TargetObject = target
-                            };
-                            var properties = this.cache[sourceValue];
-                            properties.TargetDataList.Add(data);
+                            //targetProp.SetValue(target, targetValue);
                         }
                     }
                 }
             }
-        }
-
-        public List<PropertyData> GetPropertyCache()
-        {
-            return this.propertyCache;
         }
     }
 }
