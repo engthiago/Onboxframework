@@ -55,6 +55,21 @@ namespace Onbox.Core.VDev.Mapping
         }
 
         /// <summary>
+        /// Maps properties of one object to another
+        /// </summary>
+        public object Map(object source)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+
+            var type = source.GetType();
+            var target = Activator.CreateInstance(type);
+            return Map(source, target);
+        }
+
+        /// <summary>
         /// Creates a new object as a deep copy of the input object
         /// </summary>
         public object Map(object source, object target)
@@ -105,39 +120,24 @@ namespace Onbox.Core.VDev.Mapping
             return target;
         }
 
-        /// <summary>
-        /// Maps properties of one object to another
-        /// </summary>
-        public object Map(object source)
-        {
-            if (source == null)
-            {
-                return null;
-            }
-
-            var type = source.GetType();
-            var target = Activator.CreateInstance(type);
-            return Map(source, target);
-        }
-
         private void CopyProperties(object source, object target, Type sourceType, Type targetType)
         {
             var targetProps = targetType.GetProperties();
-            var props = sourceType.GetProperties();
-            foreach (var prop in props)
+            var sourceProps = sourceType.GetProperties();
+            foreach (var sourceProp in sourceProps)
             {
-                if (!prop.CanRead)
+                if (!sourceProp.CanRead)
                 {
                     continue;
                 }
 
-                var sourceValue = prop.GetValue(source);
+                var sourceValue = sourceProp.GetValue(source);
                 if (sourceValue == null)
                 {
-                    return;
+                    continue;
                 }
 
-                var targetProp = targetProps.FirstOrDefault(p => p.CanWrite && p.Name == prop.Name && p.PropertyType == prop.PropertyType);
+                var targetProp = targetProps.FirstOrDefault(p => p.CanWrite && p.Name == sourceProp.Name && p.PropertyType == sourceProp.PropertyType);
                 if (targetProp != null)
                 {
                     var constructorInfo = targetProp.PropertyType.GetConstructor(Type.EmptyTypes);

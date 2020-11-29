@@ -13,5 +13,10 @@ namespace Onbox.Revit.Tests.Mapping.Dummies
         public int Age { get; set; }
         public Person Father { get; set; }
         public List<Person> Children { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

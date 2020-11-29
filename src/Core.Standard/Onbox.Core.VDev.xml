@@ -419,14 +419,14 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Onbox.Core.VDev.Mapping.MapperOperator.Map(System.Object,System.Object)">
-            <summary>
-            Creates a new object as a deep copy of the input object
-            </summary>
-        </member>
         <member name="M:Onbox.Core.VDev.Mapping.MapperOperator.Map(System.Object)">
             <summary>
             Maps properties of one object to another
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.VDev.Mapping.MapperOperator.Map(System.Object,System.Object)">
+            <summary>
+            Creates a new object as a deep copy of the input object
             </summary>
         </member>
         <member name="T:Onbox.Core.VDev.Messaging.MessageDebugService">
