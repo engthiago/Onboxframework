@@ -54,9 +54,10 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = CreatePerson();
             var person2 = sut.Clone(person1);
 
-            Assert.That(person1.Age == person2.Age);
-            Assert.That(person1.FirstName == person2.FirstName);
-
+            Assert.That(person2.Age == person2.Age);
+            Assert.That(person2.FirstName == person2.FirstName);
+            Assert.That(person2.Father != null);
+            Assert.That(person2.Father.Children != null);
         }
     }
 }
