@@ -105,8 +105,8 @@ namespace Onbox.Core.VDev.Mapping
                     continue;
                 }
 
-                var value = prop.GetValue(source);
-                if (value == null)
+                var targetValue = prop.GetValue(source);
+                if (targetValue == null)
                 {
                     return;
                 }
@@ -117,14 +117,14 @@ namespace Onbox.Core.VDev.Mapping
                     var constructorInfo = targetProp.PropertyType.GetConstructor(Type.EmptyTypes);
                     if (constructorInfo == null)
                     {
-                        targetProp.SetValue(target, value);
+                        targetProp.SetValue(target, targetValue);
                     }
                     else
                     {
-                        if (!this.keys.ContainsKey(value))
+                        if (!this.keys.ContainsKey(targetValue))
                         {
-                            this.keys.Add(value, null);
-                            var propValue = Map(value);
+                            this.keys.Add(targetValue, null);
+                            var propValue = Map(targetValue);
                             targetProp.SetValue(target, propValue);
                         }
                     }
