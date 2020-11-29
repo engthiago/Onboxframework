@@ -1,4 +1,5 @@
 ﻿using Onbox.Abstractions.VDev;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Onbox.Core.VDev.Mapping
@@ -28,7 +29,7 @@ namespace Onbox.Core.VDev.Mapping
 
             this.mapperOperator.SetMainObject(source);
 
-            var result = this.mapperOperator.Map(source, target);
+            this.mapperOperator.Map(source, target);
 
             var propCache = this.mapperOperator.GetPropertyCache();
             foreach (var item in propCache)
@@ -36,14 +37,28 @@ namespace Onbox.Core.VDev.Mapping
                 var targetValue = item.Value.TargetValue;
                 foreach (var propData in item.Value.TargetDataList)
                 {
-                    propData.TargetProp.SetValue(propData.TargetObject, targetValue);
+                    if (propData.IsList)
+                    {
+                        propData.TargetList[propData.ListIndex] = targetValue;
+                    }
+                    else
+                    {
+                        propData.TargetProp.SetValue(propData.TargetObject, targetValue);
+                    }
                 }
             }
 
             var mainObjPropCache = this.mapperOperator.GetMainObjectPropertyCache();
             foreach (var item in mainObjPropCache)
             {
-                item.TargetProp.SetValue(item.TargetObject, target);
+                if (item.IsList)
+                {
+                    item.TargetList[item.ListIndex] = target;
+                }
+                else
+                {
+                    item.TargetProp.SetValue(item.TargetObject, target);
+                }
             }
 
             this.mapperOperator.ClearCache();

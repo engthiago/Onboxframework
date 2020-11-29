@@ -105,7 +105,7 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
-            Assert.AreNotEqual(clone.Father.Children, person1.Father.Children);
+            Assert.AreNotSame(clone.Father.Children, person1.Father.Children);
             Assert.AreEqual(clone.Father.Children.Count, person1.Father.Children.Count);
         }
 
@@ -117,7 +117,7 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
-            Assert.AreEqual(clone, clone.Children[0].Father);
+            Assert.AreSame(clone, clone.Children[0].Father);
         }
 
         [TestCase]
@@ -128,7 +128,7 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
-            Assert.AreEqual(clone, clone.Father.Children[0]);
+            Assert.AreSame(clone, clone.Father.Children[0]);
         }
 
         [TestCase]
@@ -139,7 +139,7 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
-            Assert.AreNotEqual(clone.Children, person1.Children);
+            Assert.AreNotSame(clone.Children, person1.Children);
             Assert.AreEqual(clone.Children.Count, person1.Children.Count);
         }
 
@@ -156,12 +156,71 @@ namespace Onbox.Revit.Tests.Mapping
                 var person1Child = person1.Children[i];
                 var cloneChild = clone.Children[i];
 
-                Assert.AreNotEqual(cloneChild, person1Child);
+                Assert.AreNotSame(cloneChild, person1Child);
                 Assert.AreEqual(cloneChild.FirstName, person1Child.FirstName);
                 Assert.AreEqual(cloneChild.LastName, person1Child.LastName);
                 Assert.AreEqual(cloneChild.Children, person1Child.Children);
                 Assert.AreEqual(cloneChild.Age, person1Child.Age);
             }
+        }
+
+        [TestCase]
+        public void CloneListOfPrimitives()
+        {
+            var sut = this.SetupMapper();
+
+            var list = new List<int>
+            {
+                0, 1, 2, 3, 4, 5
+            };
+
+            var clone = sut.Clone(list);
+
+            Assert.AreNotSame(list, clone);
+        }
+
+        [TestCase]
+        public void CloneListOfPrimitiveValues()
+        {
+            var sut = this.SetupMapper();
+
+            var list = new List<int>
+            {
+                0, 1, 2, 3, 4, 5
+            };
+
+            var clone = sut.Clone(list);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                var n1 = list[i];
+                var n2 = clone[i];
+
+                Assert.AreEqual(n1, n2);
+            }
+        }
+
+        public class PersonS
+        {
+            public int[] Array { get; set; }
+        }
+
+        [TestCase]
+        public void CloneArrays()
+        {
+            var sut = this.SetupMapper();
+
+            var persons = new PersonS();
+
+            persons.Array = new int[]
+            {
+                0, 1, 2, 3, 4, 5
+            };
+
+            var clone = sut.Clone(persons);
+
+            Assert.IsNotNull(clone.Array);
+            Assert.AreNotSame(persons.Array, clone.Array);
         }
 
         [TestCase]

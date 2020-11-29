@@ -16,6 +16,9 @@ namespace Onbox.Core.VDev.Mapping
     {
         public PropertyInfo TargetProp { get; set; }
         public object TargetObject { get; set; }
+        public bool IsList { get; set; }
+        public int ListIndex { get; set; }
+        public IList TargetList { get; set; }
     }
 
     /// <summary>
@@ -24,7 +27,9 @@ namespace Onbox.Core.VDev.Mapping
     public class MapperOperator : IMapperOperator
     {
         private readonly IMapperActionManager mapperConfigurator;
+
         private readonly Dictionary<object, PropertyMap> propertyCache;
+
         private readonly List<PropertyData> mainObjectPropertyCache;
         private object mainObject;
 
@@ -34,7 +39,9 @@ namespace Onbox.Core.VDev.Mapping
         public MapperOperator(IMapperActionManager mapperConfigurator)
         {
             this.mapperConfigurator = mapperConfigurator;
+
             this.propertyCache = new Dictionary<object, PropertyMap>();
+
             this.mainObjectPropertyCache = new List<PropertyData>();
         }
 
@@ -95,11 +102,58 @@ namespace Onbox.Core.VDev.Mapping
                 if (sourceType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)) &&
                     targetType.GetInterfaces().Any(t => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<>)))
                 {
-                    var listSource = source as IList;
-                    var listTaget = target as IList;
-                    foreach (var item in listSource)
+                    var sourceList = source as IList;
+                    var targetList = target as IList;
+
+                    ConstructorInfo constructorInfo = null;
+                    for (int i = 0; i < sourceList.Count; i++)
                     {
-                        listTaget.Add(this.Map(item));
+                        var sourceItem = sourceList[i];
+                        if (i == 0) 
+                        {
+                            constructorInfo = sourceItem.GetType().GetConstructor(Type.EmptyTypes);
+                        }
+
+                        if (constructorInfo == null)
+                        {
+                            targetList.Add(sourceItem);
+                        }
+                        else
+                        {
+                            var data = new PropertyData
+                            {
+                                IsList = true,
+                                ListIndex = i,
+                                TargetProp = null,
+                                TargetObject = target,
+                                TargetList = targetList,
+                            };
+
+                            if (sourceItem == this.mainObject)
+                            {
+                                this.mainObjectPropertyCache.Add(data);
+                                targetList.Add(null);
+                            }
+                            else if (this.propertyCache.ContainsKey(sourceItem))
+                            {
+                                var properties = this.propertyCache[sourceItem];
+                                properties.TargetDataList.Add(data);
+                                targetList.Add(null);
+                            }
+                            else
+                            {
+                                var propertyMap = new PropertyMap
+                                {
+                                    TargetDataList = new List<PropertyData> { data }
+                                };
+
+                                this.propertyCache.Add(sourceItem, propertyMap);
+                                var targetValue = this.Map(sourceItem);
+                                propertyMap.TargetValue = targetValue;
+
+                                targetList.Add(null);
+                            }
+                        }
                     }
                 }
                 else
@@ -153,26 +207,22 @@ namespace Onbox.Core.VDev.Mapping
                     }
                     else
                     {
+                        var data = new PropertyData
+                        {
+                            TargetProp = targetProp,
+                            TargetObject = target
+                        };
+
                         // If the sourceValue is equal to the mainObject, it ALSO means that we are on a Refence loop,
                         // we should cache this property to apply when the mapping is done.
                         if (sourceValue == this.mainObject)
                         {
-                            var data = new PropertyData
-                            {
-                                TargetProp = targetProp,
-                                TargetObject = target
-                            };
                             this.mainObjectPropertyCache.Add(data);
                         }
                         else if (this.propertyCache.ContainsKey(sourceValue))
                         {
                             // If sourceValue was already mapped, it ALSO means that we are on a Reference loop
                             // we should cache this property to apply when the mapping is done.
-                            var data = new PropertyData
-                            {
-                                TargetProp = targetProp,
-                                TargetObject = target
-                            };
                             var properties = this.propertyCache[sourceValue];
                             properties.TargetDataList.Add(data);
                         }
@@ -180,14 +230,7 @@ namespace Onbox.Core.VDev.Mapping
                         {
                             var propertyMap = new PropertyMap
                             {
-                                TargetDataList = new List<PropertyData>
-                                {
-                                    new PropertyData
-                                    {
-                                        TargetProp = targetProp,
-                                        TargetObject = target
-                                    }
-                                }
+                                TargetDataList = new List<PropertyData> {  data }
                             };
                             this.propertyCache.Add(sourceValue, propertyMap);
                             var targetValue = this.Map(sourceValue);
