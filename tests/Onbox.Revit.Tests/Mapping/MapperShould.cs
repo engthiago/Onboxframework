@@ -314,6 +314,86 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [TestCase]
+        public void CloneArrayOfArrays()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = new Person { Age = 8, FirstName = "A", LastName = "B" };
+            var person2 = new Person { Age = 9, FirstName = "C", LastName = "D" };
+            var person3 = new Person { Age = 10, FirstName = "E", LastName = "F" };
+
+            var personArray = new Person[]
+            {
+                person1, person2, person3
+            };
+
+            var arrayOfArrays = new ArraysOfArrays
+            {
+                ArraysOfPersonArray = new Person[][]
+                {
+                    personArray
+                }
+            };
+
+            var clone = sut.Clone(arrayOfArrays);
+            Assert.AreNotSame(arrayOfArrays, clone);
+            Assert.AreNotSame(arrayOfArrays.ArraysOfPersonArray, clone.ArraysOfPersonArray);
+            Assert.NotNull(clone.ArraysOfPersonArray);
+        }
+
+        [TestCase]
+        public void CloneArrayOfArraysAndPreserveRefences()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = new Person { Age = 8, FirstName = "A", LastName = "B" };
+            var person2 = new Person { Age = 9, FirstName = "C", LastName = "D" };
+            var person3 = new Person { Age = 10, FirstName = "E", LastName = "F" };
+
+            var personArray = new Person[]
+            {
+                person1, person2, person3
+            };
+
+            var arrayOfArrays = new ArraysOfArrays
+            {
+                ArraysOfPersonArray = new Person[][]
+                {
+                    personArray, personArray, personArray
+                }
+            };
+
+            var clone = sut.Clone(arrayOfArrays);
+            Assert.AreSame(clone.ArraysOfPersonArray[0], clone.ArraysOfPersonArray[1]);
+        }
+
+        [TestCase]
+        public void CloneArrayOfLists()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = new Person { Age = 8, FirstName = "A", LastName = "B" };
+            var person2 = new Person { Age = 9, FirstName = "C", LastName = "D" };
+            var person3 = new Person { Age = 10, FirstName = "E", LastName = "F" };
+
+            var personArray = new List<Person>
+            {
+                person1, person2, person3
+            };
+
+            var arrayOfArrays = new ArrayOfLists
+            {
+                ArrayOfPersonList = new List<Person>[]
+                {
+                    personArray, personArray, personArray
+                }
+            };
+
+            var clone = sut.Clone(arrayOfArrays);
+            Assert.AreSame(clone.ArrayOfPersonList[0], clone.ArrayOfPersonList[1]);
+        }
+
+        [TestCase]
         public void CloneListOfPrimitives()
         {
             var sut = this.SetupMapper();
