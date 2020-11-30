@@ -174,6 +174,52 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [TestCase]
+        public void CloneObjectAndRefenceSameLists()
+        {
+            var sut = this.SetupMapper();
+
+            var husband = new Person { Age = 46, FirstName = "Eddard", LastName = "Stark" };
+            var wife = new Person { Age = 44, FirstName = "Catelyn", LastName = "Stark" };
+
+            var children = this.SetupPersonList();
+
+            husband.Children = children;
+            wife.Children = children;
+
+            var marriage = new Marriage { Husband = husband, Wife = wife };
+
+            var clone = sut.Clone(marriage);
+
+            Assert.AreSame(clone.Husband.Children, clone.Wife.Children);
+        }
+
+        [TestCase]
+        public void CloneObjectAndRefenceListObjects()
+        {
+            var sut = this.SetupMapper();
+
+            var husband = new Person { Age = 46, FirstName = "Eddard", LastName = "Stark" };
+            var wife = new Person { Age = 44, FirstName = "Catelyn", LastName = "Stark" };
+
+            var children = this.SetupPersonList();
+
+            husband.Children = children;
+            wife.Children = children;
+
+            var marriage = new Marriage { Husband = husband, Wife = wife };
+
+            var clone = sut.Clone(marriage);
+
+            for (int i = 0; i < clone.Husband.Children.Count; i++)
+            {
+                var child1 = clone.Husband.Children[i];
+                var child2 = clone.Wife.Children[i];
+
+                Assert.AreSame(child1, child2);
+            }
+        }
+
+        [TestCase]
         public void CloneNestedLists()
         {
             var sut = this.SetupMapper();
@@ -204,6 +250,67 @@ namespace Onbox.Revit.Tests.Mapping
                 Assert.AreEqual(cloneChild.Children, person1Child.Children);
                 Assert.AreEqual(cloneChild.Age, person1Child.Age);
             }
+        }
+
+        [TestCase]
+        public void CloneListsOfLists()
+        {
+            var sut = this.SetupMapper();
+
+            var listOfList = new List<List<Person>>();
+
+            var subList1 = new List<Person>
+                {
+                    new Person { Age = 1, FirstName = "A", LastName = "B"},
+                    new Person { Age = 2, FirstName = "C", LastName = "D"},
+                    new Person { Age = 3, FirstName = "E", LastName = "F"},
+                };
+
+            var subList2 = new List<Person>
+                {
+                    new Person { Age = 4, FirstName = "F", LastName = "G"},
+                    new Person { Age = 5, FirstName = "H", LastName = "I"},
+                    new Person { Age = 6, FirstName = "J", LastName = "L"},
+                };
+
+            listOfList.Add(subList1);
+            listOfList.Add(subList2);
+            listOfList.Add(subList1);
+
+            var clone = sut.Clone(listOfList);
+
+            Assert.AreNotSame(listOfList, clone);
+        }
+
+        [TestCase]
+        public void CloneListsOfListsAndPreserveListReference()
+        {
+            var sut = this.SetupMapper();
+
+            var listOfList = new List<List<Person>>();
+
+            var subList1 = new List<Person>
+                {
+                    new Person { Age = 1, FirstName = "A", LastName = "B"},
+                    new Person { Age = 2, FirstName = "C", LastName = "D"},
+                    new Person { Age = 3, FirstName = "E", LastName = "F"},
+                };
+
+            var subList2 = new List<Person>
+                {
+                    new Person { Age = 4, FirstName = "F", LastName = "G"},
+                    new Person { Age = 5, FirstName = "H", LastName = "I"},
+                    new Person { Age = 6, FirstName = "J", LastName = "L"},
+                };
+
+            listOfList.Add(subList1);
+            listOfList.Add(subList2);
+            listOfList.Add(subList1);
+
+            var clone = sut.Clone(listOfList);
+
+            Assert.AreNotSame(clone[0], clone[1]);
+            Assert.AreSame(clone[0], clone[2]);
         }
 
         [TestCase]
@@ -300,7 +407,7 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [TestCase]
-        public void CloneArrayOfClassesAndTheirClasses2()
+        public void CloneArrayOfClassesAndTheirClassesAndReferenceSameObjects()
         {
             var sut = this.SetupMapper();
             var persons = new ArrayObject();
