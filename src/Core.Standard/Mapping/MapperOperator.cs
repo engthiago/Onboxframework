@@ -6,13 +6,13 @@ using System.Reflection;
 
 namespace Onbox.Core.VDev.Mapping
 {
-    public class PropertyMap
+    internal class PropertyMap
     {
         public object TargetValue { get; set; }
         public List<PropertyData> TargetDataList { get; set; }
     }
 
-    public class PropertyData
+    internal class PropertyData
     {
         public PropertyInfo TargetProp { get; set; }
         public object TargetObject { get; set; }
@@ -32,9 +32,6 @@ namespace Onbox.Core.VDev.Mapping
         private readonly List<PropertyData> mainObjectPropertyCache;
         private readonly Dictionary<object, PropertyMap> propertyCache;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
         public MapperOperator(IMapperActionManager mapperConfigurator)
         {
             this.mapperConfigurator = mapperConfigurator;
@@ -55,19 +52,6 @@ namespace Onbox.Core.VDev.Mapping
             this.propertyCache.Clear();
         }
 
-        public List<PropertyData> GetMainObjectPropertyCache()
-        {
-            return this.mainObjectPropertyCache;
-        }
-
-        public Dictionary<object, PropertyMap> GetPropertyCache()
-        {
-            return this.propertyCache;
-        }
-
-        /// <summary>
-        /// Maps properties of one object to another
-        /// </summary>
         public object Map(object source)
         {
             if (source == null)
@@ -80,9 +64,6 @@ namespace Onbox.Core.VDev.Mapping
             return Map(source, target);
         }
 
-        /// <summary>
-        /// Creates a new object as a deep copy of the input object
-        /// </summary>
         public object Map(object source, object target)
         {
             if (source == null)
@@ -278,6 +259,49 @@ namespace Onbox.Core.VDev.Mapping
                     }
                 }
             }
+        }
+
+        public void MapCachedReferences<TSource>(TSource target) where TSource : new()
+        {
+            var propCache = this.GetPropertyCache();
+            foreach (var item in propCache)
+            {
+                var targetValue = item.Value.TargetValue;
+                foreach (var propData in item.Value.TargetDataList)
+                {
+                    if (propData.IsList)
+                    {
+                        propData.TargetList[propData.ListIndex] = targetValue;
+                    }
+                    else
+                    {
+                        propData.TargetProp.SetValue(propData.TargetObject, targetValue);
+                    }
+                }
+            }
+
+            var mainObjPropCache = this.GetMainObjectPropertyCache();
+            foreach (var item in mainObjPropCache)
+            {
+                if (item.IsList)
+                {
+                    item.TargetList[item.ListIndex] = target;
+                }
+                else
+                {
+                    item.TargetProp.SetValue(item.TargetObject, target);
+                }
+            }
+        }
+
+        private List<PropertyData> GetMainObjectPropertyCache()
+        {
+            return this.mainObjectPropertyCache;
+        }
+
+        private Dictionary<object, PropertyMap> GetPropertyCache()
+        {
+            return this.propertyCache;
         }
     }
 }

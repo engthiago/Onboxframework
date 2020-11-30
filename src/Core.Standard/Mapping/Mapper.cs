@@ -31,7 +31,7 @@ namespace Onbox.Core.VDev.Mapping
 
             this.mapperOperator.Map(source, target);
 
-            this.MapCachedReferences(target);
+            this.mapperOperator.MapCachedReferences(target);
 
             this.mapperOperator.ClearCache();
 
@@ -50,7 +50,7 @@ namespace Onbox.Core.VDev.Mapping
 
             this.mapperOperator.Map(source, target);
 
-            this.MapCachedReferences(target);
+            this.mapperOperator.MapCachedReferences(target);
 
             this.mapperOperator.ClearCache();
 
@@ -68,42 +68,9 @@ namespace Onbox.Core.VDev.Mapping
 
             this.mapperOperator.Map(source, target);
 
-            this.MapCachedReferences(target);
+            this.mapperOperator.MapCachedReferences(target);
 
             this.mapperOperator.ClearCache();
-        }
-
-        private void MapCachedReferences<TSource>(TSource target) where TSource : new()
-        {
-            var propCache = this.mapperOperator.GetPropertyCache();
-            foreach (var item in propCache)
-            {
-                var targetValue = item.Value.TargetValue;
-                foreach (var propData in item.Value.TargetDataList)
-                {
-                    if (propData.IsList)
-                    {
-                        propData.TargetList[propData.ListIndex] = targetValue;
-                    }
-                    else
-                    {
-                        propData.TargetProp.SetValue(propData.TargetObject, targetValue);
-                    }
-                }
-            }
-
-            var mainObjPropCache = this.mapperOperator.GetMainObjectPropertyCache();
-            foreach (var item in mainObjPropCache)
-            {
-                if (item.IsList)
-                {
-                    item.TargetList[item.ListIndex] = target;
-                }
-                else
-                {
-                    item.TargetProp.SetValue(item.TargetObject, target);
-                }
-            }
         }
 
     }

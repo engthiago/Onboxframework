@@ -352,17 +352,32 @@
         </member>
         <member name="T:Onbox.Core.VDev.Mapping.IMapperOperator">
             <summary>
-            Support contract for performing mapping
+            Support contract for performing mapping.
             </summary>
         </member>
         <member name="M:Onbox.Core.VDev.Mapping.IMapperOperator.Map(System.Object,System.Object)">
             <summary>
-            Maps properties of one object to another
+            Maps properties of one object to another.
             </summary>
         </member>
         <member name="M:Onbox.Core.VDev.Mapping.IMapperOperator.Map(System.Object)">
             <summary>
-            Creates a new object as a deep copy of the input object
+            Creates a new object as a deep copy of the input object.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.VDev.Mapping.IMapperOperator.SetMainObject(System.Object)">
+            <summary>
+            Sets the main object to be mapped or cloned, this needs to be called before any mapping takes place.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.VDev.Mapping.IMapperOperator.MapCachedReferences``1(``0)">
+            <summary>
+            Maps all the references cached by the mapping operation, this needs to be called after any mapping takes place.
+            </summary>
+        </member>
+        <member name="M:Onbox.Core.VDev.Mapping.IMapperOperator.ClearCache">
+            <summary>
+            Clears the mapping refence cache. this needs to be called after MapCachedReferences is called.
             </summary>
         </member>
         <member name="T:Onbox.Core.VDev.Mapping.Mapper">
@@ -412,21 +427,6 @@
         <member name="T:Onbox.Core.VDev.Mapping.MapperOperator">
             <summary>
             Support contract for performing mapping
-            </summary>
-        </member>
-        <member name="M:Onbox.Core.VDev.Mapping.MapperOperator.#ctor(Onbox.Core.VDev.Mapping.IMapperActionManager)">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Onbox.Core.VDev.Mapping.MapperOperator.Map(System.Object)">
-            <summary>
-            Maps properties of one object to another
-            </summary>
-        </member>
-        <member name="M:Onbox.Core.VDev.Mapping.MapperOperator.Map(System.Object,System.Object)">
-            <summary>
-            Creates a new object as a deep copy of the input object
             </summary>
         </member>
         <member name="T:Onbox.Core.VDev.Messaging.MessageDebugService">
