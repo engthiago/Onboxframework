@@ -79,6 +79,17 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [Test]
+        public void CloneAndCastObject()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = this.SetupPerson() as object;
+            var clone = sut.Clone<Person>(person1);
+
+            Assert.AreNotSame(clone, person1);
+        }
+
+        [Test]
         public void CloneObjectAndCopySimpleProperties()
         {
             var sut = this.SetupMapper();
@@ -525,6 +536,46 @@ namespace Onbox.Revit.Tests.Mapping
             //Assert.That(clone.Father != null);
             //Assert.That(clone.Father.Children != null);
             //Assert.That(clone.Father.Children.Count == person1.Father.Children.Count);
+        }
+
+        [Test]
+        public void MapObjectProperties()
+        {
+            var sut = this.SetupMapper();
+            
+            var person1 = new Person { Age = 18, FirstName = "Robb", LastName = "Stark" };
+            var person2 = new Person { Age = 14, FirstName = "Sansa", LastName = "Stark" };
+
+            sut.Map(person1, person2);
+
+            Assert.AreEqual(person1.FirstName, person2.FirstName);
+            Assert.AreEqual(person1.LastName, person2.LastName);
+            Assert.AreEqual(person1.Age, person2.Age);
+        }
+
+        [Test]
+        public void NotCloneNullObjects()
+        {
+            var sut = this.SetupMapper();
+            Person person1 = null;
+
+            var clone = sut.Clone(person1);
+
+            Assert.IsNull(clone);
+        }
+
+        [Test]
+        public void NotMapNullObjects()
+        {
+            var sut = this.SetupMapper();
+
+            Person person1 = null;
+            var person2 = new Person { Age = 18, FirstName = "Robb", LastName = "Stark" };
+
+            sut.Map(person1, person2);
+
+            Assert.AreEqual(person2.FirstName, "Robb");
+            Assert.AreEqual(person2.LastName, "Stark");
         }
     }
 }

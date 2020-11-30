@@ -1,6 +1,4 @@
 ﻿using Onbox.Abstractions.VDev;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace Onbox.Core.VDev.Mapping
 {
@@ -25,6 +23,11 @@ namespace Onbox.Core.VDev.Mapping
         /// <returns>The cloned object with all properties copied</returns>
         public TSource Clone<TSource>(TSource source) where TSource : new()
         {
+            if (source == null) 
+            {
+                return default;
+            }
+
             var target = new TSource();
 
             this.mapperOperator.SetMainObject(source);
