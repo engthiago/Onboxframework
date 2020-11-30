@@ -31,6 +31,50 @@ namespace Onbox.Core.VDev.Mapping
 
             this.mapperOperator.Map(source, target);
 
+            this.MapCachedReferences(target);
+
+            this.mapperOperator.ClearCache();
+
+            return target;
+        }
+
+        /// <summary>
+        /// Clones an object (Maps to a new instance)
+        /// </summary>
+        /// <returns>The cloned object with all properties copied</returns>
+        public TSource Clone<TSource>(object source) where TSource : new()
+        {
+            var target = new TSource();
+
+            this.mapperOperator.SetMainObject(source);
+
+            this.mapperOperator.Map(source, target);
+
+            this.MapCachedReferences(target);
+
+            this.mapperOperator.ClearCache();
+
+            return target;
+        }
+
+        /// <summary>
+        /// Maps one object to another
+        /// </summary>
+        /// <param name="source">The source object</param>
+        /// <param name="target">The target objects that the properties will be copied to</param>
+        public void Map<TSorce, TTarget>(TSorce source, TTarget target) where TSorce : new() where TTarget : new()
+        {
+            this.mapperOperator.SetMainObject(source);
+
+            this.mapperOperator.Map(source, target);
+
+            this.MapCachedReferences(target);
+
+            this.mapperOperator.ClearCache();
+        }
+
+        private void MapCachedReferences<TSource>(TSource target) where TSource : new()
+        {
             var propCache = this.mapperOperator.GetPropertyCache();
             foreach (var item in propCache)
             {
@@ -60,31 +104,7 @@ namespace Onbox.Core.VDev.Mapping
                     item.TargetProp.SetValue(item.TargetObject, target);
                 }
             }
-
-            this.mapperOperator.ClearCache();
-
-            return target;
         }
 
-        /// <summary>
-        /// Clones an object (Maps to a new instance)
-        /// </summary>
-        /// <returns>The cloned object with all properties copied</returns>
-        public TSource Clone<TSource>(object source) where TSource : new()
-        {
-            var target = new TSource();
-            this.mapperOperator.Map(source, target);
-            return target;
-        }
-
-        /// <summary>
-        /// Maps one object to another
-        /// </summary>
-        /// <param name="source">The source object</param>
-        /// <param name="target">The target objects that the properties will be copied to</param>
-        public void Map<TSorce, TTarget>(TSorce source, TTarget target) where TSorce : new() where TTarget : new()
-        {
-            this.mapperOperator.Map(source, target);
-        }
     }
 }

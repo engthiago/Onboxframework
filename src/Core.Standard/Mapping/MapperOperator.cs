@@ -28,10 +28,9 @@ namespace Onbox.Core.VDev.Mapping
     {
         private readonly IMapperActionManager mapperConfigurator;
 
-        private readonly Dictionary<object, PropertyMap> propertyCache;
-
-        private readonly List<PropertyData> mainObjectPropertyCache;
         private object mainObject;
+        private readonly List<PropertyData> mainObjectPropertyCache;
+        private readonly Dictionary<object, PropertyMap> propertyCache;
 
         /// <summary>
         /// Constructor
@@ -40,9 +39,8 @@ namespace Onbox.Core.VDev.Mapping
         {
             this.mapperConfigurator = mapperConfigurator;
 
-            this.propertyCache = new Dictionary<object, PropertyMap>();
-
             this.mainObjectPropertyCache = new List<PropertyData>();
+            this.propertyCache = new Dictionary<object, PropertyMap>();
         }
 
         public void SetMainObject(object mainObject)
