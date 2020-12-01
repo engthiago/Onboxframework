@@ -127,7 +127,7 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [Test]
-        public void CloneListObjects()
+        public void CloneListItems()
         {
             var sut = this.SetupMapper();
             List<Person> personList = SetupPersonList();
@@ -554,6 +554,79 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [Test]
+        public void MapObjectPropertiesAndPreserveReferences()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = this.SetupPerson();
+
+            var person2 = new Person { Age = 0, FirstName = "No one" };
+
+            sut.Map(person1, person2);
+
+            Assert.AreEqual(person2.Father.Children[0], person2);
+
+            person2.Father.Children[0].FirstName = "Bob";
+
+            Assert.AreEqual(person2.FirstName, "Bob");
+        }
+
+        [Test]
+        public void MapComplexPropertyObjects()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = this.SetupPerson();
+
+            var person2 = new Person { Age = 0, FirstName = "No one" };
+
+            sut.Map(person1, person2);
+
+            Assert.AreNotEqual(person1.Father, person2.Father);
+            Assert.AreEqual(person1.Father.FirstName, person2.Father.FirstName);
+            Assert.AreEqual(person1.Father.LastName, person2.Father.LastName);
+            Assert.AreEqual(person1.Father.Age, person2.Father.Age);
+        }
+
+        [Test]
+        public void MapComplexPropertyLists()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = this.SetupPerson();
+
+            var person2 = new Person { Age = 0, FirstName = "No one" };
+
+            sut.Map(person1, person2);
+
+            Assert.AreNotSame(person1.Children, person2.Children);
+            Assert.AreEqual(person1.Children.Count, person2.Children.Count);
+        }
+
+        [Test]
+        public void MapComplexPropertyListAndItsItems()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = this.SetupPerson();
+
+            var person2 = new Person { Age = 0, FirstName = "No one" };
+
+            sut.Map(person1, person2);
+
+            for (int i = 0; i < person1.Children.Count; i++)
+            {
+                var children1 = person1.Children[i];
+                var children2 = person2.Children[i];
+
+                Assert.AreNotSame(children1, children2);
+                Assert.AreEqual(children1.FirstName, children2.FirstName);
+                Assert.AreEqual(children1.LastName, children2.LastName);
+                Assert.AreEqual(children1.Age, children2.Age);
+            }
+        }
+
+        [Test]
         public void NotCloneNullObjects()
         {
             var sut = this.SetupMapper();
@@ -576,6 +649,126 @@ namespace Onbox.Revit.Tests.Mapping
 
             Assert.AreEqual(person2.FirstName, "Robb");
             Assert.AreEqual(person2.LastName, "Stark");
+        }
+
+        [Test]
+        public void NotMapCreateLists()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = new Person { Age = 20, FirstName = "Jon", LastName = "Snow", Children = null };
+            var person2 = new Person();
+
+            sut.Map(person1, person2);
+
+            Assert.IsNull(person2.Children);
+        }
+
+        [Test]
+        public void NotMapFromNullLists()
+        {
+            var sut = this.SetupMapper();
+
+            var person1 = new Person { Age = 20, FirstName = "Jon", LastName = "Snow", Children = null };
+            var person2 = new Person { Age = 20, FirstName = "Jonny", LastName = "", Children = new List<Person> { } };
+
+            sut.Map(person1, person2);
+
+            Assert.IsNotNull(person2.Children);
+        }
+
+        [Test]
+        public void RunPostMapActionAfterMapping()
+        {
+            var ranAction = false;
+
+            var mapperManager = new MapperActionManager();
+            mapperManager.AddMappingPostAction<Person, Person>((p1, p2) =>
+            {
+                ranAction = true;
+            });
+
+            var mapperOperator = new MapperOperator(mapperManager);
+            var sut = new Mapper(mapperOperator);
+
+            var person1 = this.SetupPerson();
+            var person2 = new Person();
+
+            sut.Map(person1, person2);
+
+            Assert.IsTrue(ranAction);
+        }
+
+        [Test]
+        public void RunPostMapActionAfterCloning()
+        {
+            var ranAction = false;
+
+            var mapperManager = new MapperActionManager();
+            mapperManager.AddMappingPostAction<Person, Person>((p1, p2) =>
+            {
+                ranAction = true;
+            });
+
+            var mapperOperator = new MapperOperator(mapperManager);
+            var sut = new Mapper(mapperOperator);
+
+            var person1 = this.SetupPerson();
+
+            sut.Clone(person1);
+
+            Assert.IsTrue(ranAction);
+        }
+
+        [Test]
+        public void RunPostMapActionAfterCloningNestedLists()
+        {
+            var ranAction = false;
+
+            var mapperManager = new MapperActionManager();
+            mapperManager.AddMappingPostAction<List<Person>, List<Person>>((p1, p2) =>
+            {
+                ranAction = true;
+            });
+
+            var mapperOperator = new MapperOperator(mapperManager);
+            var sut = new Mapper(mapperOperator);
+
+            var person1 = this.SetupPerson();
+
+            sut.Clone(person1);
+
+            Assert.IsTrue(ranAction);
+        }
+
+        [Test]
+        public void RunPostMapActionAfterCloningNestedObject()
+        {
+            var ranAction = false;
+
+            var mapperManager = new MapperActionManager();
+            mapperManager.AddMappingPostAction<Pet, Pet>((p1, p2) =>
+            {
+                ranAction = true;
+            });
+
+            var mapperOperator = new MapperOperator(mapperManager);
+            var sut = new Mapper(mapperOperator);
+
+
+            var pet = new Pet { Name = "Ghost" };
+            var person = new Person
+            {
+                FirstName = "Jon",
+                LastName = "Snow",
+                Age = 19,
+                Pet = pet
+            };
+            pet.Owner = person;
+
+            sut.Clone(person);
+
+            Assert.IsTrue(ranAction);
         }
     }
 }

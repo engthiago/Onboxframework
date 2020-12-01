@@ -80,6 +80,7 @@
     <Compile Include="Mapping\Dummies\ArrayOfLists.cs" />
     <Compile Include="Mapping\Dummies\Marriage.cs" />
     <Compile Include="Mapping\Dummies\Person.cs" />
+    <Compile Include="Mapping\Dummies\Pet.cs" />
     <Compile Include="Mapping\MapperShould.cs" />
     <Compile Include="Mapping\Dummies\ArrayObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

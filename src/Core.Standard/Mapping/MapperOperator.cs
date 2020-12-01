@@ -74,103 +74,103 @@ namespace Onbox.Core.VDev.Mapping
             var sourceType = source.GetType();
             var targetType = target.GetType();
 
-            //try
-            //{
-
-            if (source is IList && target is IList)
+            try
             {
-                var sourceList = source as IList;
-                var targetList = target as IList;
 
-                ConstructorInfo constructorInfo = null;
-                for (int i = 0; i < sourceList.Count; i++)
+                if (source is IList && target is IList)
                 {
-                    var sourceItem = sourceList[i];
-                    if (i == 0)
-                    {
-                        constructorInfo = sourceItem.GetType().GetConstructor(Type.EmptyTypes);
-                    }
+                    var sourceList = source as IList;
+                    var targetList = target as IList;
 
-                    if (constructorInfo == null)
+                    ConstructorInfo constructorInfo = null;
+                    for (int i = 0; i < sourceList.Count; i++)
                     {
-                        if (targetType.IsArray)
+                        var sourceItem = sourceList[i];
+                        if (i == 0)
                         {
-                            targetList[i] = sourceItem;
+                            constructorInfo = sourceItem.GetType().GetConstructor(Type.EmptyTypes);
                         }
-                        else
-                        {
-                            targetList.Add(sourceItem);
-                        }
-                    }
-                    else
-                    {
-                        var data = new PropertyData
-                        {
-                            IsList = true,
-                            ListIndex = i,
-                            TargetProp = null,
-                            TargetObject = target,
-                            TargetList = targetList,
-                        };
 
-                        if (sourceItem == this.mainObject)
+                        if (constructorInfo == null)
                         {
-                            this.mainObjectPropertyCache.Add(data);
                             if (targetType.IsArray)
                             {
-                                targetList[i] = null;
+                                targetList[i] = sourceItem;
                             }
                             else
                             {
-                                targetList.Add(null);
-                            }
-
-                        }
-                        else if (this.propertyCache.ContainsKey(sourceItem))
-                        {
-                            var properties = this.propertyCache[sourceItem];
-                            properties.TargetDataList.Add(data);
-                            if (targetType.IsArray)
-                            {
-                                targetList[i] = null;
-                            }
-                            else
-                            {
-                                targetList.Add(null);
+                                targetList.Add(sourceItem);
                             }
                         }
                         else
                         {
-                            var propertyMap = new PropertyMap
+                            var data = new PropertyData
                             {
-                                TargetDataList = new List<PropertyData> { data }
+                                IsList = true,
+                                ListIndex = i,
+                                TargetProp = null,
+                                TargetObject = target,
+                                TargetList = targetList,
                             };
 
-                            this.propertyCache.Add(sourceItem, propertyMap);
-                            var targetValue = this.Map(sourceItem);
-                            propertyMap.TargetValue = targetValue;
-
-                            if (targetType.IsArray)
+                            if (sourceItem == this.mainObject)
                             {
-                                targetList[i] = null;
+                                this.mainObjectPropertyCache.Add(data);
+                                if (targetType.IsArray)
+                                {
+                                    targetList[i] = null;
+                                }
+                                else
+                                {
+                                    targetList.Add(null);
+                                }
+
+                            }
+                            else if (this.propertyCache.ContainsKey(sourceItem))
+                            {
+                                var properties = this.propertyCache[sourceItem];
+                                properties.TargetDataList.Add(data);
+                                if (targetType.IsArray)
+                                {
+                                    targetList[i] = null;
+                                }
+                                else
+                                {
+                                    targetList.Add(null);
+                                }
                             }
                             else
                             {
-                                targetList.Add(null);
+                                var propertyMap = new PropertyMap
+                                {
+                                    TargetDataList = new List<PropertyData> { data }
+                                };
+
+                                this.propertyCache.Add(sourceItem, propertyMap);
+                                var targetValue = this.Map(sourceItem);
+                                propertyMap.TargetValue = targetValue;
+
+                                if (targetType.IsArray)
+                                {
+                                    targetList[i] = null;
+                                }
+                                else
+                                {
+                                    targetList.Add(null);
+                                }
                             }
                         }
                     }
                 }
+                else
+                {
+                    CopyProperties(source, target, sourceType, targetType);
+                }
             }
-            else
+            catch
             {
-                CopyProperties(source, target, sourceType, targetType);
+                throw new InvalidCastException($"Can not map between {sourceType.FullName} and {targetType.FullName}");
             }
-            //}
-            //catch
-            //{
-            //    throw new InvalidCastException($"Can not map between {sourceType.FullName} and {targetType.FullName}");
-            //}
 
             var mapingFunction = this.mapperConfigurator.GetMapPostAction(sourceType, targetType);
             if (mapingFunction != null)
