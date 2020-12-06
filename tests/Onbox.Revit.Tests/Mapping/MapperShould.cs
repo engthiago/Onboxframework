@@ -770,5 +770,15 @@ namespace Onbox.Revit.Tests.Mapping
 
             Assert.IsTrue(ranAction);
         }
+
+        [Test]
+        public void DoNotMapDictionaries()
+        {
+            var sut = this.SetupMapper();
+
+            var dict = new Dictionary<string, string>();
+
+            Assert.Throws<System.InvalidCastException>(() => sut.Clone(dict));
+        }
     }
 }
