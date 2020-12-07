@@ -2,6 +2,7 @@
 using Onbox.Core.VDev.Mapping;
 using Onbox.Revit.Tests.Mapping.Dummies;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Onbox.Revit.Tests.Mapping
 {
@@ -772,13 +773,43 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [Test]
-        public void DoNotMapDictionaries()
+        public void CloneDictionaries()
         {
             var sut = this.SetupMapper();
 
-            var dict = new Dictionary<string, string>();
+            var dict = new Dictionary<string, string>
+            {
+                { "K1", "V1" },
+                { "K2", "V2" }
+            };
 
-            Assert.Throws<System.InvalidCastException>(() => sut.Clone(dict));
+            var clone = sut.Clone(dict);
+
+            Assert.AreEqual(dict.Count, clone.Count);
+            Assert.AreNotSame(dict, clone);
+        }
+
+        [Test]
+        public void CloneComplexDictionaries()
+        {
+            var sut = this.SetupMapper();
+
+            var dict = new Dictionary<string, Person>
+            {
+                { "P1", new Person { FirstName = "Eddard", LastName = "Stark" } },
+                { "P2", new Person { FirstName = "Jon", LastName = "Snow" } },
+            };
+
+            var clone = sut.Clone(dict);
+
+            for (int i = 0; i < dict.Count; i++)
+            {
+                var kv1 = dict.ElementAt(i);
+                var kv2 = clone.ElementAt(i);
+
+                Assert.AreEqual(kv1.Key, kv2.Key);
+                Assert.AreNotEqual(kv1.Value, kv2.Value);
+            }
         }
     }
 }

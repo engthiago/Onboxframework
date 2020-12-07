@@ -60,6 +60,13 @@ namespace Onbox.Core.VDev.Mapping
             }
 
             var type = source.GetType();
+
+            var constructorInfo = type.GetConstructor(Type.EmptyTypes);
+            if (constructorInfo == null)
+            {
+                return source;
+            }
+
             var target = Activator.CreateInstance(type);
             return Map(source, target);
         }
@@ -76,12 +83,19 @@ namespace Onbox.Core.VDev.Mapping
 
             try
             {
-
-                if (source is IList && target is IList)
+                if (source is IDictionary sourceDic && target is IDictionary targetDic)
                 {
-                    var sourceList = source as IList;
-                    var targetList = target as IList;
+                    foreach (DictionaryEntry item in sourceDic)
+                    {
+                        var clonedKey = this.Map(item.Key);
+                        var clonedValue = this.Map(item.Value);
+                        targetDic.Add(clonedKey, clonedValue);
+                    }
 
+                    return targetDic;
+                }
+                else if (source is IList sourceList && target is IList targetList)
+                {
                     ConstructorInfo constructorInfo = null;
                     for (int i = 0; i < sourceList.Count; i++)
                     {
@@ -164,7 +178,7 @@ namespace Onbox.Core.VDev.Mapping
                 }
                 else
                 {
-                    CopyProperties(source, target, sourceType, targetType);
+                    this.CopyProperties(source, target, sourceType, targetType);
                 }
             }
             catch
