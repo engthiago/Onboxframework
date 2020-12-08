@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Onbox.Abstractions.VDev;
 using Onbox.Core.VDev.Mapping;
 using Onbox.Revit.Tests.Mapping.Dummies;
 using System.Collections.Generic;
@@ -6,9 +7,10 @@ using System.Linq;
 
 namespace Onbox.Revit.Tests.Mapping
 {
-    public partial class MapperShould
+    [TestFixture(Category = "Mapping and Cloning")]
+    public class MapperShould
     {
-        private Mapper SetupMapper()
+        private IMapper SetupMapper()
         {
             var mapperManager = new MapperActionManager();
             var mapperOperator = new MapperOperator(mapperManager);
@@ -522,7 +524,7 @@ namespace Onbox.Revit.Tests.Mapping
         public void CloneAndCopyObjects()
         {
             var sut = this.SetupMapper();
-            
+
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
@@ -543,7 +545,7 @@ namespace Onbox.Revit.Tests.Mapping
         public void MapObjectProperties()
         {
             var sut = this.SetupMapper();
-            
+
             var person1 = new Person { Age = 18, FirstName = "Robb", LastName = "Stark" };
             var person2 = new Person { Age = 14, FirstName = "Sansa", LastName = "Stark" };
 
@@ -790,7 +792,7 @@ namespace Onbox.Revit.Tests.Mapping
         }
 
         [Test]
-        public void CloneComplexDictionaries()
+        public void CloneComplexValueDictionaries()
         {
             var sut = this.SetupMapper();
 
@@ -807,6 +809,59 @@ namespace Onbox.Revit.Tests.Mapping
                 var kv1 = dict.ElementAt(i);
                 var kv2 = clone.ElementAt(i);
 
+                Assert.NotNull(kv2.Value);
+                Assert.AreEqual(kv1.Key, kv2.Key);
+                Assert.AreNotEqual(kv1.Value, kv2.Value);
+            }
+        }
+
+        [Test]
+        public void CloneComplexKeyDictionaries()
+        {
+            var sut = this.SetupMapper();
+
+            var dict = new Dictionary<Person, string>
+            {
+                { new Person { FirstName = "Eddard", LastName = "Stark" }, "P1"  },
+                { new Person { FirstName = "Jon", LastName = "Snow" }, "P2" },
+            };
+
+            var clone = sut.Clone(dict);
+
+            for (int i = 0; i < dict.Count; i++)
+            {
+                var kv1 = dict.ElementAt(i);
+                var kv2 = clone.ElementAt(i);
+
+                Assert.AreNotEqual(kv1.Key, kv2.Key);
+                Assert.AreEqual(kv1.Key.FirstName, kv2.Key.FirstName);
+                Assert.AreEqual(kv1.Key.LastName, kv2.Key.LastName);
+                Assert.AreEqual(kv1.Value, kv2.Value);
+            }
+        }
+
+        [Test]
+        public void CloneNestedDictionaries()
+        {
+            var sut = this.SetupMapper();
+
+            var personDict = new PersonNestedDictionary
+            {
+                PersonDictionary = new Dictionary<string, Person>
+                {
+                    { "P1", new Person { FirstName = "Eddard", LastName = "Stark" } },
+                    { "P2", new Person { FirstName = "Jon", LastName = "Snow" } },
+                }
+            };
+
+            var clone = sut.Clone(personDict);
+
+            for (int i = 0; i < personDict.PersonDictionary.Count; i++)
+            {
+                var kv1 = personDict.PersonDictionary.ElementAt(i);
+                var kv2 = clone.PersonDictionary.ElementAt(i);
+
+                Assert.NotNull(kv2.Value);
                 Assert.AreEqual(kv1.Key, kv2.Key);
                 Assert.AreNotEqual(kv1.Value, kv2.Value);
             }

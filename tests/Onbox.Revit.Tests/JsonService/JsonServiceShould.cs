@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Onbox.Revit.Tests.JsonService
 {
-    [Category("Json Service")]
+    [Category("Serialization")]
     public class JsonServiceShould
     {
         private string SerializeDummyPersonDirectlyWithNewtonsoft()
