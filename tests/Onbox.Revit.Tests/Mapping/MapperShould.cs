@@ -866,5 +866,60 @@ namespace Onbox.Revit.Tests.Mapping
                 Assert.AreNotEqual(kv1.Value, kv2.Value);
             }
         }
+
+        [Test]
+        public void CloneDictionariesInsideListsOfObjects()
+        {
+            var sut = this.SetupMapper();
+
+            var personDict = new PersonNestedDictionary
+            {
+                PersonDictionary = new Dictionary<string, Person>
+                {
+                    { "P1", new Person { FirstName = "Eddard", LastName = "Stark" } },
+                    { "P2", new Person { FirstName = "Jon", LastName = "Snow" } },
+                }
+            };
+
+            var personDictList = new List<PersonNestedDictionary>();
+            personDictList.Add(personDict);
+
+
+            var clone = sut.Clone(personDictList);
+
+            Assert.AreNotEqual(personDictList, clone);
+            Assert.AreEqual(personDictList.Count, clone.Count);
+            Assert.AreNotEqual(personDictList[0].PersonDictionary["P1"], clone[0].PersonDictionary["P1"]);
+        }
+
+        [Test]
+        public void CloneDictionariesAndPresenveReferences()
+        {
+            var sut = this.SetupMapper();
+
+            var personNestedDict = new Dictionary<string, Person>
+                {
+                    { "P1", new Person { FirstName = "Eddard", LastName = "Stark" } },
+                    { "P2", new Person { FirstName = "Jon", LastName = "Snow" } },
+                };
+
+            var personDict1 = new PersonNestedDictionary
+            {
+                PersonDictionary = personNestedDict
+            };
+
+            var personDict2 = new PersonNestedDictionary
+            {
+                PersonDictionary = personNestedDict
+            };
+
+            var personDictList = new List<PersonNestedDictionary>();
+            personDictList.Add(personDict1);
+            personDictList.Add(personDict2);
+
+            var clone = sut.Clone(personDictList);
+
+            Assert.AreEqual(clone[0].PersonDictionary, clone[1].PersonDictionary);
+        }
     }
 }
