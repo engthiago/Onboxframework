@@ -80,7 +80,7 @@ public override Result OnStartup(IContainer container,UIControlledApplication ap
 }
 ```
 
-If you are not familiar with the Inversion of control principle or IOC Containers, please have a look on this [article](https://martinfowler.com/articles/injection.html) or this [video](https://www.youtube.com/watch?v=QtDTfn8YxXg&), this is a very important concept for Onbox, it extensively uses this container throughout its libraries. Most of the work is done by the framework in the background, but it is good to know the advantages as it also changes the way you architecture your application and classes.
+If you are not familiar with the Inversion of control principle or IOC Containers, we explain it on the [Inversion of Control](2_1_inversion_of_control.md). This is a very important concept for Onbox, it extensively uses this container throughout its libraries. Most of the work is done by the framework in the background, but it is good to know the advantages as it also changes the way you architecture your application and classes.
 
 `container.AddOnboxCore` method call will add important core classes for dealing with Http requests, serialization, logging, mapping, and cloning of objects.
 
