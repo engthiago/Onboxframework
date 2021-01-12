@@ -4,6 +4,17 @@
         <name>Onbox.Abstractions.VDev</name>
     </assembly>
     <members>
+        <member name="T:Onbox.Abstractions.VDev.IConsolePrint">
+            <summary>
+            A contract to types that can print messages to console
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IConsolePrint.EnableConsolePrinting(System.Boolean)">
+            <summary>
+            Enables console printing
+            </summary>
+            <param name="enabled">flag to enable or disable console priting.</param>
+        </member>
         <member name="T:Onbox.Abstractions.VDev.IContainer">
             <summary>
             Onbox's IOC container contract

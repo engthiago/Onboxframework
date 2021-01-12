@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Onbox.Abstractions.VDev;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Onbox.Abstractions.VDev;
-using System.Collections.Generic;
 
 namespace Onbox.Di.VDev
 {
@@ -40,6 +40,7 @@ namespace Onbox.Di.VDev
         private Type currentType;
 
         private bool isScope = false;
+        private bool canPrintToConsole = false;
 
         /// <summary>
         /// Adds an implementation as a singleton on the container.
@@ -159,7 +160,10 @@ namespace Onbox.Di.VDev
 
         private object ResolveObject(Type contract)
         {
-            Console.WriteLine("Onbox Container request: " + contract.ToString());
+            if (this.canPrintToConsole)
+            {
+                Console.WriteLine("Onbox Container request: " + contract.ToString());
+            }
 
             // Always prioritize instances
             if (this.singletonInstances.ContainsKey(contract))
@@ -220,7 +224,10 @@ namespace Onbox.Di.VDev
             ParameterInfo[] constructorParameters = constructor.GetParameters();
             if (constructorParameters.Length == 0)
             {
-                Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
+                if (this.canPrintToConsole)
+                {
+                    Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
+                }
                 currentTypes.Remove(implementation);
                 return Activator.CreateInstance(implementation);
             }
@@ -232,7 +239,10 @@ namespace Onbox.Di.VDev
                 parameters.Add(this.ResolveObject(type));
             }
 
-            Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
+            if (this.canPrintToConsole)
+            {
+                Console.WriteLine("Onbox Container instantiated " + implementation.ToString());
+            }
             currentTypes.Remove(implementation);
             return constructor.Invoke(parameters.ToArray());
         }
@@ -245,12 +255,10 @@ namespace Onbox.Di.VDev
                 if (currentType == contract)
                 {
                     error = $"Onbox Container found circular dependency on {currentType.Name} trying to inject itself.";
-                    Console.WriteLine(error);
                     throw new InvalidOperationException(error);
                 }
 
                 error = $"Onbox Container found circular dependency between {currentType.Name} and {contract.Name}.";
-                Console.WriteLine(error);
                 throw new InvalidOperationException(error);
             }
         }
@@ -291,7 +299,10 @@ namespace Onbox.Di.VDev
         /// </summary>
         public void Dispose()
         {
-            Console.WriteLine("Onbox Container disposing... ");
+            if (this.canPrintToConsole)
+            {
+                Console.WriteLine("Onbox Container disposing... ");
+            }
             Clear();
         }
 
@@ -323,6 +334,18 @@ namespace Onbox.Di.VDev
         public bool IsScope()
         {
             return this.isScope;
+        }
+
+        /// <summary>
+        /// Enables or disables the container for printing to the console when events happen. Default is false.
+        /// <br/> * Requesting for new instances
+        /// <br/> * Instantiating
+        /// <br/> * Disposing
+        /// </summary>
+        /// <param name="enabled">flag to enable or disable console priting.</param>
+        public void EnableConsolePrinting(bool enabled)
+        {
+            this.canPrintToConsole = enabled;
         }
     }
 }

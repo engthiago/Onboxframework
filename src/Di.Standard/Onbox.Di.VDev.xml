@@ -122,5 +122,14 @@
             Reports if this container is a scope of a container
             </summary>
         </member>
+        <member name="M:Onbox.Di.VDev.Container.EnableConsolePrinting(System.Boolean)">
+            <summary>
+            Enables or disables the container for printing to the console when events happen. Default is false.
+            <br/> * Requesting for new instances
+            <br/> * Instantiating
+            <br/> * Disposing
+            </summary>
+            <param name="enabled">flag to enable or disable console priting.</param>
+        </member>
     </members>
 </doc>
