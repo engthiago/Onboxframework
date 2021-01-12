@@ -16,6 +16,27 @@ namespace Onbox.Revit.Tests.Di
         }
 
         [Test]
+        public void EnableConsoleWrittingForEvents()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.EnableConsolePrinting(true);
+                var dummyInstance = sut.Resolve(typeof(DummyService));
+                Assert.That(dummyInstance, Is.Not.Null);
+            }
+        }    
+        
+        [Test]
+        public void EnableConsoleWrittingForEventsWhenDependentServicesAreInstantiated()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.EnableConsolePrinting(true); 
+                var dependentType = sut.Resolve<DependentService>();
+            }
+        }
+
+        [Test]
         public void HaveOnlyDefaultConstructor()
         {
             var type = typeof(Container);
