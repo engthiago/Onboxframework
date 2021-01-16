@@ -5,7 +5,7 @@ namespace Onbox.Abstractions.VDev
     /// <summary>
     /// Onbox's IOC container contract
     /// </summary>
-    public interface IContainer : IContainerResolver
+    public interface IContainer : IContainerResolver, IContainerConsolePrint
     {
         /// <summary>
         /// Adds an implementation as a singleton on the container.

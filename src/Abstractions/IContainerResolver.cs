@@ -5,7 +5,7 @@ namespace Onbox.Abstractions.VDev
     /// <summary>
     /// Onbox's IOC container read only contract
     /// </summary>
-    public interface IContainerResolver: IDisposable, IConsolePrint
+    public interface IContainerResolver: IDisposable
     {
         /// <summary>
         /// Asks the container for a new instance of a type
