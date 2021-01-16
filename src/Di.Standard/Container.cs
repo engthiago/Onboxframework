@@ -50,9 +50,20 @@ namespace Onbox.Di.VDev
         /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddSingleton<TImplementation>() where TImplementation : class
         {
-            var type = typeof(TImplementation);
-            EnsureNonAbstractClass(type);
-            this.singletonTypes[type] = type;
+            var implementationType = typeof(TImplementation);
+            this.AddSingleton(implementationType);
+        }
+
+        /// <summary>
+        /// Adds an implementation as a singleton on the container.
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <param name="implementationType">The type that will be added</param>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        public void AddSingleton(Type implementationType)
+        {
+            EnsureNonAbstractClass(implementationType);
+            this.singletonTypes[implementationType] = implementationType;
         }
 
         /// <summary>
@@ -69,14 +80,27 @@ namespace Onbox.Di.VDev
         /// Adds an implementation to a contract as a singleton on the container
         /// </summary>
         /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <param name="contractType">Contract type</param>
+        /// <param name="implementationType">Implementation type</param>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        public void AddSingleton(Type contractType, Type implementationType)
+        {
+            EnsureNonAbstractClass(implementationType);
+            this.singletonTypes[contractType] = implementationType;
+        }
+
+        /// <summary>
+        /// Adds an implementation to a contract as a singleton on the container
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
         /// <typeparam name="TContract"></typeparam>
         /// <typeparam name="TImplementation"></typeparam>
         /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddSingleton<TContract, TImplementation>() where TImplementation : class, TContract
         {
-            var type = typeof(TImplementation);
-            EnsureNonAbstractClass(type);
-            this.singletonTypes[typeof(TContract)] = type;
+            var contractType = typeof(TContract);
+            var implementationType = typeof(TImplementation);
+            AddSingleton(contractType, implementationType);
         }
 
         /// <summary>
@@ -89,6 +113,17 @@ namespace Onbox.Di.VDev
             this.singletonInstances[typeof(TContract)] = instance;
         }
 
+        /// <summary>
+        /// Adds an implementation as transient on the container
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <type name="implementationType"></type>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        public void AddTransient(Type implementationType)
+        {
+            EnsureNonAbstractClass(implementationType);
+            this.transientTypes[implementationType] = implementationType;
+        }
 
         /// <summary>
         /// Adds an implementation as a transient on the container.
@@ -98,9 +133,21 @@ namespace Onbox.Di.VDev
         /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddTransient<TImplementation>() where TImplementation : class
         {
-            var type = typeof(TImplementation);
-            EnsureNonAbstractClass(type);
-            this.transientTypes[type] = type;
+            var implementationType = typeof(TImplementation);
+            this.AddTransient(implementationType);
+        }
+
+        /// <summary>
+        /// Adds an implementation to a contract as transient on the container
+        /// </summary>
+        /// <remarks>It can not be an abstract or interface type</remarks>
+        /// <type name="contractType"></type>
+        /// <type name="implementationType"></type>
+        /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        public void AddTransient(Type contractType, Type implementationType)
+        {
+            EnsureNonAbstractClass(implementationType);
+            this.transientTypes[contractType] = implementationType;
         }
 
         /// <summary>
@@ -112,9 +159,18 @@ namespace Onbox.Di.VDev
         /// <exception cref="InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         public void AddTransient<TContract, TImplementation>() where TImplementation : class, TContract
         {
-            var type = typeof(TImplementation);
-            EnsureNonAbstractClass(type);
-            this.transientTypes[typeof(TContract)] = type;
+            var contractType = typeof(TContract);
+            var implementationType = typeof(TImplementation);
+            this.AddTransient(contractType, implementationType);
+        }
+
+        /// <summary>
+        /// Adds a scoped implementation to a contract on the container.
+        /// </summary>
+        public void AddScoped(Type contractType, Type implementationType)
+        {
+            EnsureNonAbstractClass(implementationType);
+            this.scopedTypes[contractType] = implementationType;
         }
 
         /// <summary>
@@ -122,9 +178,18 @@ namespace Onbox.Di.VDev
         /// </summary>
         public void AddScoped<TContract, TImplementation>() where TImplementation : class, TContract
         {
-            var type = typeof(TImplementation);
-            EnsureNonAbstractClass(type);
-            this.scopedTypes[typeof(TContract)] = type;
+            var implementationType = typeof(TImplementation);
+            var contractType = typeof(TContract);
+            this.AddScoped(contractType, implementationType);
+        }
+
+        /// <summary>
+        /// Adds a scoped implementation on the container.
+        /// </summary>
+        public void AddScoped(Type implementationType)
+        {
+            EnsureNonAbstractClass(implementationType);
+            this.scopedTypes[implementationType] = implementationType;
         }
 
         /// <summary>
@@ -132,11 +197,9 @@ namespace Onbox.Di.VDev
         /// </summary>
         public void AddScoped<TImplementation>() where TImplementation : class
         {
-            var type = typeof(TImplementation);
-            EnsureNonAbstractClass(type);
-            this.scopedTypes[type] = type;
+            var implementationType = typeof(TImplementation);
+            this.AddScoped(implementationType);
         }
-
 
         /// <summary>
         /// Asks the container for a new instance of a type
