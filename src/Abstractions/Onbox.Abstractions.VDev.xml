@@ -20,6 +20,11 @@
             Onbox's IOC container contract
             </summary>
         </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainer.AddSingleton(System.Type)">
+            <summary>
+            Adds an implementation as a singleton on the container.
+            </summary>
+        </member>
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddSingleton``1">
             <summary>
             Adds an implementation as a singleton on the container.
@@ -28,6 +33,11 @@
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddSingleton``1(``0)">
             <summary>
             Adds an instance as a singleton on the container
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainer.AddSingleton(System.Type,System.Type)">
+            <summary>
+            Adds an implementation to a contract as a singleton on the container
             </summary>
         </member>
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddSingleton``2">
@@ -40,9 +50,19 @@
             Adds an instance as a singleton on the container
             </summary>
         </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainer.AddScoped(System.Type,System.Type)">
+            <summary>
+            Adds a scoped implementation to a contract on the container.
+            </summary>
+        </member>
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddScoped``2">
             <summary>
             Adds a scoped implementation to a contract on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainer.AddScoped(System.Type)">
+            <summary>
+            Adds a scoped implementation on the container.
             </summary>
         </member>
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddScoped``1">
@@ -50,9 +70,19 @@
             Adds a scoped implementation on the container.
             </summary>
         </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainer.AddTransient(System.Type)">
+            <summary>
+            Adds an implementation as transient on the container
+            </summary>
+        </member>
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddTransient``1">
             <summary>
             Adds an implementation as a transient on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainer.AddTransient(System.Type,System.Type)">
+            <summary>
+            Adds an implementation to a contract as transient on the container
             </summary>
         </member>
         <member name="M:Onbox.Abstractions.VDev.IContainer.AddTransient``2">
