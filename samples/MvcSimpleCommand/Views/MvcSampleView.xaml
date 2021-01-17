@@ -9,7 +9,6 @@
 						mc:Ignorable="d"
 						Title="MvcView"
 						CanRetryOnError="True"
-						CanRetryOnWarning="True"
 						MinWidth="500"
 						MinHeight="450"
 						Width="500"
@@ -17,7 +16,7 @@
 
     <Grid>
         <mvc:Spinner Text="Loading Files..."></mvc:Spinner>
-        <mvc:Warning></mvc:Warning>
+        <mvc:Error></mvc:Error>
         <!--<TextBlock Text="Loaded" 
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>-->

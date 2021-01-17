@@ -30,7 +30,7 @@ namespace MvcSimpleCommand.Views
             await this.PerformAsync(async () =>
             {
                 await Task.Delay(1500);
-                this.Warning = "Hey.. This is an error!";
+                this.Error = "Hey.. This is an error!";
             });
         }
 

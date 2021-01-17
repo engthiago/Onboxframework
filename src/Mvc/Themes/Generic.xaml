@@ -546,7 +546,7 @@
                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         <Button Content="Retry"
                                 x:Name="PART_Retry"
-                                Visibility="{Binding CanRetryOnError, Converter={c:BoolToVisibilityHideConverter}}"
+                                Visibility="Collapsed"
                                 Margin="0,7,0,0"
                                 Width="80"/>
                     </StackPanel>
@@ -592,7 +592,7 @@
                                    Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         <Button Content="Retry"
                                 x:Name="PART_Retry"
-                                Visibility="{Binding CanRetryOnWarning, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={c:BoolToVisibilityHideConverter}}"
+                                Visibility="Collapsed"
                                 Margin="0,7,0,0"
                                 Width="80"/>
                     </StackPanel>

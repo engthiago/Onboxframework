@@ -11,6 +11,7 @@ namespace Onbox.Mvc.VDev
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Error), new FrameworkPropertyMetadata(typeof(Error)));
         }
 
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -23,6 +24,16 @@ namespace Onbox.Mvc.VDev
             if (this.button != null)
             {
                 this.button.Click += OnRetryClicked;
+
+                // Sets the visibility of the button to Visible if the parent component allows it
+                var component = VisualTreeHelpers.GetParentMvcComponent(this);
+                if (component != null)
+                {
+                    if (component.CanRetryOnError)
+                    {
+                        this.button.Visibility = Visibility.Visible;
+                    }
+                }
             }
         }
 
