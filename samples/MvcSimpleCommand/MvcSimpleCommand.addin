@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Name>MvcSimpleCommand</Name>
+    <Assembly>MvcSimpleCommand/MvcSimpleCommand.dll</Assembly>
+	<FullClassName>MvcSimpleCommand.Revit.Commands.MainCommand</FullClassName>
+    <ClientId>ddfdea3a-71cf-4d9b-aa5a-40abe261d38a</ClientId>
+	<Text>MvcSimpleCommand</Text>
+	<VisibilityMode>AlwaysVisible</VisibilityMode>
+    <VendorId>MvcSimpleCommand</VendorId>
+    <VendorDescription>MvcSimpleCommand</VendorDescription>
+  </AddIn>
+</RevitAddIns>

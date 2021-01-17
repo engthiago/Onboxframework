@@ -4,17 +4,6 @@
         <name>Onbox.Abstractions.VDev</name>
     </assembly>
     <members>
-        <member name="T:Onbox.Abstractions.VDev.IConsolePrint">
-            <summary>
-            A contract to types that can print messages to console
-            </summary>
-        </member>
-        <member name="M:Onbox.Abstractions.VDev.IConsolePrint.EnableConsolePrinting(System.Boolean)">
-            <summary>
-            Enables console printing
-            </summary>
-            <param name="enabled">flag to enable or disable console priting.</param>
-        </member>
         <member name="T:Onbox.Abstractions.VDev.IContainer">
             <summary>
             Onbox's IOC container contract
@@ -94,6 +83,17 @@
             <summary>
             Resets the entire container
             </summary>
+        </member>
+        <member name="T:Onbox.Abstractions.VDev.IContainerConsolePrint">
+            <summary>
+            Contract Type for printing Container events to the console
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainerConsolePrint.EnableConsolePrinting(System.Boolean)">
+            <summary>
+            Enables console writeline for important events on the container. E.g: When the container is instantiating an object.
+            </summary>
+            <param name="enabled">flag to enable or disable console priting.</param>
         </member>
         <member name="T:Onbox.Abstractions.VDev.IContainerPipeline">
             <summary>

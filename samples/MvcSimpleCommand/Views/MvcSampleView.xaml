@@ -1,0 +1,24 @@
+﻿<rmvc:RevitMvcViewBase x:Class="MvcSimpleCommand.Views.MvcSampleView"
+					DataContext="{Binding RelativeSource={RelativeSource Self}}"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:mvc="clr-namespace:Onbox.Mvc.VDev;assembly=Onbox.Mvc.VDev"
+					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.VDev;assembly=Onbox.Mvc.Revit.VDev"
+					mc:Ignorable="d"
+					Title="MvcView"
+					MinWidth="500"
+					MinHeight="450"
+					Width="500"
+					Height="450">
+
+    <Grid>
+        <mvc:Spinner Text="Loading Files..."></mvc:Spinner>
+        <TextBlock mvc:If.OnErrorOrLoadingHide="True"
+                   Text="Loaded" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+    </Grid>
+
+</rmvc:RevitMvcViewBase>
