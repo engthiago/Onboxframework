@@ -6,16 +6,6 @@ namespace Onbox.Mvc.VDev
     public class Error : Control
     {
         Button button;
-
-        public bool CanRetry
-        {
-            get { return (bool)GetValue(CanRetryProperty); }
-            set { SetValue(CanRetryProperty, value); }
-        }
-
-        public static readonly DependencyProperty CanRetryProperty =
-            DependencyProperty.Register("CanRetry", typeof(bool), typeof(Control), new PropertyMetadata(false));
-
         static Error()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Error), new FrameworkPropertyMetadata(typeof(Error)));

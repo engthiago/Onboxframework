@@ -26,8 +26,12 @@ namespace MvcSimpleCommand.Views
         public override async Task OnInitAsync()
         {
             await base.OnInitAsync();
-            await Task.Delay(1500);
-            this.Error += "Hey.. This is an error!";
+
+            await this.PerformAsync(async () =>
+            {
+                await Task.Delay(1500);
+                this.Warning = "Hey.. This is an error!";
+            });
         }
 
         public override void OnWarningRetry()
