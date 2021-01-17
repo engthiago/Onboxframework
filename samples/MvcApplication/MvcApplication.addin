@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>MvcApplication App</Name>
+    <Assembly>MvcApplication/MvcApplication.dll</Assembly>
+    <AddInId>650ccca5-fecb-4d84-9cad-544fadd06bb5</AddInId>
+    <FullClassName>MvcApplication.Revit.App</FullClassName>
+    <VendorId>MvcApplication</VendorId>
+    <VendorDescription>MvcApplication</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
