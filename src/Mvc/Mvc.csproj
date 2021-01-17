@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorPicker.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="MvcComponent.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BitmapSourceCheckToUnchekedConverter.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Utils\ImageUtils.cs" />
     <Compile Include="MvcViewBase.cs" />
     <Compile Include="VisualTreeHelpers.cs" />
+    <Compile Include="Warning.cs" />
     <Compile Include="WarningIcon.xaml.cs">
       <DependentUpon>WarningIcon.xaml</DependentUpon>
     </Compile>

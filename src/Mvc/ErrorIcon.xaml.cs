@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Onbox.Mvc.VDev
@@ -6,6 +7,7 @@ namespace Onbox.Mvc.VDev
     /// <summary>
     /// Interaction logic for ErrorIcon.xaml
     /// </summary>
+    [Obsolete("Use component 'Error' instead")]
     public partial class ErrorIcon : UserControl
     {
         public ErrorIcon()

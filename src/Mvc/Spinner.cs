@@ -6,8 +6,6 @@ namespace Onbox.Mvc.VDev
 {
     public class Spinner : Control
     {
-
-
         public Color Color1
         {
             get { return (Color)GetValue(Color1Property); }
@@ -16,7 +14,6 @@ namespace Onbox.Mvc.VDev
 
         public static readonly DependencyProperty Color1Property =
             DependencyProperty.Register("Color1", typeof(Color), typeof(Spinner), new UIPropertyMetadata(Color.FromRgb(140,140,140)));
-
 
         public Color Color2
         {
@@ -27,9 +24,6 @@ namespace Onbox.Mvc.VDev
         public static readonly DependencyProperty Color2Property =
             DependencyProperty.Register("Color2", typeof(Color), typeof(Spinner), new UIPropertyMetadata(Color.FromRgb(84, 84, 84)));
 
-
-
-
         public Color Color3
         {
             get { return (Color)GetValue(Color3Property); }
@@ -39,8 +33,6 @@ namespace Onbox.Mvc.VDev
         // Using a DependencyProperty as the backing store for Color3.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty Color3Property =
             DependencyProperty.Register("Color3", typeof(Color), typeof(Spinner), new PropertyMetadata(Colors.Transparent));
-
-
 
         public string Text
         {

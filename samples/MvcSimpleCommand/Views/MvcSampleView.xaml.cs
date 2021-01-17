@@ -2,6 +2,7 @@
 using Onbox.Mvc.Revit.Abstractions.VDev;
 using Onbox.Mvc.Revit.VDev;
 using Onbox.Revit.Abstractions.VDev;
+using System.Threading.Tasks;
 
 namespace MvcSimpleCommand.Views
 {
@@ -20,6 +21,23 @@ namespace MvcSimpleCommand.Views
         public MvcSampleView(IRevitAppData appData) : base(appData)
         {
             InitializeComponent();
+        }
+
+        public override async Task OnInitAsync()
+        {
+            await base.OnInitAsync();
+            await Task.Delay(1500);
+            this.Error += "Hey.. This is an error!";
+        }
+
+        public override void OnWarningRetry()
+        {
+            this.Warning = null;
+        }
+
+        public override void OnErrorRetry()
+        {
+            this.Error = null;
         }
     }
 }

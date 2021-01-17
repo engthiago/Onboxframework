@@ -500,16 +500,104 @@
             </Setter.Value>
         </Setter>
     </Style>
-	<Style TargetType="{x:Type local:NavigatorComponent}">
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type local:NavigatorComponent}">
-					<Grid ClipToBounds="{TemplateBinding ClipToBounds}">
-						<Frame x:Name="PART_ControlA" NavigationUIVisibility="Hidden" />
-						<Frame x:Name="PART_ControlB" NavigationUIVisibility="Hidden"/>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
+    <Style TargetType="{x:Type local:NavigatorComponent}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:NavigatorComponent}">
+                    <Grid ClipToBounds="{TemplateBinding ClipToBounds}">
+                        <Frame x:Name="PART_ControlA" NavigationUIVisibility="Hidden" />
+                        <Frame x:Name="PART_ControlB" NavigationUIVisibility="Hidden"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:Error}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Error}">
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="{Binding Error, Converter={c:NullVisibilityCollapse}, FallbackValue=Collapsed}">
+                        <Grid>
+                            <Ellipse Fill="#FFB40000"
+                                        HorizontalAlignment="Center"
+                                        Stroke="White"
+                                        VerticalAlignment="Center"
+                                        Height="32"
+                                        Width="32" />
+                            <StackPanel VerticalAlignment="Center">
+                                <Rectangle Fill="White"
+                                            Height="16.75"
+                                            Width="3.75"
+                                            RadiusY="0.719"
+                                            RadiusX="0.719" />
+                                <Rectangle Fill="White"
+                                            Margin="0,3,0,0"
+                                            Height="3.75"
+                                            RadiusY="0.719"
+                                            RadiusX="0.719"
+                                            Width="3.75" />
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="{Binding Error, FallbackValue=Error}"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWithOverflow"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <Button Content="Retry"
+                                x:Name="PART_Retry"
+                                Visibility="{Binding CanRetry, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={c:BoolToVisibilityHideConverter}}"
+                                Margin="0,7,0,0"
+                                Width="80"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:Warning}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Warning}">
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Visibility="{Binding Warning, Converter={c:NullVisibilityCollapse}, FallbackValue=Collapsed}">
+                        <Grid>
+                            <Polygon Points="20,0 40,40, 0,40"
+                                    Fill="#FFE0C526"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    StrokeLineJoin="Round"
+                                    Stroke="White"
+                                    Height="34"
+                                    Width="34"
+                                    Stretch="UniformToFill" />
+                            <StackPanel VerticalAlignment="Center"
+                                        Margin="0,5,0,0">
+                                <Rectangle Fill="#FF4B4B4B"
+                                            Height="16.75"
+                                            Width="3.75"
+                                            RadiusY="0.719"
+                                            RadiusX="0.719" />
+                                <Rectangle Fill="#FF4B4B4B"
+                                            Margin="0,3,0,0"
+                                            Height="3.75"
+                                            RadiusY="0.719"
+                                            RadiusX="0.719"
+                                            Width="3.75" />
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="{Binding Warning, FallbackValue=Warning}"
+                                    TextAlignment="Center"
+                                    TextWrapping="WrapWithOverflow"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <Button Content="Retry"
+                                x:Name="PART_Retry"
+                                Visibility="{Binding CanRetry, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={c:BoolToVisibilityHideConverter}}"
+                                Margin="0,7,0,0"
+                                Width="80"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

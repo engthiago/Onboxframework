@@ -17,10 +17,11 @@ namespace MvcSimpleCommand.Revit.Commands
             var sampleView = container.Resolve<IMvcSampleView>();
             
             // This will run after the view is rendered 
-            sampleView.RunOnInitFunc(async () =>
-            {
-                await Task.Delay(1500);
-            });
+            //sampleView.RunOnInitFunc(async () =>
+            //{
+            //    await Task.Delay(1500);
+            //    throw new System.Exception("Oops!");
+            //});
             sampleView.ShowDialog();
 
             return Result.Succeeded;
