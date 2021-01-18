@@ -17,9 +17,10 @@
     <Grid>
         <mvc:Spinner Text="Loading Files..."></mvc:Spinner>
         <mvc:Error></mvc:Error>
-        <!--<TextBlock Text="Loaded" 
+        <TextBlock mvc:If.OnErrorOrLoadingCollapse="True"
+                   Text="Loaded" 
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>-->
+                   VerticalAlignment="Center"/>
     </Grid>
 
 </rmvc:RevitMvcViewBase>

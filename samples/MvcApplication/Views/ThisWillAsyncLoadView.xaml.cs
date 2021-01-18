@@ -2,25 +2,23 @@
 using Onbox.Mvc.Revit.Abstractions.VDev;
 using Onbox.Mvc.Revit.VDev;
 using Onbox.Revit.Abstractions.VDev;
-using System;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace MvcApplication.Views
 {
     /// <summary>
     /// A contract a view designed to have Revit as parent window
     /// </summary>
-    public interface IThisWillShowAWarningView : IRevitMvcViewBase, IMvcViewModal
+    public interface IThisWillAsyncLoadView : IRevitMvcViewBase, IMvcViewModal
     {
     }
 
     /// <summary>
     /// A view designed to have Revit as parent window
     /// </summary>
-    public partial class ThisWillShowAWarningView : RevitMvcViewBase, IThisWillShowAWarningView
+    public partial class ThisWillAsyncLoadView : RevitMvcViewBase, IThisWillAsyncLoadView
     {
-        public ThisWillShowAWarningView(IRevitAppData appData) : base(appData)
+        public ThisWillAsyncLoadView(IRevitAppData appData) : base(appData)
         {
             InitializeComponent();
         }
@@ -29,8 +27,7 @@ namespace MvcApplication.Views
         {
             await this.PerformAsync(async () =>
             {
-                await Task.Delay(2000);
-                Warning = "Oops, this is a warning! It's expected though ;)";
+                await Task.Delay(5000);
             });
         }
     }

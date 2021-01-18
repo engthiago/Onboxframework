@@ -22,16 +22,20 @@ namespace MvcApplication.Revit
             var br = ribbonManager.GetLineBreak();
 
             // Adds a Ribbon Panel to the Addins tab
-            var addinPanelManager = ribbonManager.CreatePanel("MvcApplication");
+            var addinPanelManager = ribbonManager.CreatePanel("Onbox.MvcApplication");
             addinPanelManager.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
 
-            // Adds a new Ribbon Tab with a new Panel
-            var panelManager = ribbonManager.CreatePanel("Onbox.MvcApplication", "Hello Panel");
-            panelManager.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
+            var ribbonName = "Onbox.MvcApplication";
 
-            panelManager.AddPushButton<WPFViewCommand, AvailableOnProject>($"Hello{br}WPF", "onbox_logo");
-            panelManager.AddPushButton<ThisWillShowAnErrorViewCommand, AvailableOnProject>($"Error{br}View", "onbox_logo");
-            panelManager.AddPushButton<ThisWillShowAWarningViewCommand, AvailableOnProject>($"Warning{br}View", "onbox_logo");
+            // Adds a new Ribbon Tab with a new Panel
+            var panelHello = ribbonManager.CreatePanel(ribbonName, "Hello Panel");
+            panelHello.AddPushButton<HelloCommand, AvailableOnProject>($"Hello{br}Framework", "onbox_logo");
+            panelHello.AddPushButton<WPFViewCommand, AvailableOnProject>($"Hello{br}WPF", "onbox_logo");
+
+            var panelAsync = ribbonManager.CreatePanel(ribbonName, "Async Panel");
+            panelAsync.AddPushButton<ThisWillAsyncLoadViewCommand, AvailableOnProject>($"ImgButton{br}View", "onbox_logo");
+            panelAsync.AddPushButton<ThisWillShowAnErrorViewCommand, AvailableOnProject>($"Error{br}View", "onbox_logo");
+            panelAsync.AddPushButton<ThisWillShowAWarningViewCommand, AvailableOnProject>($"Warning{br}View", "onbox_logo");
         }
 
         public override Result OnStartup(IContainer container, UIControlledApplication application)
@@ -45,6 +49,7 @@ namespace MvcApplication.Revit
             // Views should ALWAYS be added as Transients
             container.AddTransient<IHelloWpfView, HelloWpfView>();
 
+            container.AddTransient<IThisWillAsyncLoadView, ThisWillAsyncLoadView>();
             container.AddTransient<IThisWillShowAnErrorView, ThisWillShowAnErrorView>();
             container.AddTransient<IThisWillShowAWarningView, ThisWillShowAWarningView>();
 

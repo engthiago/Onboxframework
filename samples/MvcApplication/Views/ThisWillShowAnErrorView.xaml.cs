@@ -30,7 +30,7 @@ namespace MvcApplication.Views
             await this.PerformAsync(async () =>
             {
                 await Task.Delay(2000);
-                throw new Exception("Oops, this is an error!");
+                throw new Exception("Oops, this is an error! It's expected though ;)");
             }, error =>
             {
                 Error = error.Message;

@@ -1,0 +1,92 @@
+﻿<rmvc:RevitMvcViewBase x:Class="MvcApplication.Views.ThisWillAsyncLoadView"
+					DataContext="{Binding RelativeSource={RelativeSource Self}}"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:mvc="clr-namespace:Onbox.Mvc.VDev;assembly=Onbox.Mvc.VDev"
+					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.VDev;assembly=Onbox.Mvc.Revit.VDev"
+					mc:Ignorable="d"
+					Title="ThisWillAsyncLoadView"
+					MinWidth="550"
+					MinHeight="450"
+					Width="550"
+					Height="450">
+
+	<Grid Margin="11">
+        <mvc:LoadingLine Text="Fake loading something..."/>
+        <StackPanel mvc:If.OnErrorOrLoadingCollapse="True">
+            <TextBlock Text="ImgButton and ToggleButton have a large number of preset images commonly used by Revit."/>
+            <TextBlock Margin="0,20,0,0" Text="ImgButton Presets:"/>
+            <WrapPanel>
+                <mvc:ImgButton Images="Add"/>
+                <mvc:ImgButton Images="Add_To_Right"/>
+                <mvc:ImgButton Images="Adsk"/>
+                <mvc:ImgButton Images="Apply"/>
+                <mvc:ImgButton Images="Arrow_Left_Green"/>
+                <mvc:ImgButton Images="Arrow_Right_Green"/>
+                <mvc:ImgButton Images="Clear"/>
+                <mvc:ImgButton Images="Close"/>
+                <mvc:ImgButton Images="Cloud"/>
+                <mvc:ImgButton Images="Cloud_Down"/>
+                <mvc:ImgButton Images="Cloud_Up"/>
+                <mvc:ImgButton Images="Copy"/>
+                <mvc:ImgButton Images="Cut"/>
+                <mvc:ImgButton Images="Delete"/>
+                <mvc:ImgButton Images="Duplicate"/>
+                <mvc:ImgButton Images="Edit"/>
+                <mvc:ImgButton Images="Element_Align"/>
+                <mvc:ImgButton Images="Element_Array"/>
+                <mvc:ImgButton Images="Element_Mirror"/>
+                <mvc:ImgButton Images="Element_Move"/>
+                <mvc:ImgButton Images="Element_Pin"/>
+                <mvc:ImgButton Images="Element_Rotate"/>
+                <mvc:ImgButton Images="Element_Scale"/>
+                <mvc:ImgButton Images="Element_Select"/>
+                <mvc:ImgButton Images="Find"/>
+                <mvc:ImgButton Images="Folder"/>
+                <mvc:ImgButton Images="Gear"/>
+                <mvc:ImgButton Images="Image"/>
+                <mvc:ImgButton Images="Info"/>
+                <mvc:ImgButton Images="Light"/>
+                <mvc:ImgButton Images="Location"/>
+                <mvc:ImgButton Images="Move_Down"/>
+                <mvc:ImgButton Images="Move_Up"/>
+                <mvc:ImgButton Images="New"/>
+                <mvc:ImgButton Images="Onbox"/>
+                <mvc:ImgButton Images="Open"/>
+                <mvc:ImgButton Images="Paste"/>
+                <mvc:ImgButton Images="Print"/>
+                <mvc:ImgButton Images="Question"/>
+                <mvc:ImgButton Images="Redo"/>
+                <mvc:ImgButton Images="Remove"/>
+                <mvc:ImgButton Images="Remove_To_Left"/>
+                <mvc:ImgButton Images="Rename"/>
+                <mvc:ImgButton Images="Revit"/>
+                <mvc:ImgButton Images="Revit_Link"/>
+                <mvc:ImgButton Images="Save"/>
+                <mvc:ImgButton Images="Save_As"/>
+                <mvc:ImgButton Images="Search"/>
+                <mvc:ImgButton Images="Settings"/>
+                <mvc:ImgButton Images="Snap"/>
+                <mvc:ImgButton Images="Sort_Name_Down"/>
+                <mvc:ImgButton Images="Sort_Name_Up"/>
+                <mvc:ImgButton Images="Sync"/>
+                <mvc:ImgButton Images="Undo"/>
+                <mvc:ImgButton Images="Warnings"/>
+            </WrapPanel>
+            <TextBlock Margin="0,20,0,0" Text="ToggleButton Presets:"/>
+            <WrapPanel>
+                <mvc:ImgToggleButton Images="Add"/>
+                <mvc:ImgToggleButton Images="AddList"/>
+                <mvc:ImgToggleButton Images="Arrow"/>
+                <mvc:ImgToggleButton Images="Confirm"/>
+                <mvc:ImgToggleButton Images="Constraints"/>
+                <mvc:ImgToggleButton Images="PadLock"/>
+                <mvc:ImgToggleButton Images="Pin"/>
+                <mvc:ImgToggleButton Images="Undo"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+
+</rmvc:RevitMvcViewBase>

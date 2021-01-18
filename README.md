@@ -25,7 +25,7 @@ Checkout the API Docs [here](https://engthiago.github.io/Onboxframework.docs/api
 
 You can check out our free [Cross Platform Revit Presentation](https://www.autodesk.com/autodesk-university/class/Cross-Platform-Revit-Sharing-Code-Plug-Ins-Dynamo-and-Forge-2020) on Autodesk University 2020 to get a full hands-on lab on how to create a simple application using the Framework.
 
-The presentation also includes class handout and slide deck downloads as well as links to sample repositories where you plan around with the code.
+The presentation also includes class handout, slide deck downloads, and links to sample repositories where you play around with the code.
 
 ## Getting Started
 

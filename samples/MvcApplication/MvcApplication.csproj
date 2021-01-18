@@ -217,11 +217,15 @@
     <Compile Include="Revit\Commands\Availability\AvailableOnFamily.cs" />
     <Compile Include="Revit\Commands\Availability\AvailableOnProject.cs" />
     <Compile Include="Revit\Commands\HelloCommand.cs" />
+    <Compile Include="Revit\Commands\ThisWillAsyncLoadViewCommand.cs" />
     <Compile Include="Revit\Commands\ThisWillShowAnErrorViewCommand.cs" />
     <Compile Include="Revit\Commands\ThisWillShowAWarningViewCommand.cs" />
     <Compile Include="Revit\Commands\WPFViewCommand.cs" />
     <Compile Include="Views\HelloWPFView.xaml.cs">
       <DependentUpon>HelloWPFView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ThisWillAsyncLoadView.xaml.cs">
+      <DependentUpon>ThisWillAsyncLoadView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ThisWillShowAnErrorView.xaml.cs">
       <DependentUpon>ThisWillShowAnErrorView.xaml</DependentUpon>
@@ -264,6 +268,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\HelloWPFView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ThisWillAsyncLoadView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
