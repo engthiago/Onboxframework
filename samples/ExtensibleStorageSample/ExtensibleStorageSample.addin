@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>ExtensibleStorageSample App</Name>
+    <Assembly>ExtensibleStorageSample/ExtensibleStorageSample.dll</Assembly>
+    <AddInId>f512b186-25cb-443e-8be9-c3178b535745</AddInId>
+    <FullClassName>ExtensibleStorageSample.Revit.App</FullClassName>
+    <VendorId>ExtensibleStorageSample</VendorId>
+    <VendorDescription>ExtensibleStorageSample</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
