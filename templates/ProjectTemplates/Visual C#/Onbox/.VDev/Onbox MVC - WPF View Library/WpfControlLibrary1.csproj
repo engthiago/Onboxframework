@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Fody.3.1.3\build\Fody.targets" Condition="Exists('..\packages\Fody.3.1.3\build\Fody.targets')" />
-  <Import Project="..\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props" Condition="Exists('..\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props')" />
+  <Import Project="$(SolutionDir)\packages\Fody.3.1.3\build\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.3.1.3\build\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props" Condition="Exists('$(SolutionDir)\packages\PropertyChanged.Fody.2.5.9\build\PropertyChanged.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
@@ -42,38 +42,38 @@
     <Features>IOperation</Features>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Onbox.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Abstractions.dll</HintPath>
+    <Reference Include="Onbox.Abstractions">
+      <HintPath>$(SolutionDir)\packages\Onbox.Abstractions.0.99.99.99\lib\Onbox.Abstractions.VDev.dll</HintPath>
     </Reference>
-    <Reference Include="Onbox.Core, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Core.0.99.99.99\lib\netstandard2.0\Onbox.Core.dll</HintPath>
+    <Reference Include="Onbox.Core">
+      <HintPath>$(SolutionDir)\packages\Onbox.Core.0.99.99.99\lib\Onbox.Core.VDev.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Di, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Di.0.99.99.99\lib\netstandard2.0\Onbox.Di.dll</HintPath>
+	<Reference Include="Onbox.Di">
+      <HintPath>$(SolutionDir)\packages\Onbox.Di.0.99.99.99\lib\Onbox.Di.VDev.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Abstractions.dll</HintPath>
+	<Reference Include="Onbox.Mvc.Abstractions">
+      <HintPath>$(SolutionDir)\packages\Onbox.Mvc.Abstractions.0.99.99.99\lib\Onbox.Mvc.Abstractions.VDev.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Revit.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Mvc.Revit.Abstractions.dll</HintPath>
+	<Reference Include="Onbox.Mvc.Revit.Abstractions">
+      <HintPath>$(SolutionDir)\packages\Onbox.Mvc.Revit.Abstractions.0.99.99.99\lib\Onbox.Mvc.Revit.Abstractions.VDev.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Revit.Abstractions, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Revit.Abstractions.0.99.99.99\lib\netstandard2.0\Onbox.Revit.Abstractions.dll</HintPath>
+	<Reference Include="Onbox.Revit.Abstractions">
+      <HintPath>$(SolutionDir)\packages\Onbox.Revit.Abstractions.0.99.99.99\lib\Onbox.Revit.Abstractions.VDev.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.0.99.99.99\lib\Onbox.Mvc.dll</HintPath>
+	<Reference Include="Onbox.Mvc">
+      <HintPath>$(SolutionDir)\packages\Onbox.Mvc.0.99.99.99\lib\Onbox.Mvc.VDev.dll</HintPath>
     </Reference>
-	<Reference Include="Onbox.Mvc.Revit, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Onbox.Mvc.Revit.0.99.99.99\lib\Onbox.Mvc.Revit.dll</HintPath>
+	<Reference Include="Onbox.Mvc.Revit">
+      <HintPath>$(SolutionDir)\packages\Onbox.Mvc.Revit.0.99.99.99\lib\Onbox.Mvc.Revit.VDev.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged, Version=2.5.9.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
-      <HintPath>..\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\PropertyChanged.Fody.2.5.9\lib\net452\PropertyChanged.dll</HintPath>
 	  <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
+    <Analyzer Include="$(SolutionDir)\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="$(SolutionDir)\packages\Onbox.Analyzers.0.99.99.99\analyzers\dotnet\cs\Onbox.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -91,7 +91,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
 	  <Private>False</Private>
   </Reference>
   </ItemGroup>
@@ -128,12 +128,12 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\Packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Packages\Fody.3.1.3\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.3.1.3\build\Fody.targets'))" />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Couldn't find Dependencies need to build: Please make sure to have all Onbox Dependencies and Fody.PropertyChanged before continuing...</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\Packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Packages\Fody.3.1.3\build\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.3.1.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.3.1.3\build\Fody.targets'))" />
   </Target>
 </Project>
