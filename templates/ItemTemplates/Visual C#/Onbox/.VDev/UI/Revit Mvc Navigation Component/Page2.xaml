@@ -6,7 +6,7 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:local="clr-namespace:$rootnamespace$"
 					xmlns:mvc="clr-namespace:Onbox.Mvc.VDev;assembly=Onbox.Mvc.VDev"
-					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.VDev;assembly=Onbox.Mvc.VDev.Revit"
+					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.VDev;assembly=Onbox.Mvc.Revit.VDev"
 					mc:Ignorable="d"
 					d:DesignHeight="450"
 					d:DesignWidth="500">

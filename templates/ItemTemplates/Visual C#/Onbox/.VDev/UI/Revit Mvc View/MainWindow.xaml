@@ -5,7 +5,7 @@
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:mvc="clr-namespace:Onbox.Mvc.VDev;assembly=Onbox.Mvc.VDev"
-					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.VDev;assembly=Onbox.Mvc.VDev.Revit"
+					xmlns:rmvc="clr-namespace:Onbox.Mvc.Revit.VDev;assembly=Onbox.Mvc.Revit.VDev"
 					mc:Ignorable="d"
 					Title="$safeitemname$"
 					MinWidth="500"
