@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>ProgressIndicatorView App</Name>
+    <Assembly>ProgressIndicatorView/ProgressIndicatorView.dll</Assembly>
+    <AddInId>55625aa1-2a24-4fa5-a5f9-ca7c2c1bd72d</AddInId>
+    <FullClassName>ProgressIndicatorView.Revit.App</FullClassName>
+    <VendorId>ProgressIndicatorView</VendorId>
+    <VendorDescription>ProgressIndicatorView</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
