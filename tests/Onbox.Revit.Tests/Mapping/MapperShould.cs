@@ -10,7 +10,7 @@ namespace Onbox.Revit.Tests.Mapping
     [TestFixture(Category = "Mapping and Cloning")]
     public class MapperShould
     {
-        private IMapper SetupMapper()
+        private Mapper SetupMapper()
         {
             var mapperManager = new MapperActionManager();
             var mapperOperator = new MapperOperator(mapperManager);
@@ -126,7 +126,28 @@ namespace Onbox.Revit.Tests.Mapping
 
             var clone = sut.Clone(personList);
 
-            Assert.AreNotSame(sut, clone);
+            Assert.AreNotSame(personList, clone);
+        }
+
+        [Test]
+        public void CloneListWithSimilarTypes()
+        {
+            var sut = this.SetupMapper();
+            List<Person> personList = SetupPersonList();
+
+            var clone = sut.Clone<List<SimplePerson>>(personList);
+
+            Assert.NotNull(clone);
+            Assert.AreNotSame(personList, clone);
+
+            for (int i = 0; i < clone.Count; i++)
+            {
+                var src = personList[i];
+                var dest = clone[i];
+
+                Assert.AreEqual(src.FirstName, dest.FirstName);
+                Assert.AreEqual(src.LastName, dest.LastName);
+            }
         }
 
         [Test]
@@ -528,17 +549,17 @@ namespace Onbox.Revit.Tests.Mapping
             var person1 = this.SetupPerson();
             var clone = sut.Clone(person1);
 
-            //Assert.AreNotEqual(clone, person1);
+            Assert.AreNotEqual(clone, person1);
 
-            //Assert.That(clone.Age == person1.Age);
-            //Assert.That(clone.FirstName == person1.FirstName);
-            //Assert.That(clone.LastName == person1.LastName);
-            //Assert.That(clone.Children != null);
-            //Assert.That(clone.Children.Count == person1.Children.Count);
+            Assert.That(clone.Age == person1.Age);
+            Assert.That(clone.FirstName == person1.FirstName);
+            Assert.That(clone.LastName == person1.LastName);
+            Assert.That(clone.Children != null);
+            Assert.That(clone.Children.Count == person1.Children.Count);
 
-            //Assert.That(clone.Father != null);
-            //Assert.That(clone.Father.Children != null);
-            //Assert.That(clone.Father.Children.Count == person1.Father.Children.Count);
+            Assert.That(clone.Father != null);
+            Assert.That(clone.Father.Children != null);
+            Assert.That(clone.Father.Children.Count == person1.Father.Children.Count);
         }
 
         [Test]

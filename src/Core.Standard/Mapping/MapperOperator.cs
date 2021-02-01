@@ -19,6 +19,7 @@ namespace Onbox.Core.VDev.Mapping
         public bool IsList { get; set; }
         public int ListIndex { get; set; }
         public IList TargetList { get; set; }
+        public Type GenericType { get; set; }
     }
 
     /// <summary>
@@ -121,6 +122,7 @@ namespace Onbox.Core.VDev.Mapping
                             var data = new PropertyData
                             {
                                 IsList = true,
+                                GenericType = targetList.GetType().GetGenericArguments().FirstOrDefault(),
                                 ListIndex = i,
                                 TargetProp = null,
                                 TargetObject = target,
@@ -281,11 +283,24 @@ namespace Onbox.Core.VDev.Mapping
             foreach (var item in propCache)
             {
                 var targetValue = item.Value.TargetValue;
+                var targetType = targetValue.GetType();
                 foreach (var propData in item.Value.TargetDataList)
                 {
                     if (propData.IsList)
                     {
-                        propData.TargetList[propData.ListIndex] = targetValue;
+                        if (propData.GenericType != null 
+                            && !targetType.GetInterfaces().Contains(typeof(IList))
+                            && propData.GenericType != targetType)
+                        {
+                            var mappedValue = Activator.CreateInstance(propData.GenericType);
+                            this.Map(targetValue, mappedValue);
+                            propData.TargetList[propData.ListIndex] = mappedValue;
+                        }
+                        else
+                        {
+                            propData.TargetList[propData.ListIndex] = targetValue;
+                        }
+                        
                     }
                     else
                     {
