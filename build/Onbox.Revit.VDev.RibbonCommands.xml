@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Onbox.Revit.VDev.RibbonCommands</name>
+    </assembly>
+    <members>
+        <member name="T:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute">
+            <summary>
+            A Split Button on Revit's Ribbon.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.Availability">
+            <summary>
+            The class to decide availability of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.FirstLine">
+            <summary>
+            First line of the name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.SecondLine">
+            <summary>
+            Second line of the name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.PanelName">
+            <summary>
+            The panel name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.Tooltip">
+            <summary>
+            The tooltip of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.Description">
+            <summary>
+            The description of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.Image">
+            <summary>
+            The image of this button. 
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.PanelPriority">
+            <summary>
+            The priority of this button on the panel. Higher numbers will be added to the panel first. 
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.SplitButtonGroup">
+            <summary>
+            The name of the split group. Buttons with the same name will be grouped together.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute.SplitGroupPriority">
+            <summary>
+            The priority of this button on the split stack. Higher numbers will be added first. 
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute">
+            <summary>
+            A Stack Button on Revit's Ribbon.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.Availability">
+            <summary>
+            The class to decide availability of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.FirstLine">
+            <summary>
+            First line of the name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.SecondLine">
+            <summary>
+            Second line of the name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.PanelName">
+            <summary>
+            The panel name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.Tooltip">
+            <summary>
+            The tooltip of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.Description">
+            <summary>
+            The description of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.Image">
+            <summary>
+            The image of this button. 
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.PanelPriority">
+            <summary>
+            The priority of this button on the panel. Higher numbers will be added to the panel first. 
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.StackButtonGroup">
+            <summary>
+            The name of the stack group. Buttons with the same name will be grouped together.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute.StackGroupPriority">
+            <summary>
+            The priority of this button on the stack list. Higher numbers will be added first. 
+            </summary>
+        </member>
+        <member name="T:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute">
+            <summary>
+            A Push Button on Revit's Ribbon.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.Availability">
+            <summary>
+            The class to decide availability of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.FirstLine">
+            <summary>
+            First line of the name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.SecondLine">
+            <summary>
+            Second line of the name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.PanelName">
+            <summary>
+            The panel name of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.Tooltip">
+            <summary>
+            The tooltip of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.Description">
+            <summary>
+            The description of this button.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.Image">
+            <summary>
+            The image of this button. 
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute.PanelPriority">
+            <summary>
+            The priority of this button on the panel. Higher numbers will be added to the panel first. 
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.RibbonCommands.Extensions.AddRibbonCommands(Onbox.Revit.VDev.UI.IRibbonManager,System.Action{Onbox.Revit.VDev.RibbonCommands.RibbonCommandConfiguration})">
+            <summary>
+            Automatically adds buttons for Revit Commands decorated with: <see cref="T:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonPushButtonAttribute"/>, <see cref="T:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonSplitButtonAttribute"/> and <see cref="T:Onbox.Revit.VDev.RibbonCommands.Attributes.RibbonStackButtonAttribute"/>
+            </summary>
+            <param name="ribbonManager"></param>
+            <param name="config">Configuration options for automatically adding Ribbon Panels and Buttons.</param>
+        </member>
+        <member name="T:Onbox.Revit.VDev.RibbonCommands.RibbonCommandConfiguration">
+            <summary>
+            Configuration options for automatically adding Ribbon Panels and Buttons.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.RibbonCommandConfiguration.TabName">
+            <summary>
+            The name of the tab on which the panels and buttons will be created.
+            </summary>
+        </member>
+        <member name="P:Onbox.Revit.VDev.RibbonCommands.RibbonCommandConfiguration.DefaultPanelName">
+            <summary>
+            The default name for the panel, in case of not specified on the attribute.
+            </summary>
+        </member>
+        <member name="M:Onbox.Revit.VDev.RibbonCommands.RibbonCommandConfiguration.AddPanel(System.String)">
+            <summary>
+            Adding panels here will allow you to control the order on which the panels will be created for Ribbon Commands.
+            </summary>
+            <param name="panelName"></param>
+        </member>
+    </members>
+</doc>

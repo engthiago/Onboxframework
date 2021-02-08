@@ -61,18 +61,6 @@
       <HintPath>..\..\packages\Onbox.Revit.References.2021.0.0\lib\Revit 2019\NewtonSoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Onbox.Abstractions.VDev, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Onbox.Abstractions.0.9.1\lib\Onbox.Abstractions.VDev.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Di.VDev, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Onbox.Di.0.9.1\lib\Onbox.Di.VDev.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Revit.Abstractions.VDev, Version=0.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Onbox.Revit.Abstractions.0.9.1\lib\Onbox.Revit.Abstractions.VDev.dll</HintPath>
-    </Reference>
-    <Reference Include="Onbox.Revit.VDev, Version=0.9.1.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\Onbox.Revit.0.9.1\lib\Onbox.Revit.VDev.dll</HintPath>
-    </Reference>
     <Reference Include="RevitAPI, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\..\packages\Onbox.Revit.References.2021.0.0\lib\Revit 2019\RevitAPI.dll</HintPath>
       <Private>False</Private>
@@ -110,6 +98,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Abstractions\Abstractions.Standard.csproj">
+      <Project>{5c9fc71d-7306-4450-ba94-c055d36cc9c8}</Project>
+      <Name>Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit.Abstractions.Standard\Revit.Abstractions.Standard.csproj">
+      <Project>{af845b20-8b03-4905-a4b8-4fd8326312cf}</Project>
+      <Name>Revit.Abstractions.Standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Revit\Revit.csproj">
+      <Project>{d35b3334-eb2e-4587-ba1e-bb71fed3881e}</Project>
+      <Name>Revit</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

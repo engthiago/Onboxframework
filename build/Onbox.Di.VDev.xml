@@ -34,6 +34,14 @@
             The list of current scoped instances currently registered
             </summary>
         </member>
+        <member name="M:Onbox.Di.VDev.Container.AddSingleton(System.Type)">
+            <summary>
+            Adds an implementation as a singleton on the container.
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <param name="implementationType">The type that will be added</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
         <member name="M:Onbox.Di.VDev.Container.AddSingleton``1">
             <summary>
             Adds an implementation as a singleton on the container.
@@ -48,6 +56,15 @@
             </summary>
             <typeparam name="TImplementation"></typeparam>
             <param name="instance"></param>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.AddSingleton(System.Type,System.Type)">
+            <summary>
+            Adds an implementation to a contract as a singleton on the container
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <param name="contractType">Contract type</param>
+            <param name="implementationType">Implementation type</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         </member>
         <member name="M:Onbox.Di.VDev.Container.AddSingleton``2">
             <summary>
@@ -65,12 +82,49 @@
             <typeparam name="TContract"></typeparam>
             <typeparam name="TImplementation"></typeparam>
         </member>
+        <member name="M:Onbox.Di.VDev.Container.AddScoped(System.Type,System.Type)">
+            <summary>
+            Adds a scoped implementation to a contract on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.AddScoped``2">
+            <summary>
+            Adds a scoped implementation to a contract on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.AddScoped(System.Type)">
+            <summary>
+            Adds a scoped implementation on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.AddScoped``1">
+            <summary>
+            Adds a scoped implementation on the container.
+            </summary>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.AddTransient(System.Type)">
+            <summary>
+            Adds an implementation as transient on the container
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <type name="implementationType"></type>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
         <member name="M:Onbox.Di.VDev.Container.AddTransient``1">
             <summary>
             Adds an implementation as a transient on the container.
             </summary>
             <remarks>It can not be an abstract or interface type</remarks>
             <typeparam name="TImplementation"></typeparam>
+            <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.AddTransient(System.Type,System.Type)">
+            <summary>
+            Adds an implementation to a contract as transient on the container
+            </summary>
+            <remarks>It can not be an abstract or interface type</remarks>
+            <type name="contractType"></type>
+            <type name="implementationType"></type>
             <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         </member>
         <member name="M:Onbox.Di.VDev.Container.AddTransient``2">
@@ -81,16 +135,6 @@
             <typeparam name="TContract"></typeparam>
             <typeparam name="TImplementation"></typeparam>
             <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
-        </member>
-        <member name="M:Onbox.Di.VDev.Container.AddScoped``2">
-            <summary>
-            Adds a scoped implementation to a contract on the container.
-            </summary>
-        </member>
-        <member name="M:Onbox.Di.VDev.Container.AddScoped``1">
-            <summary>
-            Adds a scoped implementation on the container.
-            </summary>
         </member>
         <member name="M:Onbox.Di.VDev.Container.Resolve``1">
             <summary>
@@ -121,6 +165,15 @@
             <summary>
             Reports if this container is a scope of a container
             </summary>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.EnableConsolePrinting(System.Boolean)">
+            <summary>
+            Enables or disables the container for printing to the console when events happen. Default is false.
+            <br/> * Requesting for new instances
+            <br/> * Instantiating
+            <br/> * Disposing
+            </summary>
+            <param name="enabled">flag to enable or disable console priting.</param>
         </member>
     </members>
 </doc>
