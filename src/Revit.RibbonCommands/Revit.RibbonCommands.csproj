@@ -7,8 +7,8 @@
     <ProjectGuid>{551EF949-9105-4E4E-83D3-37BFFFE2B4D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Revit.VDev.RibbonCommands</RootNamespace>
-    <AssemblyName>Onbox.Revit.VDev.RibbonCommands</AssemblyName>
+    <RootNamespace>Onbox.Revit.RibbonCommands.VDev</RootNamespace>
+    <AssemblyName>Onbox.Revit.RibbonCommands.VDev</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -40,7 +40,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>bin\x64\Debug\Onbox.Revit.VDev.RibbonCommands.xml</DocumentationFile>
+    <DocumentationFile>bin\x64\Debug\Onbox.Revit.RibbonCommands.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\build\</OutputPath>
@@ -50,7 +50,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\..\build\Onbox.Revit.VDev.RibbonCommands.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Onbox.Revit.RibbonCommands.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdWindows, Culture=neutral, processorArchitecture=MSIL">

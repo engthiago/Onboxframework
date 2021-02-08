@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Onbox.Revit.VDev.RibbonCommands.Attributes
+namespace Onbox.Revit.RibbonCommands.VDev.Attributes
 {
     public interface IRibbonCommandAttribute
     {

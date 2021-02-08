@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Onbox.Revit.VDev.RibbonCommands
+namespace Onbox.Revit.RibbonCommands.VDev
 {
     /// <summary>
     /// Configuration options for automatically adding Ribbon Panels and Buttons.

@@ -3,7 +3,7 @@ using Onbox.Abstractions.VDev;
 using Onbox.Revit.VDev;
 using Onbox.Revit.VDev.Applications;
 using Onbox.Revit.VDev.UI;
-using Onbox.Revit.VDev.RibbonCommands;
+using Onbox.Revit.RibbonCommands.VDev;
 
 namespace RibbonCommandsApplicationSample.Revit
 {

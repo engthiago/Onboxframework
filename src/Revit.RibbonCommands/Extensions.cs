@@ -1,12 +1,12 @@
 ﻿using Autodesk.Revit.UI;
-using Onbox.Revit.VDev.RibbonCommands.Attributes;
+using Onbox.Revit.RibbonCommands.VDev.Attributes;
 using Onbox.Revit.VDev.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Onbox.Revit.VDev.RibbonCommands
+namespace Onbox.Revit.RibbonCommands.VDev
 {
     public static class Extensions
     {

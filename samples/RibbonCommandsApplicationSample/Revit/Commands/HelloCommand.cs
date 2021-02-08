@@ -3,7 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Onbox.Abstractions.VDev;
 using Onbox.Revit.VDev.Commands;
-using Onbox.Revit.VDev.RibbonCommands.Attributes;
+using Onbox.Revit.RibbonCommands.VDev.Attributes;
 
 namespace RibbonCommandsApplicationSample.Revit.Commands
 {

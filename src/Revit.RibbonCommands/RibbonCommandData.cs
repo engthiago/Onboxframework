@@ -1,7 +1,7 @@
 ﻿using Autodesk.Revit.UI;
-using Onbox.Revit.VDev.RibbonCommands.Attributes;
+using Onbox.Revit.RibbonCommands.VDev.Attributes;
 
-namespace Onbox.Revit.VDev.RibbonCommands
+namespace Onbox.Revit.RibbonCommands.VDev
 {
     internal class RibbonCommandData
     {
