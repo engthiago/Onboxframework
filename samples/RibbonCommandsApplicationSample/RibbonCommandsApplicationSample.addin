@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>RibbonCommandsApplicationSample App</Name>
+    <Assembly>RibbonCommandsApplicationSample/RibbonCommandsApplicationSample.dll</Assembly>
+    <AddInId>2c68acf1-609e-493c-87d1-ad6ba66ffc33</AddInId>
+    <FullClassName>RibbonCommandsApplicationSample.Revit.App</FullClassName>
+    <VendorId>RibbonCommandsApplicationSample</VendorId>
+    <VendorDescription>RibbonCommandsApplicationSample</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
