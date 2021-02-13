@@ -12,11 +12,11 @@ namespace Onbox.Revit.NUnit.Engine
         private const string DefaultAssemblyName = "nunit.engine.dll";
         private const string DefaultTypeName = "NUnit.Engine.TestEngine";
 
-        public ITestRunner CreateTestRunner(string assemblyPath)
+        public ITestRunner CreateTestRunner(string testAssemblyPath)
         {
             ITestEngine engine = CreateEngineInstance();
-            var dir = Path.GetDirectoryName(assemblyPath);
-            TestPackage package = new TestPackage(assemblyPath);
+            var dir = Path.GetDirectoryName(testAssemblyPath);
+            TestPackage package = new TestPackage(testAssemblyPath);
 
             string domainUsage = "None";
             string processModel = "InProcess";
