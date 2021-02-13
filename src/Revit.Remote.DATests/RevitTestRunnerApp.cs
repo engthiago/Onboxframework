@@ -31,19 +31,4 @@ namespace Onbox.Revit.Remote.DATests
         public abstract ExternalDBApplicationResult OnShutdown(ControlledApplication application);
 
     }
-
-    public class RevitApp : RevitTestRunnerApp
-    {
-        public override ExternalDBApplicationResult OnStartup(IRevitTestRunner tests, ControlledApplication application)
-        {
-            tests.Run("Onbox.Revit.Remote.Tests.dll", "result.xml");
-
-            return ExternalDBApplicationResult.Succeeded;
-        }
-
-        public override ExternalDBApplicationResult OnShutdown(ControlledApplication application)
-        {
-            return ExternalDBApplicationResult.Succeeded;
-        }
-    }
 }

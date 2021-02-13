@@ -1,0 +1,7 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="ZipOutputPath" AfterTargets="Build">
+    <ZipDirectory
+        SourceDirectory="Revit.Remote.DATests.bundle"
+        DestinationFile="$(MSBuildProjectDirectory)\Revit.Remote.DATests.bundle.zip" />
+  </Target>
+</Project>
