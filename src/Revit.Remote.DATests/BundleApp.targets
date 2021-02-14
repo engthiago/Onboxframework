@@ -2,7 +2,7 @@
   <Target Name="ZipAppBundle" AfterTargets="Build">
     <ZipDirectory
         Overwrite="true"
-        SourceDirectory="Revit.Remote.DATests.bundle"
-        DestinationFile="$(MSBuildProjectDirectory)\Revit.Remote.DATests.bundle.zip" />
+        SourceDirectory="Bundle"
+        DestinationFile="$(MSBuildProjectDirectory)\unit_tests.bundle.zip" />
   </Target>
 </Project>

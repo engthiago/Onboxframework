@@ -3,6 +3,6 @@
   <CompanyDetails Name="Onbox" Url="https://github.com/engthiago/Onboxframework" Email="t.almeidaeng@gmail.com"/>
   <Components Description="Test Runner App">
     <RuntimeRequirements SeriesMax="R2019" SeriesMin="R2019" Platform="Revit" OS="Win64"/>
-    <ComponentEntry LoadOnRevitStartup="True" LoadOnCommandInvocation="False" AppDescription="Test Runner" ModuleName="./Contents/Revit.Remote.DATests.addin" Version="1.0.0" AppName="TestRunner"/>
+    <ComponentEntry LoadOnRevitStartup="True" LoadOnCommandInvocation="False" AppDescription="Test Runner" ModuleName="./Contents/Revit.Remote.DATests.addin" Version="1.0.0" AppName="Onbox.Revit.Remote.DATests"/>
   </Components>
 </ApplicationPackage>

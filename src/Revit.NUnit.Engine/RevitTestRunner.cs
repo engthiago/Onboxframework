@@ -16,11 +16,8 @@ namespace Revit.NUnit.Engine
     {
         public XmlNode Run(string assemblyPath)
         {
-            var dir = Directory.GetCurrentDirectory();
-            var path = Path.Combine(dir, assemblyPath);
-
             var factory = new TestRunnerFactory();
-            var runner = factory.CreateTestRunner(path);
+            var runner = factory.CreateTestRunner(assemblyPath);
 
             var result = runner.Run(new TestRunnerListener(), TestFilter.Empty);
             return result;

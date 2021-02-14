@@ -11,12 +11,17 @@ namespace Onbox.Revit.Remote.DATests
     {
         public ExternalDBApplicationResult OnStartup(ControlledApplication application)
         {
+            Console.WriteLine("Design Automation App Started...");
+
             DesignAutomationBridge.DesignAutomationReadyEvent += OnAppReady;
+
             return ExternalDBApplicationResult.Succeeded;
         }
 
         private void OnAppReady(object sender, DesignAutomationReadyEventArgs e)
         {
+            Console.WriteLine("Design Automation App Ready...");
+
             var doc = e.DesignAutomationData.RevitDoc;
             var app = e.DesignAutomationData.RevitApp;
 
@@ -29,10 +34,15 @@ namespace Onbox.Revit.Remote.DATests
                 }
             }
 
+            Console.WriteLine("Created new document.");
+
             RevitRemoteContainer.Initialize(
                 doc, e.DesignAutomationData.RevitApp, e.DesignAutomationData.FilePath);
 
+            Console.WriteLine("Registered Container.");
+
             var testRunner = new RevitTestRunner();
+
             this.OnStartup(testRunner, e.DesignAutomationData.RevitApp);
         }
 
