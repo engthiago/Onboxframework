@@ -2,22 +2,22 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\NUnit.3.12.0\build\NUnit.props" Condition="Exists('..\..\packages\NUnit.3.12.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Import Project="BundleApp.targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F3A4FC2B-503B-420F-8F3F-525897998F6F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Revit.Remote.DATests</RootNamespace>
-    <AssemblyName>Onbox.Revit.Remote.DATests</AssemblyName>
+    <ProjectGuid>{08A87C4D-7E1B-44ED-BFFA-677F3881E576}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Revit.NUnit.ConsoleRunner.Test</RootNamespace>
+    <AssemblyName>Revit.NUnit.ConsoleRunner.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,12 +37,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>Bundle\unit_tests.bundle\Contents\Onbox.Revit.Remote.DATests\</OutputPath>
+    <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -51,11 +53,9 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DesignAutomationBridge, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Autodesk.Forge.DesignAutomation.Revit.2019.0.1\lib\net47\DesignAutomationBridge.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.engine, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.Engine.3.12.0\lib\net20\nunit.engine.dll</HintPath>
     </Reference>
@@ -67,10 +67,6 @@
     </Reference>
     <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="RevitAPI">
-      <HintPath>..\..\packages\Onbox.Revit.References.2021.0.0\lib\Revit 2019\RevitAPI.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -85,23 +81,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RevitTestRunnerApp.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Revit\App.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Onbox.Revit.NUnit.Core\Revit.NUnit.Core.csproj">
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Onbox.Revit.NUnit.Core\Revit.NUnit.Core.csproj">
       <Project>{2d68a896-f964-4821-8dca-bc82cfdfa683}</Project>
       <Name>Revit.NUnit.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Revit.NUnit.Engine\Revit.NUnit.Engine.csproj">
+    <ProjectReference Include="..\..\src\Revit.NUnit.Engine\Revit.NUnit.Engine.csproj">
       <Project>{646c6284-c142-4aae-a188-b10f414ce75b}</Project>
       <Name>Revit.NUnit.Engine</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="BundleApp.targets" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

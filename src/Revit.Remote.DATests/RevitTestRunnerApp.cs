@@ -44,6 +44,7 @@ namespace Onbox.Revit.Remote.DATests
             var testRunner = new RevitTestRunner();
 
             this.OnStartup(testRunner, e.DesignAutomationData.RevitApp);
+            e.Succeeded = true;
         }
 
         public abstract ExternalDBApplicationResult OnStartup(IRevitTestRunner tests, Application application);
