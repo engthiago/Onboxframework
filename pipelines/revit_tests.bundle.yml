@@ -29,7 +29,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     clean: true
-
+    
 - task: CopyFiles@2
   displayName: Copy package to Staging
   inputs:
@@ -37,6 +37,7 @@ steps:
       $(bundle)
       $(postman)
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    flattenFolders: true
 
 - task: PublishBuildArtifacts@1
   displayName: Artifacts Publish
