@@ -816,7 +816,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"activityId\": \"{{client_id}}.{{client_id}}+{{activity_alias}}\",\n        \"arguments\": {\n          \"inputAssembly\": {\n            \"url\": \"{{workitem_input_url}}\"\n          },\n          \"config\": {\n              \"url\": \"data:application/json,{'assemblyPath': 'Onbox.Revit.Remote.Tests.dll'}\"\n          },\n          \"result\": {\n            \"verb\": \"put\",\n            \"url\": \"{{workitem_result_url}}\"\n          }\n        }\n      }"
+							"raw": "{\n        \"activityId\": \"{{client_id}}.{{client_id}}+{{activity_alias}}\",\n        \"arguments\": {\n          \"inputAssembly\": {\n            \"url\": \"{{workitem_input_url}}\"\n          },\n          \"config\": {\n              \"url\": \"data:application/json,{'assemblyPath': '{{test_assembly_name}}'}\"\n          },\n          \"result\": {\n            \"verb\": \"put\",\n            \"url\": \"{{workitem_result_url}}\"\n          }\n        }\n      }"
 						},
 						"url": {
 							"raw": "https://developer.api.autodesk.com/da/us-east/v3/workitems",

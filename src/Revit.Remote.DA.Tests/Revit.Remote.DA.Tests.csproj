@@ -9,8 +9,8 @@
     <ProjectGuid>{F3A4FC2B-503B-420F-8F3F-525897998F6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Revit.Remote.DA.Tests.VDev</RootNamespace>
-    <AssemblyName>Onbox.Revit.Remote.DA.Tests.VDev</AssemblyName>
+    <RootNamespace>Onbox.Revit.Remote.DA.Tests</RootNamespace>
+    <AssemblyName>Onbox.Revit.Remote.DA.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,7 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Onbox.Revit.Remote.DA.Tests.VDev.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Onbox.Revit.Remote.DA.Tests.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -45,7 +45,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>Bundle\unit_tests.bundle\Contents\Onbox.Revit.Remote.DA.Tests\</OutputPath>
+    <OutputPath>Bundle\revit_tests.bundle\Contents\Onbox.Revit.Remote.DA.Tests\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
