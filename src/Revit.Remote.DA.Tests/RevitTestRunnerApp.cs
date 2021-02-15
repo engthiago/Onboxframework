@@ -1,8 +1,8 @@
 ﻿using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.DB;
 using DesignAutomationFramework;
-using Onbox.Revit.NUnit.Core.VDev.Internal;
 using Onbox.Revit.Remote.DA.Tests.NUnit;
+using Onbox.Revit.Remote.DAInternal;
 using System;
 using System.IO;
 

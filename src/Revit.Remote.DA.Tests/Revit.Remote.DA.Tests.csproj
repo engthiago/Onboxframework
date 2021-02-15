@@ -103,14 +103,14 @@
     <Compile Include="TestConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BundleApp.targets" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Onbox.Revit.NUnit.Core\Revit.NUnit.Core.csproj">
       <Project>{2d68a896-f964-4821-8dca-bc82cfdfa683}</Project>
       <Name>Revit.NUnit.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="BundleApp.targets" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
