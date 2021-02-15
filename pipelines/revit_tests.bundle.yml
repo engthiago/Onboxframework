@@ -10,7 +10,7 @@ variables:
   bundle: '$(projFolder)/revit_tests.bundle.zip'
   postman: '$(projFolder)/revit_tests.postman_collection.json'
   buildPlatform: 'x64'
-  buildConfiguration: 'R2019'
+  buildConfiguration: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
