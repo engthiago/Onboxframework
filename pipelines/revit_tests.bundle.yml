@@ -16,11 +16,9 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: Nuget Install
 
-- task: NuGetCommand@2
+- task: CmdLine@2
   inputs:
-    command: 'restore'
-    restoreSolution: '$(solution)'
-    restoreDirectory: '$(Build.SourcesDirectory)'
+    script: 'nuget restore $(projFolder) -OutputDirectory $(Build.SourcesDirectory)/packages'
 
 - task: VSBuild@1
   displayName: VS Build Project
