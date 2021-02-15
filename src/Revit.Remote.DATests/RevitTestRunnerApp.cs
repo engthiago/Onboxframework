@@ -1,18 +1,25 @@
 ﻿using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.DB;
 using DesignAutomationFramework;
-using Onbox.Revit.NUnit;
+using Newtonsoft.Json;
+using Onbox.Revit.NUnit.Core.Internal;
 using Revit.NUnit.Engine;
 using System;
+using System.IO;
+using System.Linq;
 
 namespace Onbox.Revit.Remote.DATests
 {
     public abstract class RevitTestRunnerApp : IExternalDBApplication
     {
+        private const string configFile = "tests.json";
+        private ControlledApplication application;
+
         public ExternalDBApplicationResult OnStartup(ControlledApplication application)
         {
             Console.WriteLine("Design Automation App Started...");
 
+            this.application = application;
             DesignAutomationBridge.DesignAutomationReadyEvent += OnAppReady;
 
             return ExternalDBApplicationResult.Succeeded;
@@ -22,32 +29,60 @@ namespace Onbox.Revit.Remote.DATests
         {
             Console.WriteLine("Design Automation App Ready...");
 
-            var doc = e.DesignAutomationData.RevitDoc;
             var app = e.DesignAutomationData.RevitApp;
 
-            if (e.DesignAutomationData.RevitDoc == null)
+            var workDir = Directory.GetCurrentDirectory();
+            var workitemId = Path.GetDirectoryName(workDir);
+
+            var thisAddin = typeof(RevitTestRunnerApp).Assembly.Location;
+            var addinPath = Path.GetDirectoryName(thisAddin);
+
+            RemoteContainer.Register(app, addinPath, workDir, workitemId);
+            Console.WriteLine("Registered Remote Container.");
+
+            string assemblyName;
+            try
             {
-                doc = app.NewProjectDocument(UnitSystem.Metric);
-                if (doc == null)
-                {
-                    throw new InvalidOperationException("Could not create new document.");
-                }
+                var json = File.ReadAllText(configFile);
+                var config = JsonConvert.DeserializeObject<TestConfiguration>(json);
+                assemblyName = config.AssemblyPath;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error trying to deserialize '{configFile}':");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                return;
             }
 
-            Console.WriteLine("Created new document.");
+            // Enumerates the files in the work directory and sub directories to find the test assembly
+            // If can't find assembly, there is no point on moving forward
+            string assemblyfullPath;
+            try
+            {
+                var files = Directory.GetFiles(workDir, "*.dll", SearchOption.AllDirectories);
+                assemblyfullPath = files.First(f => Path.GetFileName(f) == assemblyName);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error enumerating test assembly:");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace); 
+                return;
+            }
 
-            RevitRemoteContainer.Initialize(
-                doc, e.DesignAutomationData.RevitApp, e.DesignAutomationData.FilePath);
+            var testRunner = new RevitTestRunner(assemblyfullPath);
+            var result = this.OnStartup(testRunner, application);
 
-            Console.WriteLine("Registered Container.");
+            if (result != ExternalDBApplicationResult.Succeeded)
+            {
+                e.Succeeded = false;
+            }
 
-            var testRunner = new RevitTestRunner();
-
-            this.OnStartup(testRunner, e.DesignAutomationData.RevitApp);
             e.Succeeded = true;
         }
 
-        public abstract ExternalDBApplicationResult OnStartup(IRevitTestRunner tests, Application application);
+        public abstract ExternalDBApplicationResult OnStartup(IRevitTestRunner tests, ControlledApplication application);
 
         public abstract ExternalDBApplicationResult OnShutdown(ControlledApplication application);
     }

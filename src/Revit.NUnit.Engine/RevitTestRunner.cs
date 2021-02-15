@@ -8,13 +8,20 @@ namespace Revit.NUnit.Engine
 {
     public interface IRevitTestRunner
     {
-        XmlNode Run(string assemblyPath);
-        void Run(string assemblyPath, string resultXmlFile);
+        XmlNode Run();
+        void Run(string resultXmlFile);
     }
 
     public class RevitTestRunner : IRevitTestRunner
     {
-        public XmlNode Run(string assemblyPath)
+        private readonly string assemblyPath;
+
+        public RevitTestRunner(string assemblyPath)
+        {
+            this.assemblyPath = assemblyPath;
+        }
+
+        public XmlNode Run()
         {
             var factory = new TestRunnerFactory();
             var runner = factory.CreateTestRunner(assemblyPath);
@@ -23,9 +30,9 @@ namespace Revit.NUnit.Engine
             return result;
         }
 
-        public void Run(string assemblyPath, string resultXmlFile)
+        public void Run(string resultXmlFile)
         {
-            var result = Run(assemblyPath);
+            var result = Run();
             this.SerializeNode(result, resultXmlFile);
         }
 

@@ -20,8 +20,6 @@ namespace Onbox.Revit.NUnit.Engine
                 throw new Exception("Failed to load NUnit Test Engine!");
             }
 
-            Console.WriteLine($"Loaded Test engine: {engine.WorkDirectory}");
-
             var dir = Path.GetDirectoryName(testAssemblyPath);
             TestPackage package = new TestPackage(testAssemblyPath);
 
@@ -31,14 +29,18 @@ namespace Onbox.Revit.NUnit.Engine
             }
 
             Console.WriteLine($"Loaded Test: {package.FullName}");
-            Console.WriteLine($"Assembly Test Id: {package.ID}");
-            Console.WriteLine($"Assembly Test Name: {package.Name}");
 
             string domainUsage = "None";
             string processModel = "InProcess";
             package.AddSetting(EnginePackageSettings.DomainUsage, domainUsage);
             package.AddSetting(EnginePackageSettings.ProcessModel, processModel);
             package.AddSetting(EnginePackageSettings.WorkDirectory, dir);
+
+            // These Settings make sure that we run single 
+            package.AddSetting(FrameworkPackageSettings.NumberOfTestWorkers, 0);
+            package.AddSetting(FrameworkPackageSettings.RunOnMainThread, true);
+            package.AddSetting(FrameworkPackageSettings.SynchronousEvents, true);
+
             var runner = engine.GetRunner(package);
 
             var agency = engine.Services.GetService<TestAgency>();
@@ -53,12 +55,6 @@ namespace Onbox.Revit.NUnit.Engine
         private static ITestEngine CreateEngineInstance()
         {
             var apiLocation = typeof(TestEngineActivator).Assembly.Location;
-            Console.WriteLine($"Loading Engine From: {apiLocation}");
-            var folder = Path.GetDirectoryName(apiLocation);
-            foreach (var file in Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories))
-            {
-                Console.WriteLine($"Addin folder: {file}");
-            }
             var directoryName = Path.GetDirectoryName(apiLocation);
             var enginePath = directoryName == null ? DefaultAssemblyName : Path.Combine(directoryName, DefaultAssemblyName);
             var assembly = Assembly.LoadFrom(enginePath);
