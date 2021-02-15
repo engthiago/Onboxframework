@@ -24,34 +24,22 @@ namespace Onbox.Revit.Remote.DAInternal
 
         public static Application GetRevitApplication()
         {
-            CheckInitiazed();
             return revitApp;
         }
 
         public static string GetWorkDirectory()
         {
-            CheckInitiazed();
             return workDirectory;
         }
 
         public static string GetAddinDirectory()
         {
-            CheckInitiazed();
             return addinDirectory;
         }
 
         public static string GetWorkItemId()
         {
-            CheckInitiazed();
             return workItemId;
-        }
-
-        private static void CheckInitiazed()
-        {
-            if (!isInitialized)
-            {
-                //throw new Exception("Revit Container has not been initialized!");
-            }
         }
     }
 }
