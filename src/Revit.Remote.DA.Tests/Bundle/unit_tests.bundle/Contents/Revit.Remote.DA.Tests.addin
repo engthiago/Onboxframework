@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="DBApplication">
+    <Name>Onbox.Revit.Remote.DA.Tests</Name>
+    <Assembly>Onbox.Revit.Remote.DA.Tests/Onbox.Revit.Remote.DA.Tests.dll</Assembly>
+    <AddInId>700ef865-42f4-475d-8156-d0dc9bf692d2</AddInId>
+    <FullClassName>Onbox.Revit.Remote.DA.Tests.Revit.App</FullClassName>
+    <VendorId>Onbox.Revit.Remote.DA.Tests</VendorId>
+    <VendorDescription>Onbox.Revit.Remote.DA.Tests</VendorDescription>
+  </AddIn>
+</RevitAddIns>

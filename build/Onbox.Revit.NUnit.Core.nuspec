@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Onbox.Revit.NUnit.Core</id>
+    <version>0.99.99.99</version>
+    <title>Onbox.Revit.NUnit.Core</title>
+    <authors>Thiago Almeida</authors>
+    <owners>Thiago Almeida</owners>
+	<projectUrl>https://github.com/engthiago/Onbox.Rvt</projectUrl>
+    <icon>onbox.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>Extension for NUnit to run automated tests using Design Automation for Revit</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) 2021 Thiago Almeida</copyright>
+    <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM Cloud Test Tests NUnit Design Automation</tags>
+	<dependencies>
+		<dependency id="NUnit" version="3.12.0" />
+		<dependency id="Onbox.Revit.References" version="2021.0.0" />
+	</dependencies>
+	<references>
+		<reference file="Onbox.Revit.NUnit.Core.VDev.dll"/>
+	</references>
+  </metadata>
+  <files>
+	<file src="onbox.png" />
+	<file src="Onbox.Revit.NUnit.Core.VDev.dll" target="lib\" />
+	<file src="Onbox.Revit.NUnit.Core.VDev.xml" target="lib\" />
+  </files>
+</package>

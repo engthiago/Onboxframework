@@ -1,8 +1,10 @@
 ﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.DB;
 
-namespace Onbox.Revit.NUnit.Core.Internal
+namespace Onbox.Revit.NUnit.Core.VDev.Internal
 {
+    /// <summary>
+    /// This is a static Remote Container to help access runtime Revit Context variables.
+    /// </summary>
     public static class RemoteContainer
     {
         internal static Application revitApp;

@@ -1,0 +1,8 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="ZipAppBundle" AfterTargets="Build">
+    <ZipDirectory
+        Overwrite="true"
+        SourceDirectory="Bundle"
+        DestinationFile="$(MSBuildProjectDirectory)\unit_tests.bundle.zip" />
+  </Target>
+</Project>
