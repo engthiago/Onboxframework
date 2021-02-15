@@ -1,0 +1,45 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  projFolder: 'src/Revit.Remote.DA.Tests'
+  solution: '$(projFolder)/Revit.Remote.DA.Tests.csproj'
+  bundle: '$(projFolder)/revit_tests.bundle.zip'
+  postman: '$(projFolder)/revit_tests.postman_collection.json'
+  buildPlatform: 'x64'
+  buildConfiguration: 'R2019'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: Nuget Install
+
+- task: NuGetCommand@2
+  displayName: Nuget Restore Build Projects
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  displayName: VS Build Project
+  inputs:
+    solution: '$(solution)'
+    vsVersion: '16.0'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    clean: true
+
+- task: CopyFiles@2
+  displayName: Copy package to Staging
+  inputs:
+    Contents: |
+      $(bundle)
+      $(postman)
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: Artifacts Publish
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'revit_tests.bundle'
