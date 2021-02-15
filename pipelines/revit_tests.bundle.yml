@@ -17,6 +17,7 @@ steps:
   displayName: Nuget Install
 
 - task: CmdLine@2
+  displayName: Nuget Restore
   inputs:
     script: 'nuget restore $(projFolder) -OutputDirectory $(Build.SourcesDirectory)/packages'
 
