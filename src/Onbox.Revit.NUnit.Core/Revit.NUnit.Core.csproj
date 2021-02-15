@@ -8,8 +8,8 @@
     <ProjectGuid>{2D68A896-F964-4821-8DCA-BC82CFDFA683}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Onbox.Revit.NUnit.Core.VDev</RootNamespace>
-    <AssemblyName>Onbox.Revit.NUnit.Core.VDev</AssemblyName>
+    <RootNamespace>Onbox.Revit.NUnit.Core</RootNamespace>
+    <AssemblyName>Onbox.Revit.NUnit.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\build\Onbox.Revit.NUnit.Core.VDev.xml</DocumentationFile>
+    <DocumentationFile>..\..\build\Onbox.Revit.NUnit.Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>

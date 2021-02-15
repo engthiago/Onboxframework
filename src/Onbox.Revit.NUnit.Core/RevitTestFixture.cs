@@ -1,8 +1,8 @@
 ﻿using Autodesk.Revit.ApplicationServices;
 using NUnit.Framework;
-using Onbox.Revit.NUnit.Core.VDev.Internal;
+using Onbox.Revit.Remote.DAInternal;
 
-namespace Onbox.Revit.NUnit.VDev.Core
+namespace Onbox.Revit.NUnit.Core
 {
     /// <summary>
     /// Base class to help running Revit related tests. It has ready to use Revit Context variables like Application and directories.<br/>

@@ -1,6 +1,6 @@
 ﻿using Autodesk.Revit.ApplicationServices;
 
-namespace Onbox.Revit.NUnit.Core.VDev.Internal
+namespace Onbox.Revit.Remote.DAInternal
 {
     /// <summary>
     /// This is a static Remote Container to help access runtime Revit Context variables.
