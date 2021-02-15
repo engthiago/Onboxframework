@@ -3,6 +3,6 @@
     <ZipDirectory
         Overwrite="true"
         SourceDirectory="Bundle"
-        DestinationFile="$(MSBuildProjectDirectory)\unit_tests.bundle.zip" />
+        DestinationFile="$(MSBuildProjectDirectory)\revit_tests.bundle.zip" />
   </Target>
 </Project>

@@ -1,0 +1,972 @@
+{
+	"info": {
+		"_postman_id": "95c8ea84-d1fc-473b-98eb-a0df6388989d",
+		"name": "revit_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cleanup",
+			"item": [
+				{
+					"name": "Delete App Bundle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer AuIPTf4KYLTYGVnOHQ0cuolwCW2a"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/appbundles/:id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"appbundles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{app_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Activity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/activities/:id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"activities",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "revit_app_tests"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete App",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/forgeapps/me",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"forgeapps",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "App Bundle",
+			"item": [
+				{
+					"name": "02 - Register App Bundle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp = pm.response.json();\r",
+									"var parameters = resp.uploadParameters.formData;\r",
+									"console.log('parameters:');\r",
+									"console.log(parameters);\r",
+									"\r",
+									"pm.environment.set(\"bundle_key\", parameters[\"key\"]);\r",
+									"pm.environment.set(\"bundle_content-type\", parameters[\"content-type\"]);\r",
+									"pm.environment.set(\"bundle_policy\", parameters[\"policy\"]);\r",
+									"pm.environment.set(\"bundle_success_action_status\", parameters[\"success_action_status\"]);\r",
+									"pm.environment.set(\"bundle_success_action_redirect\", parameters[\"success_action_redirect\"]);\r",
+									"pm.environment.set(\"bundle_x-amz-signature\", parameters[\"x-amz-signature\"]);\r",
+									"pm.environment.set(\"bundle_x-amz-credential\", parameters[\"x-amz-credential\"]);\r",
+									"pm.environment.set(\"bundle_x-amz-algorithm\", parameters[\"x-amz-algorithm\"]);\r",
+									"pm.environment.set(\"bundle_x-amz-date\", parameters[\"x-amz-date\"]);\r",
+									"pm.environment.set(\"bundle_x-amz-server-side-encryption\", parameters[\"x-amz-server-side-encryption\"]);\r",
+									"pm.environment.set(\"bundle_x-amz-security-token\", parameters[\"x-amz-security-token\"]);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{app_id}}\",\n  \"engine\": \"{{bundle_engine}}\",\n  \"description\": \"{{app_description}}\"\n}"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/appbundles",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"appbundles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - Upload App Bundle",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "key",
+									"value": "{{bundle_key}}",
+									"type": "text"
+								},
+								{
+									"key": "content-type",
+									"value": "{{bundle_content-type}}",
+									"type": "text"
+								},
+								{
+									"key": "policy",
+									"value": "{{bundle_policy}}",
+									"type": "text"
+								},
+								{
+									"key": "success_action_status",
+									"value": "{{bundle_success_action_status}}",
+									"type": "text"
+								},
+								{
+									"key": "success_action_redirect",
+									"value": "{{bundle_success_action_redirect}}",
+									"type": "text"
+								},
+								{
+									"key": "x-amz-signature",
+									"value": "{{bundle_x-amz-signature}}",
+									"type": "text"
+								},
+								{
+									"key": "x-amz-credential",
+									"value": "{{bundle_x-amz-credential}}",
+									"type": "text"
+								},
+								{
+									"key": "x-amz-algorithm",
+									"value": "{{bundle_x-amz-algorithm}}",
+									"type": "text"
+								},
+								{
+									"key": "x-amz-date",
+									"value": "{{bundle_x-amz-date}}",
+									"type": "text"
+								},
+								{
+									"key": "x-amz-server-side-encryption",
+									"value": "{{bundle_x-amz-server-side-encryption}}",
+									"type": "text"
+								},
+								{
+									"key": "x-amz-security-token",
+									"value": "{{bundle_x-amz-security-token}}",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Thiago/source/repos/engthiago/OnboxFramework/src/Revit.Remote.DATests/unit_tests.bundle.zip"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://dasprod-store.s3.amazonaws.com",
+							"protocol": "https",
+							"host": [
+								"dasprod-store",
+								"s3",
+								"amazonaws",
+								"com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - Create App Bundle Alias",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"version\": 1,\n    \"id\": \"{{bundle_alias}}\"\n}"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/appbundles/:id/aliases",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"appbundles",
+								":id",
+								"aliases"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{app_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - Get App Bundles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer AuIPTf4KYLTYGVnOHQ0cuolwCW2a"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/appbundles",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"appbundles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - Update Bundle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"id\": null,\n      \"engine\": \"{{bundle_engine}}\",\n      \"description\": \"{{app_description}}\"\n    }"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/appbundles/:id/versions",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"appbundles",
+								":id",
+								"versions"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{app_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activity",
+			"item": [
+				{
+					"name": "01 - Create Activity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"id\": \"{{client_id}}\",\n            \"commandLine\": [ \"$(engine.path)\\\\revitcoreconsole.exe /al \\\"$(appbundles[{{app_id}}].path)\\\"\" ],\n            \"parameters\": {\n              \"inputAssembly\": {\n                \"zip\": true,\n                \"ondemand\": false,\n                \"verb\": \"get\",\n                \"description\": \"Input test assembly and dependencies\",\n                \"required\": true,\n                \"localName\": \"tests\"\n              },\n              \"config\": {\n                  \"zip\": false,\n                  \"ondemand\": false,\n                  \"verb\": \"get\",\n                  \"description\": \"Input test configurations\",\n                  \"required\": true,\n                  \"localName\": \"tests.json\"\n              },\n              \"result\": {\n                \"zip\": false,\n                \"ondemand\": false,\n                \"verb\": \"put\",\n                \"description\": \"Results\",\n                \"required\": true,\n                \"localName\": \"result.xml\"\n              }\n            },\n            \"engine\": \"{{bundle_engine}}\",\n            \"appbundles\": [ \"{{client_id}}.{{app_id}}+{{bundle_alias}}\" ],\n            \"description\": \"{{app_description}}\"\n    }"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/activities",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - Create Activiy Alias",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"version\": 1,\n    \"id\": \"{{activity_alias}}\"\n}"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/activities/:id/aliases",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"activities",
+								":id",
+								"aliases"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{client_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - Get Activities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer AuIPTf4KYLTYGVnOHQ0cuolwCW2a"
+							}
+						],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/activities",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - Get Aliases",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/activities/:id/aliases",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"activities",
+								":id",
+								"aliases"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{client_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cloud Storage",
+			"item": [
+				{
+					"name": "01 - Create Bucket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bucketKey\": \"{{app_id}}\",\n    \"access\": \"full\",\n    \"policyKey\": \"transient\"\n}"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/oss/v2/buckets",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"oss",
+								"v2",
+								"buckets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - Upload File",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							},
+							{
+								"key": "accept-encoding",
+								"value": "gzip, deflate"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/C:/Users/Thiago/source/repos/engthiago/OnboxFramework/tests/Onbox.Revit.Remote.Tests/tests.zip"
+							}
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/oss/v2/buckets/:bucket_key/objects/:object_key",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"oss",
+								"v2",
+								"buckets",
+								":bucket_key",
+								"objects",
+								":object_key"
+							],
+							"variable": [
+								{
+									"key": "bucket_key",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "object_key",
+									"value": "{{app_id}}.zip"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - Get Temp Download Link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"workitem_input_url\", resp.signedUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/oss/v2/buckets/:bucket_key/objects/:object_key/signed",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"oss",
+								"v2",
+								"buckets",
+								":bucket_key",
+								"objects",
+								":object_key",
+								"signed"
+							],
+							"variable": [
+								{
+									"key": "bucket_key",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "object_key",
+									"value": "{{app_id}}.zip"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - Get Temp Upload Link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"workitem_result_url\", resp.signedUrl);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/oss/v2/buckets/:bucket_key/objects/:object_key/signed?access=readwrite",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"oss",
+								"v2",
+								"buckets",
+								":bucket_key",
+								"objects",
+								":object_key",
+								"signed"
+							],
+							"query": [
+								{
+									"key": "access",
+									"value": "readwrite"
+								}
+							],
+							"variable": [
+								{
+									"key": "bucket_key",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "object_key",
+									"value": "result.xml"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Work Item",
+			"item": [
+				{
+					"name": "01 - Send Wok Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var resp = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"workitem_id\", resp.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer YOUR_ACCESS_TOKEN"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"activityId\": \"{{client_id}}.{{client_id}}+{{activity_alias}}\",\n        \"arguments\": {\n          \"inputAssembly\": {\n            \"url\": \"{{workitem_input_url}}\"\n          },\n          \"config\": {\n              \"url\": \"data:application/json,{'assemblyPath': 'Onbox.Revit.Remote.Tests.dll'}\"\n          },\n          \"result\": {\n            \"verb\": \"put\",\n            \"url\": \"{{workitem_result_url}}\"\n          }\n        }\n      }"
+						},
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/workitems",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"workitems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 - Get Work Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://developer.api.autodesk.com/da/us-east/v3/workitems/:id",
+							"protocol": "https",
+							"host": [
+								"developer",
+								"api",
+								"autodesk",
+								"com"
+							],
+							"path": [
+								"da",
+								"us-east",
+								"v3",
+								"workitems",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{workitem_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "00 - Authenticate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var resp = pm.response.json();\r",
+							"\r",
+							"var token = resp.access_token;\r",
+							"pm.environment.set(\"access_token\", token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "code:all data:write data:read bucket:create bucket:delete",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://developer.api.autodesk.com/authentication/v1/authenticate",
+					"protocol": "https",
+					"host": [
+						"developer",
+						"api",
+						"autodesk",
+						"com"
+					],
+					"path": [
+						"authentication",
+						"v1",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
