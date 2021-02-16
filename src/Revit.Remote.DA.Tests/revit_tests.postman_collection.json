@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "95c8ea84-d1fc-473b-98eb-a0df6388989d",
+		"_postman_id": "ecc8a35d-8c75-4042-aa98-209d7249bae8",
 		"name": "revit_tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -264,7 +264,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/Thiago/source/repos/engthiago/OnboxFramework/src/Revit.Remote.DATests/unit_tests.bundle.zip"
+									"src": "/C:/Users/Thiago/source/repos/Onbox.Revit.Tests.Sample/remote_tests/revit_tests.bundle.zip"
 								}
 							]
 						},
@@ -616,7 +616,7 @@
 						"body": {
 							"mode": "file",
 							"file": {
-								"src": "/C:/Users/Thiago/source/repos/engthiago/OnboxFramework/tests/Onbox.Revit.Remote.Tests/tests.zip"
+								"src": "/C:/Users/Thiago/source/repos/Onbox.Revit.Tests.Sample/tests/Onbox.Revit.Tests/test_project.zip"
 							}
 						},
 						"url": {
@@ -816,7 +816,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"activityId\": \"{{client_id}}.{{client_id}}+{{activity_alias}}\",\n        \"arguments\": {\n          \"inputAssembly\": {\n            \"url\": \"{{workitem_input_url}}\"\n          },\n          \"config\": {\n              \"url\": \"data:application/json,{'assemblyPath': '{{test_assembly_name}}'}\"\n          },\n          \"result\": {\n            \"verb\": \"put\",\n            \"url\": \"{{workitem_result_url}}\"\n          }\n        }\n      }"
+							"raw": "{\n    \"activityId\": \"{{client_id}}.{{client_id}}+{{activity_alias}}\",\n    \"arguments\": {\n        \"inputAssembly\": {\n            \"url\": \"{{workitem_input_url}}\"\n        },\n        \"config\": {\n            \"url\": \"data:application/json,{'assemblyPath': '{{test_assembly_name}}'}\"\n        },\n        \"result\": {\n            \"verb\": \"put\",\n            \"url\": \"{{workitem_result_url}}\"\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "https://developer.api.autodesk.com/da/us-east/v3/workitems",
