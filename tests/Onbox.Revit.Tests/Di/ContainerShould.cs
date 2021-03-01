@@ -285,6 +285,36 @@ namespace Onbox.Revit.Tests.Di
         }
 
         [Test]
+        public void ResolveSingletonAbstractionsThatAreInstancedMoreThanOnceOnParentInstantiation()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.AddSingleton<IDummyService2, DummyService2>();
+                sut.AddSingleton<IDummyService3, DummyService3>();
+
+                Assert.DoesNotThrow(() =>
+                {
+                    var dummyInstance4 = sut.Resolve<DummyService4>();
+                });
+            }
+        }
+
+        [Test]
+        public void ResolveTransientAbstractionsThatAreInstancedMoreThanOnceOnParentInstantiation()
+        {
+            using (var sut = CreateContainer())
+            {
+                sut.AddTransient<IDummyService2, DummyService2>();
+                sut.AddTransient<IDummyService3, DummyService3>();
+
+                Assert.DoesNotThrow(() =>
+                {
+                    var dummyInstance4 = sut.Resolve<DummyService4>();
+                });
+            }
+        }
+
+        [Test]
         public void ResolveTransientsEvenWhenNotRegistered()
         {
             using (var sut = CreateContainer())
