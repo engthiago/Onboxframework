@@ -266,14 +266,14 @@ namespace Onbox.Di.VDev
             // Check for Ciruclar dependencies
             CheckForCircularDependencies(contract);
 
-            this.currentTypes.Add(contract);
-
             // If this is a concrete type just instantiate it, if not, get the concrete type on the dictionary
             Type implementation = contract;
             if (implementation.IsAbstract)
             {
                 implementation = dic[contract];
             }
+
+            this.currentTypes.Add(implementation);
 
             // Get the first available contructor
             var constructors = implementation.GetConstructors();

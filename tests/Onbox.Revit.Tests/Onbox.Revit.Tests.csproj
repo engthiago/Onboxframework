@@ -71,7 +71,13 @@
     <Compile Include="Di\Dummies\DependentService.cs" />
     <Compile Include="Di\Dummies\DummyHiddenConstructor.cs" />
     <Compile Include="Di\Dummies\DummyService.cs" />
+    <Compile Include="Di\Dummies\DummyService1.cs" />
+    <Compile Include="Di\Dummies\DummyService2.cs" />
+    <Compile Include="Di\Dummies\DummyService3.cs" />
+    <Compile Include="Di\Dummies\DummyService4.cs" />
     <Compile Include="Di\Dummies\IDummyService.cs" />
+    <Compile Include="Di\Dummies\IDummyService2.cs" />
+    <Compile Include="Di\Dummies\IDummyService3.cs" />
     <Compile Include="JsonService\Dummies\DummySerializationAddress.cs" />
     <Compile Include="JsonService\Dummies\DummySerializationPerson.cs" />
     <Compile Include="JsonService\JsonExtensionsShould.cs" />
