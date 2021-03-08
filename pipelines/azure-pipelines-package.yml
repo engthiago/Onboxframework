@@ -7,7 +7,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'Onbox.sln'
+  solution: 'OnboxNuget.slnf'
   analyzers: 'analyzers/Onbox.Analyzers.Build.sln'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
