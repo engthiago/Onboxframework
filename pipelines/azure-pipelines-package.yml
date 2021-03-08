@@ -7,7 +7,8 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: 'OnboxNuget.slnf'
+  solution: 'Onbox.sln'
+  solutionFilter: 'OnboxNuget.slnf'
   analyzers: 'analyzers/Onbox.Analyzers.Build.sln'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
@@ -33,7 +34,7 @@ steps:
 - task: VSBuild@1
   displayName: Visual Studio 2019 Build Projects
   inputs:
-    solution: '$(solution)'
+    solution: '$(solutionFilter)'
     vsVersion: '16.0'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
