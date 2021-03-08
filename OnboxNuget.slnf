@@ -1,0 +1,18 @@
+{
+  "solution": {
+    "path": "Onbox.sln",
+    "projects": [
+		"src\\Abstractions\\Abstractions.Standard.csproj",
+		"src\\Core.Standard\\Core.Standard.csproj",
+		"src\\Di.Standard\\Di.Standard.csproj",
+		"src\\Mvc\\Mvc.csproj",
+		"src\\Mvc.Abstractions.Standard\\Mvc.Abstractions.Standard.csproj",
+		"src\\Mvc.Revit\\Mvc.Revit.csproj",
+		"src\\Mvc.Revit.Abstractions.Standard\\Mvc.Revit.Abstractions.Standard.csproj",
+		"src\\Revit\\Revit.csproj",
+		"src\\Revit.Abstractions.Standard\\Revit.Abstractions.Standard.csproj",
+		"src\\Revit.RibbonCommands\\Revit.RibbonCommands.csproj",
+		"src\\Store.Standard\\Store.Standard.csproj"
+    ]
+  }
+}
