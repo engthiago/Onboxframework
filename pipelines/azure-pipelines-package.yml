@@ -40,10 +40,11 @@ steps:
     clean: true
 
 - task: NuGetCommand@2
-  displayName: Package Nuget
   inputs:
     command: 'pack'
     packagesToPack: 'build/*.nuspec'
+    versioningScheme: 'off'
+    includeSymbols: true
 
 - task: CopyFiles@2
   displayName: Copy Nuget to Staging Artifacts
