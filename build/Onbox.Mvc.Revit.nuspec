@@ -23,9 +23,6 @@
 		<dependency id="Onbox.Revit.Abstractions" version="0.99.99.99" />
 		<dependency id="PropertyChanged.Fody" version="2.5.9" />
 	</dependencies>
-	<references>
-		<reference file="Onbox.Mvc.Revit.VDev.dll"/>
-	</references>
   </metadata>
   <files>
 	<file src="onbox.png" />

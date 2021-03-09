@@ -13,9 +13,6 @@
     <copyright>Copyright (c) 2020 Thiago Almeida</copyright>
     <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</tags>
     <repository type="git" url="https://github.com/engthiago/Onbox.Rvt.git" />
-	<references>
-		<reference file="Onbox.Core.VDev.dll"/>
-	</references>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
         <dependency id="Onbox.Abstractions" version="0.99.99.99" exclude="Build,Analyzers" />

@@ -19,9 +19,6 @@
 		<dependency id="Onbox.Di" version="0.99.99.99" />
 		<dependency id="Onbox.Revit.Abstractions" version="0.99.99.99" />
 	</dependencies>
-	<references>
-		<reference file="Onbox.Revit.VDev.dll"/>
-	</references>
   </metadata>
   <files>
 	<file src="onbox.png" />

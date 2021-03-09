@@ -18,9 +18,6 @@
         <dependency id="Onbox.Mvc.Abstractions" version="0.99.99.99" exclude="Build,Analyzers" />
       </group>
     </dependencies>
-	<references>
-		<reference file="Onbox.Mvc.Revit.Abstractions.VDev.dll"/>
-	</references>
   </metadata>
   <files>
 	  <file src="onbox.png" />

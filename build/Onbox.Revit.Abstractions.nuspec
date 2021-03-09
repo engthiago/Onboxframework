@@ -16,9 +16,6 @@
     <dependencies>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
-	<references>
-		<reference file="Onbox.Revit.Abstractions.VDev.dll"/>
-	</references>
   </metadata>
   <files>
 	  <file src="onbox.png" />

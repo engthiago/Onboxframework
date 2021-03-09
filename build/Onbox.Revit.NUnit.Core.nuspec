@@ -18,9 +18,6 @@
 		<dependency id="NUnit" version="3.12.0" />
 		<dependency id="Onbox.Revit.References" version="2021.0.0" />
 	</dependencies>
-	<references>
-		<reference file="Onbox.Revit.NUnit.Core.dll"/>
-	</references>
   </metadata>
   <files>
 	<file src="onbox.png" />

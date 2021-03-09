@@ -19,9 +19,6 @@
         <dependency id="Onbox.Core" version="0.99.99.99" exclude="Build,Analyzers" />
       </group>
     </dependencies>
-	<references>
-		<reference file="Onbox.Store.VDev.dll"/>
-	</references>
   </metadata>
   <files>
 	  <file src="onbox.png" />
