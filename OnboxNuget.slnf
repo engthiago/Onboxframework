@@ -12,7 +12,8 @@
 		"src\\Revit\\Revit.csproj",
 		"src\\Revit.Abstractions.Standard\\Revit.Abstractions.Standard.csproj",
 		"src\\Revit.RibbonCommands\\Revit.RibbonCommands.csproj",
-		"src\\Store.Standard\\Store.Standard.csproj"
+		"src\\Store.Standard\\Store.Standard.csproj",
+		"src\\Onbox.Revit.NUnit.Core\\Revit.NUnit.Core.csproj"
     ]
   }
 }
