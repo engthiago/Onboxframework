@@ -3,7 +3,6 @@ pool:
 
 variables:
   solution: 'Onbox.sln'
-  solutionFilter: 'OnboxNuget.slnf'
   analyzers: 'analyzers/Onbox.Analyzers.Build.sln'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
@@ -28,7 +27,7 @@ steps:
 - task: VSBuild@1
   displayName: Visual Studio 2019 Build Projects
   inputs:
-    solution: '$(solutionFilter)'
+    solution: '$(solution)'
     vsVersion: '16.0'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
@@ -37,7 +36,10 @@ steps:
 - task: CmdLine@2
   displayName: Build Nuget
   inputs:
-    script: nuget pack "$(Build.SourcesDirectory)/build/Onbox.Abstractions.Standard.nuspec"
+    workingDirectory: "$(Build.SourcesDirectory)/build"
+    script: |
+      dir "bin"
+      nuget pack "Onbox.Abstractions.Standard.nuspec"
 
 - task: CopyFiles@2
   displayName: Copy Nuget to Staging Artifacts
