@@ -1,18 +1,11 @@
-# .NET Desktop
-# Build and run tests for .NET Desktop or Windows classic desktop solutions.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
-
 pool:
   vmImage: 'windows-latest'
 
 variables:
   solution: 'Onbox.sln'
-  solutionFilter: 'OnboxNuget.slnf'
   analyzers: 'analyzers/Onbox.Analyzers.Build.sln'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
-  buildPath: 'src/Abstractions/bin/'
 
 steps:
 
@@ -34,45 +27,24 @@ steps:
 - task: VSBuild@1
   displayName: Visual Studio 2019 Build Projects
   inputs:
-    solution: '$(solutionFilter)'
+    solution: '$(solution)'
     vsVersion: '16.0'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     clean: true
 
-- task: NuGetCommand@2
-  displayName: Package Nuget
+- task: CmdLine@2
+  displayName: Build Nuget
   inputs:
-    command: 'pack'
-    packagesToPack: 'build/*.nuspec'
-    versioningScheme: 'off'
-    includeSymbols: true
+    workingDirectory: "$(Build.SourcesDirectory)/build"
+    script: |
+      dir "bin"
+      nuget pack "Onbox.Abstractions.Standard.nuspec"
 
 - task: CopyFiles@2
   displayName: Copy Nuget to Staging Artifacts
   inputs:
     SourceFolder: 'build/'
-    Contents: '*.nupkg'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: NuGetCommand@2
-  displayName: Nuget Restore Analyzers
-  inputs:
-    restoreSolution: '$(analyzers)'
-
-- task: VSBuild@1
-  displayName: Visual Studio 2019 Build Analyzers
-  inputs:
-    solution: '$(analyzers)'
-    vsVersion: '16.0'
-    platform: 'Any CPU'
-    configuration: 'Release'
-    clean: true
-
-- task: CopyFiles@2
-  displayName: Copy Analyzers Nuget to Staging Artifacts
-  inputs:
-    SourceFolder: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/bin/Release/'
     Contents: '*.nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
