@@ -49,6 +49,28 @@ steps:
     Contents: '*.nupkg'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
+- task: NuGetCommand@2
+  displayName: Nuget Restore Analyzers
+  inputs:
+    restoreSolution: '$(analyzers)'
+
+- task: VSBuild@1
+  displayName: Visual Studio 2019 Build Analyzers
+  inputs:
+    solution: '$(analyzers)'
+    vsVersion: '16.0'
+    platform: 'Any CPU'
+    configuration: 'Release'
+    clean: true
+
+- task: CopyFiles@2
+  displayName: Copy Analyzers Nuget to Staging Artifacts
+  inputs:
+    SourceFolder: 'analyzers/Onbox.Analyzers/Onbox.Analyzers.Package/bin/Release/'
+    Contents: '*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+
 - task: PublishBuildArtifacts@1
   displayName: Artifacts Publish
   inputs:
