@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Onbox.Revit.RibbonCommands</id>
+    <version>0.99.99.99</version>
+    <title>Revit.RibbonCommands</title>
+    <authors>Thiago Almeida</authors>
+    <owners>Thiago Almeida</owners>
+	<projectUrl>https://github.com/engthiago/Onbox.Rvt</projectUrl>
+    <icon>onbox.png</icon>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>Part of Onbox Framework</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright (c) 2021 Thiago Almeida</copyright>
+    <tags>Revit Autodesk Revit Revit API Onbox AEC Forge BIM</tags>
+	<dependencies>
+		<dependency id="Onbox.Abstractions" version="0.99.99.99" />
+		<dependency id="Onbox.Di" version="0.99.99.99" />
+		<dependency id="Onbox.Revit.Abstractions" version="0.99.99.99" />
+		<dependency id="Onbox.Revit" version="0.99.99.99" />
+	</dependencies>
+  </metadata>
+  <files>
+	<file src="onbox.png" />
+	<file src="build/Onbox.Revit.RibbonCommands.VDev.dll" target="lib\" />
+	<file src="build/Onbox.Revit.RibbonCommands.VDev.xml" target="lib\" />
+  </files>
+</package>
