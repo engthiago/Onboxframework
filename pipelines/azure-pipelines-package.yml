@@ -43,8 +43,8 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: 'build/*.nuspec'
+    packDestination: 'build'
     versioningScheme: 'off'
-    includeSymbols: true
 
 - task: CopyFiles@2
   displayName: Copy Nuget to Staging Artifacts
