@@ -33,13 +33,13 @@ steps:
     configuration: '$(buildConfiguration)'
     clean: true
 
-- task: CmdLine@2
-  displayName: Build Nuget
+- task: NuGetCommand@2
+  displayName: Package Nuget
   inputs:
-    workingDirectory: "$(Build.SourcesDirectory)/build"
-    script: |
-      dir "bin"
-      nuget pack "Onbox.Abstractions.Standard.nuspec"
+    command: 'pack'
+    packagesToPack: 'build/*.nuspec'
+    versioningScheme: 'off'
+    includeSymbols: true
 
 - task: CopyFiles@2
   displayName: Copy Nuget to Staging Artifacts
