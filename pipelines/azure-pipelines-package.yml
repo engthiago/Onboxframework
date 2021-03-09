@@ -12,7 +12,6 @@ variables:
   analyzers: 'analyzers/Onbox.Analyzers.Build.sln'
   buildPlatform: 'x64'
   buildConfiguration: 'R2019'
-  buildPath: 'src/Abstractions/bin/'
 
 steps:
 
@@ -45,8 +44,6 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: 'build/*.nuspec'
-    versioningScheme: 'off'
-    includeSymbols: true
 
 - task: CopyFiles@2
   displayName: Copy Nuget to Staging Artifacts
