@@ -23,7 +23,7 @@
   </metadata>
   <files>
 	<file src="onbox.png" />
-	<file src="build/Onbox.Revit.RibbonCommands.VDev.dll" target="lib\" />
-	<file src="build/Onbox.Revit.RibbonCommands.VDev.xml" target="lib\" />
+	<file src="bin/Onbox.Revit.RibbonCommands.VDev.dll" target="lib\" />
+	<file src="bin/Onbox.Revit.RibbonCommands.VDev.xml" target="lib\" />
   </files>
 </package>
