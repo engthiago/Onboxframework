@@ -24,7 +24,7 @@
   </metadata>
   <files>
 	<file src="onbox.png" />
-	<file src="Onbox.Revit.NUnit.Core.dll" target="lib\" />
-	<file src="Onbox.Revit.NUnit.Core.xml" target="lib\" />
+	<file src="bin/Onbox.Revit.NUnit.Core.dll" target="lib\" />
+	<file src="bin/Onbox.Revit.NUnit.Core.xml" target="lib\" />
   </files>
 </package>

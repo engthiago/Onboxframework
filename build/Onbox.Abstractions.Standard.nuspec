@@ -24,7 +24,7 @@
   </metadata>
   <files>
 	<file src="onbox.png" />
-	<file src="Onbox.Abstractions.VDev.dll" target="lib\" />
-	<file src="Onbox.Abstractions.VDev.xml" target="lib\" />
+	<file src="bin/Onbox.Abstractions.VDev.dll" target="lib\" />
+	<file src="bin/Onbox.Abstractions.VDev.xml" target="lib\" />
   </files>
 </package>

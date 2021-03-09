@@ -25,7 +25,7 @@
   </metadata>
   <files>
 	<file src="onbox.png" />
-	<file src="Onbox.Revit.VDev.dll" target="lib\" />
-	<file src="Onbox.Revit.VDev.xml" target="lib\" />
+	<file src="bin/Onbox.Revit.VDev.dll" target="lib\" />
+	<file src="bin/Onbox.Revit.VDev.xml" target="lib\" />
   </files>
 </package>

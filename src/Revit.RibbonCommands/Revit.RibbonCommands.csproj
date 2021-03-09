@@ -43,14 +43,14 @@
     <DocumentationFile>bin\x64\Debug\Onbox.Revit.RibbonCommands.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>..\..\build\</OutputPath>
+    <OutputPath>..\..\build\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <DocumentationFile>..\..\build\Onbox.Revit.RibbonCommands.VDev.xml</DocumentationFile>
+    <DocumentationFile>Onbox.Revit.RibbonCommands.VDev.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdWindows, Culture=neutral, processorArchitecture=MSIL">

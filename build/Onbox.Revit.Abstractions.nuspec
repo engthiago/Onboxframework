@@ -22,7 +22,7 @@
   </metadata>
   <files>
 	  <file src="onbox.png" />
-	  <file src="Onbox.Revit.Abstractions.VDev.dll" target="lib\" />
-	  <file src="Onbox.Revit.Abstractions.VDev.xml" target="lib\" />
+	  <file src="bin/Onbox.Revit.Abstractions.VDev.dll" target="lib\" />
+	  <file src="bin/Onbox.Revit.Abstractions.VDev.xml" target="lib\" />
   </files>
 </package>
