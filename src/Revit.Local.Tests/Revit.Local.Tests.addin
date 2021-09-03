@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Revit.Local.Tests App</Name>
+    <Assembly>Revit.Local.Tests/Revit.Local.Tests.dll</Assembly>
+    <AddInId>96deedfe-ca34-49c9-b134-5a8d9435d93d</AddInId>
+    <FullClassName>Revit.Local.Tests.Revit.App</FullClassName>
+    <VendorId>Revit.Local.Tests</VendorId>
+    <VendorDescription>Revit.Local.Tests</VendorDescription>
+    <AllowLoadingIntoExistingSession>true</AllowLoadingIntoExistingSession>
+  </AddIn>
+</RevitAddIns>
