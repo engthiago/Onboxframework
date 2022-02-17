@@ -202,9 +202,45 @@ namespace Onbox.Di.VDev
         }
 
         /// <summary>
+        /// Checks if a singleton instance for this type is registered in the container
+        /// </summary>
+        /// <typeparam name="T">The target type, abstract or concrete</typeparam>
+        /// <returns>true if the type is registered, false if not</returns>
+        public bool HasSingletonInstance<T>()
+        {
+            return this.singletonInstances.ContainsKey(typeof(T)) || this.singletonTypes.ContainsKey(typeof(T));
+        }
+
+        /// <summary>
+        /// Checks if a scoped instance for this type is registered in the container
+        /// </summary>
+        /// <typeparam name="T">The target type, abstract or concrete</typeparam>
+        /// <returns>true if the type is registered, false if not</returns>
+        public bool HasScopedInstance<T>()
+        {
+            return this.scopedInstances.ContainsKey(typeof(T)) || this.scopedTypes.ContainsKey(typeof(T));
+        }
+
+        /// <summary>
+        /// Asks the container for a new instance of a type
+        /// <br>It will return null if any non registered abstract type in the dependency tree</br>
+        /// </summary>
+        public T ResolveOrNull<T>() where T : class
+        {
+            try
+            {
+                return this.Resolve<T>();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Asks the container for a new instance of a type
         /// </summary>
-        public T Resolve<T>()
+        public T Resolve<T>() where T : class
         {
             var instance = (T)this.ResolveObject(typeof(T));
             this.currentTypes.Clear();

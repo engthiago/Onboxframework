@@ -136,6 +136,26 @@
             <typeparam name="TImplementation"></typeparam>
             <exception cref="T:System.InvalidOperationException">Thrown when using a abstract class or an interface</exception>
         </member>
+        <member name="M:Onbox.Di.VDev.Container.HasSingletonInstance``1">
+            <summary>
+            Checks if a singleton instance for this type is registered in the container
+            </summary>
+            <typeparam name="T">The target type, abstract or concrete</typeparam>
+            <returns>true if the type is registered, false if not</returns>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.HasScopedInstance``1">
+            <summary>
+            Checks if a scoped instance for this type is registered in the container
+            </summary>
+            <typeparam name="T">The target type, abstract or concrete</typeparam>
+            <returns>true if the type is registered, false if not</returns>
+        </member>
+        <member name="M:Onbox.Di.VDev.Container.ResolveOrNull``1">
+            <summary>
+            Asks the container for a new instance of a type
+            <br>It will return null if any non registered abstract type in the dependency tree</br>
+            </summary>
+        </member>
         <member name="M:Onbox.Di.VDev.Container.Resolve``1">
             <summary>
             Asks the container for a new instance of a type

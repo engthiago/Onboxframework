@@ -113,6 +113,15 @@
         <member name="M:Onbox.Abstractions.VDev.IContainerResolver.Resolve``1">
             <summary>
             Asks the container for a new instance of a type
+            <br>An exception will be thrown for non registered abstract types in the dependency tree</br>
+            <br>The container will automatically resolve non registered concrete types in the dependency tree</br>
+            <br>Check ResolveOrNull() for exception free version</br>
+            </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainerResolver.ResolveOrNull``1">
+            <summary>
+            Asks the container for a new instance of a type
+            <br>It will return null if any non registered abstract type in the dependency tree</br>
             </summary>
         </member>
         <member name="M:Onbox.Abstractions.VDev.IContainerResolver.Resolve(System.Type)">
@@ -124,6 +133,20 @@
             <summary>
             Creates a scoped context copy of this container
             </summary>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainerResolver.HasSingletonInstance``1">
+            <summary>
+            Checks if a singleton instance for this type is registered in the container
+            </summary>
+            <typeparam name="T">The target type, abstract or concrete</typeparam>
+            <returns>true if the type is registered, false if not</returns>
+        </member>
+        <member name="M:Onbox.Abstractions.VDev.IContainerResolver.HasScopedInstance``1">
+            <summary>
+            Checks if a scoped instance for this type is registered in the container
+            </summary>
+            <typeparam name="T">The target type, abstract or concrete</typeparam>
+            <returns>true if the type is registered, false if not</returns>
         </member>
         <member name="M:Onbox.Abstractions.VDev.IContainerResolver.IsScope">
             <summary>
