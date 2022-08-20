@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="ColorPicker.cs" />
     <Compile Include="Error.cs" />
+    <Compile Include="ActivateUIEffect.cs" />
     <Compile Include="MvcComponent.cs" />
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BitmapSourceCheckToUnchekedConverter.cs" />
