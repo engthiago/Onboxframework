@@ -8,7 +8,7 @@ namespace Onbox.Mvc.Revit.VDev
 {
     public class RevitViewAttacher
     {
-        private readonly TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
+        private TitleVisibility titleVisibility = TitleVisibility.HideMinimizeAndMaximize;
         private readonly Window window;
         private readonly IntPtr hwnd;
         private const int GWL_STYLE = -16,
@@ -33,6 +33,11 @@ namespace Onbox.Mvc.Revit.VDev
             System.Windows.Interop.WindowInteropHelper helper = new System.Windows.Interop.WindowInteropHelper(this.window);
             helper.Owner = this.hwnd;
             window.SourceInitialized += RevitViewMvcBase_SourceInitialized;
+        }
+
+        internal void SetTitleVisibility(TitleVisibility titleVisibility)
+        {
+            this.titleVisibility = titleVisibility;
         }
 
         /// <summary>
