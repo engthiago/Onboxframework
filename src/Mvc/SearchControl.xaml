@@ -10,7 +10,7 @@
              d:DesignWidth="300">
     <Grid>
         <TextBox x:Name="SearchBox"
-                 Height="20"
+                 Height="{Binding ElementName=SearchControlMain, Path=SearchHeight, UpdateSourceTrigger=PropertyChanged}"
                  Text="{Binding ElementName=SearchControlMain, Path=SearchText, UpdateSourceTrigger=PropertyChanged}"
                  TextChanged="TextBox_TextChanged">
             <TextBox.Style>
@@ -58,7 +58,7 @@
         </Grid>
         <TextBlock x:Name="PART_OverlayText"
                    IsHitTestVisible="False"
-                   Text="Search"
+                   Text="{Binding ElementName=SearchControlMain, Path=SearchPlaceholderText, UpdateSourceTrigger=PropertyChanged}"
                    VerticalAlignment="Center"
                    Margin="3,0"
                    Padding="1"
