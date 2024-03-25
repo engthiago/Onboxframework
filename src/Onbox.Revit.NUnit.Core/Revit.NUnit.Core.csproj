@@ -57,7 +57,7 @@
       <HintPath>..\..\packages\NUnit.3.12.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="RevitAPI">
-      <HintPath>..\..\packages\Onbox.Revit.References.2021.0.0\lib\Revit 2019\RevitAPI.dll</HintPath>
+      <HintPath>..\..\packages\Onbox.Revit.References.2024.0.0\lib\Revit 2019\RevitAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

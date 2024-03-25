@@ -19,9 +19,30 @@ namespace Onbox.Mvc.VDev
         public static readonly DependencyProperty SearchTextProperty =
             DependencyProperty.Register("SearchText", typeof(string), typeof(SearchControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public double SearchHeight
+        {
+            get { return (double)GetValue(SearchHeightProperty); }
+            set { SetValue(SearchHeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty SearchHeightProperty =
+            DependencyProperty.Register("SearchHeight", typeof(double), typeof(SearchControl), new PropertyMetadata(null));
+
+
+        public string SearchPlaceholderText
+        {
+            get { return (string)GetValue(SearchPlaceholderTextProperty); }
+            set { SetValue(SearchPlaceholderTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty SearchPlaceholderTextProperty =
+            DependencyProperty.Register("SearchPlaceholderText", typeof(string), typeof(SearchControl), new PropertyMetadata(null));
+
         public SearchControl()
         {
-            InitializeComponent();
+            this.SearchHeight = 25;
+            this.SearchPlaceholderText = "Search";
+            this.InitializeComponent();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

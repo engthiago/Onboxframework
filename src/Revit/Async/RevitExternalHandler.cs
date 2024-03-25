@@ -72,18 +72,18 @@ namespace Onbox.Revit.VDev.Async
         /// </summary>
         public void Execute(UIApplication app)
         {
-            if (queue.Any())
+            if (this.queue.Any())
             {
-                var actionKey = queue.First();
-                var taskKey = actionKey.Key;
-
-                if (actionKey.Value.DelegateType == DelegateType.Action)
+                foreach (var task in this.queue)
                 {
-                    RunAction(app, actionKey, taskKey);
-                }
-                else
-                {
-                    RunFunc(app, actionKey, taskKey);
+                    if (task.Value?.DelegateType == DelegateType.Action)
+                    {
+                        this.RunAction(app, task, task.Key);
+                    }
+                    else
+                    {
+                        this.RunFunc(app, task, task.Key);
+                    }
                 }
             }
         }

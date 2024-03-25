@@ -79,7 +79,7 @@
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="RevitAPI">
-      <HintPath>..\..\packages\Onbox.Revit.References.2021.0.0\lib\Revit 2019\RevitAPI.dll</HintPath>
+      <HintPath>..\..\packages\Onbox.Revit.References.2024.0.0\lib\Revit 2019\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
