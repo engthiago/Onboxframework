@@ -48,11 +48,16 @@
             Provides specific Revit functionaliy to <see cref="T:Onbox.Mvc.VDev.MvcViewBase"/> like set Revit as parent window and Title Bar visibility
             </summary>
         </member>
-        <member name="M:Onbox.Mvc.Revit.VDev.RevitMvcViewBase.#ctor(Onbox.Revit.Abstractions.VDev.IRevitAppData)">
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitMvcViewBase.#ctor(Onbox.Revit.Abstractions.VDev.IRevitAppData,Onbox.Mvc.Revit.VDev.RevitViewOptions)">
             <summary>
             Provides specific Revit functionaliy to <see cref="T:Onbox.Mvc.VDev.MvcViewBase"/> like set Revit as parent window and Title Bar visibility
             </summary>
             <param name="revitUIApp">Some information of the current instance of Revit UI App</param>
+        </member>
+        <member name="M:Onbox.Mvc.Revit.VDev.RevitMvcViewBase.SetTitleVisibility(Onbox.Mvc.VDev.TitleVisibility)">
+            <summary>
+            This Needs to be called right after the view constructor and before the view is loaded or initiliazed. Otherwise this will be ignored
+            </summary>
         </member>
         <member name="M:Onbox.Mvc.Revit.VDev.RevitViewAttacher.HideMinimizeMaximizeButton(System.Windows.Window)">
             <summary>
